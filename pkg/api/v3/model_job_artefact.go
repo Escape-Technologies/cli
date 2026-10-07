@@ -20,12 +20,12 @@ var _ MappedNullable = &JobArtefact{}
 
 // JobArtefact An artefact produced by a job; signedUrl is a time-limited download link.
 type JobArtefact struct {
-	Id                   string                                     `json:"id"`
-	Kind                 ENUMPROPERTIESARTEFACTSITEMSPROPERTIESKIND `json:"kind"`
-	Name                 string                                     `json:"name"`
-	SignedUrl            string                                     `json:"signedUrl"`
-	CreatedAt            string                                     `json:"createdAt"`
-	UpdatedAt            string                                     `json:"updatedAt"`
+	Id                   string                                                       `json:"id"`
+	Kind                 ENUMPROPERTIESLASTSCANPROPERTIESARTEFACTSITEMSPROPERTIESKIND `json:"kind"`
+	Name                 string                                                       `json:"name"`
+	SignedUrl            string                                                       `json:"signedUrl"`
+	CreatedAt            string                                                       `json:"createdAt"`
+	UpdatedAt            string                                                       `json:"updatedAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,7 +35,7 @@ type _JobArtefact JobArtefact
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewJobArtefact(id string, kind ENUMPROPERTIESARTEFACTSITEMSPROPERTIESKIND, name string, signedUrl string, createdAt string, updatedAt string) *JobArtefact {
+func NewJobArtefact(id string, kind ENUMPROPERTIESLASTSCANPROPERTIESARTEFACTSITEMSPROPERTIESKIND, name string, signedUrl string, createdAt string, updatedAt string) *JobArtefact {
 	this := JobArtefact{}
 	this.Id = id
 	this.Kind = kind
@@ -79,9 +79,9 @@ func (o *JobArtefact) SetId(v string) {
 }
 
 // GetKind returns the Kind field value
-func (o *JobArtefact) GetKind() ENUMPROPERTIESARTEFACTSITEMSPROPERTIESKIND {
+func (o *JobArtefact) GetKind() ENUMPROPERTIESLASTSCANPROPERTIESARTEFACTSITEMSPROPERTIESKIND {
 	if o == nil {
-		var ret ENUMPROPERTIESARTEFACTSITEMSPROPERTIESKIND
+		var ret ENUMPROPERTIESLASTSCANPROPERTIESARTEFACTSITEMSPROPERTIESKIND
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *JobArtefact) GetKind() ENUMPROPERTIESARTEFACTSITEMSPROPERTIESKIND {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *JobArtefact) GetKindOk() (*ENUMPROPERTIESARTEFACTSITEMSPROPERTIESKIND, bool) {
+func (o *JobArtefact) GetKindOk() (*ENUMPROPERTIESLASTSCANPROPERTIESARTEFACTSITEMSPROPERTIESKIND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *JobArtefact) GetKindOk() (*ENUMPROPERTIESARTEFACTSITEMSPROPERTIESKIND, 
 }
 
 // SetKind sets field value
-func (o *JobArtefact) SetKind(v ENUMPROPERTIESARTEFACTSITEMSPROPERTIESKIND) {
+func (o *JobArtefact) SetKind(v ENUMPROPERTIESLASTSCANPROPERTIESARTEFACTSITEMSPROPERTIESKIND) {
 	o.Kind = v
 }
 

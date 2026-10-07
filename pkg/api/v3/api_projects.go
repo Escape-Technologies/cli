@@ -16,6 +16,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -434,6 +435,8 @@ type ApiListProjectsRequest struct {
 	sortType      *string
 	sortDirection *string
 	search        *string
+	ids           *string
+	permissions   *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -463,6 +466,18 @@ func (r ApiListProjectsRequest) SortDirection(sortDirection string) ApiListProje
 // Search term to filter projects by name
 func (r ApiListProjectsRequest) Search(search string) ApiListProjectsRequest {
 	r.search = &search
+	return r
+}
+
+// Filter by project IDs
+func (r ApiListProjectsRequest) Ids(ids string) ApiListProjectsRequest {
+	r.ids = &ids
+	return r
+}
+
+// Filter by permissions
+func (r ApiListProjectsRequest) Permissions(permissions []string) ApiListProjectsRequest {
+	r.permissions = &permissions
 	return r
 }
 
@@ -527,6 +542,20 @@ func (a *ProjectsAPIService) ListProjectsExecute(r ApiListProjectsRequest) (*Lis
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	if r.ids != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "")
+	}
+	if r.permissions != nil {
+		t := *r.permissions
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "permissions", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "permissions", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
@@ -14,24 +16,44 @@ import (
 )
 
 var (
-	assetTypes         = []string{}
-	assetStatuses      = []string{}
-	assetProjectIDs    = []string{}
-	assetActivities    = false
-	manuallyCreated    = false
-	assetSortType      string
-	assetSortDirection string
-	assetListPage      pageFlags
+	assetTypes              = []string{}
+	assetStatuses           = []string{}
+	assetProjectIDs         = []string{}
+	assetListTagIDs         []string
+	assetListClasses        []string
+	assetListEnvironments   []string
+	assetListDomains        []string
+	assetListIntegrationIDs []string
+	assetListOwnerEmails    []string
+	assetListTechnologyKeys []string
+	assetListPorts          []string
+	assetListSeverities     []string
+	assetListRisks          []string
+	assetListFrameworks     []string
+	assetListDNF            string
+	assetActivities         = false
+	manuallyCreated         = false
+	assetSortType           string
+	assetSortDirection      string
+	assetListPage           pageFlags
 )
 
 var (
-	assetDescription      string
-	assetFramework        string
-	assetName             string
-	assetOwners           []string
-	assetStatus           string
-	assetTagIDs           []string
-	assetUpdateProjectIDs []string
+	assetDescription       string
+	assetFramework         string
+	assetName              string
+	assetOwners            []string
+	assetStatus            string
+	assetTagIDs            []string
+	assetUpdateProjectIDs  []string
+	assetEnvironment       string
+	assetManuallySetStatus bool
+	assetBaseURL           string
+	assetAddress           string
+	assetBestSchemaID      string
+	assetSchemaIDs         []string
+	assetParentLinks       string
+	assetChildLinks        string
 )
 
 var assetsCmd = &cobra.Command{
@@ -85,6 +107,18 @@ FILTER OPTIONS:
   -t, --types            Filter by asset types (WEBAPP, REST_API, GRAPHQL_API, etc.)
   --statuses             Filter by monitoring status (MONITORED, UNMONITORED, ARCHIVED)
   --project-id           Filter by project ID
+  --tag-ids              Filter by tag IDs
+  --classes              Filter by asset classes (API_SERVICE, FRONTEND, HOST, etc.)
+  --environments         Filter by environments (DEVELOPMENT, PRODUCTION, STAGING, UNKNOWN)
+  --domains              Filter by domain
+  --integration-ids      Filter by source integration IDs
+  --owner-emails         Filter by owner email addresses
+  --technology-keys      Filter by technology keys
+  --ports                Filter by port numbers
+  --severities           Filter by issue severities (CRITICAL, HIGH, MEDIUM, LOW, INFO)
+  --risks                Filter by asset risks (EXPOSED, UNAUTHENTICATED, etc.)
+  --frameworks           Filter by frameworks (REST_EXPRESS_JS, FRONTEND_REACT, etc.)
+  --dnf                  Filter by a DNF expression (JSON)
   -s, --search           Free-text search across asset names and URLs
   -m, --manually-created Filter assets created manually vs auto-discovered
 
@@ -130,6 +164,18 @@ ID                                      CREATED AT                TYPE          
 			AssetTypes:      assetTypes,
 			AssetStatuses:   assetStatuses,
 			ProjectIDs:      assetProjectIDs,
+			TagIDs:          assetListTagIDs,
+			Classes:         assetListClasses,
+			Environments:    assetListEnvironments,
+			Domains:         assetListDomains,
+			IntegrationIDs:  assetListIntegrationIDs,
+			OwnerEmails:     assetListOwnerEmails,
+			TechnologyKeys:  assetListTechnologyKeys,
+			Ports:           assetListPorts,
+			Severities:      assetListSeverities,
+			Risks:           assetListRisks,
+			Frameworks:      assetListFrameworks,
+			DNF:             assetListDNF,
 			Search:          search,
 			ManuallyCreated: manuallyCreated,
 			SortType:        assetSortType,
@@ -162,13 +208,16 @@ Retrieve comprehensive information about a specific asset including its type,
 status, risk indicators, and last seen timestamp.
 
 DISPLAYED INFORMATION:
-  • ID          - Unique asset identifier
-  • CREATED AT  - When asset was first discovered or created
-  • TYPE        - Asset classification (WEBAPP, REST_API, etc.)
-  • NAME        - Asset name or primary URL
-  • RISKS       - Security risk indicators
-  • STATUS      - Current monitoring status
-  • LAST SEEN   - Most recent scan or check
+  • ID            - Unique asset identifier
+  • CREATED AT    - When asset was first discovered or created
+  • TYPE          - Asset classification (WEBAPP, REST_API, etc.)
+  • NAME          - Asset name or primary URL
+  • RISKS         - Security risk indicators
+  • STATUS        - Current monitoring status
+  • LAST SEEN     - Most recent scan or check
+  • RELATIONSHIPS - Parent/child assets in the relationship graph
+  • TECHNOLOGY    - Technology metadata for PACKAGE and SOFTWARE assets
+  • PORTS         - Open ports discovered on host assets
 
 ADDITIONAL OPTIONS:
   -a, --activities   Show related issue activities for this asset
@@ -238,8 +287,8 @@ ID                                      CREATED AT                TYPE    NAME  
 		} else {
 
 			out.Table(asset, func() []string {
-				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tPROJECTS\tNAME"}
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), len(asset.GetProjectIds()), asset.GetName()))
+				res := []string{"ID\tCREATED AT\tTYPE\tSTATUS\tLAST SEEN\tRISKS\tTAGS\tOWNERS\tPROJECTS\tNAME\tRELATIONSHIPS\tTECHNOLOGY\tPORTS"}
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\t%s", asset.GetId(), asset.GetCreatedAt(), asset.GetType(), asset.GetStatus(), asset.GetLastSeenAt(), asset.GetRisks(), joinTags(asset.GetTags()), ownersColumn(asset.AdditionalProperties), len(asset.GetProjectIds()), asset.GetName(), formatAssetRelationships(asset.GetParents(), asset.GetChildren()), formatAssetTechnology(asset.Technology), formatAssetPorts(asset)))
 
 				return res
 			})
@@ -277,6 +326,154 @@ func ownersColumn(additionalProperties map[string]interface{}) string {
 	}
 
 	return strings.Join(owners, ",")
+}
+
+// assetRelationshipDirections is the number of relationship directions an asset
+// detail can expose: parents and children.
+const assetRelationshipDirections = 2
+
+// formatAssetRelationships renders the parent/child graph of an asset detail as
+// a single cell, e.g. "parents: escape-api (REST); children: docs (WEBAPP)".
+func formatAssetRelationships(parents, children []v3.AssetRelationship) string {
+	parts := make([]string, 0, assetRelationshipDirections)
+	if len(parents) > 0 {
+		parts = append(parts, "parents: "+formatAssetRelationshipList(parents))
+	}
+
+	if len(children) > 0 {
+		parts = append(parts, "children: "+formatAssetRelationshipList(children))
+	}
+
+	return strings.Join(parts, "; ")
+}
+
+func formatAssetRelationshipList(relationships []v3.AssetRelationship) string {
+	values := make([]string, 0, len(relationships))
+	for _, relationship := range relationships {
+		values = append(values, fmt.Sprintf("%s (%s)", relationship.GetName(), relationship.GetType()))
+	}
+
+	return strings.Join(values, ", ")
+}
+
+// formatAssetTechnology renders PACKAGE/SOFTWARE metadata as a single cell,
+// e.g. "PACKAGE npm/lodash@4.17.21". Empty for assets without technology.
+func formatAssetTechnology(technology *v3.AssetTechnologyDetailed) string {
+	if technology == nil {
+		return ""
+	}
+
+	value := fmt.Sprintf("%s %s", technology.GetType(), technology.GetTechnologyKey())
+	if version := technology.GetVersion(); version != "" {
+		value += "@" + version
+	}
+
+	return value
+}
+
+// formatAssetPorts renders a host's open ports as a single cell, e.g.
+// "80/tcp,443/tcp+udp". Empty for assets without a host or ports.
+func formatAssetPorts(asset *v3.AssetDetailed1) string {
+	host, ok := asset.GetHostOk()
+	if !ok {
+		return ""
+	}
+
+	ports := host.GetPorts()
+	values := make([]string, 0, len(ports))
+	for _, port := range ports {
+		values = append(values, fmt.Sprintf("%d/%s", port.GetPort(), strings.Join(port.GetProtocols(), "+")))
+	}
+
+	return strings.Join(values, ",")
+}
+
+// parseAssetLinks parses a --parent-links/--child-links JSON object into the
+// API link-update shape, e.g.
+// {"create":[{"targetId":"<id>","verb":"USES"}],"delete":[...],"set":[...]}.
+// An empty value means "leave the links untouched" and returns nil.
+func parseAssetLinks(raw string) (*v3.UpdateAssetParentLinks, error) {
+	if strings.TrimSpace(raw) == "" {
+		return nil, nil
+	}
+
+	var links v3.UpdateAssetParentLinks
+	if err := json.Unmarshal([]byte(raw), &links); err != nil {
+		return nil, fmt.Errorf("unmarshal asset links: %w", err)
+	}
+
+	return &links, nil
+}
+
+var assetDownloadOutputFile string
+
+var assetDownloadCmd = &cobra.Command{
+	Use:     "download asset-id",
+	Aliases: []string{"dl"},
+	Short:   "Download the content of an asset",
+	Long: `Download Asset Content - Fetch Asset Bytes
+
+Download the raw content of an asset, such as an uploaded OpenAPI or GraphQL
+schema. The content is written to stdout, or to a file with --output.
+
+The download uses a short-lived signed URL fetched from the asset content
+endpoint.`,
+	Example: `  # Stream the asset content to stdout
+  escape-cli assets download <asset-id>
+
+  # Save the asset content to a file
+  escape-cli assets download <asset-id> --output schema.json`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		content, err := escape.GetAssetContent(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to get asset content: %w", err)
+		}
+
+		if assetDownloadOutputFile == "" {
+			return escape.DownloadSignedURL(cmd.Context(), content.GetSignedUrl(), os.Stdout)
+		}
+
+		// Write to a sibling temp file and rename on success so a failed
+		// download (expired signed URL, mid-stream connection drop, context
+		// deadline) never leaves a truncated or empty file at the target
+		// path. The temp file lives in the same directory as the destination
+		// so the rename stays on one filesystem and is atomic on POSIX.
+		destDir, destName := filepath.Split(assetDownloadOutputFile)
+		if destDir == "" {
+			destDir = "."
+		}
+
+		tmp, err := os.CreateTemp(destDir, destName+".*.part")
+		if err != nil {
+			return fmt.Errorf("unable to create temp file in %s: %w", destDir, err)
+		}
+
+		tmpPath := tmp.Name()
+		cleanup := func() {
+			_ = tmp.Close()
+			_ = os.Remove(tmpPath)
+		}
+
+		if err := escape.DownloadSignedURL(cmd.Context(), content.GetSignedUrl(), tmp); err != nil {
+			cleanup()
+			return fmt.Errorf("unable to download asset content: %w", err)
+		}
+
+		if err := tmp.Close(); err != nil {
+			_ = os.Remove(tmpPath)
+			return fmt.Errorf("unable to finalize temp file %s: %w", tmpPath, err)
+		}
+
+		if err := os.Rename(tmpPath, assetDownloadOutputFile); err != nil {
+			_ = os.Remove(tmpPath)
+			return fmt.Errorf("unable to move %s to %s: %w", tmpPath, assetDownloadOutputFile, err)
+		}
+
+		out.Log("Asset content written to " + assetDownloadOutputFile)
+
+		return nil
+	},
 }
 
 var assetDeleteCmd = &cobra.Command{
@@ -351,13 +548,21 @@ Update an existing asset's metadata including status, description, owners, tags,
 and framework classification. Use this to maintain accurate asset inventory.
 
 UPDATABLE FIELDS:
-  -d, --description    Human-readable description
-  -f, --framework      Asset framework/type classification
-  --name               Custom asset name (defaults to the discovered name)
-  --project-id         Project IDs to assign the asset to
-  -s, --status         Monitoring status (MONITORED, UNMONITORED, ARCHIVED)
-  --owners             Asset owners (email addresses)
-  -t, --tag-ids        Tag IDs for organization
+  -d, --description     Human-readable description
+  -f, --framework       Asset framework/type classification
+  --name                Custom asset name (defaults to the discovered name)
+  --project-id          Project IDs to assign the asset to
+  -s, --status          Monitoring status (MONITORED, UNMONITORED, ARCHIVED)
+  --owners              Asset owners (email addresses)
+  -t, --tag-ids         Tag IDs for organization
+  --environment         Asset environment (DEVELOPMENT, PRODUCTION, STAGING, UNKNOWN)
+  --manually-set-status Pin the status so discovery does not override it
+  --base-url            Base URL of a SCHEMA asset
+  --address             Address of a HOST asset
+  --best-schema-id      Best schema ID of an API_SERVICE asset
+  --schema-ids          Schema IDs of an API_SERVICE asset
+  --parent-links        Parent link updates as JSON
+  --child-links         Child link updates as JSON
 
 STATUS TRANSITIONS:
   • MONITORED    → UNMONITORED   Stop active scanning
@@ -393,7 +598,14 @@ USE CASES:
     --status MONITORED \
     --description "Customer API v2" \
     --owners "api-team@example.com" \
-    --tag-ids "tag-external,tag-production"`,
+    --tag-ids "tag-external,tag-production"
+
+  # Pin the schema used by an API_SERVICE asset
+  escape-cli assets update <asset-id> --best-schema-id <schema-id> --schema-ids "schema-a,schema-b"
+
+  # Add a parent relationship (links accept set, create, and delete arrays)
+  escape-cli assets update <asset-id> \
+    --parent-links '{"create":[{"targetId":"<parent-id>","verb":"USES"}]}'`,
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			_ = cmd.Help()
@@ -444,7 +656,59 @@ USE CASES:
 			projectIDs = &assetUpdateProjectIDs
 		}
 
-		asset, err := escape.UpdateAsset(cmd.Context(), args[0], desc, framework, owners, status, tagIDs, projectIDs, name)
+		var environment *v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT
+		if assetEnvironment != "" {
+			e := v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT(assetEnvironment)
+			environment = &e
+		}
+
+		var manuallySetStatus *bool
+		if cmd.Flags().Changed("manually-set-status") {
+			manuallySetStatus = &assetManuallySetStatus
+		}
+
+		var baseURL *string
+		if assetBaseURL != "" {
+			baseURL = &assetBaseURL
+		}
+
+		var address *string
+		if assetAddress != "" {
+			address = &assetAddress
+		}
+
+		var bestSchemaID *string
+		if assetBestSchemaID != "" {
+			bestSchemaID = &assetBestSchemaID
+		}
+
+		parentLinks, err := parseAssetLinks(assetParentLinks)
+		if err != nil {
+			return fmt.Errorf("invalid --parent-links: %w", err)
+		}
+
+		childLinks, err := parseAssetLinks(assetChildLinks)
+		if err != nil {
+			return fmt.Errorf("invalid --child-links: %w", err)
+		}
+
+		asset, err := escape.UpdateAsset(cmd.Context(), args[0], escape.UpdateAssetInput{
+			Description:       desc,
+			Framework:         framework,
+			Owners:            owners,
+			Status:            status,
+			TagIDs:            tagIDs,
+			ProjectIDs:        projectIDs,
+			Name:              name,
+			Environment:       environment,
+			ManuallySetStatus: manuallySetStatus,
+			BaseURL:           baseURL,
+			Address:           address,
+			BestSchemaID:      bestSchemaID,
+			SchemaIDs:         assetSchemaIDs,
+			ParentLinks:       parentLinks,
+			ChildLinks:        (*v3.UpdateAssetChildLinks)(childLinks),
+		})
 		if err != nil {
 			return fmt.Errorf("unable to update asset: %w", err)
 		}
@@ -763,6 +1027,66 @@ var assetBulkDeleteCmd = &cobra.Command{
 	},
 }
 
+var assetBulkImportCmd = &cobra.Command{
+	Use:     "bulk-import",
+	Aliases: []string{"import"},
+	Short:   "Bulk import assets from JSON stdin",
+	Long: `Bulk Import Assets - Create Many Assets at Once
+
+Trigger an asynchronous job that creates multiple assets from JSON read on
+stdin. Returns a job ID that can be polled with 'escape-cli jobs get <job-id>'.
+
+INPUT FORMAT:
+  {
+    "assets": [ { "asset_type": "WEBAPP", "url": "https://example.com" }, ... ],
+    "projectIds": ["<project-id>"]
+  }
+
+Up to 100 asset objects are accepted per call; "projectIds" is optional.`,
+	Example: `  # Import two web applications
+  echo '{"assets":[{"asset_type":"WEBAPP","url":"https://a.example.com"},{"asset_type":"WEBAPP","url":"https://b.example.com"}]}' | escape-cli assets bulk-import
+
+  # See the expected input format
+  escape-cli assets bulk-import --input-schema`,
+	Args: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.BulkImportAssets{}) {
+			return nil
+		}
+
+		if out.Schema(v3.BulkImportAssets200Response{}) {
+			return nil
+		}
+
+		data, err := readPipedStdin(cmd.InOrStdin())
+		if err != nil {
+			return err
+		}
+
+		if len(data) == 0 {
+			return errors.New("JSON body is required on stdin")
+		}
+
+		var body v3.BulkImportAssets
+		if err := json.Unmarshal(data, &body); err != nil {
+			return fmt.Errorf("invalid JSON: %w", err)
+		}
+
+		if len(body.Assets) == 0 {
+			return errors.New("invalid JSON: 'assets' must contain at least one asset")
+		}
+
+		result, err := escape.BulkImportAssets(cmd.Context(), data)
+		if err != nil {
+			return fmt.Errorf("unable to bulk import assets: %w", err)
+		}
+
+		out.Print(result, fmt.Sprintf("Bulk import job %s started", result.GetJobId()))
+
+		return nil
+	},
+}
+
 // requireAssetBulkSelection rejects a bulk asset mutation with an empty where.
 // The public API accepts that payload, and deleteAssets/updateAssets then match
 // every asset the caller can see.
@@ -780,6 +1104,18 @@ func init() {
 	assetsListCmd.Flags().StringSliceVarP(&assetTypes, "types", "t", []string{}, fmt.Sprintf("filter by asset types (comma-separated): %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
 	assetsListCmd.Flags().StringSliceVarP(&assetStatuses, "statuses", "", []string{}, fmt.Sprintf("filter by monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
 	assetsListCmd.Flags().StringSliceVar(&assetProjectIDs, "project-id", []string{}, "filter by project IDs")
+	assetsListCmd.Flags().StringSliceVar(&assetListTagIDs, "tag-ids", nil, "filter by tag IDs")
+	assetsListCmd.Flags().StringSliceVar(&assetListClasses, "classes", nil, fmt.Sprintf("filter by asset classes: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASSEnumValues))
+	assetsListCmd.Flags().StringSliceVar(&assetListEnvironments, "environments", nil, fmt.Sprintf("filter by environments: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENTEnumValues))
+	assetsListCmd.Flags().StringSliceVar(&assetListDomains, "domains", nil, "filter by domains")
+	assetsListCmd.Flags().StringSliceVar(&assetListIntegrationIDs, "integration-ids", nil, "filter by source integration IDs")
+	assetsListCmd.Flags().StringSliceVar(&assetListOwnerEmails, "owner-emails", nil, "filter by owner email addresses")
+	assetsListCmd.Flags().StringSliceVar(&assetListTechnologyKeys, "technology-keys", nil, "filter by technology keys")
+	assetsListCmd.Flags().StringSliceVar(&assetListPorts, "ports", nil, "filter by port numbers")
+	assetsListCmd.Flags().StringSliceVar(&assetListSeverities, "severities", nil, fmt.Sprintf("filter by issue severities: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	assetsListCmd.Flags().StringSliceVar(&assetListRisks, "risks", nil, fmt.Sprintf("filter by asset risks: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
+	assetsListCmd.Flags().StringSliceVar(&assetListFrameworks, "frameworks", nil, fmt.Sprintf("filter by frameworks: %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
+	assetsListCmd.Flags().StringVar(&assetListDNF, "dnf", "", "filter by a DNF expression as JSON")
 	assetsListCmd.Flags().StringVarP(&search, "search", "s", "", "free-text search across asset names and URLs")
 	assetsListCmd.Flags().BoolVarP(&manuallyCreated, "manually-created", "m", false, "show only manually created assets (exclude auto-discovered)")
 	assetsListCmd.Flags().StringVar(&assetSortType, "sort-by", "", "sort field (e.g., LAST_SEEN, CREATED_AT)")
@@ -788,6 +1124,8 @@ func init() {
 
 	assetsCmd.AddCommand(assetGetCmd)
 	assetGetCmd.Flags().BoolVarP(&assetActivities, "activities", "a", false, "include issue activity timeline for this asset")
+	assetsCmd.AddCommand(assetDownloadCmd)
+	assetDownloadCmd.Flags().StringVar(&assetDownloadOutputFile, "output", "", "write the asset content to this file instead of stdout")
 	assetsCmd.AddCommand(assetDeleteCmd)
 
 	assetsCmd.AddCommand(assetUpdateCmd)
@@ -798,8 +1136,18 @@ func init() {
 	assetUpdateCmd.Flags().StringSliceVarP(&assetOwners, "owners", "", []string{}, "comma-separated list of owner email addresses")
 	assetUpdateCmd.Flags().StringVarP(&assetStatus, "status", "s", "", fmt.Sprintf("monitoring status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
 	assetUpdateCmd.Flags().StringSliceVarP(&assetTagIDs, "tag-ids", "t", []string{}, "comma-separated list of tag IDs for organization")
+	assetUpdateCmd.Flags().StringVar(&assetEnvironment, "environment", "", fmt.Sprintf("asset environment: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENTEnumValues))
+	assetUpdateCmd.Flags().BoolVar(&assetManuallySetStatus, "manually-set-status", false, "pin the status so discovery does not override it")
+	assetUpdateCmd.Flags().StringVar(&assetBaseURL, "base-url", "", "base URL of a SCHEMA asset")
+	assetUpdateCmd.Flags().StringVar(&assetAddress, "address", "", "address of a HOST asset")
+	assetUpdateCmd.Flags().StringVar(&assetBestSchemaID, "best-schema-id", "", "best schema ID of an API_SERVICE asset")
+	assetUpdateCmd.Flags().StringSliceVar(&assetSchemaIDs, "schema-ids", nil, "schema IDs of an API_SERVICE asset")
+	assetUpdateCmd.Flags().StringVar(&assetParentLinks, "parent-links", "", "parent link updates as JSON, e.g. {\"create\":[{\"targetId\":\"<id>\",\"verb\":\"USES\"}]}")
+	assetUpdateCmd.Flags().StringVar(&assetChildLinks, "child-links", "", "child link updates as JSON (same shape as --parent-links)")
 
 	assetsCmd.AddCommand(createAssetCmd)
+
+	assetsCmd.AddCommand(assetBulkImportCmd)
 
 	assetsCmd.AddCommand(assetCommentCmd)
 	assetCommentCmd.Flags().StringVar(&assetCommentMsg, "message", "", "comment text (max 512 characters)")

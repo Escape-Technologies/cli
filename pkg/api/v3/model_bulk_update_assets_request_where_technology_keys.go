@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// ListAssetsProjectIdsParameter Filter by any of the listed project IDs
-type ListAssetsProjectIdsParameter struct {
+// BulkUpdateAssetsRequestWhereTechnologyKeys Filter by technology key
+type BulkUpdateAssetsRequestWhereTechnologyKeys struct {
 	ArrayOfString *[]string
 	String        *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *ListAssetsProjectIdsParameter) UnmarshalJSON(data []byte) error {
+func (dst *BulkUpdateAssetsRequestWhereTechnologyKeys) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into ArrayOfString
 	err = json.Unmarshal(data, &dst.ArrayOfString)
@@ -50,11 +50,11 @@ func (dst *ListAssetsProjectIdsParameter) UnmarshalJSON(data []byte) error {
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(ListAssetsProjectIdsParameter)")
+	return fmt.Errorf("data failed to match schemas in anyOf(BulkUpdateAssetsRequestWhereTechnologyKeys)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src ListAssetsProjectIdsParameter) MarshalJSON() ([]byte, error) {
+func (src BulkUpdateAssetsRequestWhereTechnologyKeys) MarshalJSON() ([]byte, error) {
 	if src.ArrayOfString != nil {
 		return json.Marshal(&src.ArrayOfString)
 	}
@@ -66,38 +66,38 @@ func (src ListAssetsProjectIdsParameter) MarshalJSON() ([]byte, error) {
 	return nil, nil // no data in anyOf schemas
 }
 
-type NullableListAssetsProjectIdsParameter struct {
-	value *ListAssetsProjectIdsParameter
+type NullableBulkUpdateAssetsRequestWhereTechnologyKeys struct {
+	value *BulkUpdateAssetsRequestWhereTechnologyKeys
 	isSet bool
 }
 
-func (v NullableListAssetsProjectIdsParameter) Get() *ListAssetsProjectIdsParameter {
+func (v NullableBulkUpdateAssetsRequestWhereTechnologyKeys) Get() *BulkUpdateAssetsRequestWhereTechnologyKeys {
 	return v.value
 }
 
-func (v *NullableListAssetsProjectIdsParameter) Set(val *ListAssetsProjectIdsParameter) {
+func (v *NullableBulkUpdateAssetsRequestWhereTechnologyKeys) Set(val *BulkUpdateAssetsRequestWhereTechnologyKeys) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListAssetsProjectIdsParameter) IsSet() bool {
+func (v NullableBulkUpdateAssetsRequestWhereTechnologyKeys) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListAssetsProjectIdsParameter) Unset() {
+func (v *NullableBulkUpdateAssetsRequestWhereTechnologyKeys) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListAssetsProjectIdsParameter(val *ListAssetsProjectIdsParameter) *NullableListAssetsProjectIdsParameter {
-	return &NullableListAssetsProjectIdsParameter{value: val, isSet: true}
+func NewNullableBulkUpdateAssetsRequestWhereTechnologyKeys(val *BulkUpdateAssetsRequestWhereTechnologyKeys) *NullableBulkUpdateAssetsRequestWhereTechnologyKeys {
+	return &NullableBulkUpdateAssetsRequestWhereTechnologyKeys{value: val, isSet: true}
 }
 
-func (v NullableListAssetsProjectIdsParameter) MarshalJSON() ([]byte, error) {
+func (v NullableBulkUpdateAssetsRequestWhereTechnologyKeys) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListAssetsProjectIdsParameter) UnmarshalJSON(src []byte) error {
+func (v *NullableBulkUpdateAssetsRequestWhereTechnologyKeys) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

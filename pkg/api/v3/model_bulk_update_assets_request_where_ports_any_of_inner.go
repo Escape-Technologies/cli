@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// ListAssetsPortsParameterAnyOfInner struct for ListAssetsPortsParameterAnyOfInner
-type ListAssetsPortsParameterAnyOfInner struct {
+// BulkUpdateAssetsRequestWherePortsAnyOfInner struct for BulkUpdateAssetsRequestWherePortsAnyOfInner
+type BulkUpdateAssetsRequestWherePortsAnyOfInner struct {
 	Float32 *float32
 	String  *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *ListAssetsPortsParameterAnyOfInner) UnmarshalJSON(data []byte) error {
+func (dst *BulkUpdateAssetsRequestWherePortsAnyOfInner) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into Float32
 	err = json.Unmarshal(data, &dst.Float32)
@@ -50,11 +50,11 @@ func (dst *ListAssetsPortsParameterAnyOfInner) UnmarshalJSON(data []byte) error 
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(ListAssetsPortsParameterAnyOfInner)")
+	return fmt.Errorf("data failed to match schemas in anyOf(BulkUpdateAssetsRequestWherePortsAnyOfInner)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src ListAssetsPortsParameterAnyOfInner) MarshalJSON() ([]byte, error) {
+func (src BulkUpdateAssetsRequestWherePortsAnyOfInner) MarshalJSON() ([]byte, error) {
 	if src.Float32 != nil {
 		return json.Marshal(&src.Float32)
 	}
@@ -66,38 +66,38 @@ func (src ListAssetsPortsParameterAnyOfInner) MarshalJSON() ([]byte, error) {
 	return nil, nil // no data in anyOf schemas
 }
 
-type NullableListAssetsPortsParameterAnyOfInner struct {
-	value *ListAssetsPortsParameterAnyOfInner
+type NullableBulkUpdateAssetsRequestWherePortsAnyOfInner struct {
+	value *BulkUpdateAssetsRequestWherePortsAnyOfInner
 	isSet bool
 }
 
-func (v NullableListAssetsPortsParameterAnyOfInner) Get() *ListAssetsPortsParameterAnyOfInner {
+func (v NullableBulkUpdateAssetsRequestWherePortsAnyOfInner) Get() *BulkUpdateAssetsRequestWherePortsAnyOfInner {
 	return v.value
 }
 
-func (v *NullableListAssetsPortsParameterAnyOfInner) Set(val *ListAssetsPortsParameterAnyOfInner) {
+func (v *NullableBulkUpdateAssetsRequestWherePortsAnyOfInner) Set(val *BulkUpdateAssetsRequestWherePortsAnyOfInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListAssetsPortsParameterAnyOfInner) IsSet() bool {
+func (v NullableBulkUpdateAssetsRequestWherePortsAnyOfInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListAssetsPortsParameterAnyOfInner) Unset() {
+func (v *NullableBulkUpdateAssetsRequestWherePortsAnyOfInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListAssetsPortsParameterAnyOfInner(val *ListAssetsPortsParameterAnyOfInner) *NullableListAssetsPortsParameterAnyOfInner {
-	return &NullableListAssetsPortsParameterAnyOfInner{value: val, isSet: true}
+func NewNullableBulkUpdateAssetsRequestWherePortsAnyOfInner(val *BulkUpdateAssetsRequestWherePortsAnyOfInner) *NullableBulkUpdateAssetsRequestWherePortsAnyOfInner {
+	return &NullableBulkUpdateAssetsRequestWherePortsAnyOfInner{value: val, isSet: true}
 }
 
-func (v NullableListAssetsPortsParameterAnyOfInner) MarshalJSON() ([]byte, error) {
+func (v NullableBulkUpdateAssetsRequestWherePortsAnyOfInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListAssetsPortsParameterAnyOfInner) UnmarshalJSON(src []byte) error {
+func (v *NullableBulkUpdateAssetsRequestWherePortsAnyOfInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

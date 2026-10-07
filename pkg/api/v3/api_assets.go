@@ -3391,6 +3391,134 @@ func (a *AssetsAPIService) GetAssetExecute(r ApiGetAssetRequest) (*AssetDetailed
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetAssetContentRequest struct {
+	ctx        context.Context
+	ApiService *AssetsAPIService
+	assetId    string
+}
+
+func (r ApiGetAssetContentRequest) Execute() (*GetAssetContent200Response, *http.Response, error) {
+	return r.ApiService.GetAssetContentExecute(r)
+}
+
+/*
+GetAssetContent Get asset content
+
+Get a short-lived signed download URL for the content of an asset, along with its content type and filename. Only available for assets with uploaded or fetched content, such as schema assets. When the asset does not exist (or belongs to another organization), the internal API returns an error that is forwarded as a 404 to avoid leaking its existence.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param assetId The asset ID
+	@return ApiGetAssetContentRequest
+*/
+func (a *AssetsAPIService) GetAssetContent(ctx context.Context, assetId string) ApiGetAssetContentRequest {
+	return ApiGetAssetContentRequest{
+		ApiService: a,
+		ctx:        ctx,
+		assetId:    assetId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetAssetContent200Response
+func (a *AssetsAPIService) GetAssetContentExecute(r ApiGetAssetContentRequest) (*GetAssetContent200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetAssetContent200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.GetAssetContent")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/assets/{assetId}/content"
+	localVarPath = strings.Replace(localVarPath, "{"+"assetId"+"}", url.PathEscape(parameterValueToString(r.assetId, "assetId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiListAssetActivitiesRequest struct {
 	ctx        context.Context
 	ApiService *AssetsAPIService
@@ -3529,15 +3657,15 @@ type ApiListAssetsRequest struct {
 	search          *string
 	types           *[]string
 	statuses        *[]string
-	projectIds      *ListAssetsProjectIdsParameter
+	projectIds      *string
 	tagIds          *string
 	classes         *[]string
 	environments    *[]string
 	domains         *string
-	integrationIds  *ListAssetsIntegrationIdsParameter
-	ownerEmails     *ListAssetsOwnerEmailsParameter
-	technologyKeys  *ListAssetsTechnologyKeysParameter
-	ports           *ListAssetsPortsParameter
+	integrationIds  *string
+	ownerEmails     *string
+	technologyKeys  *string
+	ports           *string
 	severities      *[]string
 	risks           *[]string
 	frameworks      *[]string
@@ -3588,7 +3716,7 @@ func (r ApiListAssetsRequest) Statuses(statuses []string) ApiListAssetsRequest {
 }
 
 // Filter by any of the listed project IDs
-func (r ApiListAssetsRequest) ProjectIds(projectIds ListAssetsProjectIdsParameter) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) ProjectIds(projectIds string) ApiListAssetsRequest {
 	r.projectIds = &projectIds
 	return r
 }
@@ -3618,25 +3746,25 @@ func (r ApiListAssetsRequest) Domains(domains string) ApiListAssetsRequest {
 }
 
 // Filter by source integration ID
-func (r ApiListAssetsRequest) IntegrationIds(integrationIds ListAssetsIntegrationIdsParameter) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) IntegrationIds(integrationIds string) ApiListAssetsRequest {
 	r.integrationIds = &integrationIds
 	return r
 }
 
 // Filter by owner email
-func (r ApiListAssetsRequest) OwnerEmails(ownerEmails ListAssetsOwnerEmailsParameter) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) OwnerEmails(ownerEmails string) ApiListAssetsRequest {
 	r.ownerEmails = &ownerEmails
 	return r
 }
 
 // Filter by technology key
-func (r ApiListAssetsRequest) TechnologyKeys(technologyKeys ListAssetsTechnologyKeysParameter) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) TechnologyKeys(technologyKeys string) ApiListAssetsRequest {
 	r.technologyKeys = &technologyKeys
 	return r
 }
 
 // Filter by port number
-func (r ApiListAssetsRequest) Ports(ports ListAssetsPortsParameter) ApiListAssetsRequest {
+func (r ApiListAssetsRequest) Ports(ports string) ApiListAssetsRequest {
 	r.ports = &ports
 	return r
 }

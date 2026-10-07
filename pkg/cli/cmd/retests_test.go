@@ -152,6 +152,24 @@ func TestBuildMCPToolSpecsIncludesRetestTools(t *testing.T) {
 	assertFlag(t, start.FlagBindings, "search", "search", "string")
 	assertFlag(t, start.FlagBindings, "context", "context", "string")
 	assertFlag(t, start.FlagBindings, "initiator", "initiator", "string")
+	assertFlag(t, start.FlagBindings, "project_id", "project-id", "stringSlice")
+	assertFlag(t, start.FlagBindings, "target_id", "target-id", "stringSlice")
+	assertFlag(t, start.FlagBindings, "scan_id", "scan-id", "stringSlice")
+	assertFlag(t, start.FlagBindings, "security_test_uid", "security-test-uid", "stringSlice")
+	assertFlag(t, start.FlagBindings, "domain", "domain", "stringSlice")
+	assertFlag(t, start.FlagBindings, "name", "name", "stringSlice")
+	assertFlag(t, start.FlagBindings, "blacklisted_id", "blacklisted-id", "stringSlice")
+	assertFlag(t, start.FlagBindings, "blacklisted_name", "blacklisted-name", "stringSlice")
+	assertFlag(t, start.FlagBindings, "risk", "risk", "stringSlice")
+	assertFlag(t, start.FlagBindings, "asset_class", "asset-class", "stringSlice")
+	assertFlag(t, start.FlagBindings, "category", "category", "stringSlice")
+	assertFlag(t, start.FlagBindings, "asset_type", "asset-type", "stringSlice")
+	assertFlag(t, start.FlagBindings, "asset_status", "asset-status", "stringSlice")
+	assertFlag(t, start.FlagBindings, "jira_ticket", "jira-ticket", "bool")
+	assertFlag(t, start.FlagBindings, "no_tags", "no-tags", "bool")
+	assertFlag(t, start.FlagBindings, "ai_false_positive", "ai-false-positive", "bool")
+	assertFlag(t, start.FlagBindings, "agentic", "agentic", "bool")
+	assertFlag(t, start.FlagBindings, "dnf", "dnf", "string")
 
 	bodyProps := mcpBodyProperties(t, start.Tool.RawInputSchema)
 	for _, key := range []string{"profileId", "issueIds", "filter", "context", "initiator"} {
@@ -164,7 +182,13 @@ func TestBuildMCPToolSpecsIncludesRetestTools(t *testing.T) {
 	// nullable object. The fields stay on the object branch.
 	filter, _ := bodyProps["filter"].(map[string]any)
 	filterProps, _ := nullableObjectSchema(filter)["properties"].(map[string]any)
-	for _, key := range []string{"ids", "assetIds", "severities", "tagIds", "scannerKinds", "status", "search"} {
+	for _, key := range []string{
+		"ids", "assetIds", "severities", "tagIds", "scannerKinds", "status", "search",
+		"projectIds", "targetIds", "scanIds", "securityTestUids", "domains", "names",
+		"blacklistedIds", "blacklistedNames", "risks", "assetClasses", "categories",
+		"assetTypes", "assetStatuses", "jiraTicket", "noTags", "aiFalsePositive",
+		"agentic", "dnf",
+	} {
 		if _, ok := filterProps[key]; !ok {
 			t.Fatalf("start filter schema missing %q", key)
 		}
@@ -255,6 +279,148 @@ func TestBuildStartRetestRequestFromFilterFlags(t *testing.T) {
 
 	if request.HasInitiator() {
 		t.Fatal("initiator should stay unset so the API can default it to MANUAL")
+	}
+}
+
+func TestBuildStartRetestRequestFromExtendedFilterFlags(t *testing.T) {
+	resetRetestStartFlags(t)
+
+	if err := retestsStartCmd.ParseFlags([]string{
+		"--profile-id", "profile-1",
+		"--project-id", "project-1",
+		"--target-id", "target-1",
+		"--scan-id", "scan-1",
+		"--security-test-uid", "ISSUE_SQL_INJECTION",
+		"--domain", "example.com",
+		"--name", "SQL injection found",
+		"--blacklisted-id", "issue-2",
+		"--blacklisted-name", "SQL injection",
+		"--risk", "EXPOSED",
+		"--asset-class", "FRONTEND",
+		"--category", "INJECTION",
+		"--asset-type", "WEBAPP",
+		"--asset-status", "MONITORED",
+		"--jira-ticket",
+		"--no-tags",
+		"--ai-false-positive",
+		"--agentic",
+		"--dnf", `{"and":[{"severity":"HIGH"}]}`,
+	}); err != nil {
+		t.Fatalf("parse flags: %v", err)
+	}
+
+	request, err := buildStartRetestRequest(startRetestInputFromCommand(retestsStartCmd), nil)
+	if err != nil {
+		t.Fatalf("build request: %v", err)
+	}
+
+	if request.Filter == nil {
+		t.Fatal("expected filter")
+	}
+
+	filter := request.Filter
+	if strings.Join(filter.ProjectIds, ",") != "project-1" {
+		t.Errorf("project ids = %v", filter.ProjectIds)
+	}
+
+	if strings.Join(filter.TargetIds, ",") != "target-1" {
+		t.Errorf("target ids = %v", filter.TargetIds)
+	}
+
+	if strings.Join(filter.ScanIds, ",") != "scan-1" {
+		t.Errorf("scan ids = %v", filter.ScanIds)
+	}
+
+	if strings.Join(filter.SecurityTestUids, ",") != "ISSUE_SQL_INJECTION" {
+		t.Errorf("security test uids = %v", filter.SecurityTestUids)
+	}
+
+	if strings.Join(filter.Domains, ",") != "example.com" {
+		t.Errorf("domains = %v", filter.Domains)
+	}
+
+	if strings.Join(filter.Names, ",") != "SQL injection found" {
+		t.Errorf("names = %v", filter.Names)
+	}
+
+	if strings.Join(filter.BlacklistedIds, ",") != "issue-2" {
+		t.Errorf("blacklisted ids = %v", filter.BlacklistedIds)
+	}
+
+	if strings.Join(filter.BlacklistedNames, ",") != "SQL injection" {
+		t.Errorf("blacklisted names = %v", filter.BlacklistedNames)
+	}
+
+	if strings.Join(enumStrings(filter.Risks), ",") != "EXPOSED" {
+		t.Errorf("risks = %v", filter.Risks)
+	}
+
+	if strings.Join(enumStrings(filter.AssetClasses), ",") != "FRONTEND" {
+		t.Errorf("asset classes = %v", filter.AssetClasses)
+	}
+
+	if strings.Join(enumStrings(filter.Categories), ",") != "INJECTION" {
+		t.Errorf("categories = %v", filter.Categories)
+	}
+
+	if strings.Join(enumStrings(filter.AssetTypes), ",") != "WEBAPP" {
+		t.Errorf("asset types = %v", filter.AssetTypes)
+	}
+
+	if strings.Join(enumStrings(filter.AssetStatuses), ",") != "MONITORED" {
+		t.Errorf("asset statuses = %v", filter.AssetStatuses)
+	}
+
+	if !filter.GetJiraTicket() {
+		t.Errorf("jira ticket = %v, want true", filter.JiraTicket)
+	}
+
+	if filter.NoTags == nil || !bool(*filter.NoTags) {
+		t.Errorf("no tags = %v, want true", filter.NoTags)
+	}
+
+	if !filter.GetAiFalsePositive() {
+		t.Errorf("ai false positive = %v, want true", filter.AiFalsePositive)
+	}
+
+	if !filter.GetAgentic() {
+		t.Errorf("agentic = %v, want true", filter.Agentic)
+	}
+
+	if filter.Dnf["and"] == nil {
+		t.Errorf("dnf = %v, want the parsed object", filter.Dnf)
+	}
+}
+
+func TestBuildStartRetestRequestRejectsNoTagsFalse(t *testing.T) {
+	resetRetestStartFlags(t)
+
+	if err := retestsStartCmd.ParseFlags([]string{
+		"--profile-id", "profile-1",
+		"--no-tags=false",
+	}); err != nil {
+		t.Fatalf("parse flags: %v", err)
+	}
+
+	_, err := buildStartRetestRequest(startRetestInputFromCommand(retestsStartCmd), nil)
+	if err == nil || !strings.Contains(err.Error(), "--no-tags only supports true") {
+		t.Fatalf("expected a --no-tags true-only error, got %v", err)
+	}
+}
+
+func TestBuildStartRetestRequestRejectsInvalidDnf(t *testing.T) {
+	resetRetestStartFlags(t)
+
+	if err := retestsStartCmd.ParseFlags([]string{
+		"--profile-id", "profile-1",
+		"--dnf", "not-json",
+	}); err != nil {
+		t.Fatalf("parse flags: %v", err)
+	}
+
+	_, err := buildStartRetestRequest(startRetestInputFromCommand(retestsStartCmd), nil)
+	if err == nil || !strings.Contains(err.Error(), "invalid --dnf JSON") {
+		t.Fatalf("expected an invalid --dnf error, got %v", err)
 	}
 }
 
@@ -353,6 +519,20 @@ func TestBuildStartRetestRequestAcceptsEmptyFilterBody(t *testing.T) {
 	}
 }
 
+func TestBuildStartRetestRequestRejectsBlankFilterFlagOverBodySelection(t *testing.T) {
+	t.Parallel()
+
+	// A blank --project-id used to drop out of the filter and clear the issue
+	// selection from the body, which the API reads as "retest every issue".
+	body := []byte(`{"profileId":"profile-1","issueIds":["issue-1"]}`)
+	input := startRetestInput{projectIDsSet: true, projectIDs: []string{" "}}
+
+	_, err := buildStartRetestRequest(input, body)
+	if err == nil || !strings.Contains(err.Error(), "--project-id requires a non-empty value") {
+		t.Fatalf("expected a blank --project-id error, got %v", err)
+	}
+}
+
 func TestBuildStartRetestRequestValidation(t *testing.T) {
 	t.Parallel()
 
@@ -377,6 +557,21 @@ func TestBuildStartRetestRequestValidation(t *testing.T) {
 			name:  "bad severity",
 			input: startRetestInput{profileID: "profile-1", profileSet: true, severitiesSet: true, severities: []string{"NOPE"}},
 			want:  `invalid severity "NOPE"`,
+		},
+		{
+			name:  "blank project id flag",
+			input: startRetestInput{profileID: "profile-1", profileSet: true, projectIDsSet: true, projectIDs: []string{" "}},
+			want:  "--project-id requires a non-empty value",
+		},
+		{
+			name:  "blank severity flag",
+			input: startRetestInput{profileID: "profile-1", profileSet: true, severitiesSet: true, severities: []string{""}},
+			want:  "--severity requires a non-empty value",
+		},
+		{
+			name:  "blank search flag",
+			input: startRetestInput{profileID: "profile-1", profileSet: true, searchSet: true, search: "  "},
+			want:  "--search requires a non-empty value",
 		},
 		{
 			name:  "bad initiator",

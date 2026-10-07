@@ -17,24 +17,24 @@ import (
 
 // ListEventsResponseStatusCodesParameter Filter by response status codes
 type ListEventsResponseStatusCodesParameter struct {
-	ArrayOfListAssetsPortsParameterAnyOfInner *[]ListAssetsPortsParameterAnyOfInner
-	String                                    *string
+	ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner *[]BulkUpdateAssetsRequestWherePortsAnyOfInner
+	String                                             *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *ListEventsResponseStatusCodesParameter) UnmarshalJSON(data []byte) error {
 	var err error
-	// try to unmarshal JSON data into ArrayOfListAssetsPortsParameterAnyOfInner
-	err = json.Unmarshal(data, &dst.ArrayOfListAssetsPortsParameterAnyOfInner)
+	// try to unmarshal JSON data into ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner
+	err = json.Unmarshal(data, &dst.ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner)
 	if err == nil {
-		jsonArrayOfListAssetsPortsParameterAnyOfInner, _ := json.Marshal(dst.ArrayOfListAssetsPortsParameterAnyOfInner)
-		if string(jsonArrayOfListAssetsPortsParameterAnyOfInner) == "{}" { // empty struct
-			dst.ArrayOfListAssetsPortsParameterAnyOfInner = nil
+		jsonArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner, _ := json.Marshal(dst.ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner)
+		if string(jsonArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner) == "{}" { // empty struct
+			dst.ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner = nil
 		} else {
-			return nil // data stored in dst.ArrayOfListAssetsPortsParameterAnyOfInner, return on the first match
+			return nil // data stored in dst.ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner, return on the first match
 		}
 	} else {
-		dst.ArrayOfListAssetsPortsParameterAnyOfInner = nil
+		dst.ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner = nil
 	}
 
 	// try to unmarshal JSON data into String
@@ -55,8 +55,8 @@ func (dst *ListEventsResponseStatusCodesParameter) UnmarshalJSON(data []byte) er
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ListEventsResponseStatusCodesParameter) MarshalJSON() ([]byte, error) {
-	if src.ArrayOfListAssetsPortsParameterAnyOfInner != nil {
-		return json.Marshal(&src.ArrayOfListAssetsPortsParameterAnyOfInner)
+	if src.ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner != nil {
+		return json.Marshal(&src.ArrayOfBulkUpdateAssetsRequestWherePortsAnyOfInner)
 	}
 
 	if src.String != nil {

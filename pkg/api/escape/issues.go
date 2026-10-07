@@ -28,20 +28,32 @@ type IssueTrendPoint struct {
 
 // ListIssuesFilters holds optional filters for listing issues
 type ListIssuesFilters struct {
-	Status       []string
-	Severities   []string
-	ProfileIDs   []string
-	AssetIDs     []string
-	Domains      []string
-	IssueIDs     []string
-	ScanIDs      []string
-	TagsIDs      []string
-	Search       string
-	JiraTicket   string
-	Risks        []string
-	AssetClasses []string
-	ScannerKinds []string
-	Names        []string
+	Status           []string
+	Severities       []string
+	ProfileIDs       []string
+	AssetIDs         []string
+	Domains          []string
+	IssueIDs         []string
+	ScanIDs          []string
+	TagsIDs          []string
+	Search           string
+	JiraTicket       string
+	Risks            []string
+	AssetClasses     []string
+	ScannerKinds     []string
+	Names            []string
+	ProjectIDs       []string
+	TargetIDs        []string
+	Categories       []string
+	AssetTypes       []string
+	AssetStatuses    []string
+	SecurityTestUids []string
+	BlacklistedIDs   []string
+	BlacklistedNames []string
+	AiFalsePositive  string
+	Agentic          string
+	NoTags           *bool
+	Dnf              string
 }
 
 // GetIssue gets an issue by ID
@@ -87,63 +99,7 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 		req = req.SortDirection(sortDirection)
 	}
 
-	if filters != nil {
-		if len(filters.Status) > 0 {
-			req = req.Status(filters.Status)
-		}
-
-		if len(filters.Severities) > 0 {
-			req = req.Severities(filters.Severities)
-		}
-
-		if len(filters.ProfileIDs) > 0 {
-			req = req.ProfileIds(strings.Join(filters.ProfileIDs, ","))
-		}
-
-		if len(filters.AssetIDs) > 0 {
-			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
-		}
-
-		if len(filters.Domains) > 0 {
-			req = req.Domains(strings.Join(filters.Domains, ","))
-		}
-
-		if len(filters.IssueIDs) > 0 {
-			req = req.Ids(strings.Join(filters.IssueIDs, ","))
-		}
-
-		if len(filters.ScanIDs) > 0 {
-			req = req.ScanIds(strings.Join(filters.ScanIDs, ","))
-		}
-
-		if len(filters.TagsIDs) > 0 {
-			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
-		}
-
-		if filters.Search != "" {
-			req = req.Search(filters.Search)
-		}
-
-		if filters.JiraTicket != "" {
-			req = req.JiraTicket(filters.JiraTicket)
-		}
-
-		if len(filters.Risks) > 0 {
-			req = req.Risks(filters.Risks)
-		}
-
-		if len(filters.AssetClasses) > 0 {
-			req = req.AssetClasses(filters.AssetClasses)
-		}
-
-		if len(filters.ScannerKinds) > 0 {
-			req = req.ScannerKinds(filters.ScannerKinds)
-		}
-
-		if len(filters.Names) > 0 {
-			req = req.Names(v3.ListIssuesNamesParameter{ArrayOfString: &filters.Names})
-		}
-	}
+	req = applyIssueListFilters(req, filters)
 
 	data, _, err := req.Execute()
 	if err != nil {
@@ -151,6 +107,144 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 	}
 
 	return data.Data, data.NextCursor, data.GetTotalCount(), nil
+}
+
+// applyIssueListFilters applies the optional issue filters to a ListIssues
+// request. The filters are split into small helpers so each one stays readable
+// and below the cyclomatic-complexity limit.
+func applyIssueListFilters(req v3.ApiListIssuesRequest, filters *ListIssuesFilters) v3.ApiListIssuesRequest {
+	if filters == nil {
+		return req
+	}
+
+	req = applyIssueListIDFilters(req, filters)
+	req = applyIssueListValueFilters(req, filters)
+
+	return applyIssueListParameterFilters(req, filters)
+}
+
+// applyIssueListIDFilters applies the filters sent as one comma-separated
+// string parameter.
+func applyIssueListIDFilters(req v3.ApiListIssuesRequest, filters *ListIssuesFilters) v3.ApiListIssuesRequest {
+	if len(filters.ProfileIDs) > 0 {
+		req = req.ProfileIds(strings.Join(filters.ProfileIDs, ","))
+	}
+
+	if len(filters.AssetIDs) > 0 {
+		req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
+	}
+
+	if len(filters.Domains) > 0 {
+		req = req.Domains(strings.Join(filters.Domains, ","))
+	}
+
+	if len(filters.IssueIDs) > 0 {
+		req = req.Ids(strings.Join(filters.IssueIDs, ","))
+	}
+
+	if len(filters.ScanIDs) > 0 {
+		req = req.ScanIds(strings.Join(filters.ScanIDs, ","))
+	}
+
+	if len(filters.TagsIDs) > 0 {
+		req = req.TagIds(strings.Join(filters.TagsIDs, ","))
+	}
+
+	return req
+}
+
+// applyIssueListValueFilters applies the filters forwarded as-is, either as a
+// repeated string parameter or a scalar string parameter.
+func applyIssueListValueFilters(req v3.ApiListIssuesRequest, filters *ListIssuesFilters) v3.ApiListIssuesRequest {
+	if len(filters.Status) > 0 {
+		req = req.Status(filters.Status)
+	}
+
+	if len(filters.Severities) > 0 {
+		req = req.Severities(filters.Severities)
+	}
+
+	if filters.Search != "" {
+		req = req.Search(filters.Search)
+	}
+
+	if filters.JiraTicket != "" {
+		req = req.JiraTicket(filters.JiraTicket)
+	}
+
+	if len(filters.Risks) > 0 {
+		req = req.Risks(filters.Risks)
+	}
+
+	if len(filters.AssetClasses) > 0 {
+		req = req.AssetClasses(filters.AssetClasses)
+	}
+
+	if len(filters.ScannerKinds) > 0 {
+		req = req.ScannerKinds(filters.ScannerKinds)
+	}
+
+	if len(filters.Categories) > 0 {
+		req = req.Categories(filters.Categories)
+	}
+
+	if len(filters.AssetTypes) > 0 {
+		req = req.AssetTypes(filters.AssetTypes)
+	}
+
+	if len(filters.AssetStatuses) > 0 {
+		req = req.AssetStatuses(filters.AssetStatuses)
+	}
+
+	if filters.AiFalsePositive != "" {
+		req = req.AiFalsePositive(filters.AiFalsePositive)
+	}
+
+	if filters.Agentic != "" {
+		req = req.Agentic(filters.Agentic)
+	}
+
+	if filters.Dnf != "" {
+		req = req.Dnf(filters.Dnf)
+	}
+
+	return req
+}
+
+// applyIssueListParameterFilters applies the filters the generated client
+// wraps in a typed parameter struct.
+func applyIssueListParameterFilters(req v3.ApiListIssuesRequest, filters *ListIssuesFilters) v3.ApiListIssuesRequest {
+	if len(filters.Names) > 0 {
+		req = req.Names(v3.ListIssuesNamesParameter{ArrayOfString: &filters.Names})
+	}
+
+	if len(filters.ProjectIDs) > 0 {
+		req = req.ProjectIds(v3.ListScansProjectIdsParameter{ArrayOfString: &filters.ProjectIDs})
+	}
+
+	if len(filters.TargetIDs) > 0 {
+		req = req.TargetIds(v3.ListIssuesTargetIdsParameter{ArrayOfString: &filters.TargetIDs})
+	}
+
+	if len(filters.SecurityTestUids) > 0 {
+		req = req.SecurityTestUids(v3.ListIssuesSecurityTestUidsParameter{ArrayOfString: &filters.SecurityTestUids})
+	}
+
+	if len(filters.BlacklistedIDs) > 0 {
+		req = req.BlacklistedIds(v3.ListIssuesBlacklistedIdsParameter{ArrayOfString: &filters.BlacklistedIDs})
+	}
+
+	if len(filters.BlacklistedNames) > 0 {
+		req = req.BlacklistedNames(v3.ListIssuesBlacklistedNamesParameter{ArrayOfString: &filters.BlacklistedNames})
+	}
+
+	// The API only honours noTags=true; false is rejected, so the flag is
+	// only forwarded when set.
+	if filters.NoTags != nil && *filters.NoTags {
+		req = req.NoTags("true")
+	}
+
+	return req
 }
 
 // UpdateIssue applies the supplied mutation to a single issue.
@@ -291,6 +385,41 @@ func NotifyIssueOwners(ctx context.Context, issueID, scanID string) (*v3.NotifyI
 
 	body := v3.NotifyIssueOwnersRequest{ScanId: scanID}
 	data, _, err := client.IssuesAPI.NotifyIssueOwners(ctx, issueID).NotifyIssueOwnersRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// GenerateIssueAiRemediation schedules AI remediation generation for an issue.
+// The body carries the kind ("remediation" for the full issue-panel
+// remediation or "summary" for the short overview). Generation is
+// asynchronous: read the result back with GetIssue.
+func GenerateIssueAiRemediation(ctx context.Context, issueID string, body v3.GenerateIssueAiRemediationRequest) (*v3.GenerateIssueAiRemediation200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	data, _, err := client.IssuesAPI.GenerateIssueAiRemediation(ctx, issueID).GenerateIssueAiRemediationRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// SaveIssueAiRemediationFeedback records whether an AI remediation artefact was
+// useful. The body carries the kind and the tri-state feedback: true, false, or
+// an explicit null (carried through AdditionalProperties) to clear a rating.
+func SaveIssueAiRemediationFeedback(ctx context.Context, issueID string, body v3.SaveIssueAiRemediationFeedbackRequest) (*v3.SaveIssueAiRemediationFeedback200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	data, _, err := client.IssuesAPI.SaveIssueAiRemediationFeedback(ctx, issueID).SaveIssueAiRemediationFeedbackRequest(body).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}

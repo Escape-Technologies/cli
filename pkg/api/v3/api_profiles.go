@@ -1818,20 +1818,22 @@ func (a *ProfilesAPIService) ListProfilesExecute(r ApiListProfilesRequest) (*Lis
 }
 
 type ApiProblemsRequest struct {
-	ctx           context.Context
-	ApiService    *ProfilesAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
-	sortDirection *string
-	assetIds      *string
-	domains       *string
-	issueIds      *string
-	tagIds        *string
-	search        *string
-	initiators    *[]string
-	kinds         *[]string
-	risks         *[]string
+	ctx               context.Context
+	ApiService        *ProfilesAPIService
+	cursor            *string
+	size              *int
+	sortType          *string
+	sortDirection     *string
+	assetIds          *string
+	domains           *string
+	issueIds          *string
+	tagIds            *string
+	search            *string
+	initiators        *[]string
+	kinds             *[]string
+	risks             *[]string
+	problemCodes      *[]string
+	problemSeverities *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -1903,6 +1905,18 @@ func (r ApiProblemsRequest) Kinds(kinds []string) ApiProblemsRequest {
 // Filter by risk
 func (r ApiProblemsRequest) Risks(risks []string) ApiProblemsRequest {
 	r.risks = &risks
+	return r
+}
+
+// Filter by problem codes
+func (r ApiProblemsRequest) ProblemCodes(problemCodes []string) ApiProblemsRequest {
+	r.problemCodes = &problemCodes
+	return r
+}
+
+// Filter by problem severities
+func (r ApiProblemsRequest) ProblemSeverities(problemSeverities []string) ApiProblemsRequest {
+	r.problemSeverities = &problemSeverities
 	return r
 }
 
@@ -2011,6 +2025,28 @@ func (a *ProfilesAPIService) ProblemsExecute(r ApiProblemsRequest) (*Problems200
 			}
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "risks", t, "form", "multi")
+		}
+	}
+	if r.problemCodes != nil {
+		t := *r.problemCodes
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "problemCodes", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "problemCodes", t, "form", "multi")
+		}
+	}
+	if r.problemSeverities != nil {
+		t := *r.problemSeverities
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "problemSeverities", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "problemSeverities", t, "form", "multi")
 		}
 	}
 	// to determine the Content-Type header

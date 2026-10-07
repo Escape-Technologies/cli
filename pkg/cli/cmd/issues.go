@@ -66,6 +66,51 @@ type IssueEventHydrateError struct {
 	Error   string `json:"error"`
 }
 
+// optionalBool returns a pointer to the flag value, or nil when it is the zero
+// value, so an unset boolean filter is not forwarded to the API at all.
+func optionalBool(value bool) *bool {
+	if !value {
+		return nil
+	}
+
+	return &value
+}
+
+// issueListFilters assembles the GET /issues filter set from the `issues list`
+// flags. The boolean API filters are string flags ("true"/"false") so an
+// explicit false is forwarded instead of being dropped. noTags only honours
+// true, so its flag stays nil unless set.
+func issueListFilters() *escape.ListIssuesFilters {
+	return &escape.ListIssuesFilters{
+		Status:           issueStatus,
+		Severities:       issueSeverity,
+		ProfileIDs:       profileIDs,
+		AssetIDs:         assetIDs,
+		Domains:          domains,
+		IssueIDs:         issueIDs,
+		ScanIDs:          scanIDs,
+		TagsIDs:          tagsIDs,
+		Risks:            risks,
+		Search:           search,
+		AssetClasses:     assetClasses,
+		JiraTicket:       jiraTicket,
+		ScannerKinds:     issueScannerKinds,
+		Names:            issueNames,
+		ProjectIDs:       issueProjectIDs,
+		TargetIDs:        issueTargetIDs,
+		Categories:       issueCategories,
+		AssetTypes:       issueAssetTypes,
+		AssetStatuses:    issueAssetStatuses,
+		SecurityTestUids: issueSecurityTestUids,
+		BlacklistedIDs:   issueBlacklistedIDs,
+		BlacklistedNames: issueBlacklistedNames,
+		AiFalsePositive:  strings.TrimSpace(issueAiFalsePositive),
+		Agentic:          strings.TrimSpace(issueAgentic),
+		NoTags:           optionalBool(issueNoTags),
+		Dnf:              strings.TrimSpace(issueDnf),
+	}
+}
+
 func formatIssueCompliances(items []v3.GetIssue200ResponseCompliancesInner) string {
 	if len(items) == 0 {
 		return "-"
@@ -116,6 +161,19 @@ var (
 	issueScannerKinds    []string
 	issueNames           []string
 	issueListPage        pageFlags
+
+	issueProjectIDs       []string
+	issueTargetIDs        []string
+	issueCategories       []string
+	issueAssetTypes       []string
+	issueAssetStatuses    []string
+	issueSecurityTestUids []string
+	issueBlacklistedIDs   []string
+	issueBlacklistedNames []string
+	issueAiFalsePositive  string
+	issueAgentic          string
+	issueNoTags           bool
+	issueDnf              string
 )
 
 var issuesCmd = &cobra.Command{
@@ -163,13 +221,25 @@ FILTER OPTIONS:
   --severity         Filter by severity: CRITICAL, HIGH, MEDIUM, LOW, INFO
   --status           Filter by status: OPEN, MANUAL_REVIEW, IN_PROGRESS, RESOLVED
   -p, --profile-id   Filter by profile ID
-  -a, --asset-id     Filter by asset ID  
+  -a, --asset-id     Filter by asset ID
   -d, --domain       Filter by domain name
   -i, --issue-id     Filter by specific issue IDs
   --scan-id          Filter by scan ID
   -t, --tag-id       Filter by tag ID
   -r, --risk         Filter by risk level
   --asset-class      Filter by asset classification
+  --project-id       Filter by project ID
+  --target-id        Filter by target ID
+  --category         Filter by issue category
+  --asset-type       Filter by asset type
+  --asset-status     Filter by asset status
+  --security-test-uid Filter by security test UID
+  --blacklisted-id   Exclude these issue IDs
+  --blacklisted-name Exclude issues by their raw name
+  --ai-false-positive Filter by AI false positive classification (true/false)
+  --agentic          Filter by agentic (AI pentest) issues (true/false)
+  --no-tags           Filter by issues whose assets have no tags (true only)
+  --dnf              Advanced filter as a DNF expression (URL-encoded JSON object)
   -s, --search       Free-text search across issue names
 
 SEVERITY PRIORITY:
@@ -199,7 +269,13 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
   escape-cli issues list -o json | jq '.[] | select(.severity == "CRITICAL")'
 
   # List unresolved issues across all assets
-  escape-cli issues list --status OPEN,MANUAL_REVIEW,IN_PROGRESS`,
+  escape-cli issues list --status OPEN,MANUAL_REVIEW,IN_PROGRESS
+
+  # List AI-classified false positives in a project
+  escape-cli issues list --project-id <project-id> --ai-false-positive true
+
+  # List agentic (AI pentest) findings of a given category
+  escape-cli issues list --agentic true --category INJECTION`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		// Output JSON Schema if requested
 		if out.Schema([]v3.IssueSummarized{}) {
@@ -225,22 +301,7 @@ ID                                      CREATED AT  SEVERITY  STATUS  NAME      
 			return fmt.Errorf("invalid --sort-direction %q; valid values: asc, desc", issueSortDirection)
 		}
 
-		filters := &escape.ListIssuesFilters{
-			Status:       issueStatus,
-			Severities:   issueSeverity,
-			ProfileIDs:   profileIDs,
-			AssetIDs:     assetIDs,
-			Domains:      domains,
-			IssueIDs:     issueIDs,
-			ScanIDs:      scanIDs,
-			TagsIDs:      tagsIDs,
-			Risks:        risks,
-			Search:       search,
-			AssetClasses: assetClasses,
-			JiraTicket:   jiraTicket,
-			ScannerKinds: issueScannerKinds,
-			Names:        issueNames,
-		}
+		filters := issueListFilters()
 		if err := runPagedList(cmd, issueListPage, func(ctx context.Context, cursor string, size int) ([]v3.IssueSummarized, *string, int, error) {
 			return escape.ListIssues(ctx, cursor, filters, issueSortType, issueSortDirection, size)
 		}, func(issues []v3.IssueSummarized) []string {
@@ -277,11 +338,19 @@ DISPLAYED INFORMATION:
   • ASSET       - Affected API or application
   • LINK        - URL to detailed analysis and remediation steps
 
+AI PENTEST DETAILS (pretty output):
+  • Reproduction steps, exploits and attack chain
+  • Impact and AI false-positive verdict
+  • Linked ticket (external ID and URL)
+  • Ready-to-use fix prompt for a coding agent
+  All of these fields are also present in -o json output.
+
 USE CASES:
   • Review vulnerability details before fixing
   • Share issue information with team members
   • Verify issue details in incident response
   • Get remediation guidance link
+  • Hand the fix prompt to a coding agent
 
 Example output:
 ID                                      CREATED AT                SEVERITY  CATEGORY         STATUS  NAME              ASSET                  LINK
@@ -330,8 +399,89 @@ ID                                      CREATED AT                SEVERITY  CATE
 			return res
 		})
 
+		printIssueDetails(issue)
+
 		return nil
 	},
+}
+
+// printIssueDetails renders the AI pentest detail fields of `issues get`:
+// reproduction steps, exploits, attack chain, impact, the AI false-positive
+// verdict, the linked ticket and the fix prompt. JSON and YAML output already
+// carry every one of these fields on the issue document, so this only runs
+// when stdout is the human table.
+func printIssueDetails(issue *v3.GetIssue200Response) {
+	if !isPrettyOutput() {
+		return
+	}
+
+	if steps := issue.GetReproductionSteps(); len(steps) > 0 {
+		out.Table(steps, func() []string {
+			res := []string{"REPRODUCTION STEPS"}
+			res = append(res, "ORDER\tTITLE\tCONTENT")
+			for _, step := range steps {
+				res = append(res, fmt.Sprintf("%d\t%s\t%s", step.GetOrder(), step.GetTitle(), step.GetContent()))
+			}
+
+			return res
+		})
+	}
+
+	if exploits := issue.GetExploits(); len(exploits) > 0 {
+		out.Table(exploits, func() []string {
+			res := []string{"EXPLOITS"}
+			res = append(res, exploits...)
+
+			return res
+		})
+	}
+
+	if chain := issue.GetAttackChain(); len(chain) > 0 {
+		out.Table(chain, func() []string {
+			res := []string{"ATTACK CHAIN"}
+			res = append(res, "ORDER\tSTAGE\tTITLE\tDESCRIPTION\tCONTENT")
+			for _, step := range chain {
+				res = append(res, fmt.Sprintf("%d\t%s\t%s\t%s\t%s", step.GetOrder(), step.GetStage(), step.GetTitle(), step.GetDescription(), step.GetContent()))
+			}
+
+			return res
+		})
+	}
+
+	verdict := issue.GetAiFalsePositive()
+	out.Table(verdict, func() []string {
+		res := []string{"AI FALSE POSITIVE"}
+		res = append(res, "IS FALSE POSITIVE\tREASONING\tREASONING SUMMARY")
+		res = append(res, fmt.Sprintf("%t\t%s\t%s", verdict.GetIsFalsePositive(), formatOptional(verdict.GetReasoning()), formatOptional(verdict.GetReasoningSummary())))
+
+		return res
+	})
+
+	if ticket, ok := issue.GetTicketOk(); ok {
+		out.Table(ticket, func() []string {
+			res := []string{"TICKET"}
+			res = append(res, "EXTERNAL ID\tEXTERNAL URL\tCREATED AT")
+			res = append(res, fmt.Sprintf("%s\t%s\t%s", ticket.GetExternalId(), ticket.GetExternalUrl(), ticket.GetCreatedAt()))
+
+			return res
+		})
+	}
+
+	if issue.HasImpact() {
+		out.Table(issue, func() []string {
+			res := []string{"IMPACT"}
+			res = append(res, issue.GetImpact())
+
+			return res
+		})
+	}
+
+	out.Table(issue, func() []string {
+		res := []string{"FIX PROMPT"}
+		res = append(res, issue.GetFixPrompt())
+
+		return res
+	})
 }
 
 var issueGetWithEventsCmd = &cobra.Command{
@@ -811,6 +961,8 @@ var (
 	bulkIssueProfileIDs   []string
 	bulkIssueTagIDs       []string
 	bulkIssueScannerKinds []string
+	bulkIssueAll          bool
+	bulkIssueDryRun       bool
 
 	notifyScanID string
 
@@ -964,30 +1116,65 @@ func buildBulkUpdateIssuesRequest() (*v3.BulkUpdateIssuesRequest, error) {
 		where.ScannerKinds = kinds
 	}
 
-	body.SetWhere(where)
+	// An empty where is only sent with a filter: with --all the API rejects a
+	// non-empty where, and an empty one is noise.
+	if bulkIssueFilterFlagsSet() {
+		body.SetWhere(where)
+	}
+
+	// All and DryRun are pointers with omitempty, so they are only forwarded
+	// when set: an explicit false would be accepted by the API but adds noise.
+	if bulkIssueAll {
+		body.SetAll(true)
+	}
+
+	if bulkIssueDryRun {
+		body.SetDryRun(true)
+	}
 
 	return body, nil
 }
 
-// requireIssueBulkSelection rejects a bulk issue update whose where clause
-// would match every issue. The API accepts an empty where.
-func requireIssueBulkSelection() error {
-	if len(bulkIssueIDs) > 0 ||
+// bulkIssueFilterFlagsSet reports whether any where-filter flag carries a
+// value. It mirrors the fields requireIssueBulkSelection checks.
+func bulkIssueFilterFlagsSet() bool {
+	return len(bulkIssueIDs) > 0 ||
 		len(bulkIssueAssetIDs) > 0 ||
 		len(bulkIssueSeverities) > 0 ||
 		len(bulkIssueProfileIDs) > 0 ||
 		len(bulkIssueTagIDs) > 0 ||
-		len(bulkIssueScannerKinds) > 0 {
+		len(bulkIssueScannerKinds) > 0
+}
+
+// requireIssueBulkSelection rejects a bulk issue update that would match
+// every issue in the organization. Since the breaking API change
+// (POST /issues/bulk-update), the server requires a non-empty where filter
+// or all=true, and rejects all=true combined with a filter.
+func requireIssueBulkSelection() error {
+	if bulkIssueAll {
+		if bulkIssueFilterFlagsSet() {
+			return errors.New("--all cannot be combined with a filter; pass --all alone to target every issue")
+		}
+
 		return nil
 	}
 
-	return errors.New("at least one of --issue-id, --asset-id, --severity, --profile-id, --tag-id, or --scanner-kind is required")
+	if bulkIssueFilterFlagsSet() {
+		return nil
+	}
+
+	return errors.New("at least one of --issue-id, --asset-id, --severity, --profile-id, --tag-id, --scanner-kind, or --all is required")
 }
 
 var issueBulkUpdateCmd = &cobra.Command{
 	Use:   "bulk-update",
 	Short: "Update status and/or severity of multiple issues matching a filter",
-	Long:  `Bulk update issues. For example, mark all LOW severity issues on a given asset as IGNORED, or reset severities to scanner values. --reason is forwarded with both --status and --set-severity changes.`,
+	Long: `Bulk update issues. For example, mark all LOW severity issues on a given asset as IGNORED, or reset severities to scanner values. --reason is forwarded with both --status and --set-severity changes.
+
+A non-empty filter or --all is required: the API rejects an unscoped update
+that would match every issue in the organization. --all cannot be combined
+with filter flags. --dry-run prints the matching issue IDs without updating
+anything.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if out.Schema(v3.BulkUpdateIssues200Response{}) {
 			return nil
@@ -1007,13 +1194,20 @@ var issueBulkUpdateCmd = &cobra.Command{
 			return fmt.Errorf("unable to bulk update issues: %w", err)
 		}
 
+		changed := "Updated IDs"
+		summary := fmt.Sprintf("Updated %d issues", len(result.GetIds()))
+		if result.GetDryRun() {
+			changed = "MATCHING IDS (DRY RUN)"
+			summary = fmt.Sprintf("Dry run: %d issues would be updated", len(result.GetIds()))
+		}
+
 		out.Table(result, func() []string {
-			res := []string{"UPDATED IDS"}
+			res := []string{changed}
 			res = append(res, result.GetIds()...)
 
 			return res
 		})
-		out.Log(fmt.Sprintf("Updated %d issues", len(result.GetIds())))
+		out.Log(summary)
 
 		return nil
 	},
@@ -1145,6 +1339,8 @@ func init() {
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueProfileIDs, "profile-id", nil, "filter by profile ID(s)")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueTagIDs, "tag-id", nil, "filter by tag ID(s)")
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueScannerKinds, "scanner-kind", nil, "filter by scanner kind")
+	issueBulkUpdateCmd.Flags().BoolVar(&bulkIssueAll, "all", false, "target every issue in the organization; cannot be combined with filter flags")
+	issueBulkUpdateCmd.Flags().BoolVar(&bulkIssueDryRun, "dry-run", false, "print the matching issue IDs without updating anything")
 
 	issuesCmd.AddCommand(issueNotifyCmd)
 	issueNotifyCmd.Flags().StringVar(&notifyScanID, "scan-id", "", "scan ID to reference in the notification (required)")
@@ -1169,6 +1365,18 @@ func init() {
 	issueListCmd.Flags().StringSliceVarP(&assetClasses, "asset-class", "", []string{}, fmt.Sprintf("filter by asset classification: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASSEnumValues))
 	issueListCmd.Flags().StringSliceVar(&issueScannerKinds, "scanner-kind", []string{}, "filter by scanner kind (e.g., DAST, BLST_REST)")
 	issueListCmd.Flags().StringSliceVar(&issueNames, "name", []string{}, "filter by issue name(s)")
+	issueListCmd.Flags().StringSliceVar(&issueProjectIDs, "project-id", []string{}, "filter by project ID(s)")
+	issueListCmd.Flags().StringSliceVar(&issueTargetIDs, "target-id", []string{}, "filter by target ID(s)")
+	issueListCmd.Flags().StringSliceVar(&issueCategories, "category", []string{}, fmt.Sprintf("filter by issue category: %v", v3.AllowedENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORYEnumValues))
+	issueListCmd.Flags().StringSliceVar(&issueAssetTypes, "asset-type", []string{}, fmt.Sprintf("filter by asset type: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPEEnumValues))
+	issueListCmd.Flags().StringSliceVar(&issueAssetStatuses, "asset-status", []string{}, fmt.Sprintf("filter by asset status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
+	issueListCmd.Flags().StringSliceVar(&issueSecurityTestUids, "security-test-uid", []string{}, "filter by security test UID(s)")
+	issueListCmd.Flags().StringSliceVar(&issueBlacklistedIDs, "blacklisted-id", []string{}, "exclude these issue ID(s)")
+	issueListCmd.Flags().StringSliceVar(&issueBlacklistedNames, "blacklisted-name", []string{}, "exclude issues by their raw name(s)")
+	issueListCmd.Flags().StringVar(&issueAiFalsePositive, "ai-false-positive", "", "filter by AI false positive classification (true/false)")
+	issueListCmd.Flags().StringVar(&issueAgentic, "agentic", "", "filter by agentic (AI pentest) issues (true/false)")
+	issueListCmd.Flags().BoolVar(&issueNoTags, "no-tags", false, "filter by issues whose assets have no tags (only true is supported)")
+	issueListCmd.Flags().StringVar(&issueDnf, "dnf", "", "advanced filter as a DNF expression (URL-encoded JSON object)")
 	issueListCmd.Flags().StringVar(&issueSortType, "sort-by", "", "sort field: LAST_SEEN, FIRST_SEEN, SEVERITY, STATUS")
 	issueListCmd.Flags().StringVar(&issueSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	issueListPage.bind(issueListCmd)

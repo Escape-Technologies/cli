@@ -45,14 +45,24 @@ type StartScan200Response struct {
 	// The id of the profile of the scan
 	ProfileId string `json:"profileId"`
 	// The id of the organization of the scan
-	OrganizationId                 string            `json:"organizationId"`
-	CommitHash                     *string           `json:"commitHash,omitempty"`
-	CommitBranch                   *string           `json:"commitBranch,omitempty"`
-	CommitAuthor                   *string           `json:"commitAuthor,omitempty"`
-	CommitLink                     *string           `json:"commitLink,omitempty"`
-	CommitAuthorProfilePictureLink *string           `json:"commitAuthorProfilePictureLink,omitempty"`
-	Links                          ScanDetailedLinks `json:"links"`
-	AdditionalProperties           map[string]interface{}
+	OrganizationId                 string  `json:"organizationId"`
+	CommitHash                     *string `json:"commitHash,omitempty"`
+	CommitBranch                   *string `json:"commitBranch,omitempty"`
+	CommitAuthor                   *string `json:"commitAuthor,omitempty"`
+	CommitLink                     *string `json:"commitLink,omitempty"`
+	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
+	// Whether the scan is ignored. Only returned by the scan detail endpoint.
+	Ignored *bool `json:"ignored,omitempty"`
+	// AI-generated executive summary of the scan. Credentials and secrets are redacted. Only returned by the scan detail endpoint.
+	ExecutiveSummary *string `json:"executiveSummary,omitempty"`
+	// AI-generated summary of the scanned scope. Credentials and secrets are redacted. Only returned by the scan detail endpoint.
+	ScopeSummary *string `json:"scopeSummary,omitempty"`
+	// Validation problems surfaced by the scanner during this scan. Only returned by the scan detail endpoint.
+	Problems []ScanProblem `json:"problems,omitempty"`
+	// Files produced by this scan, such as executive reports. Only returned by the scan detail endpoint.
+	Artefacts            []ScanArtefact    `json:"artefacts,omitempty"`
+	Links                ScanDetailedLinks `json:"links"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StartScan200Response StartScan200Response
@@ -581,6 +591,166 @@ func (o *StartScan200Response) SetCommitAuthorProfilePictureLink(v string) {
 	o.CommitAuthorProfilePictureLink = &v
 }
 
+// GetIgnored returns the Ignored field value if set, zero value otherwise.
+func (o *StartScan200Response) GetIgnored() bool {
+	if o == nil || IsNil(o.Ignored) {
+		var ret bool
+		return ret
+	}
+	return *o.Ignored
+}
+
+// GetIgnoredOk returns a tuple with the Ignored field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartScan200Response) GetIgnoredOk() (*bool, bool) {
+	if o == nil || IsNil(o.Ignored) {
+		return nil, false
+	}
+	return o.Ignored, true
+}
+
+// HasIgnored returns a boolean if a field has been set.
+func (o *StartScan200Response) HasIgnored() bool {
+	if o != nil && !IsNil(o.Ignored) {
+		return true
+	}
+
+	return false
+}
+
+// SetIgnored gets a reference to the given bool and assigns it to the Ignored field.
+func (o *StartScan200Response) SetIgnored(v bool) {
+	o.Ignored = &v
+}
+
+// GetExecutiveSummary returns the ExecutiveSummary field value if set, zero value otherwise.
+func (o *StartScan200Response) GetExecutiveSummary() string {
+	if o == nil || IsNil(o.ExecutiveSummary) {
+		var ret string
+		return ret
+	}
+	return *o.ExecutiveSummary
+}
+
+// GetExecutiveSummaryOk returns a tuple with the ExecutiveSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartScan200Response) GetExecutiveSummaryOk() (*string, bool) {
+	if o == nil || IsNil(o.ExecutiveSummary) {
+		return nil, false
+	}
+	return o.ExecutiveSummary, true
+}
+
+// HasExecutiveSummary returns a boolean if a field has been set.
+func (o *StartScan200Response) HasExecutiveSummary() bool {
+	if o != nil && !IsNil(o.ExecutiveSummary) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecutiveSummary gets a reference to the given string and assigns it to the ExecutiveSummary field.
+func (o *StartScan200Response) SetExecutiveSummary(v string) {
+	o.ExecutiveSummary = &v
+}
+
+// GetScopeSummary returns the ScopeSummary field value if set, zero value otherwise.
+func (o *StartScan200Response) GetScopeSummary() string {
+	if o == nil || IsNil(o.ScopeSummary) {
+		var ret string
+		return ret
+	}
+	return *o.ScopeSummary
+}
+
+// GetScopeSummaryOk returns a tuple with the ScopeSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartScan200Response) GetScopeSummaryOk() (*string, bool) {
+	if o == nil || IsNil(o.ScopeSummary) {
+		return nil, false
+	}
+	return o.ScopeSummary, true
+}
+
+// HasScopeSummary returns a boolean if a field has been set.
+func (o *StartScan200Response) HasScopeSummary() bool {
+	if o != nil && !IsNil(o.ScopeSummary) {
+		return true
+	}
+
+	return false
+}
+
+// SetScopeSummary gets a reference to the given string and assigns it to the ScopeSummary field.
+func (o *StartScan200Response) SetScopeSummary(v string) {
+	o.ScopeSummary = &v
+}
+
+// GetProblems returns the Problems field value if set, zero value otherwise.
+func (o *StartScan200Response) GetProblems() []ScanProblem {
+	if o == nil || IsNil(o.Problems) {
+		var ret []ScanProblem
+		return ret
+	}
+	return o.Problems
+}
+
+// GetProblemsOk returns a tuple with the Problems field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartScan200Response) GetProblemsOk() ([]ScanProblem, bool) {
+	if o == nil || IsNil(o.Problems) {
+		return nil, false
+	}
+	return o.Problems, true
+}
+
+// HasProblems returns a boolean if a field has been set.
+func (o *StartScan200Response) HasProblems() bool {
+	if o != nil && !IsNil(o.Problems) {
+		return true
+	}
+
+	return false
+}
+
+// SetProblems gets a reference to the given []ScanProblem and assigns it to the Problems field.
+func (o *StartScan200Response) SetProblems(v []ScanProblem) {
+	o.Problems = v
+}
+
+// GetArtefacts returns the Artefacts field value if set, zero value otherwise.
+func (o *StartScan200Response) GetArtefacts() []ScanArtefact {
+	if o == nil || IsNil(o.Artefacts) {
+		var ret []ScanArtefact
+		return ret
+	}
+	return o.Artefacts
+}
+
+// GetArtefactsOk returns a tuple with the Artefacts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartScan200Response) GetArtefactsOk() ([]ScanArtefact, bool) {
+	if o == nil || IsNil(o.Artefacts) {
+		return nil, false
+	}
+	return o.Artefacts, true
+}
+
+// HasArtefacts returns a boolean if a field has been set.
+func (o *StartScan200Response) HasArtefacts() bool {
+	if o != nil && !IsNil(o.Artefacts) {
+		return true
+	}
+
+	return false
+}
+
+// SetArtefacts gets a reference to the given []ScanArtefact and assigns it to the Artefacts field.
+func (o *StartScan200Response) SetArtefacts(v []ScanArtefact) {
+	o.Artefacts = v
+}
+
 // GetLinks returns the Links field value
 func (o *StartScan200Response) GetLinks() ScanDetailedLinks {
 	if o == nil {
@@ -648,6 +818,21 @@ func (o StartScan200Response) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CommitAuthorProfilePictureLink) {
 		toSerialize["commitAuthorProfilePictureLink"] = o.CommitAuthorProfilePictureLink
+	}
+	if !IsNil(o.Ignored) {
+		toSerialize["ignored"] = o.Ignored
+	}
+	if !IsNil(o.ExecutiveSummary) {
+		toSerialize["executiveSummary"] = o.ExecutiveSummary
+	}
+	if !IsNil(o.ScopeSummary) {
+		toSerialize["scopeSummary"] = o.ScopeSummary
+	}
+	if !IsNil(o.Problems) {
+		toSerialize["problems"] = o.Problems
+	}
+	if !IsNil(o.Artefacts) {
+		toSerialize["artefacts"] = o.Artefacts
 	}
 	toSerialize["links"] = o.Links
 
@@ -721,6 +906,11 @@ func (o *StartScan200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "commitAuthor")
 		delete(additionalProperties, "commitLink")
 		delete(additionalProperties, "commitAuthorProfilePictureLink")
+		delete(additionalProperties, "ignored")
+		delete(additionalProperties, "executiveSummary")
+		delete(additionalProperties, "scopeSummary")
+		delete(additionalProperties, "problems")
+		delete(additionalProperties, "artefacts")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -175,7 +175,7 @@ func (r ApiGetScanRequest) Execute() (*StartScan200Response, *http.Response, err
 /*
 GetScan Get a scan
 
-Get a scan by ID
+Get a scan by ID, including its AI pentest results: executive and scope summaries, scanner problems and produced artefacts. Credentials and secrets are redacted.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param scanId The scan ID
@@ -1137,6 +1137,188 @@ func (a *ScansAPIService) ListScanAgentsExecute(r ApiListScanAgentsRequest) (*Li
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiListScanScenariosRequest struct {
+	ctx        context.Context
+	ApiService *ScansAPIService
+	scanId     string
+	cursor     *string
+	size       *int
+	vector     *string
+	search     *string
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListScanScenariosRequest) Cursor(cursor string) ApiListScanScenariosRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListScanScenariosRequest) Size(size int) ApiListScanScenariosRequest {
+	r.size = &size
+	return r
+}
+
+// Filter scenarios by attack vector
+func (r ApiListScanScenariosRequest) Vector(vector string) ApiListScanScenariosRequest {
+	r.vector = &vector
+	return r
+}
+
+// Filter scenarios by text found in the title or surfaces
+func (r ApiListScanScenariosRequest) Search(search string) ApiListScanScenariosRequest {
+	r.search = &search
+	return r
+}
+
+func (r ApiListScanScenariosRequest) Execute() (*ListScanScenarios200Response, *http.Response, error) {
+	return r.ApiService.ListScanScenariosExecute(r)
+}
+
+/*
+ListScanScenarios List attack scenarios for a scan
+
+Returns the attack scenarios explored during an AI pentest scan, each mapped to its attack vector. Filter by vector to build the vector/scenario matrix, or search scenario titles and surfaces. Credentials and secrets in scenario descriptions are redacted.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param scanId The scan ID
+	@return ApiListScanScenariosRequest
+*/
+func (a *ScansAPIService) ListScanScenarios(ctx context.Context, scanId string) ApiListScanScenariosRequest {
+	return ApiListScanScenariosRequest{
+		ApiService: a,
+		ctx:        ctx,
+		scanId:     scanId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListScanScenarios200Response
+func (a *ScansAPIService) ListScanScenariosExecute(r ApiListScanScenariosRequest) (*ListScanScenarios200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListScanScenarios200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.ListScanScenarios")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/scans/{scanId}/scenarios"
+	localVarPath = strings.Replace(localVarPath, "{"+"scanId"+"}", url.PathEscape(parameterValueToString(r.scanId, "scanId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
+	if r.vector != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "vector", r.vector, "form", "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v PaginationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiListScanTargetsRequest struct {
 	ctx           context.Context
 	ApiService    *ScansAPIService
@@ -1737,21 +1919,23 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 }
 
 type ApiScansProblemsRequest struct {
-	ctx           context.Context
-	ApiService    *ScansAPIService
-	cursor        *string
-	size          *int
-	sortType      *string
-	sortDirection *string
-	after         *string
-	before        *string
-	assetIds      *string
-	profileIds    *string
-	projectIds    *ListScansProjectIdsParameter
-	ignored       *string
-	initiator     *[]string
-	kinds         *[]string
-	status        *[]string
+	ctx               context.Context
+	ApiService        *ScansAPIService
+	cursor            *string
+	size              *int
+	sortType          *string
+	sortDirection     *string
+	after             *string
+	before            *string
+	assetIds          *string
+	profileIds        *string
+	projectIds        *ListScansProjectIdsParameter
+	ignored           *string
+	initiator         *[]string
+	kinds             *[]string
+	status            *[]string
+	problemCodes      *[]string
+	problemSeverities *[]string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -1829,6 +2013,18 @@ func (r ApiScansProblemsRequest) Kinds(kinds []string) ApiScansProblemsRequest {
 // Filter by status
 func (r ApiScansProblemsRequest) Status(status []string) ApiScansProblemsRequest {
 	r.status = &status
+	return r
+}
+
+// Filter by problem codes
+func (r ApiScansProblemsRequest) ProblemCodes(problemCodes []string) ApiScansProblemsRequest {
+	r.problemCodes = &problemCodes
+	return r
+}
+
+// Filter by problem severities
+func (r ApiScansProblemsRequest) ProblemSeverities(problemSeverities []string) ApiScansProblemsRequest {
+	r.problemSeverities = &problemSeverities
 	return r
 }
 
@@ -1940,6 +2136,28 @@ func (a *ScansAPIService) ScansProblemsExecute(r ApiScansProblemsRequest) (*Scan
 			}
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
+	}
+	if r.problemCodes != nil {
+		t := *r.problemCodes
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "problemCodes", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "problemCodes", t, "form", "multi")
+		}
+	}
+	if r.problemSeverities != nil {
+		t := *r.problemSeverities
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "problemSeverities", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "problemSeverities", t, "form", "multi")
 		}
 	}
 	// to determine the Content-Type header

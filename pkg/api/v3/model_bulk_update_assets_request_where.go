@@ -34,10 +34,10 @@ type BulkUpdateAssetsRequestWhere struct {
 	// Filter by environment
 	Environments   []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT `json:"environments,omitempty"`
 	Domains        *BulkUpdateAssetsRequestWhereDomains                                           `json:"domains,omitempty"`
-	IntegrationIds *ListAssetsIntegrationIdsParameter                                             `json:"integrationIds,omitempty"`
-	OwnerEmails    *ListAssetsOwnerEmailsParameter                                                `json:"ownerEmails,omitempty"`
-	TechnologyKeys *ListAssetsTechnologyKeysParameter                                             `json:"technologyKeys,omitempty"`
-	Ports          *ListAssetsPortsParameter                                                      `json:"ports,omitempty"`
+	IntegrationIds *BulkUpdateAssetsRequestWhereIntegrationIds                                    `json:"integrationIds,omitempty"`
+	OwnerEmails    *BulkUpdateAssetsRequestWhereOwnerEmails                                       `json:"ownerEmails,omitempty"`
+	TechnologyKeys *BulkUpdateAssetsRequestWhereTechnologyKeys                                    `json:"technologyKeys,omitempty"`
+	Ports          *BulkUpdateAssetsRequestWherePorts                                             `json:"ports,omitempty"`
 	// Filter by severity
 	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
 	// Filter by risk
@@ -357,9 +357,9 @@ func (o *BulkUpdateAssetsRequestWhere) SetDomains(v BulkUpdateAssetsRequestWhere
 }
 
 // GetIntegrationIds returns the IntegrationIds field value if set, zero value otherwise.
-func (o *BulkUpdateAssetsRequestWhere) GetIntegrationIds() ListAssetsIntegrationIdsParameter {
+func (o *BulkUpdateAssetsRequestWhere) GetIntegrationIds() BulkUpdateAssetsRequestWhereIntegrationIds {
 	if o == nil || IsNil(o.IntegrationIds) {
-		var ret ListAssetsIntegrationIdsParameter
+		var ret BulkUpdateAssetsRequestWhereIntegrationIds
 		return ret
 	}
 	return *o.IntegrationIds
@@ -367,7 +367,7 @@ func (o *BulkUpdateAssetsRequestWhere) GetIntegrationIds() ListAssetsIntegration
 
 // GetIntegrationIdsOk returns a tuple with the IntegrationIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateAssetsRequestWhere) GetIntegrationIdsOk() (*ListAssetsIntegrationIdsParameter, bool) {
+func (o *BulkUpdateAssetsRequestWhere) GetIntegrationIdsOk() (*BulkUpdateAssetsRequestWhereIntegrationIds, bool) {
 	if o == nil || IsNil(o.IntegrationIds) {
 		return nil, false
 	}
@@ -383,15 +383,15 @@ func (o *BulkUpdateAssetsRequestWhere) HasIntegrationIds() bool {
 	return false
 }
 
-// SetIntegrationIds gets a reference to the given ListAssetsIntegrationIdsParameter and assigns it to the IntegrationIds field.
-func (o *BulkUpdateAssetsRequestWhere) SetIntegrationIds(v ListAssetsIntegrationIdsParameter) {
+// SetIntegrationIds gets a reference to the given BulkUpdateAssetsRequestWhereIntegrationIds and assigns it to the IntegrationIds field.
+func (o *BulkUpdateAssetsRequestWhere) SetIntegrationIds(v BulkUpdateAssetsRequestWhereIntegrationIds) {
 	o.IntegrationIds = &v
 }
 
 // GetOwnerEmails returns the OwnerEmails field value if set, zero value otherwise.
-func (o *BulkUpdateAssetsRequestWhere) GetOwnerEmails() ListAssetsOwnerEmailsParameter {
+func (o *BulkUpdateAssetsRequestWhere) GetOwnerEmails() BulkUpdateAssetsRequestWhereOwnerEmails {
 	if o == nil || IsNil(o.OwnerEmails) {
-		var ret ListAssetsOwnerEmailsParameter
+		var ret BulkUpdateAssetsRequestWhereOwnerEmails
 		return ret
 	}
 	return *o.OwnerEmails
@@ -399,7 +399,7 @@ func (o *BulkUpdateAssetsRequestWhere) GetOwnerEmails() ListAssetsOwnerEmailsPar
 
 // GetOwnerEmailsOk returns a tuple with the OwnerEmails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateAssetsRequestWhere) GetOwnerEmailsOk() (*ListAssetsOwnerEmailsParameter, bool) {
+func (o *BulkUpdateAssetsRequestWhere) GetOwnerEmailsOk() (*BulkUpdateAssetsRequestWhereOwnerEmails, bool) {
 	if o == nil || IsNil(o.OwnerEmails) {
 		return nil, false
 	}
@@ -415,15 +415,15 @@ func (o *BulkUpdateAssetsRequestWhere) HasOwnerEmails() bool {
 	return false
 }
 
-// SetOwnerEmails gets a reference to the given ListAssetsOwnerEmailsParameter and assigns it to the OwnerEmails field.
-func (o *BulkUpdateAssetsRequestWhere) SetOwnerEmails(v ListAssetsOwnerEmailsParameter) {
+// SetOwnerEmails gets a reference to the given BulkUpdateAssetsRequestWhereOwnerEmails and assigns it to the OwnerEmails field.
+func (o *BulkUpdateAssetsRequestWhere) SetOwnerEmails(v BulkUpdateAssetsRequestWhereOwnerEmails) {
 	o.OwnerEmails = &v
 }
 
 // GetTechnologyKeys returns the TechnologyKeys field value if set, zero value otherwise.
-func (o *BulkUpdateAssetsRequestWhere) GetTechnologyKeys() ListAssetsTechnologyKeysParameter {
+func (o *BulkUpdateAssetsRequestWhere) GetTechnologyKeys() BulkUpdateAssetsRequestWhereTechnologyKeys {
 	if o == nil || IsNil(o.TechnologyKeys) {
-		var ret ListAssetsTechnologyKeysParameter
+		var ret BulkUpdateAssetsRequestWhereTechnologyKeys
 		return ret
 	}
 	return *o.TechnologyKeys
@@ -431,7 +431,7 @@ func (o *BulkUpdateAssetsRequestWhere) GetTechnologyKeys() ListAssetsTechnologyK
 
 // GetTechnologyKeysOk returns a tuple with the TechnologyKeys field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateAssetsRequestWhere) GetTechnologyKeysOk() (*ListAssetsTechnologyKeysParameter, bool) {
+func (o *BulkUpdateAssetsRequestWhere) GetTechnologyKeysOk() (*BulkUpdateAssetsRequestWhereTechnologyKeys, bool) {
 	if o == nil || IsNil(o.TechnologyKeys) {
 		return nil, false
 	}
@@ -447,15 +447,15 @@ func (o *BulkUpdateAssetsRequestWhere) HasTechnologyKeys() bool {
 	return false
 }
 
-// SetTechnologyKeys gets a reference to the given ListAssetsTechnologyKeysParameter and assigns it to the TechnologyKeys field.
-func (o *BulkUpdateAssetsRequestWhere) SetTechnologyKeys(v ListAssetsTechnologyKeysParameter) {
+// SetTechnologyKeys gets a reference to the given BulkUpdateAssetsRequestWhereTechnologyKeys and assigns it to the TechnologyKeys field.
+func (o *BulkUpdateAssetsRequestWhere) SetTechnologyKeys(v BulkUpdateAssetsRequestWhereTechnologyKeys) {
 	o.TechnologyKeys = &v
 }
 
 // GetPorts returns the Ports field value if set, zero value otherwise.
-func (o *BulkUpdateAssetsRequestWhere) GetPorts() ListAssetsPortsParameter {
+func (o *BulkUpdateAssetsRequestWhere) GetPorts() BulkUpdateAssetsRequestWherePorts {
 	if o == nil || IsNil(o.Ports) {
-		var ret ListAssetsPortsParameter
+		var ret BulkUpdateAssetsRequestWherePorts
 		return ret
 	}
 	return *o.Ports
@@ -463,7 +463,7 @@ func (o *BulkUpdateAssetsRequestWhere) GetPorts() ListAssetsPortsParameter {
 
 // GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateAssetsRequestWhere) GetPortsOk() (*ListAssetsPortsParameter, bool) {
+func (o *BulkUpdateAssetsRequestWhere) GetPortsOk() (*BulkUpdateAssetsRequestWherePorts, bool) {
 	if o == nil || IsNil(o.Ports) {
 		return nil, false
 	}
@@ -479,8 +479,8 @@ func (o *BulkUpdateAssetsRequestWhere) HasPorts() bool {
 	return false
 }
 
-// SetPorts gets a reference to the given ListAssetsPortsParameter and assigns it to the Ports field.
-func (o *BulkUpdateAssetsRequestWhere) SetPorts(v ListAssetsPortsParameter) {
+// SetPorts gets a reference to the given BulkUpdateAssetsRequestWherePorts and assigns it to the Ports field.
+func (o *BulkUpdateAssetsRequestWhere) SetPorts(v BulkUpdateAssetsRequestWherePorts) {
 	o.Ports = &v
 }
 

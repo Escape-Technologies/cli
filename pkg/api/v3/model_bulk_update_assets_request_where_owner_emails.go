@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// ListAssetsIntegrationIdsParameter Filter by source integration ID
-type ListAssetsIntegrationIdsParameter struct {
+// BulkUpdateAssetsRequestWhereOwnerEmails Filter by owner email
+type BulkUpdateAssetsRequestWhereOwnerEmails struct {
 	ArrayOfString *[]string
 	String        *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *ListAssetsIntegrationIdsParameter) UnmarshalJSON(data []byte) error {
+func (dst *BulkUpdateAssetsRequestWhereOwnerEmails) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into ArrayOfString
 	err = json.Unmarshal(data, &dst.ArrayOfString)
@@ -50,11 +50,11 @@ func (dst *ListAssetsIntegrationIdsParameter) UnmarshalJSON(data []byte) error {
 		dst.String = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(ListAssetsIntegrationIdsParameter)")
+	return fmt.Errorf("data failed to match schemas in anyOf(BulkUpdateAssetsRequestWhereOwnerEmails)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src ListAssetsIntegrationIdsParameter) MarshalJSON() ([]byte, error) {
+func (src BulkUpdateAssetsRequestWhereOwnerEmails) MarshalJSON() ([]byte, error) {
 	if src.ArrayOfString != nil {
 		return json.Marshal(&src.ArrayOfString)
 	}
@@ -66,38 +66,38 @@ func (src ListAssetsIntegrationIdsParameter) MarshalJSON() ([]byte, error) {
 	return nil, nil // no data in anyOf schemas
 }
 
-type NullableListAssetsIntegrationIdsParameter struct {
-	value *ListAssetsIntegrationIdsParameter
+type NullableBulkUpdateAssetsRequestWhereOwnerEmails struct {
+	value *BulkUpdateAssetsRequestWhereOwnerEmails
 	isSet bool
 }
 
-func (v NullableListAssetsIntegrationIdsParameter) Get() *ListAssetsIntegrationIdsParameter {
+func (v NullableBulkUpdateAssetsRequestWhereOwnerEmails) Get() *BulkUpdateAssetsRequestWhereOwnerEmails {
 	return v.value
 }
 
-func (v *NullableListAssetsIntegrationIdsParameter) Set(val *ListAssetsIntegrationIdsParameter) {
+func (v *NullableBulkUpdateAssetsRequestWhereOwnerEmails) Set(val *BulkUpdateAssetsRequestWhereOwnerEmails) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListAssetsIntegrationIdsParameter) IsSet() bool {
+func (v NullableBulkUpdateAssetsRequestWhereOwnerEmails) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListAssetsIntegrationIdsParameter) Unset() {
+func (v *NullableBulkUpdateAssetsRequestWhereOwnerEmails) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListAssetsIntegrationIdsParameter(val *ListAssetsIntegrationIdsParameter) *NullableListAssetsIntegrationIdsParameter {
-	return &NullableListAssetsIntegrationIdsParameter{value: val, isSet: true}
+func NewNullableBulkUpdateAssetsRequestWhereOwnerEmails(val *BulkUpdateAssetsRequestWhereOwnerEmails) *NullableBulkUpdateAssetsRequestWhereOwnerEmails {
+	return &NullableBulkUpdateAssetsRequestWhereOwnerEmails{value: val, isSet: true}
 }
 
-func (v NullableListAssetsIntegrationIdsParameter) MarshalJSON() ([]byte, error) {
+func (v NullableBulkUpdateAssetsRequestWhereOwnerEmails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListAssetsIntegrationIdsParameter) UnmarshalJSON(src []byte) error {
+func (v *NullableBulkUpdateAssetsRequestWhereOwnerEmails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

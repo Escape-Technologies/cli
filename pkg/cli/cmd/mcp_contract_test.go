@@ -640,12 +640,18 @@ func stdinBodyFor(path string) string {
 	switch path {
 	case "escape-cli issues comment":
 		return `{"comment":"stdinProbe"}`
+	case "escape-cli issues remediation generate":
+		return `{"kind":"summary","stdinProbe":"body"}`
+	case "escape-cli issues remediation feedback":
+		return `{"feedback":true,"stdinProbe":"body"}`
 	case "escape-cli locations create":
 		return `{"name":"stdinProbe","sshPublicKey":"ssh-ed25519 AAAA"}`
 	case "escape-cli locations update":
 		return `{"name":"stdinProbe"}`
 	case "escape-cli assets create":
 		return `{"asset_class":"FRONTEND","asset_type":"WEBAPP","url":"https://example.com/stdinProbe"}`
+	case "escape-cli assets bulk-import":
+		return `{"assets":[{"asset_type":"WEBAPP","url":"https://example.com/stdinProbe"}]}`
 	case "escape-cli retests start":
 		return `{"profileId":"` + id + `","issueIds":["00000000-0000-0000-0000-000000000002"],"context":"stdinProbe"}`
 	case "escape-cli roles create":

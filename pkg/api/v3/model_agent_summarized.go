@@ -32,7 +32,13 @@ type AgentSummarized struct {
 	// The agent run duration in milliseconds
 	Duration *float32 `json:"duration,omitempty"`
 	// The number of issues reported by the agent
-	IssuesCount          float32 `json:"issuesCount"`
+	IssuesCount float32 `json:"issuesCount"`
+	// AI-generated summary of what the agent did. Credentials and secrets are redacted.
+	Summary *string `json:"summary,omitempty"`
+	// The date and time the agent started
+	StartedAt *string `json:"startedAt,omitempty"`
+	// The date and time the agent finished
+	FinishedAt           *string `json:"finishedAt,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -244,6 +250,102 @@ func (o *AgentSummarized) SetIssuesCount(v float32) {
 	o.IssuesCount = v
 }
 
+// GetSummary returns the Summary field value if set, zero value otherwise.
+func (o *AgentSummarized) GetSummary() string {
+	if o == nil || IsNil(o.Summary) {
+		var ret string
+		return ret
+	}
+	return *o.Summary
+}
+
+// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentSummarized) GetSummaryOk() (*string, bool) {
+	if o == nil || IsNil(o.Summary) {
+		return nil, false
+	}
+	return o.Summary, true
+}
+
+// HasSummary returns a boolean if a field has been set.
+func (o *AgentSummarized) HasSummary() bool {
+	if o != nil && !IsNil(o.Summary) {
+		return true
+	}
+
+	return false
+}
+
+// SetSummary gets a reference to the given string and assigns it to the Summary field.
+func (o *AgentSummarized) SetSummary(v string) {
+	o.Summary = &v
+}
+
+// GetStartedAt returns the StartedAt field value if set, zero value otherwise.
+func (o *AgentSummarized) GetStartedAt() string {
+	if o == nil || IsNil(o.StartedAt) {
+		var ret string
+		return ret
+	}
+	return *o.StartedAt
+}
+
+// GetStartedAtOk returns a tuple with the StartedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentSummarized) GetStartedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.StartedAt) {
+		return nil, false
+	}
+	return o.StartedAt, true
+}
+
+// HasStartedAt returns a boolean if a field has been set.
+func (o *AgentSummarized) HasStartedAt() bool {
+	if o != nil && !IsNil(o.StartedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartedAt gets a reference to the given string and assigns it to the StartedAt field.
+func (o *AgentSummarized) SetStartedAt(v string) {
+	o.StartedAt = &v
+}
+
+// GetFinishedAt returns the FinishedAt field value if set, zero value otherwise.
+func (o *AgentSummarized) GetFinishedAt() string {
+	if o == nil || IsNil(o.FinishedAt) {
+		var ret string
+		return ret
+	}
+	return *o.FinishedAt
+}
+
+// GetFinishedAtOk returns a tuple with the FinishedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AgentSummarized) GetFinishedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.FinishedAt) {
+		return nil, false
+	}
+	return o.FinishedAt, true
+}
+
+// HasFinishedAt returns a boolean if a field has been set.
+func (o *AgentSummarized) HasFinishedAt() bool {
+	if o != nil && !IsNil(o.FinishedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinishedAt gets a reference to the given string and assigns it to the FinishedAt field.
+func (o *AgentSummarized) SetFinishedAt(v string) {
+	o.FinishedAt = &v
+}
+
 func (o AgentSummarized) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -265,6 +367,15 @@ func (o AgentSummarized) ToMap() (map[string]interface{}, error) {
 		toSerialize["duration"] = o.Duration
 	}
 	toSerialize["issuesCount"] = o.IssuesCount
+	if !IsNil(o.Summary) {
+		toSerialize["summary"] = o.Summary
+	}
+	if !IsNil(o.StartedAt) {
+		toSerialize["startedAt"] = o.StartedAt
+	}
+	if !IsNil(o.FinishedAt) {
+		toSerialize["finishedAt"] = o.FinishedAt
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -319,6 +430,9 @@ func (o *AgentSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "hasChildren")
 		delete(additionalProperties, "duration")
 		delete(additionalProperties, "issuesCount")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "startedAt")
+		delete(additionalProperties, "finishedAt")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -14,11 +14,24 @@ import (
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
-// ListAssetsFilters holds optional filters for listing assets
+// ListAssetsFilters holds optional filters for listing assets. The slice
+// fields are sent as comma-separated query values, matching the public API.
 type ListAssetsFilters struct {
 	AssetTypes      []string
 	AssetStatuses   []string
 	ProjectIDs      []string
+	TagIDs          []string
+	Classes         []string
+	Environments    []string
+	Domains         []string
+	IntegrationIDs  []string
+	OwnerEmails     []string
+	TechnologyKeys  []string
+	Ports           []string
+	Severities      []string
+	Risks           []string
+	Frameworks      []string
+	DNF             string
 	Search          string
 	ManuallyCreated bool
 	SortType        string
@@ -61,7 +74,55 @@ func ListAssets(ctx context.Context, next string, filters *ListAssetsFilters, si
 		}
 
 		if len(filters.ProjectIDs) > 0 {
-			req = req.ProjectIds(v3.ListAssetsProjectIdsParameter{ArrayOfString: &filters.ProjectIDs})
+			req = req.ProjectIds(strings.Join(filters.ProjectIDs, ","))
+		}
+
+		if len(filters.TagIDs) > 0 {
+			req = req.TagIds(strings.Join(filters.TagIDs, ","))
+		}
+
+		if len(filters.Classes) > 0 {
+			req = req.Classes(filters.Classes)
+		}
+
+		if len(filters.Environments) > 0 {
+			req = req.Environments(filters.Environments)
+		}
+
+		if len(filters.Domains) > 0 {
+			req = req.Domains(strings.Join(filters.Domains, ","))
+		}
+
+		if len(filters.IntegrationIDs) > 0 {
+			req = req.IntegrationIds(strings.Join(filters.IntegrationIDs, ","))
+		}
+
+		if len(filters.OwnerEmails) > 0 {
+			req = req.OwnerEmails(strings.Join(filters.OwnerEmails, ","))
+		}
+
+		if len(filters.TechnologyKeys) > 0 {
+			req = req.TechnologyKeys(strings.Join(filters.TechnologyKeys, ","))
+		}
+
+		if len(filters.Ports) > 0 {
+			req = req.Ports(strings.Join(filters.Ports, ","))
+		}
+
+		if len(filters.Severities) > 0 {
+			req = req.Severities(filters.Severities)
+		}
+
+		if len(filters.Risks) > 0 {
+			req = req.Risks(filters.Risks)
+		}
+
+		if len(filters.Frameworks) > 0 {
+			req = req.Frameworks(filters.Frameworks)
+		}
+
+		if filters.DNF != "" {
+			req = req.Dnf(filters.DNF)
 		}
 
 		if filters.Search != "" {
@@ -89,6 +150,21 @@ func GetAsset(ctx context.Context, id string) (*v3.AssetDetailed1, error) {
 	}
 
 	data, _, err := client.AssetsAPI.GetAsset(ctx, id).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// GetAssetContent gets the download metadata (signed URL, content type, filename) of an asset content
+func GetAssetContent(ctx context.Context, id string) (*v3.GetAssetContent200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	data, _, err := client.AssetsAPI.GetAssetContent(ctx, id).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
@@ -142,55 +218,65 @@ func deleteAssetAcknowledgement(httpRes *http.Response, err error) (*v3.DeletePr
 	return v3.NewDeleteProfile200Response("Asset deleted successfully"), true, nil
 }
 
+// UpdateAssetInput is the optional body of PUT /v3/assets/{id}. Nil fields and
+// empty collections are omitted, so the API only touches what the caller set.
+type UpdateAssetInput struct {
+	Description       *string
+	Framework         *v3.ENUMPROPERTIESFRAMEWORK
+	Owners            *[]string
+	Status            *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS
+	TagIDs            *[]string
+	ProjectIDs        *[]string
+	Name              *string
+	Environment       *v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT
+	ManuallySetStatus *bool
+	BaseURL           *string
+	Address           *string
+	BestSchemaID      *string
+	SchemaIDs         []string
+	ParentLinks       *v3.UpdateAssetParentLinks
+	ChildLinks        *v3.UpdateAssetChildLinks
+}
+
 // UpdateAsset updates an asset by ID
-func UpdateAsset(
-	ctx context.Context,
-	id string,
-	assetDescription *string,
-	assetFramework *v3.ENUMPROPERTIESFRAMEWORK,
-	assetOwners *[]string,
-	assetStatus *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS,
-	assetTagIDs *[]string,
-	assetProjectIDs *[]string,
-	assetName *string,
-) (*v3.UpdateAsset200Response, error) {
+func UpdateAsset(ctx context.Context, id string, input UpdateAssetInput) (*v3.UpdateAsset200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	updateAssetRequest := v3.UpdateAsset{}
-
-	if assetDescription != nil {
-		updateAssetRequest.Description = assetDescription
+	updateAssetRequest := v3.UpdateAsset{
+		Description:       input.Description,
+		Framework:         input.Framework,
+		Status:            input.Status,
+		Name:              input.Name,
+		Environment:       input.Environment,
+		ManuallySetStatus: input.ManuallySetStatus,
+		BaseUrl:           input.BaseURL,
+		Address:           input.Address,
+		BestSchemaId:      input.BestSchemaID,
+		ParentLinks:       input.ParentLinks,
+		ChildLinks:        input.ChildLinks,
 	}
 
-	if assetFramework != nil {
-		updateAssetRequest.Framework = assetFramework
-	}
-
-	if assetOwners != nil && len(*assetOwners) > 0 {
+	if input.Owners != nil && len(*input.Owners) > 0 {
 		updateAssetRequest.Owners = &v3.UpdateAssetOwners{
-			ArrayOfString: assetOwners,
+			ArrayOfString: input.Owners,
 		}
 	}
 
-	if assetStatus != nil {
-		updateAssetRequest.Status = assetStatus
-	}
-
-	if assetTagIDs != nil && len(*assetTagIDs) > 0 {
+	if input.TagIDs != nil && len(*input.TagIDs) > 0 {
 		updateAssetRequest.TagIds = &v3.UpdateAssetTagIds{
-			ArrayOfString: assetTagIDs,
+			ArrayOfString: input.TagIDs,
 		}
 	}
 
-	if assetProjectIDs != nil && len(*assetProjectIDs) > 0 {
-		updateAssetRequest.ProjectIds = *assetProjectIDs
+	if input.ProjectIDs != nil && len(*input.ProjectIDs) > 0 {
+		updateAssetRequest.ProjectIds = *input.ProjectIDs
 	}
 
-	if assetName != nil {
-		updateAssetRequest.Name = assetName
+	if len(input.SchemaIDs) > 0 {
+		updateAssetRequest.SchemaIds = input.SchemaIDs
 	}
 
 	data, apiRes, err := client.AssetsAPI.UpdateAsset(ctx, id).UpdateAsset(updateAssetRequest).Execute()
@@ -204,6 +290,28 @@ func UpdateAsset(
 	}
 
 	return data, nil
+}
+
+// BulkImportAssets starts an asynchronous job that creates multiple assets. The
+// raw JSON body is the BulkImportAssets request, so callers can pass the stdin
+// payload straight through.
+func BulkImportAssets(ctx context.Context, data []byte) (*v3.BulkImportAssets200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var body v3.BulkImportAssets
+	if err := json.Unmarshal(data, &body); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	result, _, err := client.AssetsAPI.BulkImportAssets(ctx).BulkImportAssets(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return result, nil
 }
 
 // BulkUpdateAssets updates multiple assets matching a filter

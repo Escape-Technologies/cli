@@ -18,6 +18,8 @@ func saveBulkUpdateFlags(t *testing.T) {
 	prevProfileIDs := bulkIssueProfileIDs
 	prevTagIDs := bulkIssueTagIDs
 	prevScannerKinds := bulkIssueScannerKinds
+	prevAll := bulkIssueAll
+	prevDryRun := bulkIssueDryRun
 	t.Cleanup(func() {
 		bulkIssueStatus = prevStatus
 		bulkIssueReason = prevReason
@@ -29,6 +31,8 @@ func saveBulkUpdateFlags(t *testing.T) {
 		bulkIssueProfileIDs = prevProfileIDs
 		bulkIssueTagIDs = prevTagIDs
 		bulkIssueScannerKinds = prevScannerKinds
+		bulkIssueAll = prevAll
+		bulkIssueDryRun = prevDryRun
 	})
 
 	bulkIssueStatus = ""
@@ -41,6 +45,8 @@ func saveBulkUpdateFlags(t *testing.T) {
 	bulkIssueProfileIDs = nil
 	bulkIssueTagIDs = nil
 	bulkIssueScannerKinds = nil
+	bulkIssueAll = false
+	bulkIssueDryRun = false
 }
 
 func TestIssueBulkUpdateRequiresASelection(t *testing.T) {
@@ -50,6 +56,73 @@ func TestIssueBulkUpdateRequiresASelection(t *testing.T) {
 	err := issueBulkUpdateCmd.RunE(issueBulkUpdateCmd, nil)
 	if err == nil || !strings.Contains(err.Error(), "--issue-id") {
 		t.Fatalf("expected a filter requirement, got %v", err)
+	}
+}
+
+func TestIssueBulkUpdateAllAloneIsAccepted(t *testing.T) {
+	saveBulkUpdateFlags(t)
+	bulkIssueStatus = "IGNORED"
+	bulkIssueAll = true
+
+	if err := requireIssueBulkSelection(); err != nil {
+		t.Fatalf("expected --all without a filter to pass, got %v", err)
+	}
+}
+
+func TestIssueBulkUpdateAllWithFilterIsRejected(t *testing.T) {
+	saveBulkUpdateFlags(t)
+	bulkIssueStatus = "IGNORED"
+	bulkIssueAll = true
+	bulkIssueIDs = []string{"00000000-0000-0000-0000-000000000001"}
+
+	err := requireIssueBulkSelection()
+	if err == nil || !strings.Contains(err.Error(), "--all cannot be combined with a filter") {
+		t.Fatalf("expected a --all mutual exclusion error, got %v", err)
+	}
+}
+
+func TestBuildBulkUpdateIssuesRequestSetsAllAndDryRun(t *testing.T) {
+	saveBulkUpdateFlags(t)
+	bulkIssueStatus = "IGNORED"
+	bulkIssueAll = true
+	bulkIssueDryRun = true
+
+	body, err := buildBulkUpdateIssuesRequest()
+	if err != nil {
+		t.Fatalf("buildBulkUpdateIssuesRequest: %v", err)
+	}
+
+	payload := marshalToMap(t, body)
+	if payload["all"] != true {
+		t.Errorf("all = %#v, want true", payload["all"])
+	}
+
+	if payload["dryRun"] != true {
+		t.Errorf("dryRun = %#v, want true", payload["dryRun"])
+	}
+
+	if _, hasWhere := payload["where"]; hasWhere {
+		t.Errorf("unexpected where payload with --all: %v", payload["where"])
+	}
+}
+
+func TestBuildBulkUpdateIssuesRequestDryRunFalseByDefault(t *testing.T) {
+	saveBulkUpdateFlags(t)
+	bulkIssueStatus = "IGNORED"
+	bulkIssueIDs = []string{"00000000-0000-0000-0000-000000000001"}
+
+	body, err := buildBulkUpdateIssuesRequest()
+	if err != nil {
+		t.Fatalf("buildBulkUpdateIssuesRequest: %v", err)
+	}
+
+	payload := marshalToMap(t, body)
+	if _, hasAll := payload["all"]; hasAll {
+		t.Errorf("unexpected all payload without --all: %v", payload["all"])
+	}
+
+	if _, hasDryRun := payload["dryRun"]; hasDryRun {
+		t.Errorf("unexpected dryRun payload without --dry-run: %v", payload["dryRun"])
 	}
 }
 

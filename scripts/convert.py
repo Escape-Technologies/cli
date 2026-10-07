@@ -231,6 +231,20 @@ for path, path_data in data["paths"].items():
             "locationIds",
         ]
 
+        # /assets GET exposes several id/email/key filters as comma-separated
+        # strings. openapi-generator emits an unusable anyOf model for those
+        # query params, so normalize them to plain strings. This is scoped to
+        # /assets because other endpoints reuse the same names as real arrays
+        # (for example workflows integrationIds).
+        if path == "/assets" and method == "get":
+            list_params += [
+                "projectIds",
+                "integrationIds",
+                "ownerEmails",
+                "technologyKeys",
+                "ports",
+            ]
+
         # Normalize list-like query params
         # - For params backed by arrayOrSingle on the server, expose them as
         #   arrays so the client sends repeated query params (form+explode).

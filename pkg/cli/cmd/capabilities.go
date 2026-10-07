@@ -113,6 +113,9 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli issues bulk-update":            {Output: v3.BulkUpdateIssues200Response{}},
 		"escape-cli issues notify":                 {Output: v3.NotifyIssueOwners200Response{}},
 		"escape-cli issues trigger-workflow":       {Output: v3.TriggerIssueManualWorkflow200Response{}},
+		"escape-cli issues remediation generate":   {Input: v3.GenerateIssueAiRemediationRequest{}, Output: v3.GenerateIssueAiRemediation200Response{}},
+		"escape-cli issues remediation get":        {Output: IssueRemediation{}},
+		"escape-cli issues remediation feedback":   {Input: v3.SaveIssueAiRemediationFeedbackRequest{}, Output: v3.SaveIssueAiRemediationFeedback200Response{}},
 		"escape-cli scans list":                    {Output: []v3.ScanSummarized{}},
 		"escape-cli scans get":                     {Output: v3.StartScan200Response{}},
 		"escape-cli scans start":                   {Output: v3.ScanDetailed1{}},
@@ -147,6 +150,7 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli assets delete":                 {Output: v3.DeleteProfile200Response{}}, // generated client reuses this {"message": string} schema
 		"escape-cli assets bulk-update":            {Output: v3.BulkUpdateAssets200Response{}},
 		"escape-cli assets bulk-delete":            {Output: v3.BulkUpdateAssets200Response{}},
+		"escape-cli assets bulk-import":            {Input: v3.BulkImportAssets{}, Output: v3.BulkImportAssets200Response{}},
 		"escape-cli asm trigger":                   {Output: v3.TriggerAsmScans200Response{}},
 		"escape-cli custom-rules list":             {Output: []v3.CustomRuleSummarized{}},
 		"escape-cli custom-rules get":              {Output: v3.CreateCustomRule200Response{}},

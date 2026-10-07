@@ -31,17 +31,35 @@ var (
 	retestGetCursor string
 	retestGetSize   int
 
-	retestStartProfileID    string
-	retestStartIssueIDs     []string
-	retestStartFilterIDs    []string
-	retestStartAssetIDs     []string
-	retestStartSeverities   []string
-	retestStartTagIDs       []string
-	retestStartScannerKinds []string
-	retestStartStatuses     []string
-	retestStartSearch       string
-	retestStartContext      string
-	retestStartInitiator    string
+	retestStartProfileID        string
+	retestStartIssueIDs         []string
+	retestStartFilterIDs        []string
+	retestStartAssetIDs         []string
+	retestStartSeverities       []string
+	retestStartTagIDs           []string
+	retestStartScannerKinds     []string
+	retestStartStatuses         []string
+	retestStartSearch           string
+	retestStartContext          string
+	retestStartInitiator        string
+	retestStartProjectIDs       []string
+	retestStartTargetIDs        []string
+	retestStartScanIDs          []string
+	retestStartSecurityTestUids []string
+	retestStartDomains          []string
+	retestStartNames            []string
+	retestStartBlacklistedIDs   []string
+	retestStartBlacklistedNames []string
+	retestStartRisks            []string
+	retestStartAssetClasses     []string
+	retestStartCategories       []string
+	retestStartAssetTypes       []string
+	retestStartAssetStatuses    []string
+	retestStartJiraTicket       bool
+	retestStartNoTags           bool
+	retestStartAiFalsePositive  bool
+	retestStartAgentic          bool
+	retestStartDnf              string
 )
 
 var retestsCmd = &cobra.Command{
@@ -210,7 +228,12 @@ Start a retest on a DAST or AI pentest profile. Provide exactly one of:
   • filter flags, or a "filter" object in the JSON body
 
 Filter flags map to the public API filter: --filter-id, --asset-id,
---severity, --tag-id, --scanner-kind, --status, and --search.
+--project-id, --target-id, --scan-id, --security-test-uid, --domain,
+--name, --blacklisted-id, --blacklisted-name, --severity, --tag-id,
+--scanner-kind, --status, --risk, --asset-class, --category, --asset-type,
+--asset-status, --jira-ticket, --no-tags, --ai-false-positive, --agentic,
+--search, and --dnf. The retest API filter does not accept --profile-id:
+the profile is the --profile-id flag itself.
 --initiator defaults to MANUAL on the server when omitted.
 
 The same request can be sent as JSON on stdin. Flags override the body.
@@ -278,28 +301,64 @@ type startRetestBody struct {
 // startRetestInput is the flag side of POST /retests. A set bit means the user
 // passed that flag, which overrides the same field from stdin.
 type startRetestInput struct {
-	profileID       string
-	profileSet      bool
-	issueIDs        []string
-	issueIDsSet     bool
-	filterIDs       []string
-	filterIDsSet    bool
-	assetIDs        []string
-	assetIDsSet     bool
-	severities      []string
-	severitiesSet   bool
-	tagIDs          []string
-	tagIDsSet       bool
-	scannerKinds    []string
-	scannerKindsSet bool
-	statuses        []string
-	statusesSet     bool
-	search          string
-	searchSet       bool
-	context         string
-	contextSet      bool
-	initiator       string
-	initiatorSet    bool
+	profileID           string
+	profileSet          bool
+	issueIDs            []string
+	issueIDsSet         bool
+	filterIDs           []string
+	filterIDsSet        bool
+	assetIDs            []string
+	assetIDsSet         bool
+	severities          []string
+	severitiesSet       bool
+	tagIDs              []string
+	tagIDsSet           bool
+	scannerKinds        []string
+	scannerKindsSet     bool
+	statuses            []string
+	statusesSet         bool
+	search              string
+	searchSet           bool
+	context             string
+	contextSet          bool
+	initiator           string
+	initiatorSet        bool
+	projectIDs          []string
+	projectIDsSet       bool
+	targetIDs           []string
+	targetIDsSet        bool
+	scanIDs             []string
+	scanIDsSet          bool
+	securityTestUids    []string
+	securityTestUidsSet bool
+	domains             []string
+	domainsSet          bool
+	names               []string
+	namesSet            bool
+	blacklistedIDs      []string
+	blacklistedIDsSet   bool
+	blacklistedNames    []string
+	blacklistedNamesSet bool
+	risks               []string
+	risksSet            bool
+	assetClasses        []string
+	assetClassesSet     bool
+	categories          []string
+	categoriesSet       bool
+	assetTypes          []string
+	assetTypesSet       bool
+	assetStatuses       []string
+	assetStatusesSet    bool
+	jiraTicket          bool
+	jiraTicketSet       bool
+	noTags              bool
+	noTagsSet           bool
+	aiFalsePositive     bool
+	aiFalsePositiveSet  bool
+	agentic             bool
+	agenticSet          bool
+	dnf                 string
+	dnfSet              bool
 }
 
 func (input startRetestInput) filterFlagsSet() bool {
@@ -309,7 +368,78 @@ func (input startRetestInput) filterFlagsSet() bool {
 		input.tagIDsSet ||
 		input.scannerKindsSet ||
 		input.statusesSet ||
-		input.searchSet
+		input.searchSet ||
+		input.projectIDsSet ||
+		input.targetIDsSet ||
+		input.scanIDsSet ||
+		input.securityTestUidsSet ||
+		input.domainsSet ||
+		input.namesSet ||
+		input.blacklistedIDsSet ||
+		input.blacklistedNamesSet ||
+		input.risksSet ||
+		input.assetClassesSet ||
+		input.categoriesSet ||
+		input.assetTypesSet ||
+		input.assetStatusesSet ||
+		input.jiraTicketSet ||
+		input.noTagsSet ||
+		input.aiFalsePositiveSet ||
+		input.agenticSet ||
+		input.dnfSet
+}
+
+// retestFilterListFlag pairs an explicitly set repeated filter flag with its raw
+// values so the empty-value check can name the offending flag.
+type retestFilterListFlag struct {
+	name   string
+	set    bool
+	values []string
+}
+
+// retestFilterListFlags lists the repeated filter flags in flag-declaration
+// order. Enum flags are included: parseStringEnums drops blanks the same way
+// compactStrings does.
+func (input startRetestInput) retestFilterListFlags() []retestFilterListFlag {
+	return []retestFilterListFlag{
+		{"--filter-id", input.filterIDsSet, input.filterIDs},
+		{"--asset-id", input.assetIDsSet, input.assetIDs},
+		{"--severity", input.severitiesSet, input.severities},
+		{"--tag-id", input.tagIDsSet, input.tagIDs},
+		{"--scanner-kind", input.scannerKindsSet, input.scannerKinds},
+		{"--status", input.statusesSet, input.statuses},
+		{"--project-id", input.projectIDsSet, input.projectIDs},
+		{"--target-id", input.targetIDsSet, input.targetIDs},
+		{"--scan-id", input.scanIDsSet, input.scanIDs},
+		{"--security-test-uid", input.securityTestUidsSet, input.securityTestUids},
+		{"--domain", input.domainsSet, input.domains},
+		{"--name", input.namesSet, input.names},
+		{"--blacklisted-id", input.blacklistedIDsSet, input.blacklistedIDs},
+		{"--blacklisted-name", input.blacklistedNamesSet, input.blacklistedNames},
+		{"--risk", input.risksSet, input.risks},
+		{"--asset-class", input.assetClassesSet, input.assetClasses},
+		{"--category", input.categoriesSet, input.categories},
+		{"--asset-type", input.assetTypesSet, input.assetTypes},
+		{"--asset-status", input.assetStatusesSet, input.assetStatuses},
+	}
+}
+
+// validateRetestFilterFlags rejects an explicitly set filter flag whose value is
+// empty after normalization. Such a flag would otherwise be dropped, leaving an
+// empty filter that the API reads as "retest every issue on the profile", while
+// silently discarding any issue selection from the request body.
+func validateRetestFilterFlags(input startRetestInput) error {
+	for _, flag := range input.retestFilterListFlags() {
+		if flag.set && len(compactStrings(flag.values)) == 0 {
+			return fmt.Errorf("%s requires a non-empty value", flag.name)
+		}
+	}
+
+	if input.searchSet && strings.TrimSpace(input.search) == "" {
+		return errors.New("--search requires a non-empty value")
+	}
+
+	return nil
 }
 
 // buildStartRetestRequest merges a StartRetestRequest JSON body with CLI flags.
@@ -369,6 +499,10 @@ func applyRetestSelection(request *v3.StartRetestRequest, input startRetestInput
 		return errors.New("provide either issueIds or filter, not both")
 	}
 
+	if err := validateRetestFilterFlags(input); err != nil {
+		return err
+	}
+
 	if input.issueIDsSet {
 		issueIDs := compactStrings(input.issueIDs)
 		if len(issueIDs) == 0 {
@@ -406,6 +540,26 @@ func applyRetestFilter(base *v3.StartRetestRequestFilter, input startRetestInput
 		filter = *base
 	}
 
+	applyRetestListFilters(&filter, input)
+
+	if err := applyRetestEnumFilters(&filter, input); err != nil {
+		return nil, err
+	}
+
+	if err := applyRetestAssetEnumFilters(&filter, input); err != nil {
+		return nil, err
+	}
+
+	if err := applyRetestScalarFilters(&filter, input); err != nil {
+		return nil, err
+	}
+
+	return &filter, nil
+}
+
+// applyRetestListFilters applies the retest filter flags that map directly to a
+// repeated string field.
+func applyRetestListFilters(filter *v3.StartRetestRequestFilter, input startRetestInput) {
 	if input.filterIDsSet {
 		filter.Ids = compactStrings(input.filterIDs)
 	}
@@ -418,10 +572,46 @@ func applyRetestFilter(base *v3.StartRetestRequestFilter, input startRetestInput
 		filter.TagIds = compactStrings(input.tagIDs)
 	}
 
+	if input.projectIDsSet {
+		filter.ProjectIds = compactStrings(input.projectIDs)
+	}
+
+	if input.targetIDsSet {
+		filter.TargetIds = compactStrings(input.targetIDs)
+	}
+
+	if input.scanIDsSet {
+		filter.ScanIds = compactStrings(input.scanIDs)
+	}
+
+	if input.securityTestUidsSet {
+		filter.SecurityTestUids = compactStrings(input.securityTestUids)
+	}
+
+	if input.domainsSet {
+		filter.Domains = compactStrings(input.domains)
+	}
+
+	if input.namesSet {
+		filter.Names = compactStrings(input.names)
+	}
+
+	if input.blacklistedIDsSet {
+		filter.BlacklistedIds = compactStrings(input.blacklistedIDs)
+	}
+
+	if input.blacklistedNamesSet {
+		filter.BlacklistedNames = compactStrings(input.blacklistedNames)
+	}
+}
+
+// applyRetestEnumFilters applies the retest filter flags that are validated
+// against a generated enum allow-list.
+func applyRetestEnumFilters(filter *v3.StartRetestRequestFilter, input startRetestInput) error {
 	if input.severitiesSet {
 		severities, err := parseStringEnums(input.severities, "severity", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		filter.Severities = severities
@@ -430,7 +620,7 @@ func applyRetestFilter(base *v3.StartRetestRequestFilter, input startRetestInput
 	if input.scannerKindsSet {
 		kinds, err := parseStringEnums(input.scannerKinds, "scanner kind", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMSEnumValues)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		filter.ScannerKinds = kinds
@@ -439,45 +629,187 @@ func applyRetestFilter(base *v3.StartRetestRequestFilter, input startRetestInput
 	if input.statusesSet {
 		statuses, err := parseStringEnums(input.statuses, "status", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		filter.Status = statuses
 	}
 
+	if input.risksSet {
+		risks, err := parseStringEnums(input.risks, "risk", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues)
+		if err != nil {
+			return err
+		}
+
+		filter.Risks = risks
+	}
+
+	return nil
+}
+
+// applyRetestAssetEnumFilters applies the retest asset filter flags that are
+// validated against a generated enum allow-list.
+func applyRetestAssetEnumFilters(filter *v3.StartRetestRequestFilter, input startRetestInput) error {
+	if input.assetClassesSet {
+		classes, err := parseStringEnums(input.assetClasses, "asset class", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASSEnumValues)
+		if err != nil {
+			return err
+		}
+
+		filter.AssetClasses = classes
+	}
+
+	if input.categoriesSet {
+		categories, err := parseStringEnums(input.categories, "category", v3.AllowedENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORYEnumValues)
+		if err != nil {
+			return err
+		}
+
+		filter.Categories = categories
+	}
+
+	if input.assetTypesSet {
+		types, err := parseStringEnums(input.assetTypes, "asset type", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPEEnumValues)
+		if err != nil {
+			return err
+		}
+
+		filter.AssetTypes = types
+	}
+
+	if input.assetStatusesSet {
+		statuses, err := parseStringEnums(input.assetStatuses, "asset status", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues)
+		if err != nil {
+			return err
+		}
+
+		filter.AssetStatuses = statuses
+	}
+
+	return nil
+}
+
+// applyRetestScalarFilters applies the retest filter flags that map to a single
+// scalar field.
+func applyRetestScalarFilters(filter *v3.StartRetestRequestFilter, input startRetestInput) error {
 	if input.searchSet {
 		filter.Search = optionalString(input.search)
 	}
 
-	return &filter, nil
+	if input.jiraTicketSet {
+		filter.JiraTicket = &input.jiraTicket
+	}
+
+	if input.noTagsSet {
+		if !input.noTags {
+			return errors.New("--no-tags only supports true: the API cannot express \"assets that have tags\"")
+		}
+
+		noTags := v3.ENUMTRUE_TRUE
+		filter.NoTags = &noTags
+	}
+
+	if input.aiFalsePositiveSet {
+		filter.AiFalsePositive = &input.aiFalsePositive
+	}
+
+	if input.agenticSet {
+		filter.Agentic = &input.agentic
+	}
+
+	if input.dnfSet {
+		dnf, err := parseDnfFilter(input.dnf)
+		if err != nil {
+			return err
+		}
+
+		filter.Dnf = dnf
+	}
+
+	return nil
+}
+
+// parseDnfFilter parses the --dnf flag into the JSON object the API expects.
+func parseDnfFilter(value string) (map[string]interface{}, error) {
+	trimmed := strings.TrimSpace(value)
+	if trimmed == "" {
+		return nil, errors.New("--dnf must be a JSON object")
+	}
+
+	var dnf map[string]interface{}
+	if err := json.Unmarshal([]byte(trimmed), &dnf); err != nil {
+		return nil, fmt.Errorf("invalid --dnf JSON: %w", err)
+	}
+
+	if dnf == nil {
+		return nil, errors.New("--dnf must be a JSON object")
+	}
+
+	return dnf, nil
 }
 
 func startRetestInputFromCommand(cmd *cobra.Command) startRetestInput {
 	flags := cmd.Flags()
 
 	return startRetestInput{
-		profileID:       retestStartProfileID,
-		profileSet:      flags.Changed("profile-id"),
-		issueIDs:        retestStartIssueIDs,
-		issueIDsSet:     flags.Changed("issue-id"),
-		filterIDs:       retestStartFilterIDs,
-		filterIDsSet:    flags.Changed("filter-id"),
-		assetIDs:        retestStartAssetIDs,
-		assetIDsSet:     flags.Changed("asset-id"),
-		severities:      retestStartSeverities,
-		severitiesSet:   flags.Changed("severity"),
-		tagIDs:          retestStartTagIDs,
-		tagIDsSet:       flags.Changed("tag-id"),
-		scannerKinds:    retestStartScannerKinds,
-		scannerKindsSet: flags.Changed("scanner-kind"),
-		statuses:        retestStartStatuses,
-		statusesSet:     flags.Changed("status"),
-		search:          retestStartSearch,
-		searchSet:       flags.Changed("search"),
-		context:         retestStartContext,
-		contextSet:      flags.Changed("context"),
-		initiator:       retestStartInitiator,
-		initiatorSet:    flags.Changed("initiator"),
+		profileID:           retestStartProfileID,
+		profileSet:          flags.Changed("profile-id"),
+		issueIDs:            retestStartIssueIDs,
+		issueIDsSet:         flags.Changed("issue-id"),
+		filterIDs:           retestStartFilterIDs,
+		filterIDsSet:        flags.Changed("filter-id"),
+		assetIDs:            retestStartAssetIDs,
+		assetIDsSet:         flags.Changed("asset-id"),
+		severities:          retestStartSeverities,
+		severitiesSet:       flags.Changed("severity"),
+		tagIDs:              retestStartTagIDs,
+		tagIDsSet:           flags.Changed("tag-id"),
+		scannerKinds:        retestStartScannerKinds,
+		scannerKindsSet:     flags.Changed("scanner-kind"),
+		statuses:            retestStartStatuses,
+		statusesSet:         flags.Changed("status"),
+		search:              retestStartSearch,
+		searchSet:           flags.Changed("search"),
+		context:             retestStartContext,
+		contextSet:          flags.Changed("context"),
+		initiator:           retestStartInitiator,
+		initiatorSet:        flags.Changed("initiator"),
+		projectIDs:          retestStartProjectIDs,
+		projectIDsSet:       flags.Changed("project-id"),
+		targetIDs:           retestStartTargetIDs,
+		targetIDsSet:        flags.Changed("target-id"),
+		scanIDs:             retestStartScanIDs,
+		scanIDsSet:          flags.Changed("scan-id"),
+		securityTestUids:    retestStartSecurityTestUids,
+		securityTestUidsSet: flags.Changed("security-test-uid"),
+		domains:             retestStartDomains,
+		domainsSet:          flags.Changed("domain"),
+		names:               retestStartNames,
+		namesSet:            flags.Changed("name"),
+		blacklistedIDs:      retestStartBlacklistedIDs,
+		blacklistedIDsSet:   flags.Changed("blacklisted-id"),
+		blacklistedNames:    retestStartBlacklistedNames,
+		blacklistedNamesSet: flags.Changed("blacklisted-name"),
+		risks:               retestStartRisks,
+		risksSet:            flags.Changed("risk"),
+		assetClasses:        retestStartAssetClasses,
+		assetClassesSet:     flags.Changed("asset-class"),
+		categories:          retestStartCategories,
+		categoriesSet:       flags.Changed("category"),
+		assetTypes:          retestStartAssetTypes,
+		assetTypesSet:       flags.Changed("asset-type"),
+		assetStatuses:       retestStartAssetStatuses,
+		assetStatusesSet:    flags.Changed("asset-status"),
+		jiraTicket:          retestStartJiraTicket,
+		jiraTicketSet:       flags.Changed("jira-ticket"),
+		noTags:              retestStartNoTags,
+		noTagsSet:           flags.Changed("no-tags"),
+		aiFalsePositive:     retestStartAiFalsePositive,
+		aiFalsePositiveSet:  flags.Changed("ai-false-positive"),
+		agentic:             retestStartAgentic,
+		agenticSet:          flags.Changed("agentic"),
+		dnf:                 retestStartDnf,
+		dnfSet:              flags.Changed("dnf"),
 	}
 }
 
@@ -787,6 +1119,24 @@ func init() {
 	retestsStartCmd.Flags().StringVar(&retestStartSearch, "search", "", "filter issues by name or description")
 	retestsStartCmd.Flags().StringVar(&retestStartContext, "context", "", "operator context passed to the retest agents")
 	retestsStartCmd.Flags().StringVar(&retestStartInitiator, "initiator", "", retestInitiatorUsage())
+	retestsStartCmd.Flags().StringSliceVar(&retestStartProjectIDs, "project-id", nil, "filter by project ID(s)")
+	retestsStartCmd.Flags().StringSliceVar(&retestStartTargetIDs, "target-id", nil, "filter by target ID(s)")
+	retestsStartCmd.Flags().StringSliceVar(&retestStartScanIDs, "scan-id", nil, "filter by scan ID(s)")
+	retestsStartCmd.Flags().StringSliceVar(&retestStartSecurityTestUids, "security-test-uid", nil, "filter by security test UID(s)")
+	retestsStartCmd.Flags().StringSliceVar(&retestStartDomains, "domain", nil, "filter by domain(s)")
+	retestsStartCmd.Flags().StringSliceVar(&retestStartNames, "name", nil, "filter by issue full name(s)")
+	retestsStartCmd.Flags().StringSliceVar(&retestStartBlacklistedIDs, "blacklisted-id", nil, "exclude these issue ID(s)")
+	retestsStartCmd.Flags().StringSliceVar(&retestStartBlacklistedNames, "blacklisted-name", nil, "exclude issues by their raw name(s)")
+	retestsStartCmd.Flags().StringSliceVar(&retestStartRisks, "risk", nil, fmt.Sprintf("filter by risk level: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
+	retestsStartCmd.Flags().StringSliceVar(&retestStartAssetClasses, "asset-class", nil, fmt.Sprintf("filter by asset classification: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASSEnumValues))
+	retestsStartCmd.Flags().StringSliceVar(&retestStartCategories, "category", nil, fmt.Sprintf("filter by issue category: %v", v3.AllowedENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORYEnumValues))
+	retestsStartCmd.Flags().StringSliceVar(&retestStartAssetTypes, "asset-type", nil, fmt.Sprintf("filter by asset type: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPEEnumValues))
+	retestsStartCmd.Flags().StringSliceVar(&retestStartAssetStatuses, "asset-status", nil, fmt.Sprintf("filter by asset status: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
+	retestsStartCmd.Flags().BoolVar(&retestStartJiraTicket, "jira-ticket", false, "filter by issues with Jira tickets")
+	retestsStartCmd.Flags().BoolVar(&retestStartNoTags, "no-tags", false, "filter by issues whose assets have no tags (only true is supported)")
+	retestsStartCmd.Flags().BoolVar(&retestStartAiFalsePositive, "ai-false-positive", false, "filter by AI false positive classification")
+	retestsStartCmd.Flags().BoolVar(&retestStartAgentic, "agentic", false, "filter by agentic (AI pentest) issues")
+	retestsStartCmd.Flags().StringVar(&retestStartDnf, "dnf", "", "advanced filter as a DNF expression (JSON object)")
 
 	retestsCmd.AddCommand(retestsListCmd, retestsGetCmd, retestsStartCmd)
 	rootCmd.AddCommand(retestsCmd)
