@@ -61,14 +61,14 @@ func dialSSH(ctx context.Context, ep endpoint, locationID string, sshPrivateKey 
 
 	client, err := getClient(ep.addr, conn, config)
 	if err != nil {
-		return fmt.Errorf("failed to create SSH client: %w", err)
+		return fmt.Errorf("failed to create Secure Tunnel client: %w", err)
 	}
 	// Ends the WebSocket or poll session goroutines once the tunnel is gone.
 	defer client.Close() //nolint:errcheck
 
 	_ = conn.SetDeadline(time.Time{})
 
-	log.Debug("SSH connection established to Escape Platform over %s", ep.transport)
+	log.Debug("Secure Tunnel connection established to Escape Platform")
 	listenerCtx, listenerCancel := context.WithCancel(ctx)
 	go monitor.Start(listenerCtx, client)
 

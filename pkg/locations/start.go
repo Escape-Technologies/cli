@@ -29,13 +29,14 @@ func Start(ctx context.Context, name string) error {
 	go health.Start(ctx, healthy)
 	go restart.Start()
 
-	log.Trace("Generating SSH Keys")
+	log.Trace("Generating keys")
+
 	sshPublicKey, sshPrivateKey, err := ssh.GenSSHKeys(name)
 	if err != nil {
-		return fmt.Errorf("unable to generate SSH keys: %w", err)
+		return fmt.Errorf("unable to generate keys: %w", err)
 	}
 
-	log.Debug("Generated SSH Key: %s", sshPublicKey)
+	log.Debug("Generated public key: %s", sshPublicKey)
 
 	log.Trace("Creating location %s with public key %s", name, sshPublicKey)
 	id, err := escape.UpsertLocation(ctx, name, sshPublicKey)

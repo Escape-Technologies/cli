@@ -22,7 +22,7 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 		return err
 	}
 
-	log.Debug("Connecting to the Escape Platform over %s at %s", ep.transport, ep.addr)
+	log.Debug("Connecting to the Escape Platform via Secure Tunnel at %s", ep.addr)
 
 	var hasEverConnected atomic.Bool
 	var hasLoggedTimeoutHint atomic.Bool
@@ -43,7 +43,7 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 			}
 
 			if shouldLog {
-				log.Error("Failed to dial SSH over %s: %s, retrying...", ep.transport, err)
+				log.Error("Failed to dial Secure Tunnel: %s, retrying...", err)
 			}
 
 			errMsg := err.Error()
@@ -68,7 +68,7 @@ func StartLocation(ctx context.Context, locationID string, sshPrivateKey ed25519
 			hasLoggedTimeoutHint.Store(false)
 			failureStartTime = time.Time{}
 			// First failure may just be a network issue, we dont want to notify the customer yet
-			log.Info("SSH connection lost, retrying...")
+			log.Info("Secure Tunnel connection lost, retrying...")
 		}
 
 		time.Sleep(1 * time.Second)
@@ -91,11 +91,12 @@ func logDialTimeoutHints(ep endpoint, hasLoggedTimeoutHint *atomic.Bool) {
 	}
 
 	hasLoggedTimeoutHint.Store(true)
-	if ep.transport == transportSSH {
-		log.Error("Timed out connecting to Escape SSH endpoint (%s)", ep.addr)
-	} else {
-		log.Error("Timed out connecting to Escape HTTPS endpoint (%s) over %s", ep.connectURL, ep.transport)
+	dest := ep.addr
+	if ep.connectURL != nil {
+		dest = ep.connectURL.String()
 	}
+
+	log.Error("Timed out connecting to Escape Secure Tunnel endpoint (%s)", dest)
 
 	if env.GetFrontendProxyURL() == nil {
 		log.Error("Outbound traffic may require a proxy: set ESCAPE_FRONTEND_PROXY_URL on the deployment")
