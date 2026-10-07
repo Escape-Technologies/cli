@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net"
+	"strings"
 	"sync/atomic"
 
 	stdlog "log"
@@ -18,9 +19,15 @@ import (
 func startSocks5Server(ctx context.Context, listener net.Listener, healthy *atomic.Bool) error {
 	log.Trace("Starting socks5 server")
 	baseDial := env.BuildProxyDialer(env.GetBackendProxyURL())
+	// ASSOCIATE datagrams leave through the agent NIC: the backend proxy is TCP-only.
+	var directDialer net.Dialer
 	socks5Server, err := socks5.New(&socks5.Config{
 		Dial: func(ctx context.Context, network, addr string) (net.Conn, error) {
 			stats.IncRequest()
+			if strings.HasPrefix(network, "udp") {
+				return directDialer.DialContext(ctx, network, addr)
+			}
+
 			return baseDial(ctx, network, addr)
 		},
 		Logger: stdlog.New(io.Discard, "", 0),
