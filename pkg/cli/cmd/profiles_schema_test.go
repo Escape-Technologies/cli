@@ -28,6 +28,61 @@ func schemaAsset(id string, active bool, signed string) v3.ProfileExtraAsset {
 	return a
 }
 
+func TestApplyProfileUpdatePentestFlags(t *testing.T) {
+	for name, value := range map[string]string{
+		"mode":                   "STRICT",
+		"rate-limit-req-per-sec": "5",
+		"app-description":        "Payments API",
+	} {
+		resetFlag(t, profileUpdateCmd, name)
+		if err := profileUpdateCmd.Flags().Set(name, value); err != nil {
+			t.Fatalf("set %s: %v", name, err)
+		}
+	}
+
+	payload := map[string]interface{}{}
+	applyProfileUpdatePentestFlags(profileUpdateCmd, payload)
+
+	if payload["mode"] != "STRICT" {
+		t.Fatalf("mode = %#v", payload["mode"])
+	}
+
+	if payload["rateLimitReqPerSec"] != 5 {
+		t.Fatalf("rateLimitReqPerSec = %#v", payload["rateLimitReqPerSec"])
+	}
+
+	context, ok := payload["context"].(map[string]interface{})
+	if !ok || context["appDescription"] != "Payments API" {
+		t.Fatalf("context = %#v", payload["context"])
+	}
+}
+
+func TestPrintProfilePentest(t *testing.T) {
+	profile := &v3.GetProfile200Response{}
+	profile.SetPentest(v3.ProfilePentest{
+		Mode:               v3.ENUMPROPERTIESCONFIGURATIONPROPERTIESAUTOMATEDPENTESTINGPROPERTIESMULTIAGENTPENTESTPROPERTIESMODE_STRICT,
+		RateLimitReqPerSec: 5,
+		Context: v3.ProfilePentestContext{
+			AppDescription: ptr("Payments API"),
+		},
+	})
+
+	stdout, _, err := captureOutput(t, "pretty", func() error {
+		printProfilePentest(profile)
+
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("print: %v", err)
+	}
+
+	for _, want := range []string{"STRICT", "Payments API", "MODE"} {
+		if !strings.Contains(stdout, want) {
+			t.Fatalf("stdout missing %q:\n%s", want, stdout)
+		}
+	}
+}
+
 func TestPickProfileSchema_NilProfile(t *testing.T) {
 	t.Parallel()
 	if _, err := pickProfileSchema(nil, ""); err == nil {

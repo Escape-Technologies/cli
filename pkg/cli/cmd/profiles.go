@@ -35,12 +35,24 @@ var profileKinds = []string{
 }
 
 var profileAssetIDs []string
+var profileAssetSchemaIDs string
+var profileAssetTypes []string
+var profileAssetStatuses []string
 var profileDomains []string
+var profileFilterIDs string
 var profileIssueIDs []string
 var profileTagsIDs []string
+var profileProjectIDs []string
+var profileScanIDs string
+var profileLastScanStatuses []string
 var profileSearch string
 var profileInitiators []string
 var profileRisks []string
+var profileProblemCodes []string
+var profileProblemSeverities []string
+var profileNoProjects string
+var profileNoTags string
+var profileDnf string
 var profileSortType string
 var profileSortDirection string
 var profileListPage pageFlags
@@ -81,7 +93,29 @@ var profilesListCmd = &cobra.Command{
 	Long: `List Security Profiles - View Test Configurations
 
 List all security testing profiles in your organization. By default shows DAST
-profiles only (REST, GraphQL, WEBAPP). Use --all to include pentest profiles.`,
+profiles only (REST, GraphQL, WEBAPP). Use --all to include pentest profiles.
+
+FILTER OPTIONS:
+  -a, --asset-id           Filter by asset ID
+  -d, --domain             Filter by domain
+  -i, --issue-id           Filter by issue ID
+  -t, --tag-id             Filter by tag ID
+  -s, --search             Search by name or description
+  -n, --initiator          Filter by initiator
+  -k, --kind               Filter by scanner kind
+  -r, --risk               Filter by risk
+  --asset-schema-id        Filter by asset schema ID
+  --asset-type             Filter by asset type
+  --asset-status           Filter by asset status
+  --id                     Filter by profile ID
+  --project-id             Filter by project ID
+  --scan-id                Filter by scan ID
+  --last-scan-status       Filter by last scan status
+  --problem-code           Filter by problem code
+  --problem-severity       Filter by problem severity
+  --no-projects            Filter by profiles with no projects (true/false)
+  --no-tags                Filter by profiles with no tags (true/false)
+  --dnf                    Filter by a DNF expression (JSON)`,
 	Example: `  # List all standard profiles
   escape-cli profiles list
 
@@ -109,16 +143,28 @@ profiles only (REST, GraphQL, WEBAPP). Use --all to include pentest profiles.`,
 		}
 
 		filters := &escape.ListProfilesFilters{
-			AssetIDs:      profileAssetIDs,
-			Domains:       profileDomains,
-			IssueIDs:      profileIssueIDs,
-			TagsIDs:       profileTagsIDs,
-			Search:        profileSearch,
-			Initiators:    profileInitiators,
-			Kinds:         kindsToUse,
-			Risks:         profileRisks,
-			SortType:      profileSortType,
-			SortDirection: profileSortDirection,
+			AssetIDs:          profileAssetIDs,
+			AssetSchemaIDs:    profileAssetSchemaIDs,
+			AssetTypes:        profileAssetTypes,
+			AssetStatuses:     profileAssetStatuses,
+			Domains:           profileDomains,
+			IDs:               profileFilterIDs,
+			IssueIDs:          profileIssueIDs,
+			TagsIDs:           profileTagsIDs,
+			ProjectIDs:        profileProjectIDs,
+			ScanIDs:           profileScanIDs,
+			LastScanStatuses:  profileLastScanStatuses,
+			Search:            profileSearch,
+			Initiators:        profileInitiators,
+			Kinds:             kindsToUse,
+			Risks:             profileRisks,
+			ProblemCodes:      profileProblemCodes,
+			ProblemSeverities: profileProblemSeverities,
+			NoProjects:        profileNoProjects,
+			NoTags:            profileNoTags,
+			Dnf:               profileDnf,
+			SortType:          profileSortType,
+			SortDirection:     profileSortDirection,
 		}
 		if err := runPagedList(cmd, profileListPage, func(ctx context.Context, cursor string, size int) ([]v3.ProfileSummarized, *string, int, error) {
 			return escape.ListProfiles(ctx, cursor, filters, size)
@@ -224,8 +270,47 @@ schedule, risks, and configuration details.`,
 			return result
 		})
 
+		printProfilePentest(profile)
+
 		return nil
 	},
+}
+
+// printProfilePentest prints the AI pentest settings read back by GET /profiles/{id}
+// (mode, context, users, rules, files, sources, repositories). Only AI pentest
+// profiles carry them. JSON and YAML already include the pentest object in the
+// declared document, so this table is pretty-mode only.
+func printProfilePentest(profile *v3.GetProfile200Response) {
+	if !out.IsPretty() {
+		return
+	}
+
+	pentest, ok := profile.GetPentestOk()
+	if !ok || pentest == nil {
+		return
+	}
+
+	context := pentest.GetContext()
+	out.Table(pentest, func() []string {
+		result := []string{"MODE\tRATE LIMIT (REQ/S)\tOFF-LIMITS AREAS\tAPP DESCRIPTION\tMAIN CONCERNS\tCRITICAL FLOWS\tADDITIONAL\tUSERS\tRULES\tFILES\tSOURCES\tREPOSITORIES"}
+		result = append(result, fmt.Sprintf(
+			"%s\t%d\t%s\t%s\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d",
+			pentest.GetMode(),
+			pentest.GetRateLimitReqPerSec(),
+			pentest.GetOffLimitsAreas(),
+			context.GetAppDescription(),
+			context.GetMainConcerns(),
+			context.GetCriticalFlows(),
+			context.GetAdditional(),
+			len(pentest.GetUsers()),
+			len(pentest.GetRules()),
+			len(pentest.GetFiles()),
+			len(pentest.GetSources()),
+			len(pentest.GetRepositories()),
+		))
+
+		return result
+	})
 }
 
 func formatExtraAssets(extraAssets []v3.ProfileExtraAsset) string {
@@ -514,6 +599,19 @@ UPDATABLE FIELDS:
                          Replaces the full list of extra assets on the profile.
   --clear-extra-assets   Detach every extra asset from the profile.
 
+AI PENTEST FIELDS (AI pentest profiles only):
+  --mode                     Pentest aggressiveness: STANDARD or STRICT
+  --off-limits-areas         Areas the agent must not touch
+  --rate-limit-req-per-sec   Rate limit in requests per second
+  --app-description          What the application does (context)
+  --main-concerns            Your main worries (context)
+  --critical-flows           The flows that matter most (context)
+  --additional-context       Anything else testers should know (context)
+
+Complex AI pentest settings (users, rules, repositoriesSelected, location,
+artefactIds, sourceIds) are set through the JSON body on stdin, like
+profiles create-ai-pentest.
+
 Alternatively, provide a JSON object via stdin with any combination of fields.`,
 	Example: `  # Update name via flag
   escape-cli profiles update <profile-id> --name "New Profile Name"
@@ -527,6 +625,13 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 
   # Detach every extra asset from a profile
   escape-cli profiles update <profile-id> --clear-extra-assets
+
+  # Update AI pentest settings via flags
+  escape-cli profiles update <profile-id> \
+    --mode STRICT \
+    --rate-limit-req-per-sec 5 \
+    --app-description "Payments API" \
+    --main-concerns "Refund abuse"
 
   # Update via JSON stdin
   echo '{"name": "Updated Name", "cron": "0 22 * * *"}' | escape-cli profiles update <profile-id>
@@ -585,6 +690,8 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 			payload["extraAssetIds"] = parseExtraAssetIDs(profileUpdateExtraAssetIDs)
 		}
 
+		applyProfileUpdatePentestFlags(cmd, payload)
+
 		if len(payload) == 0 {
 			return errors.New("no updates provided: use flags or pipe JSON via stdin")
 		}
@@ -606,16 +713,75 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 			}
 		})
 
+		printProfilePentest(profile)
+
 		return nil
 	},
 }
 
+// applyProfileUpdatePentestFlags merges the AI pentest flags into the update
+// payload. Complex settings (users, rules, repositoriesSelected, location,
+// artefactIds, sourceIds) stay JSON-only on stdin, matching create-ai-pentest.
+func applyProfileUpdatePentestFlags(cmd *cobra.Command, payload map[string]interface{}) {
+	if cmd.Flags().Changed("mode") {
+		payload["mode"] = profileUpdateMode
+	}
+
+	if cmd.Flags().Changed("off-limits-areas") {
+		payload["offLimitsAreas"] = profileUpdateOffLimitsAreas
+	}
+
+	if cmd.Flags().Changed("rate-limit-req-per-sec") {
+		payload["rateLimitReqPerSec"] = profileUpdateRateLimitReqPerSec
+	}
+
+	contextChanged := cmd.Flags().Changed("app-description") ||
+		cmd.Flags().Changed("main-concerns") ||
+		cmd.Flags().Changed("critical-flows") ||
+		cmd.Flags().Changed("additional-context")
+	if !contextChanged {
+		return
+	}
+
+	// Merge into a context object from stdin when it is one, so a partial flag
+	// update keeps the fields the caller already sent.
+	context, ok := payload["context"].(map[string]interface{})
+	if !ok {
+		context = map[string]interface{}{}
+	}
+
+	if cmd.Flags().Changed("app-description") {
+		context["appDescription"] = profileUpdateAppDescription
+	}
+
+	if cmd.Flags().Changed("main-concerns") {
+		context["mainConcerns"] = profileUpdateMainConcerns
+	}
+
+	if cmd.Flags().Changed("critical-flows") {
+		context["criticalFlows"] = profileUpdateCriticalFlows
+	}
+
+	if cmd.Flags().Changed("additional-context") {
+		context["additional"] = profileUpdateAdditionalContext
+	}
+
+	payload["context"] = context
+}
+
 var (
-	profileUpdateName             string
-	profileUpdateDescription      string
-	profileUpdateCron             string
-	profileUpdateExtraAssetIDs    string
-	profileUpdateClearExtraAssets bool
+	profileUpdateName               string
+	profileUpdateDescription        string
+	profileUpdateCron               string
+	profileUpdateExtraAssetIDs      string
+	profileUpdateClearExtraAssets   bool
+	profileUpdateMode               string
+	profileUpdateOffLimitsAreas     string
+	profileUpdateRateLimitReqPerSec int
+	profileUpdateAppDescription     string
+	profileUpdateMainConcerns       string
+	profileUpdateCriticalFlows      string
+	profileUpdateAdditionalContext  string
 )
 
 // parseExtraAssetIDs splits the raw --extra-asset-id value on commas and
@@ -1131,6 +1297,13 @@ func init() {
 	profileUpdateCmd.Flags().StringVar(&profileUpdateCron, "cron", "", "cron schedule (e.g., \"0 22 * * *\")")
 	profileUpdateCmd.Flags().StringVar(&profileUpdateExtraAssetIDs, "extra-asset-id", "", "extra asset ID(s) to attach, as a comma-separated list; replaces the full list of extra assets on the profile")
 	profileUpdateCmd.Flags().BoolVar(&profileUpdateClearExtraAssets, "clear-extra-assets", false, "detach every extra asset from the profile")
+	profileUpdateCmd.Flags().StringVar(&profileUpdateMode, "mode", "", fmt.Sprintf("AI pentest aggressiveness: %v", v3.AllowedENUMPROPERTIESCONFIGURATIONPROPERTIESAUTOMATEDPENTESTINGPROPERTIESMULTIAGENTPENTESTPROPERTIESMODEEnumValues))
+	profileUpdateCmd.Flags().StringVar(&profileUpdateOffLimitsAreas, "off-limits-areas", "", "AI pentest areas the agent must not touch")
+	profileUpdateCmd.Flags().IntVar(&profileUpdateRateLimitReqPerSec, "rate-limit-req-per-sec", 0, "AI pentest rate limit in requests per second")
+	profileUpdateCmd.Flags().StringVar(&profileUpdateAppDescription, "app-description", "", "AI pentest context: what the application does")
+	profileUpdateCmd.Flags().StringVar(&profileUpdateMainConcerns, "main-concerns", "", "AI pentest context: your main worries")
+	profileUpdateCmd.Flags().StringVar(&profileUpdateCriticalFlows, "critical-flows", "", "AI pentest context: the flows that matter most")
+	profileUpdateCmd.Flags().StringVar(&profileUpdateAdditionalContext, "additional-context", "", "AI pentest context: anything else testers should know")
 	profileUpdateCmd.MarkFlagsMutuallyExclusive("extra-asset-id", "clear-extra-assets")
 	profileGetCmd.Flags().BoolVar(&profileGetExtraAssets, "extra-assets", false, "list the extra assets attached to the profile (detailed table)")
 	profilesListCmd.Flags().Bool("all", false, "Show profiles for all asset types")
@@ -1142,6 +1315,18 @@ func init() {
 	profilesListCmd.Flags().StringSliceVarP(&profileInitiators, "initiator", "n", []string{}, "initiator")
 	profilesListCmd.Flags().StringSliceVarP(&profileKinds, "kind", "k", []string{}, "kind")
 	profilesListCmd.Flags().StringSliceVarP(&profileRisks, "risk", "r", []string{}, "risk")
+	profilesListCmd.Flags().StringVar(&profileAssetSchemaIDs, "asset-schema-id", "", "filter by asset schema ID(s) - comma-separated for multiple")
+	profilesListCmd.Flags().StringSliceVar(&profileAssetTypes, "asset-type", []string{}, fmt.Sprintf("filter by asset type(s): %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPEEnumValues))
+	profilesListCmd.Flags().StringSliceVar(&profileAssetStatuses, "asset-status", []string{}, fmt.Sprintf("filter by asset status(es): %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUSEnumValues))
+	profilesListCmd.Flags().StringVar(&profileFilterIDs, "id", "", "filter by profile ID(s) - comma-separated for multiple")
+	profilesListCmd.Flags().StringSliceVar(&profileProjectIDs, "project-id", []string{}, "filter by project ID(s)")
+	profilesListCmd.Flags().StringVar(&profileScanIDs, "scan-id", "", "filter by scan ID(s) - comma-separated for multiple")
+	profilesListCmd.Flags().StringSliceVar(&profileLastScanStatuses, "last-scan-status", []string{}, fmt.Sprintf("filter by last scan status(es): %v", v3.AllowedENUMPROPERTIESSTATUSEnumValues))
+	profilesListCmd.Flags().StringSliceVar(&profileProblemCodes, "problem-code", []string{}, fmt.Sprintf("filter by problem code(s): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues))
+	profilesListCmd.Flags().StringSliceVar(&profileProblemSeverities, "problem-severity", []string{}, fmt.Sprintf("filter by problem severity(ies): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues))
+	profilesListCmd.Flags().StringVar(&profileNoProjects, "no-projects", "", "filter by profiles with no projects (true/false)")
+	profilesListCmd.Flags().StringVar(&profileNoTags, "no-tags", "", "filter by profiles with no tags (true/false)")
+	profilesListCmd.Flags().StringVar(&profileDnf, "dnf", "", "filter by a DNF expression (JSON)")
 	profilesListCmd.Flags().StringVar(&profileSortType, "sort-by", "", "sort field")
 	profilesListCmd.Flags().StringVar(&profileSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	profileListPage.bind(profilesListCmd)

@@ -342,6 +342,8 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli audit list",
 		"escape-cli retests list",
 		"escape-cli problems",
+		"escape-cli regression-tests list",
+		"escape-cli regression-tests history",
 	)
 	note("needs a valid stdin body; TestAdvertisedBodiesReachTheAPI checks the body reaches the API",
 		"escape-cli roles create",
@@ -366,6 +368,9 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli issues remediation feedback",
 		"escape-cli retests start",
 		"escape-cli authentications start",
+		"escape-cli regression-tests create",
+		"escape-cli regression-tests update",
+		"escape-cli regression-tests answer",
 	)
 	note("a dedicated contract test already decodes this command, or it needs more than one response, a file, or a summary it builds itself",
 		"escape-cli me",
@@ -412,6 +417,10 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli tags update",
 		"escape-cli stats",
 		"escape-cli retests get",
+		"escape-cli regression-tests get",
+		"escape-cli regression-tests delete",
+		"escape-cli regression-tests run",
+		"escape-cli regression-tests stop",
 	)
 
 	return reasons
@@ -424,15 +433,21 @@ func TestEveryOutputSchemaToolIsExercisedOrExplained(t *testing.T) {
 	}
 
 	exercised := map[string]struct{}{
-		"escape-cli assets delete":       {},
-		"escape-cli assets bulk-update":  {},
-		"escape-cli assets bulk-delete":  {},
-		"escape-cli tags delete":         {},
-		"escape-cli profiles delete":     {},
-		"escape-cli locations delete":    {},
-		"escape-cli workflows delete":    {},
-		"escape-cli custom-rules delete": {},
-		"escape-cli integrations delete": {},
+		"escape-cli assets delete":                       {},
+		"escape-cli assets bulk-update":                  {},
+		"escape-cli assets bulk-delete":                  {},
+		"escape-cli tags delete":                         {},
+		"escape-cli profiles delete":                     {},
+		"escape-cli locations delete":                    {},
+		"escape-cli workflows delete":                    {},
+		"escape-cli custom-rules delete":                 {},
+		"escape-cli integrations delete":                 {},
+		"escape-cli scans configuration":                 {},
+		"escape-cli scans statistics":                    {},
+		"escape-cli profiles continuous-pentest create":  {},
+		"escape-cli profiles continuous-pentest update":  {},
+		"escape-cli profiles continuous-pentest enable":  {},
+		"escape-cli profiles continuous-pentest disable": {},
 	}
 	explained := outputSchemaNotExercised()
 	seen := map[string]struct{}{}

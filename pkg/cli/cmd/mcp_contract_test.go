@@ -672,6 +672,17 @@ func stdinBodyFor(path string) string {
 		return `{"assetIds":["` + id + `"],"name":"stdinProbe"}`
 	case "escape-cli profiles update-configuration":
 		return `{"configuration":{"mode":"read_only"},"stdinProbe":"body"}`
+	case "escape-cli profiles continuous-pentest create",
+		"escape-cli profiles continuous-pentest enable":
+		return `{"repositories":[{"url":"https://github.com/org/repo","branch":"main"}],"cron":"0 0 * * *","stdinProbe":"body"}`
+	case "escape-cli profiles continuous-pentest update":
+		return `{"cron":"0 0 * * *","stdinProbe":"body"}`
+	case "escape-cli regression-tests create":
+		return `{"name":"stdinProbe","additionalContext":"stdinProbe","inputFilename":"report.pdf","temporaryObjectKey":"00000000-0000-0000-0000-000000000001","stdinProbe":"body"}`
+	case "escape-cli regression-tests update":
+		return `{"name":"stdinProbe","stdinProbe":"body"}`
+	case "escape-cli regression-tests answer":
+		return `{"content":"stdinProbe","stdinProbe":"body"}`
 	case "escape-cli custom-rules create":
 		return `{"content":{"rule":{"type":"API","alert":{"severity":"INFO","name":"stdinProbe","context":"probe","category":"CUSTOM"},"detect":[{"if":"scan.type"}]}}}`
 	default:

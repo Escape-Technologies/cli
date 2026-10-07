@@ -35,6 +35,7 @@ type WorkflowFilterAnyOf struct {
 	TagIds               []string                                                            `json:"tagIds,omitempty"`
 	NoTags               *bool                                                               `json:"noTags,omitempty"`
 	ScanIds              []string                                                            `json:"scanIds,omitempty"`
+	FirstSeenScanIds     []string                                                            `json:"firstSeenScanIds,omitempty"`
 	SecurityTestUids     []string                                                            `json:"securityTestUids,omitempty"`
 	Status               []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS                         `json:"status,omitempty"`
 	Ids                  []string                                                            `json:"ids,omitempty"`
@@ -551,6 +552,38 @@ func (o *WorkflowFilterAnyOf) SetScanIds(v []string) {
 	o.ScanIds = v
 }
 
+// GetFirstSeenScanIds returns the FirstSeenScanIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf) GetFirstSeenScanIds() []string {
+	if o == nil || IsNil(o.FirstSeenScanIds) {
+		var ret []string
+		return ret
+	}
+	return o.FirstSeenScanIds
+}
+
+// GetFirstSeenScanIdsOk returns a tuple with the FirstSeenScanIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf) GetFirstSeenScanIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.FirstSeenScanIds) {
+		return nil, false
+	}
+	return o.FirstSeenScanIds, true
+}
+
+// HasFirstSeenScanIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf) HasFirstSeenScanIds() bool {
+	if o != nil && !IsNil(o.FirstSeenScanIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetFirstSeenScanIds gets a reference to the given []string and assigns it to the FirstSeenScanIds field.
+func (o *WorkflowFilterAnyOf) SetFirstSeenScanIds(v []string) {
+	o.FirstSeenScanIds = v
+}
+
 // GetSecurityTestUids returns the SecurityTestUids field value if set, zero value otherwise.
 func (o *WorkflowFilterAnyOf) GetSecurityTestUids() []string {
 	if o == nil || IsNil(o.SecurityTestUids) {
@@ -1055,6 +1088,9 @@ func (o WorkflowFilterAnyOf) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScanIds) {
 		toSerialize["scanIds"] = o.ScanIds
 	}
+	if !IsNil(o.FirstSeenScanIds) {
+		toSerialize["firstSeenScanIds"] = o.FirstSeenScanIds
+	}
 	if !IsNil(o.SecurityTestUids) {
 		toSerialize["securityTestUids"] = o.SecurityTestUids
 	}
@@ -1134,6 +1170,7 @@ func (o *WorkflowFilterAnyOf) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "tagIds")
 		delete(additionalProperties, "noTags")
 		delete(additionalProperties, "scanIds")
+		delete(additionalProperties, "firstSeenScanIds")
 		delete(additionalProperties, "securityTestUids")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "ids")

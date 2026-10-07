@@ -18,12 +18,19 @@ import (
 var scanProfileIDs []string
 var scanProjectIDs []string
 var scanAssetIDs []string
+var scanTagIDs []string
+var scanAssetTypes []string
+var scanSearch string
 var scanAfter string
 var scanBefore string
 var scanIgnored string
 var scanInitiator []string
 var scanKinds []string
 var scanStatus []string
+var scanProblemCodes []string
+var scanProblemSeverities []string
+var scanNoTags string
+var scanDnf string
 var scanSortType string
 var scanSortDirection string
 var scanListAllKinds bool
@@ -95,6 +102,14 @@ FILTER OPTIONS:
   --after             Show scans created after this date (RFC3339 format)
   --before            Show scans created before this date (RFC3339 format)
   --ignored           Filter by ignored status (true/false)
+  -a, --asset-id      Filter by one or more asset IDs
+  --tag-id            Filter by one or more tag IDs
+  --asset-type        Filter by asset type
+  --search            Search term to filter scans
+  --problem-code      Filter by validation problem code
+  --problem-severity  Filter by validation problem severity
+  --no-tags           Filter by assets with no tags (true/false)
+  --dnf               Filter by a DNF expression (JSON)
 
 SCANNER TYPES:
   • BLST_REST                  - REST API security testing
@@ -103,9 +118,8 @@ SCANNER TYPES:
   • AUTOMATED_PENTEST          - AI Pentesting
 
 Example output:
-ID                                      CREATED AT                           KIND           STATUS      PROGRESS    LINK
-00000000-0000-0000-0000-000000000001    2025-02-05 08:34:47.541 +0000 UTC    BLST_REST      FINISHED    1.000000    https://...
-00000000-0000-0000-0000-000000000002    2025-02-02 08:27:23.919 +0000 UTC    BLST_GRAPHQL   RUNNING     0.453000    https://...`,
+ID                                      PROFILE ID                              ASSET ID                                CREATED AT                           KIND           STATUS      PROGRESS    LINK
+00000000-0000-0000-0000-000000000001    11111111-1111-1111-1111-111111111111    22222222-2222-2222-2222-222222222222    2025-02-05 08:34:47.541 +0000 UTC    BLST_REST      FINISHED    1.000000    https://...`,
 	Example: `  # List all scans for a specific profile
   escape-cli scans list -p 00000000-0000-0000-0000-000000000000
 
@@ -118,6 +132,9 @@ ID                                      CREATED AT                           KIN
   # List CI-triggered scans for multiple profiles
   escape-cli scans list -p profile-1,profile-2 -i CI
 
+  # Search scans and filter by asset type
+  escape-cli scans list --search checkout --asset-type WEBAPP
+
   # Export scan list to JSON for processing
   escape-cli scans list -o json > scans.json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
@@ -128,17 +145,24 @@ ID                                      CREATED AT                           KIN
 
 		kinds := resolveScanKinds(cmd)
 		filters := &escape.ListScansFilters{
-			ProfileIDs:    &scanProfileIDs,
-			ProjectIDs:    &scanProjectIDs,
-			AssetIDs:      &scanAssetIDs,
-			After:         scanAfter,
-			Before:        scanBefore,
-			Ignored:       scanIgnored,
-			Initiator:     &scanInitiator,
-			Kinds:         scanKindsFilter(kinds),
-			Status:        &scanStatus,
-			SortType:      scanSortType,
-			SortDirection: scanSortDirection,
+			After:             scanAfter,
+			Before:            scanBefore,
+			Search:            scanSearch,
+			ProfileIDs:        &scanProfileIDs,
+			ProjectIDs:        &scanProjectIDs,
+			AssetIDs:          &scanAssetIDs,
+			TagIDs:            &scanTagIDs,
+			AssetTypes:        &scanAssetTypes,
+			Ignored:           scanIgnored,
+			Initiator:         &scanInitiator,
+			Kinds:             scanKindsFilter(kinds),
+			Status:            &scanStatus,
+			ProblemCodes:      &scanProblemCodes,
+			ProblemSeverities: &scanProblemSeverities,
+			NoTags:            scanNoTags,
+			Dnf:               scanDnf,
+			SortType:          scanSortType,
+			SortDirection:     scanSortDirection,
 		}
 		allScans, err := fetchAllScans(cmd.Context(), filters, scanListLimit, isPrettyOutput())
 		if err != nil {
@@ -153,9 +177,9 @@ ID                                      CREATED AT                           KIN
 		}
 
 		out.Table(allScans, func() []string {
-			res := []string{"ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
+			res := []string{"ID\tPROFILE ID\tASSET ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
 			for _, scan := range allScans {
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetProfileId(), scan.GetAssetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
 			}
 
 			return res
@@ -232,6 +256,133 @@ ID                                      CREATED AT                           KIN
 
 		return nil
 	},
+}
+
+var scanConfigurationCmd = &cobra.Command{
+	Use:     "configuration scan-id",
+	Aliases: []string{"config"},
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
+
+		return nil
+	},
+	Short: "Get the effective configuration a scan ran with",
+	Long: `Get Scan Configuration - Inspect the Settings Used by a Scan
+
+Returns the configuration a scan actually ran with, as stored on the scan.
+Credentials, tokens, cookies, passwords and other secret values are redacted
+with "[REDACTED]". Vault variable references (e.g. "{{API_KEY}}") are never
+resolved to their secret value.
+
+USE CASES:
+  • Debug why a scan behaved differently than the profile expects
+  • Confirm the effective mode (for example read-only) of a past scan
+  • Audit authentication and scope settings after a profile change`,
+	Example: `  # Print the effective configuration of a scan
+  escape-cli scans configuration 00000000-0000-0000-0000-000000000000
+
+  # Export to JSON for diffing
+  escape-cli scans configuration <scan-id> -o json`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.GetScanConfiguration200Response{}) {
+			return nil
+		}
+
+		configuration, err := escape.GetScanConfiguration(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to get scan configuration: %w", err)
+		}
+
+		out.Print(configuration, formatScanConfiguration(configuration))
+
+		return nil
+	},
+}
+
+var scanStatisticsCmd = &cobra.Command{
+	Use:     "statistics scan-id",
+	Aliases: []string{"stats"},
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			_ = cmd.Help()
+			return errors.New("scan ID is required")
+		}
+
+		return nil
+	},
+	Short: "Get aggregated statistics for a scan",
+	Long: `Get Scan Statistics - Summarize Issues, Events, and Requests
+
+Returns aggregated statistics for a scan: issue counts by severity and category,
+compliance coverage, API coverage statuses, scanner events over time, and
+request counts by operation.
+
+USE CASES:
+  • Get issue counts by severity without paging every issue
+  • See which operations the scan exercised and how often
+  • Feed CI/CD quality gates with a single request`,
+	Example: `  # Print the statistics summary
+  escape-cli scans statistics 00000000-0000-0000-0000-000000000000
+
+  # Export to JSON for processing
+  escape-cli scans statistics <scan-id> -o json
+
+  # Count critical issues from the severity breakdown
+  escape-cli scans statistics <scan-id> -o json | jq '.issue.severities[] | select(.severity=="CRITICAL").count'`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		// Output JSON Schema if requested
+		if out.Schema(v3.GetScanStatistics200Response{}) {
+			return nil
+		}
+
+		statistics, err := escape.GetScanStatistics(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to get scan statistics: %w", err)
+		}
+
+		out.Print(statistics, formatScanStatistics(statistics))
+
+		return nil
+	},
+}
+
+// formatScanConfiguration renders the effective configuration as indented JSON.
+// The configuration is a nested object, so a table would hide its structure.
+func formatScanConfiguration(configuration *v3.GetScanConfiguration200Response) string {
+	pretty, err := json.MarshalIndent(configuration.GetConfiguration(), "", "  ")
+	if err != nil {
+		return "Scan " + configuration.GetScanId() + " effective configuration"
+	}
+
+	return "Scan " + configuration.GetScanId() + " effective configuration\n" + string(pretty)
+}
+
+// formatScanStatistics renders the statistics as labelled sections. JSON mode
+// keeps the full document; this is only the human-readable view.
+func formatScanStatistics(statistics *v3.GetScanStatistics200Response) string {
+	var b strings.Builder
+	fmt.Fprintf(&b, "Scan %s statistics\n", statistics.GetScanId())
+
+	b.WriteString("\nISSUES BY SEVERITY\nSEVERITY\tCOUNT\n")
+	for _, severity := range statistics.Issue.GetSeverities() {
+		fmt.Fprintf(&b, "%s\t%d\n", severity.GetSeverity(), severity.GetCount())
+	}
+
+	b.WriteString("\nISSUES BY CATEGORY\nCATEGORY\tCOUNT\n")
+	for _, category := range statistics.Issue.GetCategories() {
+		fmt.Fprintf(&b, "%s\t%d\n", category.GetCategory(), category.GetCount())
+	}
+
+	b.WriteString("\nREQUESTS BY OPERATION\nOPERATION\tCOUNT\n")
+	for _, request := range statistics.GetRequestTypeCounts() {
+		fmt.Fprintf(&b, "%s\t%d\n", request.GetOperation(), request.GetCount())
+	}
+
+	return b.String()
 }
 
 func extractCommitDataFromEnv() {
@@ -1176,6 +1327,13 @@ func init() {
 	scansListCmd.Flags().StringSliceVarP(&scanProfileIDs, "profile-id", "p", []string{}, "filter by profile ID(s) - comma-separated for multiple")
 	scansListCmd.Flags().StringSliceVar(&scanProjectIDs, "project-id", []string{}, "filter by project ID(s)")
 	scansListCmd.Flags().StringSliceVarP(&scanAssetIDs, "asset-id", "a", []string{}, "filter by asset ID(s) - comma-separated for multiple")
+	scansListCmd.Flags().StringSliceVar(&scanTagIDs, "tag-id", []string{}, "filter by tag ID(s)")
+	scansListCmd.Flags().StringSliceVar(&scanAssetTypes, "asset-type", []string{}, fmt.Sprintf("filter by asset type(s): %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPEEnumValues))
+	scansListCmd.Flags().StringVar(&scanSearch, "search", "", "search term to filter scans")
+	scansListCmd.Flags().StringSliceVar(&scanProblemCodes, "problem-code", []string{}, fmt.Sprintf("filter by validation problem code(s): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues))
+	scansListCmd.Flags().StringSliceVar(&scanProblemSeverities, "problem-severity", []string{}, fmt.Sprintf("filter by validation problem severity(ies): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues))
+	scansListCmd.Flags().StringVar(&scanNoTags, "no-tags", "", "filter by assets with no tags (true/false)")
+	scansListCmd.Flags().StringVar(&scanDnf, "dnf", "", "filter by a DNF expression (JSON)")
 	scansListCmd.Flags().StringVar(&scanAfter, "after", "", "show scans created after this date (RFC3339 format, e.g., 2025-01-01T00:00:00Z)")
 	scansListCmd.Flags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansListCmd.Flags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
@@ -1197,6 +1355,8 @@ func init() {
 	scanStartCmd.Flags().StringVar(&scanStartCmdAdditionalProperties, "additional-properties", "", "JSON additional properties for the scan request")
 	scansCmd.AddCommand(scanStartCmd)
 	scansCmd.AddCommand(scanGetCmd)
+	scansCmd.AddCommand(scanConfigurationCmd)
+	scansCmd.AddCommand(scanStatisticsCmd)
 	scansCmd.AddCommand(scanIssuesCmd)
 	scanIssuesPage.bind(scanIssuesCmd)
 	scanWatchCmd.Flags().StringVar(&scanFailOnSeverity, "fail-on-severity", "", failOnSeverityUsage)

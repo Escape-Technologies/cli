@@ -13,16 +13,28 @@ import (
 
 // ListProfilesFilters holds optional filters for listing profiles
 type ListProfilesFilters struct {
-	AssetIDs      []string
-	Domains       []string
-	IssueIDs      []string
-	TagsIDs       []string
-	Search        string
-	Initiators    []string
-	Kinds         []string
-	Risks         []string
-	SortType      string
-	SortDirection string
+	AssetIDs          []string
+	AssetSchemaIDs    string
+	AssetTypes        []string
+	AssetStatuses     []string
+	Domains           []string
+	IDs               string
+	IssueIDs          []string
+	TagsIDs           []string
+	ProjectIDs        []string
+	ScanIDs           string
+	LastScanStatuses  []string
+	Search            string
+	Initiators        []string
+	Kinds             []string
+	Risks             []string
+	ProblemCodes      []string
+	ProblemSeverities []string
+	NoProjects        string
+	NoTags            string
+	Dnf               string
+	SortType          string
+	SortDirection     string
 }
 
 // ListProfiles lists one page of profiles.
@@ -55,8 +67,24 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
 		}
 
+		if filters.AssetSchemaIDs != "" {
+			req = req.AssetSchemaIds(v3.ListProfilesAssetSchemaIdsParameter{String: &filters.AssetSchemaIDs})
+		}
+
+		if len(filters.AssetTypes) > 0 {
+			req = req.AssetTypes(filters.AssetTypes)
+		}
+
+		if len(filters.AssetStatuses) > 0 {
+			req = req.AssetStatuses(filters.AssetStatuses)
+		}
+
 		if len(filters.Domains) > 0 {
 			req = req.Domains(strings.Join(filters.Domains, ","))
+		}
+
+		if filters.IDs != "" {
+			req = req.Ids(filters.IDs)
 		}
 
 		if len(filters.IssueIDs) > 0 {
@@ -65,6 +93,19 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 
 		if len(filters.TagsIDs) > 0 {
 			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
+		}
+
+		if len(filters.ProjectIDs) > 0 {
+			ids := filters.ProjectIDs
+			req = req.ProjectIds(v3.ListProfilesProjectIdsParameter{ArrayOfString: &ids})
+		}
+
+		if filters.ScanIDs != "" {
+			req = req.ScanIds(filters.ScanIDs)
+		}
+
+		if len(filters.LastScanStatuses) > 0 {
+			req = req.LastScanStatuses(filters.LastScanStatuses)
 		}
 
 		if filters.Search != "" {
@@ -81,6 +122,26 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 
 		if len(filters.Risks) > 0 {
 			req = req.Risks((filters.Risks))
+		}
+
+		if len(filters.ProblemCodes) > 0 {
+			req = req.ProblemCodes(filters.ProblemCodes)
+		}
+
+		if len(filters.ProblemSeverities) > 0 {
+			req = req.ProblemSeverities(filters.ProblemSeverities)
+		}
+
+		if filters.NoProjects != "" {
+			req = req.NoProjects(filters.NoProjects)
+		}
+
+		if filters.NoTags != "" {
+			req = req.NoTags(filters.NoTags)
+		}
+
+		if filters.Dnf != "" {
+			req = req.Dnf(filters.Dnf)
 		}
 	}
 
@@ -189,6 +250,81 @@ func CreateProfileAiPentest(ctx context.Context, data []byte) (interface{}, erro
 	}
 
 	return profile, nil
+}
+
+// CreateContinuousPentest sets up continuous pentesting on an AI pentest profile.
+func CreateContinuousPentest(ctx context.Context, profileID string, data []byte) (*v3.UpdateContinuousPentest200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.ContinuousPentestCreateInput
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON for ContinuousPentestCreateInput: %w", err)
+	}
+
+	result, _, err := client.ProfilesAPI.CreateContinuousPentest(ctx, profileID).ContinuousPentestCreateInput(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return result, nil
+}
+
+// UpdateContinuousPentest edits the repositories and cadence of an enabled continuous pentest.
+func UpdateContinuousPentest(ctx context.Context, profileID string, data []byte) (*v3.UpdateContinuousPentest200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.ContinuousPentestUpdateInput
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON for ContinuousPentestUpdateInput: %w", err)
+	}
+
+	result, _, err := client.ProfilesAPI.UpdateContinuousPentest(ctx, profileID).ContinuousPentestUpdateInput(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return result, nil
+}
+
+// EnableContinuousPentest turns the timer back on for a continuous pentest.
+func EnableContinuousPentest(ctx context.Context, profileID string, data []byte) (*v3.UpdateContinuousPentest200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var payload v3.ContinuousPentestEnableInput
+	if err := json.Unmarshal(data, &payload); err != nil {
+		return nil, fmt.Errorf("invalid JSON for ContinuousPentestEnableInput: %w", err)
+	}
+
+	result, _, err := client.ProfilesAPI.EnableContinuousPentest(ctx, profileID).ContinuousPentestEnableInput(payload).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return result, nil
+}
+
+// DisableContinuousPentest stops the timer of a continuous pentest and keeps the repositories.
+func DisableContinuousPentest(ctx context.Context, profileID string) (*v3.UpdateContinuousPentest200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	result, _, err := client.ProfilesAPI.DisableContinuousPentest(ctx, profileID).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return result, nil
 }
 
 // UpdateProfile updates profile metadata (name, description, cron, extra assets)

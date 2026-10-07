@@ -12,17 +12,24 @@ import (
 
 // ListScansFilters holds optional filters for listing scans
 type ListScansFilters struct {
-	After         string
-	Before        string
-	AssetIDs      *[]string
-	ProfileIDs    *[]string
-	ProjectIDs    *[]string
-	Ignored       string
-	Initiator     *[]string
-	Kinds         *[]string
-	Status        *[]string
-	SortType      string
-	SortDirection string
+	After             string
+	Before            string
+	Search            string
+	AssetIDs          *[]string
+	ProfileIDs        *[]string
+	ProjectIDs        *[]string
+	TagIDs            *[]string
+	AssetTypes        *[]string
+	Ignored           string
+	Initiator         *[]string
+	Kinds             *[]string
+	Status            *[]string
+	ProblemCodes      *[]string
+	ProblemSeverities *[]string
+	NoTags            string
+	Dnf               string
+	SortType          string
+	SortDirection     string
 }
 
 // ListScans lists all scans for an application
@@ -53,41 +60,7 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 	}
 
 	if filters != nil {
-		if filters.After != "" {
-			req = req.After(filters.After)
-		}
-
-		if filters.Before != "" {
-			req = req.Before(filters.Before)
-		}
-
-		if filters.AssetIDs != nil && len(*filters.AssetIDs) > 0 {
-			req = req.AssetIds(strings.Join(*filters.AssetIDs, ","))
-		}
-
-		if filters.ProfileIDs != nil && len(*filters.ProfileIDs) > 0 {
-			req = req.ProfileIds(strings.Join(*filters.ProfileIDs, ","))
-		}
-
-		if filters.ProjectIDs != nil && len(*filters.ProjectIDs) > 0 {
-			req = req.ProjectIds(v3.ListScansProjectIdsParameter{ArrayOfString: filters.ProjectIDs})
-		}
-
-		if filters.Ignored != "" {
-			req = req.Ignored(filters.Ignored)
-		}
-
-		if filters.Initiator != nil && len(*filters.Initiator) > 0 {
-			req = req.Initiator(*filters.Initiator)
-		}
-
-		if filters.Kinds != nil && len(*filters.Kinds) > 0 {
-			req = req.Kinds(*filters.Kinds)
-		}
-
-		if filters.Status != nil && len(*filters.Status) > 0 {
-			req = req.Status(*filters.Status)
-		}
+		req = applyListScansFilters(req, filters)
 	}
 
 	data, _, err := req.Execute()
@@ -97,6 +70,75 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 	}
 
 	return data.Data, data.NextCursor, nil
+}
+
+// applyListScansFilters adds every set filter to the request.
+func applyListScansFilters(req v3.ApiListScansRequest, filters *ListScansFilters) v3.ApiListScansRequest {
+	if filters.After != "" {
+		req = req.After(filters.After)
+	}
+
+	if filters.Before != "" {
+		req = req.Before(filters.Before)
+	}
+
+	if filters.Search != "" {
+		req = req.Search(filters.Search)
+	}
+
+	if filters.AssetIDs != nil && len(*filters.AssetIDs) > 0 {
+		req = req.AssetIds(strings.Join(*filters.AssetIDs, ","))
+	}
+
+	if filters.ProfileIDs != nil && len(*filters.ProfileIDs) > 0 {
+		req = req.ProfileIds(strings.Join(*filters.ProfileIDs, ","))
+	}
+
+	if filters.ProjectIDs != nil && len(*filters.ProjectIDs) > 0 {
+		req = req.ProjectIds(v3.ListScansProjectIdsParameter{ArrayOfString: filters.ProjectIDs})
+	}
+
+	if filters.TagIDs != nil && len(*filters.TagIDs) > 0 {
+		req = req.TagIds(strings.Join(*filters.TagIDs, ","))
+	}
+
+	if filters.AssetTypes != nil && len(*filters.AssetTypes) > 0 {
+		req = req.AssetTypes(*filters.AssetTypes)
+	}
+
+	if filters.Ignored != "" {
+		req = req.Ignored(filters.Ignored)
+	}
+
+	if filters.Initiator != nil && len(*filters.Initiator) > 0 {
+		req = req.Initiator(*filters.Initiator)
+	}
+
+	if filters.Kinds != nil && len(*filters.Kinds) > 0 {
+		req = req.Kinds(*filters.Kinds)
+	}
+
+	if filters.Status != nil && len(*filters.Status) > 0 {
+		req = req.Status(*filters.Status)
+	}
+
+	if filters.ProblemCodes != nil && len(*filters.ProblemCodes) > 0 {
+		req = req.ProblemCodes(*filters.ProblemCodes)
+	}
+
+	if filters.ProblemSeverities != nil && len(*filters.ProblemSeverities) > 0 {
+		req = req.ProblemSeverities(*filters.ProblemSeverities)
+	}
+
+	if filters.NoTags != "" {
+		req = req.NoTags(filters.NoTags)
+	}
+
+	if filters.Dnf != "" {
+		req = req.Dnf(filters.Dnf)
+	}
+
+	return req
 }
 
 // GetScan returns a scan by its ID
@@ -109,6 +151,37 @@ func GetScan(ctx context.Context, scanID string) (*v3.StartScan200Response, erro
 	data, _, err := client.ScansAPI.GetScan(ctx, scanID).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to get scan: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// GetScanConfiguration returns the effective configuration a scan ran with.
+// Secret values are redacted server-side.
+func GetScanConfiguration(ctx context.Context, scanID string) (*v3.GetScanConfiguration200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	data, _, err := client.ScansAPI.GetScanConfiguration(ctx, scanID).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("unable to get scan configuration: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// GetScanStatistics returns aggregated statistics for a scan.
+func GetScanStatistics(ctx context.Context, scanID string) (*v3.GetScanStatistics200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	data, _, err := client.ScansAPI.GetScanStatistics(ctx, scanID).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("unable to get scan statistics: %w", humanizeAPIError(err))
 	}
 
 	return data, nil

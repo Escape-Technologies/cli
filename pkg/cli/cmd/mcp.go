@@ -149,17 +149,18 @@ func init() {
 // CommandSchemaRegistry does not make a command destructive, and a command
 // in this set is not exposed without the confirm gate applied in buildMCPTool.
 var destructiveMCPCommands = map[string]struct{}{
-	"escape-cli profiles delete":     {},
-	"escape-cli assets delete":       {},
-	"escape-cli assets bulk-delete":  {},
-	"escape-cli assets bulk-update":  {},
-	"escape-cli issues bulk-update":  {},
-	"escape-cli tags delete":         {},
-	"escape-cli custom-rules delete": {},
-	"escape-cli locations delete":    {},
-	"escape-cli workflows delete":    {},
-	"escape-cli roles unbind":        {},
-	"escape-cli integrations delete": {},
+	"escape-cli profiles delete":         {},
+	"escape-cli assets delete":           {},
+	"escape-cli assets bulk-delete":      {},
+	"escape-cli assets bulk-update":      {},
+	"escape-cli issues bulk-update":      {},
+	"escape-cli tags delete":             {},
+	"escape-cli custom-rules delete":     {},
+	"escape-cli locations delete":        {},
+	"escape-cli workflows delete":        {},
+	"escape-cli roles unbind":            {},
+	"escape-cli integrations delete":     {},
+	"escape-cli regression-tests delete": {},
 }
 
 func isDestructiveMCPCommand(path string) bool {

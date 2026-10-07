@@ -13,13 +13,25 @@ import (
 )
 
 var (
-	stages             []string
-	hasAttachments     bool
-	attachments        []string
-	eventLevels        []string
-	eventSortType      string
-	eventSortDirection string
-	eventListPage      pageFlags
+	stages                   []string
+	hasAttachments           bool
+	attachments              []string
+	eventLevels              []string
+	eventAfter               string
+	eventBefore              string
+	eventIDs                 string
+	eventTargetIDs           string
+	eventWorkflowIDs         string
+	eventGroups              string
+	eventSeverities          []string
+	eventRisks               []string
+	eventScanProblemCodes    []string
+	eventResponseStatusCodes string
+	eventPublic              string
+	eventDnf                 string
+	eventSortType            string
+	eventSortDirection       string
+	eventListPage            pageFlags
 )
 
 var eventsCmd = &cobra.Command{
@@ -54,14 +66,26 @@ var eventsListCmd = &cobra.Command{
 Display events from security scans with filtering by scan, asset, severity, and type.
 
 FILTER OPTIONS:
-  -s, --search         Free-text search
-  -p, --profile-id     Filter by profile ID
-  --scan-id            Filter by scan ID
-  -a, --asset-id       Filter by asset ID
-  -i, --issue-id       Filter by issue ID
-  --stage              Filter by execution stage
-  -l, --levels         Filter by level (ERROR, WARN, INFO, DEBUG)
-  --has-attachments    Show only events with attachments`,
+  -s, --search            Free-text search
+  -p, --profile-id        Filter by profile ID
+  --scan-id               Filter by scan ID
+  -a, --asset-id          Filter by asset ID
+  -i, --issue-id          Filter by issue ID
+  --event-id              Filter by event ID
+  --target-id             Filter by target ID
+  --workflow-id           Filter by workflow ID
+  --group                 Filter by group
+  --stage                 Filter by execution stage
+  -l, --levels            Filter by level (ERROR, WARN, INFO, DEBUG)
+  --severity              Filter by issue severity
+  --risk                  Filter by risk
+  --problem-code          Filter by scan problem code
+  --response-status-code  Filter by response status code
+  --public                Filter by public events (true/false)
+  --after                 Show events created after this date (RFC3339 format)
+  --before                Show events created before this date (RFC3339 format)
+  --has-attachments       Show only events with attachments
+  --dnf                   Filter by a DNF expression (JSON)`,
 	Example: `  # List recent events
   escape-cli events list
 
@@ -78,17 +102,29 @@ FILTER OPTIONS:
   escape-cli events list --search "timeout"`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		filters := &escape.ListEventsFilters{
-			Search:         search,
-			ProfileIDs:     profileIDs,
-			ScanIDs:        scanIDs,
-			AssetIDs:       assetIDs,
-			IssueIDs:       issueIDs,
-			Stages:         stages,
-			HasAttachments: hasAttachments,
-			Attachments:    attachments,
-			Levels:         eventLevels,
-			SortType:       eventSortType,
-			SortDirection:  eventSortDirection,
+			Search:              search,
+			After:               eventAfter,
+			Before:              eventBefore,
+			ProfileIDs:          profileIDs,
+			ScanIDs:             scanIDs,
+			AssetIDs:            assetIDs,
+			IssueIDs:            issueIDs,
+			EventIDs:            eventIDs,
+			TargetIDs:           eventTargetIDs,
+			WorkflowIDs:         eventWorkflowIDs,
+			Groups:              eventGroups,
+			Stages:              stages,
+			HasAttachments:      hasAttachments,
+			Attachments:         attachments,
+			Levels:              eventLevels,
+			Severities:          eventSeverities,
+			Risks:               eventRisks,
+			ScanProblemCodes:    eventScanProblemCodes,
+			ResponseStatusCodes: eventResponseStatusCodes,
+			Public:              eventPublic,
+			Dnf:                 eventDnf,
+			SortType:            eventSortType,
+			SortDirection:       eventSortDirection,
 		}
 		if err := runPagedList(cmd, eventListPage, func(ctx context.Context, cursor string, size int) ([]v3.EventSummarized, *string, int, error) {
 			return escape.ListEvents(ctx, cursor, filters, size)
@@ -184,6 +220,18 @@ func init() {
 	eventsListCmd.Flags().BoolVarP(&hasAttachments, "has-attachments", "", hasAttachments, "Has attachments")
 	eventsListCmd.Flags().StringSliceVarP(&attachments, "attachments", "t", attachments, "Attachments to filter events by")
 	eventsListCmd.Flags().StringSliceVarP(&eventLevels, "levels", "l", eventLevels, fmt.Sprintf("levels of events: %v", v3.AllowedENUMPROPERTIESEVENTSITEMSPROPERTIESLEVELEnumValues))
+	eventsListCmd.Flags().StringVar(&eventAfter, "after", "", "show events created after this date (RFC3339 format)")
+	eventsListCmd.Flags().StringVar(&eventBefore, "before", "", "show events created before this date (RFC3339 format)")
+	eventsListCmd.Flags().StringVar(&eventIDs, "event-id", "", "filter by event ID(s) - comma-separated for multiple")
+	eventsListCmd.Flags().StringVar(&eventTargetIDs, "target-id", "", "filter by target ID(s) - comma-separated for multiple")
+	eventsListCmd.Flags().StringVar(&eventWorkflowIDs, "workflow-id", "", "filter by workflow ID(s) - comma-separated for multiple")
+	eventsListCmd.Flags().StringVar(&eventGroups, "group", "", "filter by group(s) - comma-separated for multiple")
+	eventsListCmd.Flags().StringSliceVar(&eventSeverities, "severity", nil, fmt.Sprintf("filter by severity: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	eventsListCmd.Flags().StringSliceVar(&eventRisks, "risk", nil, fmt.Sprintf("filter by risk: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
+	eventsListCmd.Flags().StringSliceVar(&eventScanProblemCodes, "problem-code", nil, fmt.Sprintf("filter by scan problem code: %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues))
+	eventsListCmd.Flags().StringVar(&eventResponseStatusCodes, "response-status-code", "", "filter by response status code(s) - comma-separated for multiple")
+	eventsListCmd.Flags().StringVar(&eventPublic, "public", "", "filter by public events (true/false)")
+	eventsListCmd.Flags().StringVar(&eventDnf, "dnf", "", "filter by a DNF expression (JSON)")
 	eventsListCmd.Flags().StringVar(&eventSortType, "sort-by", "", "sort field")
 	eventsListCmd.Flags().StringVar(&eventSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	eventListPage.bind(eventsListCmd)
