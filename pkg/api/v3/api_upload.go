@@ -22,8 +22,22 @@ import (
 type UploadAPIService service
 
 type ApiCreateUploadSignedUrlRequest struct {
-	ctx        context.Context
-	ApiService *UploadAPIService
+	ctx         context.Context
+	ApiService  *UploadAPIService
+	contentType *string
+	filename    *string
+}
+
+// The MIME type of the file to upload, e.g. &#x60;application/json&#x60;. Stored on the uploaded object. When provided, the &#x60;PUT&#x60; must send the same &#x60;Content-Type&#x60;.
+func (r ApiCreateUploadSignedUrlRequest) ContentType(contentType string) ApiCreateUploadSignedUrlRequest {
+	r.contentType = &contentType
+	return r
+}
+
+// The original file name, e.g. &#x60;schema.har&#x60;. Used to build the storage key so the uploaded object keeps its original name.
+func (r ApiCreateUploadSignedUrlRequest) Filename(filename string) ApiCreateUploadSignedUrlRequest {
+	r.filename = &filename
+	return r
 }
 
 func (r ApiCreateUploadSignedUrlRequest) Execute() (*CreateUploadSignedUrl200Response, *http.Response, error) {
@@ -54,6 +68,20 @@ curl -X PUT --data-binary '@./schema.json' "[SIGNED URL]"
 
 Now, you are able to use the previously received id in another query.
 For example to update a schema of your application.
+
+Optionally pass `contentType` and `filename` query parameters so the uploaded object keeps its
+MIME type and original name:
+
+```bash
+curl -X POST "/v3/upload/signed-url?contentType=application/json&filename=schema.har"
+```
+
+When `contentType` is provided it is part of the signed request, so the `PUT` must send the same
+`Content-Type` header:
+
+```bash
+curl -X PUT -H "Content-Type: application/json" --data-binary '@./schema.json' "[SIGNED URL]"
+```
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateUploadSignedUrlRequest
@@ -87,6 +115,12 @@ func (a *UploadAPIService) CreateUploadSignedUrlExecute(r ApiCreateUploadSignedU
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.contentType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contentType", r.contentType, "form", "")
+	}
+	if r.filename != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

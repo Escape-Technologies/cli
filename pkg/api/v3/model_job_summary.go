@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the GetJob200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetJob200Response{}
+// checks if the JobSummary type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &JobSummary{}
 
-// GetJob200Response struct for GetJob200Response
-type GetJob200Response struct {
+// JobSummary Job status for list views.
+type JobSummary struct {
 	Id          string                                  `json:"id"`
 	Status      ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS `json:"status"`
 	Kind        ENUMPROPERTIESDATAITEMSPROPERTIESKIND   `json:"kind"`
@@ -28,44 +28,41 @@ type GetJob200Response struct {
 	ScheduledAt *string                                 `json:"scheduledAt,omitempty"`
 	TriggeredAt *string                                 `json:"triggeredAt,omitempty"`
 	CompletedAt *string                                 `json:"completedAt,omitempty"`
-	Parameters  interface{}                             `json:"parameters,omitempty"`
 	Error       *JobSummaryError                        `json:"error,omitempty"`
 	// Why the job was triggered.
-	Reason               *string       `json:"reason,omitempty"`
-	Retries              int           `json:"retries"`
-	RetriedAt            []string      `json:"retriedAt"`
-	Artefacts            []JobArtefact `json:"artefacts"`
+	Reason               *string  `json:"reason,omitempty"`
+	Retries              int      `json:"retries"`
+	RetriedAt            []string `json:"retriedAt"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _GetJob200Response GetJob200Response
+type _JobSummary JobSummary
 
-// NewGetJob200Response instantiates a new GetJob200Response object
+// NewJobSummary instantiates a new JobSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetJob200Response(id string, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, createdAt string, retries int, retriedAt []string, artefacts []JobArtefact) *GetJob200Response {
-	this := GetJob200Response{}
+func NewJobSummary(id string, status ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, createdAt string, retries int, retriedAt []string) *JobSummary {
+	this := JobSummary{}
 	this.Id = id
 	this.Status = status
 	this.Kind = kind
 	this.CreatedAt = createdAt
 	this.Retries = retries
 	this.RetriedAt = retriedAt
-	this.Artefacts = artefacts
 	return &this
 }
 
-// NewGetJob200ResponseWithDefaults instantiates a new GetJob200Response object
+// NewJobSummaryWithDefaults instantiates a new JobSummary object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetJob200ResponseWithDefaults() *GetJob200Response {
-	this := GetJob200Response{}
+func NewJobSummaryWithDefaults() *JobSummary {
+	this := JobSummary{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *GetJob200Response) GetId() string {
+func (o *JobSummary) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -76,7 +73,7 @@ func (o *GetJob200Response) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetIdOk() (*string, bool) {
+func (o *JobSummary) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -84,12 +81,12 @@ func (o *GetJob200Response) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *GetJob200Response) SetId(v string) {
+func (o *JobSummary) SetId(v string) {
 	o.Id = v
 }
 
 // GetStatus returns the Status field value
-func (o *GetJob200Response) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
+func (o *JobSummary) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS
 		return ret
@@ -100,7 +97,7 @@ func (o *GetJob200Response) GetStatus() ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS 
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
+func (o *JobSummary) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -108,12 +105,12 @@ func (o *GetJob200Response) GetStatusOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESSTA
 }
 
 // SetStatus sets field value
-func (o *GetJob200Response) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
+func (o *JobSummary) SetStatus(v ENUMPROPERTIESDATAITEMSPROPERTIESSTATUS) {
 	o.Status = v
 }
 
 // GetKind returns the Kind field value
-func (o *GetJob200Response) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
+func (o *JobSummary) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
 	if o == nil {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESKIND
 		return ret
@@ -124,7 +121,7 @@ func (o *GetJob200Response) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
 
 // GetKindOk returns a tuple with the Kind field value
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
+func (o *JobSummary) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,12 +129,12 @@ func (o *GetJob200Response) GetKindOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESKIND,
 }
 
 // SetKind sets field value
-func (o *GetJob200Response) SetKind(v ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
+func (o *JobSummary) SetKind(v ENUMPROPERTIESDATAITEMSPROPERTIESKIND) {
 	o.Kind = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *GetJob200Response) GetName() string {
+func (o *JobSummary) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -147,7 +144,7 @@ func (o *GetJob200Response) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetNameOk() (*string, bool) {
+func (o *JobSummary) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -155,7 +152,7 @@ func (o *GetJob200Response) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *GetJob200Response) HasName() bool {
+func (o *JobSummary) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -164,12 +161,12 @@ func (o *GetJob200Response) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *GetJob200Response) SetName(v string) {
+func (o *JobSummary) SetName(v string) {
 	o.Name = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *GetJob200Response) GetCreatedAt() string {
+func (o *JobSummary) GetCreatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -180,7 +177,7 @@ func (o *GetJob200Response) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetCreatedAtOk() (*string, bool) {
+func (o *JobSummary) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -188,12 +185,12 @@ func (o *GetJob200Response) GetCreatedAtOk() (*string, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *GetJob200Response) SetCreatedAt(v string) {
+func (o *JobSummary) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetScheduledAt returns the ScheduledAt field value if set, zero value otherwise.
-func (o *GetJob200Response) GetScheduledAt() string {
+func (o *JobSummary) GetScheduledAt() string {
 	if o == nil || IsNil(o.ScheduledAt) {
 		var ret string
 		return ret
@@ -203,7 +200,7 @@ func (o *GetJob200Response) GetScheduledAt() string {
 
 // GetScheduledAtOk returns a tuple with the ScheduledAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetScheduledAtOk() (*string, bool) {
+func (o *JobSummary) GetScheduledAtOk() (*string, bool) {
 	if o == nil || IsNil(o.ScheduledAt) {
 		return nil, false
 	}
@@ -211,7 +208,7 @@ func (o *GetJob200Response) GetScheduledAtOk() (*string, bool) {
 }
 
 // HasScheduledAt returns a boolean if a field has been set.
-func (o *GetJob200Response) HasScheduledAt() bool {
+func (o *JobSummary) HasScheduledAt() bool {
 	if o != nil && !IsNil(o.ScheduledAt) {
 		return true
 	}
@@ -220,12 +217,12 @@ func (o *GetJob200Response) HasScheduledAt() bool {
 }
 
 // SetScheduledAt gets a reference to the given string and assigns it to the ScheduledAt field.
-func (o *GetJob200Response) SetScheduledAt(v string) {
+func (o *JobSummary) SetScheduledAt(v string) {
 	o.ScheduledAt = &v
 }
 
 // GetTriggeredAt returns the TriggeredAt field value if set, zero value otherwise.
-func (o *GetJob200Response) GetTriggeredAt() string {
+func (o *JobSummary) GetTriggeredAt() string {
 	if o == nil || IsNil(o.TriggeredAt) {
 		var ret string
 		return ret
@@ -235,7 +232,7 @@ func (o *GetJob200Response) GetTriggeredAt() string {
 
 // GetTriggeredAtOk returns a tuple with the TriggeredAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetTriggeredAtOk() (*string, bool) {
+func (o *JobSummary) GetTriggeredAtOk() (*string, bool) {
 	if o == nil || IsNil(o.TriggeredAt) {
 		return nil, false
 	}
@@ -243,7 +240,7 @@ func (o *GetJob200Response) GetTriggeredAtOk() (*string, bool) {
 }
 
 // HasTriggeredAt returns a boolean if a field has been set.
-func (o *GetJob200Response) HasTriggeredAt() bool {
+func (o *JobSummary) HasTriggeredAt() bool {
 	if o != nil && !IsNil(o.TriggeredAt) {
 		return true
 	}
@@ -252,12 +249,12 @@ func (o *GetJob200Response) HasTriggeredAt() bool {
 }
 
 // SetTriggeredAt gets a reference to the given string and assigns it to the TriggeredAt field.
-func (o *GetJob200Response) SetTriggeredAt(v string) {
+func (o *JobSummary) SetTriggeredAt(v string) {
 	o.TriggeredAt = &v
 }
 
 // GetCompletedAt returns the CompletedAt field value if set, zero value otherwise.
-func (o *GetJob200Response) GetCompletedAt() string {
+func (o *JobSummary) GetCompletedAt() string {
 	if o == nil || IsNil(o.CompletedAt) {
 		var ret string
 		return ret
@@ -267,7 +264,7 @@ func (o *GetJob200Response) GetCompletedAt() string {
 
 // GetCompletedAtOk returns a tuple with the CompletedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetCompletedAtOk() (*string, bool) {
+func (o *JobSummary) GetCompletedAtOk() (*string, bool) {
 	if o == nil || IsNil(o.CompletedAt) {
 		return nil, false
 	}
@@ -275,7 +272,7 @@ func (o *GetJob200Response) GetCompletedAtOk() (*string, bool) {
 }
 
 // HasCompletedAt returns a boolean if a field has been set.
-func (o *GetJob200Response) HasCompletedAt() bool {
+func (o *JobSummary) HasCompletedAt() bool {
 	if o != nil && !IsNil(o.CompletedAt) {
 		return true
 	}
@@ -284,45 +281,12 @@ func (o *GetJob200Response) HasCompletedAt() bool {
 }
 
 // SetCompletedAt gets a reference to the given string and assigns it to the CompletedAt field.
-func (o *GetJob200Response) SetCompletedAt(v string) {
+func (o *JobSummary) SetCompletedAt(v string) {
 	o.CompletedAt = &v
 }
 
-// GetParameters returns the Parameters field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetJob200Response) GetParameters() interface{} {
-	if o == nil {
-		var ret interface{}
-		return ret
-	}
-	return o.Parameters
-}
-
-// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetJob200Response) GetParametersOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Parameters) {
-		return nil, false
-	}
-	return &o.Parameters, true
-}
-
-// HasParameters returns a boolean if a field has been set.
-func (o *GetJob200Response) HasParameters() bool {
-	if o != nil && !IsNil(o.Parameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetParameters gets a reference to the given interface{} and assigns it to the Parameters field.
-func (o *GetJob200Response) SetParameters(v interface{}) {
-	o.Parameters = v
-}
-
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *GetJob200Response) GetError() JobSummaryError {
+func (o *JobSummary) GetError() JobSummaryError {
 	if o == nil || IsNil(o.Error) {
 		var ret JobSummaryError
 		return ret
@@ -332,7 +296,7 @@ func (o *GetJob200Response) GetError() JobSummaryError {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetErrorOk() (*JobSummaryError, bool) {
+func (o *JobSummary) GetErrorOk() (*JobSummaryError, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -340,7 +304,7 @@ func (o *GetJob200Response) GetErrorOk() (*JobSummaryError, bool) {
 }
 
 // HasError returns a boolean if a field has been set.
-func (o *GetJob200Response) HasError() bool {
+func (o *JobSummary) HasError() bool {
 	if o != nil && !IsNil(o.Error) {
 		return true
 	}
@@ -349,12 +313,12 @@ func (o *GetJob200Response) HasError() bool {
 }
 
 // SetError gets a reference to the given JobSummaryError and assigns it to the Error field.
-func (o *GetJob200Response) SetError(v JobSummaryError) {
+func (o *JobSummary) SetError(v JobSummaryError) {
 	o.Error = &v
 }
 
 // GetReason returns the Reason field value if set, zero value otherwise.
-func (o *GetJob200Response) GetReason() string {
+func (o *JobSummary) GetReason() string {
 	if o == nil || IsNil(o.Reason) {
 		var ret string
 		return ret
@@ -364,7 +328,7 @@ func (o *GetJob200Response) GetReason() string {
 
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetReasonOk() (*string, bool) {
+func (o *JobSummary) GetReasonOk() (*string, bool) {
 	if o == nil || IsNil(o.Reason) {
 		return nil, false
 	}
@@ -372,7 +336,7 @@ func (o *GetJob200Response) GetReasonOk() (*string, bool) {
 }
 
 // HasReason returns a boolean if a field has been set.
-func (o *GetJob200Response) HasReason() bool {
+func (o *JobSummary) HasReason() bool {
 	if o != nil && !IsNil(o.Reason) {
 		return true
 	}
@@ -381,12 +345,12 @@ func (o *GetJob200Response) HasReason() bool {
 }
 
 // SetReason gets a reference to the given string and assigns it to the Reason field.
-func (o *GetJob200Response) SetReason(v string) {
+func (o *JobSummary) SetReason(v string) {
 	o.Reason = &v
 }
 
 // GetRetries returns the Retries field value
-func (o *GetJob200Response) GetRetries() int {
+func (o *JobSummary) GetRetries() int {
 	if o == nil {
 		var ret int
 		return ret
@@ -397,7 +361,7 @@ func (o *GetJob200Response) GetRetries() int {
 
 // GetRetriesOk returns a tuple with the Retries field value
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetRetriesOk() (*int, bool) {
+func (o *JobSummary) GetRetriesOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -405,12 +369,12 @@ func (o *GetJob200Response) GetRetriesOk() (*int, bool) {
 }
 
 // SetRetries sets field value
-func (o *GetJob200Response) SetRetries(v int) {
+func (o *JobSummary) SetRetries(v int) {
 	o.Retries = v
 }
 
 // GetRetriedAt returns the RetriedAt field value
-func (o *GetJob200Response) GetRetriedAt() []string {
+func (o *JobSummary) GetRetriedAt() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -421,7 +385,7 @@ func (o *GetJob200Response) GetRetriedAt() []string {
 
 // GetRetriedAtOk returns a tuple with the RetriedAt field value
 // and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetRetriedAtOk() ([]string, bool) {
+func (o *JobSummary) GetRetriedAtOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -429,35 +393,11 @@ func (o *GetJob200Response) GetRetriedAtOk() ([]string, bool) {
 }
 
 // SetRetriedAt sets field value
-func (o *GetJob200Response) SetRetriedAt(v []string) {
+func (o *JobSummary) SetRetriedAt(v []string) {
 	o.RetriedAt = v
 }
 
-// GetArtefacts returns the Artefacts field value
-func (o *GetJob200Response) GetArtefacts() []JobArtefact {
-	if o == nil {
-		var ret []JobArtefact
-		return ret
-	}
-
-	return o.Artefacts
-}
-
-// GetArtefactsOk returns a tuple with the Artefacts field value
-// and a boolean to check if the value has been set.
-func (o *GetJob200Response) GetArtefactsOk() ([]JobArtefact, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Artefacts, true
-}
-
-// SetArtefacts sets field value
-func (o *GetJob200Response) SetArtefacts(v []JobArtefact) {
-	o.Artefacts = v
-}
-
-func (o GetJob200Response) MarshalJSON() ([]byte, error) {
+func (o JobSummary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -465,7 +405,7 @@ func (o GetJob200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetJob200Response) ToMap() (map[string]interface{}, error) {
+func (o JobSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["status"] = o.Status
@@ -483,9 +423,6 @@ func (o GetJob200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CompletedAt) {
 		toSerialize["completedAt"] = o.CompletedAt
 	}
-	if o.Parameters != nil {
-		toSerialize["parameters"] = o.Parameters
-	}
 	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
@@ -494,7 +431,6 @@ func (o GetJob200Response) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["retries"] = o.Retries
 	toSerialize["retriedAt"] = o.RetriedAt
-	toSerialize["artefacts"] = o.Artefacts
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -503,7 +439,7 @@ func (o GetJob200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *GetJob200Response) UnmarshalJSON(data []byte) (err error) {
+func (o *JobSummary) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -514,7 +450,6 @@ func (o *GetJob200Response) UnmarshalJSON(data []byte) (err error) {
 		"createdAt",
 		"retries",
 		"retriedAt",
-		"artefacts",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -531,15 +466,15 @@ func (o *GetJob200Response) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGetJob200Response := _GetJob200Response{}
+	varJobSummary := _JobSummary{}
 
-	err = json.Unmarshal(data, &varGetJob200Response)
+	err = json.Unmarshal(data, &varJobSummary)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetJob200Response(varGetJob200Response)
+	*o = JobSummary(varJobSummary)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -552,50 +487,48 @@ func (o *GetJob200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scheduledAt")
 		delete(additionalProperties, "triggeredAt")
 		delete(additionalProperties, "completedAt")
-		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "error")
 		delete(additionalProperties, "reason")
 		delete(additionalProperties, "retries")
 		delete(additionalProperties, "retriedAt")
-		delete(additionalProperties, "artefacts")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableGetJob200Response struct {
-	value *GetJob200Response
+type NullableJobSummary struct {
+	value *JobSummary
 	isSet bool
 }
 
-func (v NullableGetJob200Response) Get() *GetJob200Response {
+func (v NullableJobSummary) Get() *JobSummary {
 	return v.value
 }
 
-func (v *NullableGetJob200Response) Set(val *GetJob200Response) {
+func (v *NullableJobSummary) Set(val *JobSummary) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetJob200Response) IsSet() bool {
+func (v NullableJobSummary) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetJob200Response) Unset() {
+func (v *NullableJobSummary) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetJob200Response(val *GetJob200Response) *NullableGetJob200Response {
-	return &NullableGetJob200Response{value: val, isSet: true}
+func NewNullableJobSummary(val *JobSummary) *NullableJobSummary {
+	return &NullableJobSummary{value: val, isSet: true}
 }
 
-func (v NullableGetJob200Response) MarshalJSON() ([]byte, error) {
+func (v NullableJobSummary) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetJob200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableJobSummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

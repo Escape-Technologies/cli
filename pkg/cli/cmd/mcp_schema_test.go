@@ -260,10 +260,6 @@ func TestGeneratedFlagEnumsAreClosedAndSamplesAreNot(t *testing.T) {
 		t.Fatalf("status enum = %s", gotStatus)
 	}
 
-	if !strings.Contains(gotStatus, "COMPLETED") || !strings.Contains(gotStatus, "PENDING") {
-		t.Fatalf("status enum = %s", gotStatus)
-	}
-
 	direction := schemaProperty(t, scans.Tool.RawInputSchema, flagProperty(t, scans, "sort-direction"))
 	if propertyHasEnum(direction) {
 		t.Fatalf("scans_list sort-direction enum = %#v", direction)

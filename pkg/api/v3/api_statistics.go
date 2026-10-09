@@ -134,3 +134,436 @@ func (a *StatisticsAPIService) GetStatisticsExecute(r ApiGetStatisticsRequest) (
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+
+type ApiGetStatisticsEndpointsRequest struct {
+	ctx        context.Context
+	ApiService *StatisticsAPIService
+	source     *string
+	projectId  *string
+}
+
+// Product line to scope the statistics to
+func (r ApiGetStatisticsEndpointsRequest) Source(source string) ApiGetStatisticsEndpointsRequest {
+	r.source = &source
+	return r
+}
+
+// Scope the statistics to a single project. Omit for organization-wide statistics.
+func (r ApiGetStatisticsEndpointsRequest) ProjectId(projectId string) ApiGetStatisticsEndpointsRequest {
+	r.projectId = &projectId
+	return r
+}
+
+func (r ApiGetStatisticsEndpointsRequest) Execute() (*GetStatisticsEndpoints200Response, *http.Response, error) {
+	return r.ApiService.GetStatisticsEndpointsExecute(r)
+}
+
+/*
+GetStatisticsEndpoints Get endpoint coverage statistics
+
+Get endpoint coverage statistics for the organization: the number of covered API routes, GraphQL resolvers, and web pages. Scope by product line (source) and optionally by project.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStatisticsEndpointsRequest
+*/
+func (a *StatisticsAPIService) GetStatisticsEndpoints(ctx context.Context) ApiGetStatisticsEndpointsRequest {
+	return ApiGetStatisticsEndpointsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetStatisticsEndpoints200Response
+func (a *StatisticsAPIService) GetStatisticsEndpointsExecute(r ApiGetStatisticsEndpointsRequest) (*GetStatisticsEndpoints200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetStatisticsEndpoints200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatisticsAPIService.GetStatisticsEndpoints")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/statistics/endpoints"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.source != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "source", r.source, "form", "")
+	} else {
+		var defaultValue string = "DAST"
+		r.source = &defaultValue
+	}
+	if r.projectId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetStatisticsIssuesRequest struct {
+	ctx        context.Context
+	ApiService *StatisticsAPIService
+	source     *string
+	projectId  *string
+}
+
+// Product line to scope the statistics to
+func (r ApiGetStatisticsIssuesRequest) Source(source string) ApiGetStatisticsIssuesRequest {
+	r.source = &source
+	return r
+}
+
+// Scope the statistics to a single project. Omit for organization-wide statistics.
+func (r ApiGetStatisticsIssuesRequest) ProjectId(projectId string) ApiGetStatisticsIssuesRequest {
+	r.projectId = &projectId
+	return r
+}
+
+func (r ApiGetStatisticsIssuesRequest) Execute() (*GetStatisticsIssues200Response, *http.Response, error) {
+	return r.ApiService.GetStatisticsIssuesExecute(r)
+}
+
+/*
+GetStatisticsIssues Get issue security KPIs
+
+Get issue security KPIs for the organization: open count, remediated count (last 30 days), average time to resolve (MTTR in days), and grouped counts by status and severity. Scope by product line (source) and optionally by project.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStatisticsIssuesRequest
+*/
+func (a *StatisticsAPIService) GetStatisticsIssues(ctx context.Context) ApiGetStatisticsIssuesRequest {
+	return ApiGetStatisticsIssuesRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetStatisticsIssues200Response
+func (a *StatisticsAPIService) GetStatisticsIssuesExecute(r ApiGetStatisticsIssuesRequest) (*GetStatisticsIssues200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetStatisticsIssues200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatisticsAPIService.GetStatisticsIssues")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/statistics/issues"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.source != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "source", r.source, "form", "")
+	} else {
+		var defaultValue string = "DAST"
+		r.source = &defaultValue
+	}
+	if r.projectId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetStatisticsTrendsRequest struct {
+	ctx        context.Context
+	ApiService *StatisticsAPIService
+	start      *string
+	end        *string
+	interval   *string
+	projectIds *GetIssueFunnelProjectIdsParameter
+}
+
+// Start date (ISO 8601)
+func (r ApiGetStatisticsTrendsRequest) Start(start string) ApiGetStatisticsTrendsRequest {
+	r.start = &start
+	return r
+}
+
+// End date (ISO 8601)
+func (r ApiGetStatisticsTrendsRequest) End(end string) ApiGetStatisticsTrendsRequest {
+	r.end = &end
+	return r
+}
+
+// Time bucket interval (e.g. \&quot;1 day\&quot;, \&quot;1 week\&quot;, \&quot;2 weeks\&quot;)
+func (r ApiGetStatisticsTrendsRequest) Interval(interval string) ApiGetStatisticsTrendsRequest {
+	r.interval = &interval
+	return r
+}
+
+// Filter by project IDs
+func (r ApiGetStatisticsTrendsRequest) ProjectIds(projectIds GetIssueFunnelProjectIdsParameter) ApiGetStatisticsTrendsRequest {
+	r.projectIds = &projectIds
+	return r
+}
+
+func (r ApiGetStatisticsTrendsRequest) Execute() (*GetStatisticsTrends200Response, *http.Response, error) {
+	return r.ApiService.GetStatisticsTrendsExecute(r)
+}
+
+/*
+GetStatisticsTrends Get security trend time series
+
+Get time-bucketed security trends for the organization over the half-open window [start, end): open vs resolved issue counts, and average API health scores. Both series share the same ordered bucket grid, so index i refers to the same bucket x. Filter by project IDs.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetStatisticsTrendsRequest
+*/
+func (a *StatisticsAPIService) GetStatisticsTrends(ctx context.Context) ApiGetStatisticsTrendsRequest {
+	return ApiGetStatisticsTrendsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetStatisticsTrends200Response
+func (a *StatisticsAPIService) GetStatisticsTrendsExecute(r ApiGetStatisticsTrendsRequest) (*GetStatisticsTrends200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetStatisticsTrends200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatisticsAPIService.GetStatisticsTrends")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/statistics/trends"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.start == nil {
+		return localVarReturnValue, nil, reportError("start is required and must be specified")
+	}
+	if r.end == nil {
+		return localVarReturnValue, nil, reportError("end is required and must be specified")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "form", "")
+	if r.interval != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "interval", r.interval, "form", "")
+	} else {
+		var defaultValue string = "1 day"
+		r.interval = &defaultValue
+	}
+	if r.projectIds != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "projectIds", r.projectIds, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}

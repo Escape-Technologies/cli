@@ -17,8 +17,9 @@ import (
 
 // CreateAssetSchemaRequest struct for CreateAssetSchemaRequest
 type CreateAssetSchemaRequest struct {
-	CreateSchemaViaFetch  *CreateSchemaViaFetch
-	CreateSchemaViaUpload *CreateSchemaViaUpload
+	CreateSchemaViaFetch         *CreateSchemaViaFetch
+	CreateSchemaViaInlineContent *CreateSchemaViaInlineContent
+	CreateSchemaViaUpload        *CreateSchemaViaUpload
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -35,6 +36,19 @@ func (dst *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.CreateSchemaViaFetch = nil
+	}
+
+	// try to unmarshal JSON data into CreateSchemaViaInlineContent
+	err = json.Unmarshal(data, &dst.CreateSchemaViaInlineContent)
+	if err == nil {
+		jsonCreateSchemaViaInlineContent, _ := json.Marshal(dst.CreateSchemaViaInlineContent)
+		if string(jsonCreateSchemaViaInlineContent) == "{}" { // empty struct
+			dst.CreateSchemaViaInlineContent = nil
+		} else {
+			return nil // data stored in dst.CreateSchemaViaInlineContent, return on the first match
+		}
+	} else {
+		dst.CreateSchemaViaInlineContent = nil
 	}
 
 	// try to unmarshal JSON data into CreateSchemaViaUpload
@@ -57,6 +71,10 @@ func (dst *CreateAssetSchemaRequest) UnmarshalJSON(data []byte) error {
 func (src CreateAssetSchemaRequest) MarshalJSON() ([]byte, error) {
 	if src.CreateSchemaViaFetch != nil {
 		return json.Marshal(&src.CreateSchemaViaFetch)
+	}
+
+	if src.CreateSchemaViaInlineContent != nil {
+		return json.Marshal(&src.CreateSchemaViaInlineContent)
 	}
 
 	if src.CreateSchemaViaUpload != nil {

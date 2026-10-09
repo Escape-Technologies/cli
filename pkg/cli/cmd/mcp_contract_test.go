@@ -321,8 +321,8 @@ func TestAssetCreateSchemaCoversDispatchedTypes(t *testing.T) {
 		}
 	}
 
-	if seen["SCHEMA"] != 2 {
-		t.Errorf("SCHEMA variants = %d, want fetch and upload", seen["SCHEMA"])
+	if seen["SCHEMA"] != 3 {
+		t.Errorf("SCHEMA variants = %d, want fetch, inline content and upload", seen["SCHEMA"])
 	}
 
 	spec := mcpSpec(t, "assets_create")

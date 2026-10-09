@@ -377,6 +377,21 @@ func formatScanStatistics(statistics *v3.GetScanStatistics200Response) string {
 		fmt.Fprintf(&b, "%s\t%d\n", category.GetCategory(), category.GetCount())
 	}
 
+	b.WriteString("\nCOMPLIANCE\nCOMPLIANCE\tENABLED\tFAILED ITEMS\n")
+	for _, compliance := range statistics.Issue.GetCompliance() {
+		fmt.Fprintf(&b, "%s\t%t\t%d\n", compliance.GetCompliance(), compliance.GetEnabled(), len(compliance.GetFailedItems()))
+	}
+
+	b.WriteString("\nAPI COVERAGE\n")
+	for _, coverage := range statistics.Issue.GetCoverage() {
+		fmt.Fprintf(&b, "%s\n", coverage)
+	}
+
+	b.WriteString("\nEVENTS OVER TIME\nDATE\tCOUNT\n")
+	for _, event := range statistics.Events.GetEventsOverTime() {
+		fmt.Fprintf(&b, "%s\t%d\n", event.GetDate(), event.GetCount())
+	}
+
 	b.WriteString("\nREQUESTS BY OPERATION\nOPERATION\tCOUNT\n")
 	for _, request := range statistics.GetRequestTypeCounts() {
 		fmt.Fprintf(&b, "%s\t%d\n", request.GetOperation(), request.GetCount())
@@ -943,7 +958,7 @@ var scanProblemsPage pageFlags
 // finishWatch prints the terminal scan and returns the process error.
 // FAILED and CANCELED fail in pretty and JSON mode. JSON prints the scan
 // document first and does not print issues for those statuses. Only a
-// finished scan succeeds: any other last status (STARTING, RUNNING, PENDING,
+// finished scan succeeds: any other last status (STARTING, RUNNING,
 // or an unknown value — the stream can close without a terminal status when
 // the API stops answering) fails the run the same way.
 // A finished scan prints issues: a pretty table, or the second JSON document
@@ -952,7 +967,7 @@ var scanProblemsPage pageFlags
 // main writes the error to stderr and exits 1, so stdout stays the documents.
 func finishWatch(ctx context.Context, scanID string, status *v3.StartScan200Response, jsonResult watchJSONResult) error {
 	switch v3.ENUMPROPERTIESSTATUS(status.Status) {
-	case v3.ENUMPROPERTIESSTATUS_FINISHED, v3.ENUMPROPERTIESSTATUS_COMPLETED:
+	case v3.ENUMPROPERTIESSTATUS_FINISHED:
 		return finishSuccessfulWatch(ctx, scanID, status, jsonResult)
 	case v3.ENUMPROPERTIESSTATUS_FAILED:
 		writeWatchFailure(status, jsonResult, "Scan failed")
@@ -960,7 +975,7 @@ func finishWatch(ctx context.Context, scanID string, status *v3.StartScan200Resp
 	case v3.ENUMPROPERTIESSTATUS_CANCELED:
 		writeWatchFailure(status, jsonResult, "Scan canceled")
 		return fmt.Errorf("scan %s was canceled", scanID)
-	case v3.ENUMPROPERTIESSTATUS_PENDING, v3.ENUMPROPERTIESSTATUS_RUNNING, v3.ENUMPROPERTIESSTATUS_STARTING:
+	case v3.ENUMPROPERTIESSTATUS_RUNNING, v3.ENUMPROPERTIESSTATUS_STARTING:
 		// The stream closed while the scan was still queued or running.
 		fallthrough
 	default:

@@ -22,6 +22,8 @@ var _ MappedNullable = &TriggerExportRequest{}
 type TriggerExportRequest struct {
 	// Report blocks to include, in order.
 	Blocks []TriggerExportRequestBlocksInner `json:"blocks"`
+	// Report name (optional).
+	Name *string `json:"name,omitempty"`
 	// Restrict scope to a scan (optional).
 	ScanId *string `json:"scanId,omitempty"`
 	// If true, validates selection only and does not schedule a job.
@@ -76,6 +78,38 @@ func (o *TriggerExportRequest) GetBlocksOk() ([]TriggerExportRequestBlocksInner,
 // SetBlocks sets field value
 func (o *TriggerExportRequest) SetBlocks(v []TriggerExportRequestBlocksInner) {
 	o.Blocks = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *TriggerExportRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TriggerExportRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *TriggerExportRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *TriggerExportRequest) SetName(v string) {
+	o.Name = &v
 }
 
 // GetScanId returns the ScanId field value if set, zero value otherwise.
@@ -284,6 +318,9 @@ func (o TriggerExportRequest) MarshalJSON() ([]byte, error) {
 func (o TriggerExportRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["blocks"] = o.Blocks
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.ScanId) {
 		toSerialize["scanId"] = o.ScanId
 	}
@@ -346,6 +383,7 @@ func (o *TriggerExportRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "blocks")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "scanId")
 		delete(additionalProperties, "dry")
 		delete(additionalProperties, "notify")
