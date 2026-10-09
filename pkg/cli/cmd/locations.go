@@ -111,7 +111,7 @@ var locationsGetCmd = &cobra.Command{
 	Example: `escape-cli locations get 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Output JSON Schema if requested
-		if out.Schema(v3.CreateLocation200Response{}) {
+		if out.Schema(v3.GetLocation200Response{}) {
 			return nil
 		}
 
@@ -275,7 +275,7 @@ var locationsUpdateCmd = &cobra.Command{
 			return nil
 		}
 
-		if out.Schema(v3.CreateLocation200Response{}) {
+		if out.Schema(v3.GetLocation200Response{}) {
 			return nil
 		}
 

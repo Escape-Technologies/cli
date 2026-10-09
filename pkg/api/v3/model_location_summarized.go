@@ -29,7 +29,14 @@ type LocationSummarized struct {
 	// Whether the location is enabled.
 	Enabled bool `json:"enabled"`
 	// The date and time the location agent last connected.
-	LastSeenAt           *string                 `json:"lastSeenAt,omitempty"`
+	LastSeenAt *string `json:"lastSeenAt,omitempty"`
+	// The IP address of the location.
+	Ip     *string                                  `json:"ip,omitempty"`
+	Region *ENUMPROPERTIESLOCATION1PROPERTIESREGION `json:"region,omitempty"`
+	// Whether the location agent is currently active.
+	IsActive *bool `json:"isActive,omitempty"`
+	// The tags associated with the location.
+	Tags                 []TagDetail             `json:"tags,omitempty"`
 	Links                LocationSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -46,6 +53,8 @@ func NewLocationSummarized(id string, name string, type_ string, enabled bool, l
 	this.Name = name
 	this.Type = type_
 	this.Enabled = enabled
+	var isActive bool = false
+	this.IsActive = &isActive
 	this.Links = links
 	return &this
 }
@@ -55,6 +64,8 @@ func NewLocationSummarized(id string, name string, type_ string, enabled bool, l
 // but it doesn't guarantee that properties required by API are set
 func NewLocationSummarizedWithDefaults() *LocationSummarized {
 	this := LocationSummarized{}
+	var isActive bool = false
+	this.IsActive = &isActive
 	return &this
 }
 
@@ -186,6 +197,134 @@ func (o *LocationSummarized) SetLastSeenAt(v string) {
 	o.LastSeenAt = &v
 }
 
+// GetIp returns the Ip field value if set, zero value otherwise.
+func (o *LocationSummarized) GetIp() string {
+	if o == nil || IsNil(o.Ip) {
+		var ret string
+		return ret
+	}
+	return *o.Ip
+}
+
+// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationSummarized) GetIpOk() (*string, bool) {
+	if o == nil || IsNil(o.Ip) {
+		return nil, false
+	}
+	return o.Ip, true
+}
+
+// HasIp returns a boolean if a field has been set.
+func (o *LocationSummarized) HasIp() bool {
+	if o != nil && !IsNil(o.Ip) {
+		return true
+	}
+
+	return false
+}
+
+// SetIp gets a reference to the given string and assigns it to the Ip field.
+func (o *LocationSummarized) SetIp(v string) {
+	o.Ip = &v
+}
+
+// GetRegion returns the Region field value if set, zero value otherwise.
+func (o *LocationSummarized) GetRegion() ENUMPROPERTIESLOCATION1PROPERTIESREGION {
+	if o == nil || IsNil(o.Region) {
+		var ret ENUMPROPERTIESLOCATION1PROPERTIESREGION
+		return ret
+	}
+	return *o.Region
+}
+
+// GetRegionOk returns a tuple with the Region field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationSummarized) GetRegionOk() (*ENUMPROPERTIESLOCATION1PROPERTIESREGION, bool) {
+	if o == nil || IsNil(o.Region) {
+		return nil, false
+	}
+	return o.Region, true
+}
+
+// HasRegion returns a boolean if a field has been set.
+func (o *LocationSummarized) HasRegion() bool {
+	if o != nil && !IsNil(o.Region) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegion gets a reference to the given ENUMPROPERTIESLOCATION1PROPERTIESREGION and assigns it to the Region field.
+func (o *LocationSummarized) SetRegion(v ENUMPROPERTIESLOCATION1PROPERTIESREGION) {
+	o.Region = &v
+}
+
+// GetIsActive returns the IsActive field value if set, zero value otherwise.
+func (o *LocationSummarized) GetIsActive() bool {
+	if o == nil || IsNil(o.IsActive) {
+		var ret bool
+		return ret
+	}
+	return *o.IsActive
+}
+
+// GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationSummarized) GetIsActiveOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsActive) {
+		return nil, false
+	}
+	return o.IsActive, true
+}
+
+// HasIsActive returns a boolean if a field has been set.
+func (o *LocationSummarized) HasIsActive() bool {
+	if o != nil && !IsNil(o.IsActive) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
+func (o *LocationSummarized) SetIsActive(v bool) {
+	o.IsActive = &v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *LocationSummarized) GetTags() []TagDetail {
+	if o == nil || IsNil(o.Tags) {
+		var ret []TagDetail
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationSummarized) GetTagsOk() ([]TagDetail, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *LocationSummarized) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []TagDetail and assigns it to the Tags field.
+func (o *LocationSummarized) SetTags(v []TagDetail) {
+	o.Tags = v
+}
+
 // GetLinks returns the Links field value
 func (o *LocationSummarized) GetLinks() LocationSummarizedLinks {
 	if o == nil {
@@ -226,6 +365,18 @@ func (o LocationSummarized) ToMap() (map[string]interface{}, error) {
 	toSerialize["enabled"] = o.Enabled
 	if !IsNil(o.LastSeenAt) {
 		toSerialize["lastSeenAt"] = o.LastSeenAt
+	}
+	if !IsNil(o.Ip) {
+		toSerialize["ip"] = o.Ip
+	}
+	if !IsNil(o.Region) {
+		toSerialize["region"] = o.Region
+	}
+	if !IsNil(o.IsActive) {
+		toSerialize["isActive"] = o.IsActive
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
 	}
 	toSerialize["links"] = o.Links
 
@@ -280,6 +431,10 @@ func (o *LocationSummarized) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "lastSeenAt")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "isActive")
+		delete(additionalProperties, "tags")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

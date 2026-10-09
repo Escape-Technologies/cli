@@ -22,7 +22,11 @@ func TestDestructiveDeletesPrintTheirDeclaredDocument(t *testing.T) {
 		"id":"` + deleteOutputID + `",
 		"name":"nightly",
 		"trigger":"MANUAL",
+		"paused":false,
 		"filter":null,
+		"projects":[],
+		"createdAt":"2026-01-01T00:00:00Z",
+		"updatedAt":"2026-01-01T00:00:00Z",
 		"filters":[],
 		"actions":[]
 	}`
@@ -35,7 +39,8 @@ func TestDestructiveDeletesPrintTheirDeclaredDocument(t *testing.T) {
 		"valid":true,
 		"validationErrors":[],
 		"organizationId":"00000000-0000-0000-0000-000000000002",
-		"projects":[]
+		"projects":[],
+		"tags":[]
 	}`
 
 	tests := []struct {

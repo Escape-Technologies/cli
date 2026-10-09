@@ -96,6 +96,10 @@ type APIClient struct {
 
 	ValidationsAPI *ValidationsAPIService
 
+	VaultVariablesAPI *VaultVariablesAPIService
+
+	ViewsAPI *ViewsAPIService
+
 	WorkflowsAPI *WorkflowsAPIService
 }
 
@@ -139,6 +143,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.UploadAPI = (*UploadAPIService)(&c.common)
 	c.UsersAPI = (*UsersAPIService)(&c.common)
 	c.ValidationsAPI = (*ValidationsAPIService)(&c.common)
+	c.VaultVariablesAPI = (*VaultVariablesAPIService)(&c.common)
+	c.ViewsAPI = (*ViewsAPIService)(&c.common)
 	c.WorkflowsAPI = (*WorkflowsAPIService)(&c.common)
 
 	return c

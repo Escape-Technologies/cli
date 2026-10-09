@@ -433,6 +433,191 @@ func (a *WorkflowsAPIService) GetWorkflowExecute(r ApiGetWorkflowRequest) (*Crea
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiListWorkflowExecutionsRequest struct {
+	ctx           context.Context
+	ApiService    *WorkflowsAPIService
+	id            string
+	cursor        *string
+	size          *int
+	sortType      *string
+	sortDirection *string
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListWorkflowExecutionsRequest) Cursor(cursor string) ApiListWorkflowExecutionsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListWorkflowExecutionsRequest) Size(size int) ApiListWorkflowExecutionsRequest {
+	r.size = &size
+	return r
+}
+
+// The type to sort by
+func (r ApiListWorkflowExecutionsRequest) SortType(sortType string) ApiListWorkflowExecutionsRequest {
+	r.sortType = &sortType
+	return r
+}
+
+// The direction to sort by
+func (r ApiListWorkflowExecutionsRequest) SortDirection(sortDirection string) ApiListWorkflowExecutionsRequest {
+	r.sortDirection = &sortDirection
+	return r
+}
+
+func (r ApiListWorkflowExecutionsRequest) Execute() (*ListWorkflowExecutions200Response, *http.Response, error) {
+	return r.ApiService.ListWorkflowExecutionsExecute(r)
+}
+
+/*
+ListWorkflowExecutions List workflow executions
+
+List the execution history of a workflow: the asynchronous jobs scheduled each time the workflow ran, most recent first.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The workflow ID
+	@return ApiListWorkflowExecutionsRequest
+*/
+func (a *WorkflowsAPIService) ListWorkflowExecutions(ctx context.Context, id string) ApiListWorkflowExecutionsRequest {
+	return ApiListWorkflowExecutionsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListWorkflowExecutions200Response
+func (a *WorkflowsAPIService) ListWorkflowExecutionsExecute(r ApiListWorkflowExecutionsRequest) (*ListWorkflowExecutions200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListWorkflowExecutions200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowsAPIService.ListWorkflowExecutions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/workflows/{id}/executions"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
+	if r.sortType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortType", r.sortType, "form", "")
+	}
+	if r.sortDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sortDirection", r.sortDirection, "form", "")
+	} else {
+		var defaultValue string = "desc"
+		r.sortDirection = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v PaginationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiListWorkflowsRequest struct {
 	ctx            context.Context
 	ApiService     *WorkflowsAPIService
@@ -445,6 +630,7 @@ type ApiListWorkflowsRequest struct {
 	integrationIds *[]string
 	triggers       *[]string
 	search         *string
+	dnf            *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -498,6 +684,12 @@ func (r ApiListWorkflowsRequest) Triggers(triggers []string) ApiListWorkflowsReq
 // Search term to filter integrations by name or description
 func (r ApiListWorkflowsRequest) Search(search string) ApiListWorkflowsRequest {
 	r.search = &search
+	return r
+}
+
+// JSON-encoded workflow DNF filter. Supports TRIGGER, PROJECT, INTEGRATION and PAUSED conditions.
+func (r ApiListWorkflowsRequest) Dnf(dnf string) ApiListWorkflowsRequest {
+	r.dnf = &dnf
 	return r
 }
 
@@ -607,6 +799,9 @@ func (a *WorkflowsAPIService) ListWorkflowsExecute(r ApiListWorkflowsRequest) (*
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
+	if r.dnf != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dnf", r.dnf, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -661,7 +856,7 @@ func (a *WorkflowsAPIService) ListWorkflowsExecute(r ApiListWorkflowsRequest) (*
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v PaginationError
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -32,17 +32,25 @@ type CreateakamaiIntegration200Response struct {
 	// The date and time the integration is scheduled for deletion
 	ScheduledForDeletionAt *time.Time `json:"scheduledForDeletionAt,omitempty"`
 	// The date and time the last pull workflow was executed
-	LastPullWorkflowAt *time.Time                            `json:"lastPullWorkflowAt,omitempty"`
-	Kind               ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	LastPullWorkflowAt *time.Time `json:"lastPullWorkflowAt,omitempty"`
+	// The date and time the integration was last validated
+	LastValidationAt *time.Time                            `json:"lastValidationAt,omitempty"`
+	Kind             ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
 	// Whether the integration is valid
 	Valid bool `json:"valid"`
 	// The validation errors of the integration
-	ValidationErrors []string `json:"validationErrors"`
+	ValidationErrors []string    `json:"validationErrors"`
+	Parameters       interface{} `json:"parameters,omitempty"`
+	Meta             interface{} `json:"meta,omitempty"`
 	// The id of the organization the integration belongs to
 	OrganizationId string `json:"organizationId"`
 	// The projects of the integration
-	Projects             []ListProjects200ResponseDataInner `json:"projects"`
-	Location             *LocationDetailed                  `json:"location,omitempty"`
+	Projects []ListProjects200ResponseDataInner `json:"projects"`
+	// The tags of the integration
+	Tags     []TagDetail       `json:"tags"`
+	Location *LocationDetailed `json:"location,omitempty"`
+	// The id of the location used by the integration
+	ProxyId              *string `json:"proxyId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -52,7 +60,7 @@ type _CreateakamaiIntegration200Response CreateakamaiIntegration200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateakamaiIntegration200Response(id string, name string, createdAt time.Time, updatedAt time.Time, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string, organizationId string, projects []ListProjects200ResponseDataInner) *CreateakamaiIntegration200Response {
+func NewCreateakamaiIntegration200Response(id string, name string, createdAt time.Time, updatedAt time.Time, kind ENUMPROPERTIESDATAITEMSPROPERTIESKIND, valid bool, validationErrors []string, organizationId string, projects []ListProjects200ResponseDataInner, tags []TagDetail) *CreateakamaiIntegration200Response {
 	this := CreateakamaiIntegration200Response{}
 	this.Id = id
 	this.Name = name
@@ -63,6 +71,7 @@ func NewCreateakamaiIntegration200Response(id string, name string, createdAt tim
 	this.ValidationErrors = validationErrors
 	this.OrganizationId = organizationId
 	this.Projects = projects
+	this.Tags = tags
 	return &this
 }
 
@@ -234,6 +243,38 @@ func (o *CreateakamaiIntegration200Response) SetLastPullWorkflowAt(v time.Time) 
 	o.LastPullWorkflowAt = &v
 }
 
+// GetLastValidationAt returns the LastValidationAt field value if set, zero value otherwise.
+func (o *CreateakamaiIntegration200Response) GetLastValidationAt() time.Time {
+	if o == nil || IsNil(o.LastValidationAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastValidationAt
+}
+
+// GetLastValidationAtOk returns a tuple with the LastValidationAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateakamaiIntegration200Response) GetLastValidationAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastValidationAt) {
+		return nil, false
+	}
+	return o.LastValidationAt, true
+}
+
+// HasLastValidationAt returns a boolean if a field has been set.
+func (o *CreateakamaiIntegration200Response) HasLastValidationAt() bool {
+	if o != nil && !IsNil(o.LastValidationAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastValidationAt gets a reference to the given time.Time and assigns it to the LastValidationAt field.
+func (o *CreateakamaiIntegration200Response) SetLastValidationAt(v time.Time) {
+	o.LastValidationAt = &v
+}
+
 // GetKind returns the Kind field value
 func (o *CreateakamaiIntegration200Response) GetKind() ENUMPROPERTIESDATAITEMSPROPERTIESKIND {
 	if o == nil {
@@ -306,6 +347,72 @@ func (o *CreateakamaiIntegration200Response) SetValidationErrors(v []string) {
 	o.ValidationErrors = v
 }
 
+// GetParameters returns the Parameters field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateakamaiIntegration200Response) GetParameters() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.Parameters
+}
+
+// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateakamaiIntegration200Response) GetParametersOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Parameters) {
+		return nil, false
+	}
+	return &o.Parameters, true
+}
+
+// HasParameters returns a boolean if a field has been set.
+func (o *CreateakamaiIntegration200Response) HasParameters() bool {
+	if o != nil && !IsNil(o.Parameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetParameters gets a reference to the given interface{} and assigns it to the Parameters field.
+func (o *CreateakamaiIntegration200Response) SetParameters(v interface{}) {
+	o.Parameters = v
+}
+
+// GetMeta returns the Meta field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateakamaiIntegration200Response) GetMeta() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.Meta
+}
+
+// GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateakamaiIntegration200Response) GetMetaOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.Meta) {
+		return nil, false
+	}
+	return &o.Meta, true
+}
+
+// HasMeta returns a boolean if a field has been set.
+func (o *CreateakamaiIntegration200Response) HasMeta() bool {
+	if o != nil && !IsNil(o.Meta) {
+		return true
+	}
+
+	return false
+}
+
+// SetMeta gets a reference to the given interface{} and assigns it to the Meta field.
+func (o *CreateakamaiIntegration200Response) SetMeta(v interface{}) {
+	o.Meta = v
+}
+
 // GetOrganizationId returns the OrganizationId field value
 func (o *CreateakamaiIntegration200Response) GetOrganizationId() string {
 	if o == nil {
@@ -354,6 +461,30 @@ func (o *CreateakamaiIntegration200Response) SetProjects(v []ListProjects200Resp
 	o.Projects = v
 }
 
+// GetTags returns the Tags field value
+func (o *CreateakamaiIntegration200Response) GetTags() []TagDetail {
+	if o == nil {
+		var ret []TagDetail
+		return ret
+	}
+
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value
+// and a boolean to check if the value has been set.
+func (o *CreateakamaiIntegration200Response) GetTagsOk() ([]TagDetail, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// SetTags sets field value
+func (o *CreateakamaiIntegration200Response) SetTags(v []TagDetail) {
+	o.Tags = v
+}
+
 // GetLocation returns the Location field value if set, zero value otherwise.
 func (o *CreateakamaiIntegration200Response) GetLocation() LocationDetailed {
 	if o == nil || IsNil(o.Location) {
@@ -386,6 +517,38 @@ func (o *CreateakamaiIntegration200Response) SetLocation(v LocationDetailed) {
 	o.Location = &v
 }
 
+// GetProxyId returns the ProxyId field value if set, zero value otherwise.
+func (o *CreateakamaiIntegration200Response) GetProxyId() string {
+	if o == nil || IsNil(o.ProxyId) {
+		var ret string
+		return ret
+	}
+	return *o.ProxyId
+}
+
+// GetProxyIdOk returns a tuple with the ProxyId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateakamaiIntegration200Response) GetProxyIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ProxyId) {
+		return nil, false
+	}
+	return o.ProxyId, true
+}
+
+// HasProxyId returns a boolean if a field has been set.
+func (o *CreateakamaiIntegration200Response) HasProxyId() bool {
+	if o != nil && !IsNil(o.ProxyId) {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyId gets a reference to the given string and assigns it to the ProxyId field.
+func (o *CreateakamaiIntegration200Response) SetProxyId(v string) {
+	o.ProxyId = &v
+}
+
 func (o CreateakamaiIntegration200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -406,13 +569,26 @@ func (o CreateakamaiIntegration200Response) ToMap() (map[string]interface{}, err
 	if !IsNil(o.LastPullWorkflowAt) {
 		toSerialize["lastPullWorkflowAt"] = o.LastPullWorkflowAt
 	}
+	if !IsNil(o.LastValidationAt) {
+		toSerialize["lastValidationAt"] = o.LastValidationAt
+	}
 	toSerialize["kind"] = o.Kind
 	toSerialize["valid"] = o.Valid
 	toSerialize["validationErrors"] = o.ValidationErrors
+	if o.Parameters != nil {
+		toSerialize["parameters"] = o.Parameters
+	}
+	if o.Meta != nil {
+		toSerialize["meta"] = o.Meta
+	}
 	toSerialize["organizationId"] = o.OrganizationId
 	toSerialize["projects"] = o.Projects
+	toSerialize["tags"] = o.Tags
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
+	}
+	if !IsNil(o.ProxyId) {
+		toSerialize["proxyId"] = o.ProxyId
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -436,6 +612,7 @@ func (o *CreateakamaiIntegration200Response) UnmarshalJSON(data []byte) (err err
 		"validationErrors",
 		"organizationId",
 		"projects",
+		"tags",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -471,12 +648,17 @@ func (o *CreateakamaiIntegration200Response) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "updatedAt")
 		delete(additionalProperties, "scheduledForDeletionAt")
 		delete(additionalProperties, "lastPullWorkflowAt")
+		delete(additionalProperties, "lastValidationAt")
 		delete(additionalProperties, "kind")
 		delete(additionalProperties, "valid")
 		delete(additionalProperties, "validationErrors")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "meta")
 		delete(additionalProperties, "organizationId")
 		delete(additionalProperties, "projects")
+		delete(additionalProperties, "tags")
 		delete(additionalProperties, "location")
+		delete(additionalProperties, "proxyId")
 		o.AdditionalProperties = additionalProperties
 	}
 

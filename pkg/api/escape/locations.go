@@ -79,7 +79,7 @@ func ListLocations(ctx context.Context, next string, filters *ListLocationsFilte
 }
 
 // GetLocation gets a location by ID
-func GetLocation(ctx context.Context, id string) (*v3.CreateLocation200Response, error) {
+func GetLocation(ctx context.Context, id string) (*v3.GetLocation200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -119,7 +119,7 @@ func CreateLocation(ctx context.Context, name, sshPublicKey string) (*v3.CreateL
 
 // UpdateLocation updates a location. Only non-nil fields are sent.
 // The returned value is the location after the update.
-func UpdateLocation(ctx context.Context, id string, name, sshPublicKey *string, enabled *bool) (*v3.CreateLocation200Response, error) {
+func UpdateLocation(ctx context.Context, id string, name, sshPublicKey *string, enabled *bool) (*v3.GetLocation200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)

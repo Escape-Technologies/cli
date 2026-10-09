@@ -13,6 +13,7 @@ package v3
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the CreateWorkflow200Response type satisfies the MappedNullable interface at compile time
@@ -25,10 +26,18 @@ type CreateWorkflow200Response struct {
 	// The name of the workflow.
 	Name    *string                                  `json:"name,omitempty"`
 	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
+	// Whether the workflow is paused.
+	Paused bool `json:"paused"`
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32               `json:"throttleMs,omitempty"`
 	Filter     NullableWorkflowFilter `json:"filter"`
 	View       *WorkflowView          `json:"view,omitempty"`
+	// Projects the workflow applies to. Empty when the workflow is organization-wide.
+	Projects []WorkflowProject `json:"projects"`
+	// The date and time the workflow was created.
+	CreatedAt time.Time `json:"createdAt"`
+	// The date and time the workflow was last updated.
+	UpdatedAt time.Time `json:"updatedAt"`
 	// Deprecated. Always empty. Use `filter` and `view` instead.
 	Filters              []WorkflowLegacyFilter           `json:"filters"`
 	Actions              []WorkflowSummarizedActionsInner `json:"actions"`
@@ -41,14 +50,18 @@ type _CreateWorkflow200Response CreateWorkflow200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWorkflow200Response(trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, filter NullableWorkflowFilter, filters []WorkflowLegacyFilter, actions []WorkflowSummarizedActionsInner) *CreateWorkflow200Response {
+func NewCreateWorkflow200Response(trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, paused bool, filter NullableWorkflowFilter, projects []WorkflowProject, createdAt time.Time, updatedAt time.Time, filters []WorkflowLegacyFilter, actions []WorkflowSummarizedActionsInner) *CreateWorkflow200Response {
 	this := CreateWorkflow200Response{}
 	var id string = "00000000-0000-0000-0000-000000000000"
 	this.Id = &id
 	var name string = "Workflow Name"
 	this.Name = &name
 	this.Trigger = trigger
+	this.Paused = paused
 	this.Filter = filter
+	this.Projects = projects
+	this.CreatedAt = createdAt
+	this.UpdatedAt = updatedAt
 	this.Filters = filters
 	this.Actions = actions
 	return &this
@@ -154,6 +167,30 @@ func (o *CreateWorkflow200Response) SetTrigger(v ENUMPROPERTIESDATAITEMSPROPERTI
 	o.Trigger = v
 }
 
+// GetPaused returns the Paused field value
+func (o *CreateWorkflow200Response) GetPaused() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Paused
+}
+
+// GetPausedOk returns a tuple with the Paused field value
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflow200Response) GetPausedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Paused, true
+}
+
+// SetPaused sets field value
+func (o *CreateWorkflow200Response) SetPaused(v bool) {
+	o.Paused = v
+}
+
 // GetThrottleMs returns the ThrottleMs field value if set, zero value otherwise.
 func (o *CreateWorkflow200Response) GetThrottleMs() float32 {
 	if o == nil || IsNil(o.ThrottleMs) {
@@ -244,6 +281,78 @@ func (o *CreateWorkflow200Response) SetView(v WorkflowView) {
 	o.View = &v
 }
 
+// GetProjects returns the Projects field value
+func (o *CreateWorkflow200Response) GetProjects() []WorkflowProject {
+	if o == nil {
+		var ret []WorkflowProject
+		return ret
+	}
+
+	return o.Projects
+}
+
+// GetProjectsOk returns a tuple with the Projects field value
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflow200Response) GetProjectsOk() ([]WorkflowProject, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Projects, true
+}
+
+// SetProjects sets field value
+func (o *CreateWorkflow200Response) SetProjects(v []WorkflowProject) {
+	o.Projects = v
+}
+
+// GetCreatedAt returns the CreatedAt field value
+func (o *CreateWorkflow200Response) GetCreatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflow200Response) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *CreateWorkflow200Response) SetCreatedAt(v time.Time) {
+	o.CreatedAt = v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *CreateWorkflow200Response) GetUpdatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflow200Response) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedAt, true
+}
+
+// SetUpdatedAt sets field value
+func (o *CreateWorkflow200Response) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = v
+}
+
 // GetFilters returns the Filters field value
 func (o *CreateWorkflow200Response) GetFilters() []WorkflowLegacyFilter {
 	if o == nil {
@@ -309,6 +418,7 @@ func (o CreateWorkflow200Response) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["trigger"] = o.Trigger
+	toSerialize["paused"] = o.Paused
 	if !IsNil(o.ThrottleMs) {
 		toSerialize["throttleMs"] = o.ThrottleMs
 	}
@@ -316,6 +426,9 @@ func (o CreateWorkflow200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.View) {
 		toSerialize["view"] = o.View
 	}
+	toSerialize["projects"] = o.Projects
+	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["updatedAt"] = o.UpdatedAt
 	toSerialize["filters"] = o.Filters
 	toSerialize["actions"] = o.Actions
 
@@ -332,7 +445,11 @@ func (o *CreateWorkflow200Response) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"trigger",
+		"paused",
 		"filter",
+		"projects",
+		"createdAt",
+		"updatedAt",
 		"filters",
 		"actions",
 	}
@@ -367,9 +484,13 @@ func (o *CreateWorkflow200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "trigger")
+		delete(additionalProperties, "paused")
 		delete(additionalProperties, "throttleMs")
 		delete(additionalProperties, "filter")
 		delete(additionalProperties, "view")
+		delete(additionalProperties, "projects")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "updatedAt")
 		delete(additionalProperties, "filters")
 		delete(additionalProperties, "actions")
 		o.AdditionalProperties = additionalProperties

@@ -311,7 +311,7 @@ type ApiGetLocationRequest struct {
 	locationId string
 }
 
-func (r ApiGetLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
+func (r ApiGetLocationRequest) Execute() (*GetLocation200Response, *http.Response, error) {
 	return r.ApiService.GetLocationExecute(r)
 }
 
@@ -334,13 +334,13 @@ func (a *LocationsAPIService) GetLocation(ctx context.Context, locationId string
 
 // Execute executes the request
 //
-//	@return CreateLocation200Response
-func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*CreateLocation200Response, *http.Response, error) {
+//	@return GetLocation200Response
+func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*GetLocation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateLocation200Response
+		localVarReturnValue *GetLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.GetLocation")
@@ -407,6 +407,178 @@ func (a *LocationsAPIService) GetLocationExecute(r ApiGetLocationRequest) (*Crea
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListLocationLogsRequest struct {
+	ctx        context.Context
+	ApiService *LocationsAPIService
+	locationId string
+	cursor     *string
+	size       *int
+	search     *string
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListLocationLogsRequest) Cursor(cursor string) ApiListLocationLogsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListLocationLogsRequest) Size(size int) ApiListLocationLogsRequest {
+	r.size = &size
+	return r
+}
+
+// Filter by search term
+func (r ApiListLocationLogsRequest) Search(search string) ApiListLocationLogsRequest {
+	r.search = &search
+	return r
+}
+
+func (r ApiListLocationLogsRequest) Execute() (*ListLocationLogs200Response, *http.Response, error) {
+	return r.ApiService.ListLocationLogsExecute(r)
+}
+
+/*
+ListLocationLogs List location logs
+
+List logs for a private location.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param locationId The ID of the location
+	@return ApiListLocationLogsRequest
+*/
+func (a *LocationsAPIService) ListLocationLogs(ctx context.Context, locationId string) ApiListLocationLogsRequest {
+	return ApiListLocationLogsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		locationId: locationId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListLocationLogs200Response
+func (a *LocationsAPIService) ListLocationLogsExecute(r ApiListLocationLogsRequest) (*ListLocationLogs200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListLocationLogs200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.ListLocationLogs")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/locations/{locationId}/logs"
+	localVarPath = strings.Replace(localVarPath, "{"+"locationId"+"}", url.PathEscape(parameterValueToString(r.locationId, "locationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v PaginationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
@@ -650,7 +822,7 @@ func (r ApiUpdateLocationRequest) UpdateLocationRequest(updateLocationRequest Up
 	return r
 }
 
-func (r ApiUpdateLocationRequest) Execute() (*CreateLocation200Response, *http.Response, error) {
+func (r ApiUpdateLocationRequest) Execute() (*GetLocation200Response, *http.Response, error) {
 	return r.ApiService.UpdateLocationExecute(r)
 }
 
@@ -673,13 +845,13 @@ func (a *LocationsAPIService) UpdateLocation(ctx context.Context, locationId str
 
 // Execute executes the request
 //
-//	@return CreateLocation200Response
-func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*CreateLocation200Response, *http.Response, error) {
+//	@return GetLocation200Response
+func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) (*GetLocation200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateLocation200Response
+		localVarReturnValue *GetLocation200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.UpdateLocation")
@@ -713,6 +885,153 @@ func (a *LocationsAPIService) UpdateLocationExecute(r ApiUpdateLocationRequest) 
 	}
 	// body params
 	localVarPostBody = r.updateLocationRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateLocationTagsRequest struct {
+	ctx                       context.Context
+	ApiService                *LocationsAPIService
+	locationId                string
+	updateLocationTagsRequest *UpdateLocationTagsRequest
+}
+
+func (r ApiUpdateLocationTagsRequest) UpdateLocationTagsRequest(updateLocationTagsRequest UpdateLocationTagsRequest) ApiUpdateLocationTagsRequest {
+	r.updateLocationTagsRequest = &updateLocationTagsRequest
+	return r
+}
+
+func (r ApiUpdateLocationTagsRequest) Execute() (*GetLocation200Response, *http.Response, error) {
+	return r.ApiService.UpdateLocationTagsExecute(r)
+}
+
+/*
+UpdateLocationTags Update location tags
+
+Update the tags associated with a private location.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param locationId The ID of the location
+	@return ApiUpdateLocationTagsRequest
+*/
+func (a *LocationsAPIService) UpdateLocationTags(ctx context.Context, locationId string) ApiUpdateLocationTagsRequest {
+	return ApiUpdateLocationTagsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		locationId: locationId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetLocation200Response
+func (a *LocationsAPIService) UpdateLocationTagsExecute(r ApiUpdateLocationTagsRequest) (*GetLocation200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetLocation200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LocationsAPIService.UpdateLocationTags")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/locations/{locationId}/tags"
+	localVarPath = strings.Replace(localVarPath, "{"+"locationId"+"}", url.PathEscape(parameterValueToString(r.locationId, "locationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateLocationTagsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

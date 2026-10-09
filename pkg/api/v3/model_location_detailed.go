@@ -31,7 +31,14 @@ type LocationDetailed struct {
 	// The date and time the location was created.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The date and time the location was last seen.
-	LastSeenAt           *string                 `json:"lastSeenAt,omitempty"`
+	LastSeenAt *string `json:"lastSeenAt,omitempty"`
+	// The IP address of the location.
+	Ip     *string                                  `json:"ip,omitempty"`
+	Region *ENUMPROPERTIESLOCATION1PROPERTIESREGION `json:"region,omitempty"`
+	// Whether the location agent is currently active.
+	IsActive *bool `json:"isActive,omitempty"`
+	// The tags associated with the location.
+	Tags                 []TagDetail             `json:"tags,omitempty"`
 	Links                LocationSummarizedLinks `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
@@ -56,6 +63,8 @@ func NewLocationDetailed(links LocationSummarizedLinks) *LocationDetailed {
 	this.CreatedAt = &createdAt
 	var lastSeenAt string = "2021-01-01T00:00:00Z"
 	this.LastSeenAt = &lastSeenAt
+	var isActive bool = false
+	this.IsActive = &isActive
 	this.Links = links
 	return &this
 }
@@ -77,6 +86,8 @@ func NewLocationDetailedWithDefaults() *LocationDetailed {
 	this.CreatedAt = &createdAt
 	var lastSeenAt string = "2021-01-01T00:00:00Z"
 	this.LastSeenAt = &lastSeenAt
+	var isActive bool = false
+	this.IsActive = &isActive
 	return &this
 }
 
@@ -272,6 +283,134 @@ func (o *LocationDetailed) SetLastSeenAt(v string) {
 	o.LastSeenAt = &v
 }
 
+// GetIp returns the Ip field value if set, zero value otherwise.
+func (o *LocationDetailed) GetIp() string {
+	if o == nil || IsNil(o.Ip) {
+		var ret string
+		return ret
+	}
+	return *o.Ip
+}
+
+// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationDetailed) GetIpOk() (*string, bool) {
+	if o == nil || IsNil(o.Ip) {
+		return nil, false
+	}
+	return o.Ip, true
+}
+
+// HasIp returns a boolean if a field has been set.
+func (o *LocationDetailed) HasIp() bool {
+	if o != nil && !IsNil(o.Ip) {
+		return true
+	}
+
+	return false
+}
+
+// SetIp gets a reference to the given string and assigns it to the Ip field.
+func (o *LocationDetailed) SetIp(v string) {
+	o.Ip = &v
+}
+
+// GetRegion returns the Region field value if set, zero value otherwise.
+func (o *LocationDetailed) GetRegion() ENUMPROPERTIESLOCATION1PROPERTIESREGION {
+	if o == nil || IsNil(o.Region) {
+		var ret ENUMPROPERTIESLOCATION1PROPERTIESREGION
+		return ret
+	}
+	return *o.Region
+}
+
+// GetRegionOk returns a tuple with the Region field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationDetailed) GetRegionOk() (*ENUMPROPERTIESLOCATION1PROPERTIESREGION, bool) {
+	if o == nil || IsNil(o.Region) {
+		return nil, false
+	}
+	return o.Region, true
+}
+
+// HasRegion returns a boolean if a field has been set.
+func (o *LocationDetailed) HasRegion() bool {
+	if o != nil && !IsNil(o.Region) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegion gets a reference to the given ENUMPROPERTIESLOCATION1PROPERTIESREGION and assigns it to the Region field.
+func (o *LocationDetailed) SetRegion(v ENUMPROPERTIESLOCATION1PROPERTIESREGION) {
+	o.Region = &v
+}
+
+// GetIsActive returns the IsActive field value if set, zero value otherwise.
+func (o *LocationDetailed) GetIsActive() bool {
+	if o == nil || IsNil(o.IsActive) {
+		var ret bool
+		return ret
+	}
+	return *o.IsActive
+}
+
+// GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationDetailed) GetIsActiveOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsActive) {
+		return nil, false
+	}
+	return o.IsActive, true
+}
+
+// HasIsActive returns a boolean if a field has been set.
+func (o *LocationDetailed) HasIsActive() bool {
+	if o != nil && !IsNil(o.IsActive) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
+func (o *LocationDetailed) SetIsActive(v bool) {
+	o.IsActive = &v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *LocationDetailed) GetTags() []TagDetail {
+	if o == nil || IsNil(o.Tags) {
+		var ret []TagDetail
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LocationDetailed) GetTagsOk() ([]TagDetail, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *LocationDetailed) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []TagDetail and assigns it to the Tags field.
+func (o *LocationDetailed) SetTags(v []TagDetail) {
+	o.Tags = v
+}
+
 // GetLinks returns the Links field value
 func (o *LocationDetailed) GetLinks() LocationSummarizedLinks {
 	if o == nil {
@@ -324,6 +463,18 @@ func (o LocationDetailed) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastSeenAt) {
 		toSerialize["lastSeenAt"] = o.LastSeenAt
 	}
+	if !IsNil(o.Ip) {
+		toSerialize["ip"] = o.Ip
+	}
+	if !IsNil(o.Region) {
+		toSerialize["region"] = o.Region
+	}
+	if !IsNil(o.IsActive) {
+		toSerialize["isActive"] = o.IsActive
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
+	}
 	toSerialize["links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
@@ -374,6 +525,10 @@ func (o *LocationDetailed) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "lastSeenAt")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "isActive")
+		delete(additionalProperties, "tags")
 		delete(additionalProperties, "links")
 		o.AdditionalProperties = additionalProperties
 	}

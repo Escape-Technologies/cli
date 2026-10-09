@@ -268,11 +268,12 @@ func TestIssueCommentJSONMatchesDeclaredOutput(t *testing.T) {
 func TestLocationCreateAndUpdateJSONMatchDeclaredOutput(t *testing.T) {
 	const locationID = "00000000-0000-0000-0000-000000000004"
 	locationBody := map[string]any{
-		"id":      locationID,
-		"name":    "prod-vpc",
-		"type":    "PRIVATE",
-		"enabled": true,
-		"links":   map[string]any{"locationOverview": "https://app.escape.tech/loc"},
+		"id":         locationID,
+		"name":       "prod-vpc",
+		"type":       "PRIVATE",
+		"enabled":    true,
+		"links":      map[string]any{"locationOverview": "https://app.escape.tech/loc"},
+		"runCommand": "escape-cli locations start prod-vpc",
 	}
 	serveJSON(t, func(w http.ResponseWriter, r *http.Request) {
 		switch {
@@ -328,7 +329,7 @@ func TestLocationCreateAndUpdateJSONMatchDeclaredOutput(t *testing.T) {
 		t.Fatalf("update: %v\nstderr: %s", err, stderr)
 	}
 
-	var updated v3.CreateLocation200Response
+	var updated v3.GetLocation200Response
 	mustUnmarshalOne(t, stdout, &updated)
 	if updated.GetId() != locationID || updated.GetName() != "renamed" {
 		t.Fatalf("updated = %#v", updated)

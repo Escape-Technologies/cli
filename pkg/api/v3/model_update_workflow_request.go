@@ -12,7 +12,6 @@ package v3
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the UpdateWorkflowRequest type satisfies the MappedNullable interface at compile time
@@ -21,8 +20,10 @@ var _ MappedNullable = &UpdateWorkflowRequest{}
 // UpdateWorkflowRequest struct for UpdateWorkflowRequest
 type UpdateWorkflowRequest struct {
 	// The new name of the integration
-	Name    *string                                  `json:"name,omitempty"`
-	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
+	Name    *string                                   `json:"name,omitempty"`
+	Trigger *ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger,omitempty"`
+	// Set to true to pause the workflow, or false to resume it.
+	Paused *bool `json:"paused,omitempty"`
 	// The throttle in milliseconds for the workflow.
 	ThrottleMs *float32 `json:"throttleMs,omitempty"`
 	// Saved view to apply as the workflow filter.
@@ -43,9 +44,8 @@ type _UpdateWorkflowRequest UpdateWorkflowRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateWorkflowRequest(trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER) *UpdateWorkflowRequest {
+func NewUpdateWorkflowRequest() *UpdateWorkflowRequest {
 	this := UpdateWorkflowRequest{}
-	this.Trigger = trigger
 	return &this
 }
 
@@ -89,28 +89,68 @@ func (o *UpdateWorkflowRequest) SetName(v string) {
 	o.Name = &v
 }
 
-// GetTrigger returns the Trigger field value
+// GetTrigger returns the Trigger field value if set, zero value otherwise.
 func (o *UpdateWorkflowRequest) GetTrigger() ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER {
-	if o == nil {
+	if o == nil || IsNil(o.Trigger) {
 		var ret ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER
 		return ret
 	}
-
-	return o.Trigger
+	return *o.Trigger
 }
 
-// GetTriggerOk returns a tuple with the Trigger field value
+// GetTriggerOk returns a tuple with the Trigger field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateWorkflowRequest) GetTriggerOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Trigger) {
 		return nil, false
 	}
-	return &o.Trigger, true
+	return o.Trigger, true
 }
 
-// SetTrigger sets field value
+// HasTrigger returns a boolean if a field has been set.
+func (o *UpdateWorkflowRequest) HasTrigger() bool {
+	if o != nil && !IsNil(o.Trigger) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrigger gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER and assigns it to the Trigger field.
 func (o *UpdateWorkflowRequest) SetTrigger(v ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER) {
-	o.Trigger = v
+	o.Trigger = &v
+}
+
+// GetPaused returns the Paused field value if set, zero value otherwise.
+func (o *UpdateWorkflowRequest) GetPaused() bool {
+	if o == nil || IsNil(o.Paused) {
+		var ret bool
+		return ret
+	}
+	return *o.Paused
+}
+
+// GetPausedOk returns a tuple with the Paused field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateWorkflowRequest) GetPausedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Paused) {
+		return nil, false
+	}
+	return o.Paused, true
+}
+
+// HasPaused returns a boolean if a field has been set.
+func (o *UpdateWorkflowRequest) HasPaused() bool {
+	if o != nil && !IsNil(o.Paused) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaused gets a reference to the given bool and assigns it to the Paused field.
+func (o *UpdateWorkflowRequest) SetPaused(v bool) {
+	o.Paused = &v
 }
 
 // GetThrottleMs returns the ThrottleMs field value if set, zero value otherwise.
@@ -329,7 +369,12 @@ func (o UpdateWorkflowRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["trigger"] = o.Trigger
+	if !IsNil(o.Trigger) {
+		toSerialize["trigger"] = o.Trigger
+	}
+	if !IsNil(o.Paused) {
+		toSerialize["paused"] = o.Paused
+	}
 	if !IsNil(o.ThrottleMs) {
 		toSerialize["throttleMs"] = o.ThrottleMs
 	}
@@ -357,27 +402,6 @@ func (o UpdateWorkflowRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *UpdateWorkflowRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"trigger",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err
-	}
-
-	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varUpdateWorkflowRequest := _UpdateWorkflowRequest{}
 
 	err = json.Unmarshal(data, &varUpdateWorkflowRequest)
@@ -393,6 +417,7 @@ func (o *UpdateWorkflowRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "trigger")
+		delete(additionalProperties, "paused")
 		delete(additionalProperties, "throttleMs")
 		delete(additionalProperties, "viewId")
 		delete(additionalProperties, "filter")

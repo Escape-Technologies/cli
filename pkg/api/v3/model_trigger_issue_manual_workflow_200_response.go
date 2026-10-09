@@ -20,7 +20,7 @@ var _ MappedNullable = &TriggerIssueManualWorkflow200Response{}
 
 // TriggerIssueManualWorkflow200Response struct for TriggerIssueManualWorkflow200Response
 type TriggerIssueManualWorkflow200Response struct {
-	Workflow             TriggerIssueManualWorkflow200ResponseWorkflow `json:"workflow"`
+	Workflow             BulkTriggerIssueWorkflows200ResponseWorkflowsInner `json:"workflow"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,7 +30,7 @@ type _TriggerIssueManualWorkflow200Response TriggerIssueManualWorkflow200Respons
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTriggerIssueManualWorkflow200Response(workflow TriggerIssueManualWorkflow200ResponseWorkflow) *TriggerIssueManualWorkflow200Response {
+func NewTriggerIssueManualWorkflow200Response(workflow BulkTriggerIssueWorkflows200ResponseWorkflowsInner) *TriggerIssueManualWorkflow200Response {
 	this := TriggerIssueManualWorkflow200Response{}
 	this.Workflow = workflow
 	return &this
@@ -45,9 +45,9 @@ func NewTriggerIssueManualWorkflow200ResponseWithDefaults() *TriggerIssueManualW
 }
 
 // GetWorkflow returns the Workflow field value
-func (o *TriggerIssueManualWorkflow200Response) GetWorkflow() TriggerIssueManualWorkflow200ResponseWorkflow {
+func (o *TriggerIssueManualWorkflow200Response) GetWorkflow() BulkTriggerIssueWorkflows200ResponseWorkflowsInner {
 	if o == nil {
-		var ret TriggerIssueManualWorkflow200ResponseWorkflow
+		var ret BulkTriggerIssueWorkflows200ResponseWorkflowsInner
 		return ret
 	}
 
@@ -56,7 +56,7 @@ func (o *TriggerIssueManualWorkflow200Response) GetWorkflow() TriggerIssueManual
 
 // GetWorkflowOk returns a tuple with the Workflow field value
 // and a boolean to check if the value has been set.
-func (o *TriggerIssueManualWorkflow200Response) GetWorkflowOk() (*TriggerIssueManualWorkflow200ResponseWorkflow, bool) {
+func (o *TriggerIssueManualWorkflow200Response) GetWorkflowOk() (*BulkTriggerIssueWorkflows200ResponseWorkflowsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *TriggerIssueManualWorkflow200Response) GetWorkflowOk() (*TriggerIssueMa
 }
 
 // SetWorkflow sets field value
-func (o *TriggerIssueManualWorkflow200Response) SetWorkflow(v TriggerIssueManualWorkflow200ResponseWorkflow) {
+func (o *TriggerIssueManualWorkflow200Response) SetWorkflow(v BulkTriggerIssueWorkflows200ResponseWorkflowsInner) {
 	o.Workflow = v
 }
 
