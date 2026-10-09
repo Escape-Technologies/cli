@@ -15,11 +15,11 @@ import (
 	"time"
 )
 
-// checks if the ProfileScheduleUpdateInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ProfileScheduleUpdateInput{}
+// checks if the ProfileScheduleUpdateInput1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ProfileScheduleUpdateInput1{}
 
-// ProfileScheduleUpdateInput Schedule to apply
-type ProfileScheduleUpdateInput struct {
+// ProfileScheduleUpdateInput1 Profile schedule
+type ProfileScheduleUpdateInput1 struct {
 	// Recurring cron expression
 	Cron *string `json:"cron,omitempty"`
 	// When the schedule becomes active (ISO 8601)
@@ -29,27 +29,27 @@ type ProfileScheduleUpdateInput struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _ProfileScheduleUpdateInput ProfileScheduleUpdateInput
+type _ProfileScheduleUpdateInput1 ProfileScheduleUpdateInput1
 
-// NewProfileScheduleUpdateInput instantiates a new ProfileScheduleUpdateInput object
+// NewProfileScheduleUpdateInput1 instantiates a new ProfileScheduleUpdateInput1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileScheduleUpdateInput() *ProfileScheduleUpdateInput {
-	this := ProfileScheduleUpdateInput{}
+func NewProfileScheduleUpdateInput1() *ProfileScheduleUpdateInput1 {
+	this := ProfileScheduleUpdateInput1{}
 	return &this
 }
 
-// NewProfileScheduleUpdateInputWithDefaults instantiates a new ProfileScheduleUpdateInput object
+// NewProfileScheduleUpdateInput1WithDefaults instantiates a new ProfileScheduleUpdateInput1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewProfileScheduleUpdateInputWithDefaults() *ProfileScheduleUpdateInput {
-	this := ProfileScheduleUpdateInput{}
+func NewProfileScheduleUpdateInput1WithDefaults() *ProfileScheduleUpdateInput1 {
+	this := ProfileScheduleUpdateInput1{}
 	return &this
 }
 
 // GetCron returns the Cron field value if set, zero value otherwise.
-func (o *ProfileScheduleUpdateInput) GetCron() string {
+func (o *ProfileScheduleUpdateInput1) GetCron() string {
 	if o == nil || IsNil(o.Cron) {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *ProfileScheduleUpdateInput) GetCron() string {
 
 // GetCronOk returns a tuple with the Cron field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileScheduleUpdateInput) GetCronOk() (*string, bool) {
+func (o *ProfileScheduleUpdateInput1) GetCronOk() (*string, bool) {
 	if o == nil || IsNil(o.Cron) {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *ProfileScheduleUpdateInput) GetCronOk() (*string, bool) {
 }
 
 // HasCron returns a boolean if a field has been set.
-func (o *ProfileScheduleUpdateInput) HasCron() bool {
+func (o *ProfileScheduleUpdateInput1) HasCron() bool {
 	if o != nil && !IsNil(o.Cron) {
 		return true
 	}
@@ -76,12 +76,12 @@ func (o *ProfileScheduleUpdateInput) HasCron() bool {
 }
 
 // SetCron gets a reference to the given string and assigns it to the Cron field.
-func (o *ProfileScheduleUpdateInput) SetCron(v string) {
+func (o *ProfileScheduleUpdateInput1) SetCron(v string) {
 	o.Cron = &v
 }
 
 // GetStartAt returns the StartAt field value if set, zero value otherwise.
-func (o *ProfileScheduleUpdateInput) GetStartAt() time.Time {
+func (o *ProfileScheduleUpdateInput1) GetStartAt() time.Time {
 	if o == nil || IsNil(o.StartAt) {
 		var ret time.Time
 		return ret
@@ -91,7 +91,7 @@ func (o *ProfileScheduleUpdateInput) GetStartAt() time.Time {
 
 // GetStartAtOk returns a tuple with the StartAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileScheduleUpdateInput) GetStartAtOk() (*time.Time, bool) {
+func (o *ProfileScheduleUpdateInput1) GetStartAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.StartAt) {
 		return nil, false
 	}
@@ -99,7 +99,7 @@ func (o *ProfileScheduleUpdateInput) GetStartAtOk() (*time.Time, bool) {
 }
 
 // HasStartAt returns a boolean if a field has been set.
-func (o *ProfileScheduleUpdateInput) HasStartAt() bool {
+func (o *ProfileScheduleUpdateInput1) HasStartAt() bool {
 	if o != nil && !IsNil(o.StartAt) {
 		return true
 	}
@@ -108,12 +108,12 @@ func (o *ProfileScheduleUpdateInput) HasStartAt() bool {
 }
 
 // SetStartAt gets a reference to the given time.Time and assigns it to the StartAt field.
-func (o *ProfileScheduleUpdateInput) SetStartAt(v time.Time) {
+func (o *ProfileScheduleUpdateInput1) SetStartAt(v time.Time) {
 	o.StartAt = &v
 }
 
 // GetDelete returns the Delete field value if set, zero value otherwise.
-func (o *ProfileScheduleUpdateInput) GetDelete() bool {
+func (o *ProfileScheduleUpdateInput1) GetDelete() bool {
 	if o == nil || IsNil(o.Delete) {
 		var ret bool
 		return ret
@@ -123,7 +123,7 @@ func (o *ProfileScheduleUpdateInput) GetDelete() bool {
 
 // GetDeleteOk returns a tuple with the Delete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProfileScheduleUpdateInput) GetDeleteOk() (*bool, bool) {
+func (o *ProfileScheduleUpdateInput1) GetDeleteOk() (*bool, bool) {
 	if o == nil || IsNil(o.Delete) {
 		return nil, false
 	}
@@ -131,7 +131,7 @@ func (o *ProfileScheduleUpdateInput) GetDeleteOk() (*bool, bool) {
 }
 
 // HasDelete returns a boolean if a field has been set.
-func (o *ProfileScheduleUpdateInput) HasDelete() bool {
+func (o *ProfileScheduleUpdateInput1) HasDelete() bool {
 	if o != nil && !IsNil(o.Delete) {
 		return true
 	}
@@ -140,11 +140,11 @@ func (o *ProfileScheduleUpdateInput) HasDelete() bool {
 }
 
 // SetDelete gets a reference to the given bool and assigns it to the Delete field.
-func (o *ProfileScheduleUpdateInput) SetDelete(v bool) {
+func (o *ProfileScheduleUpdateInput1) SetDelete(v bool) {
 	o.Delete = &v
 }
 
-func (o ProfileScheduleUpdateInput) MarshalJSON() ([]byte, error) {
+func (o ProfileScheduleUpdateInput1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -152,7 +152,7 @@ func (o ProfileScheduleUpdateInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ProfileScheduleUpdateInput) ToMap() (map[string]interface{}, error) {
+func (o ProfileScheduleUpdateInput1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Cron) {
 		toSerialize["cron"] = o.Cron
@@ -171,16 +171,16 @@ func (o ProfileScheduleUpdateInput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ProfileScheduleUpdateInput) UnmarshalJSON(data []byte) (err error) {
-	varProfileScheduleUpdateInput := _ProfileScheduleUpdateInput{}
+func (o *ProfileScheduleUpdateInput1) UnmarshalJSON(data []byte) (err error) {
+	varProfileScheduleUpdateInput1 := _ProfileScheduleUpdateInput1{}
 
-	err = json.Unmarshal(data, &varProfileScheduleUpdateInput)
+	err = json.Unmarshal(data, &varProfileScheduleUpdateInput1)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ProfileScheduleUpdateInput(varProfileScheduleUpdateInput)
+	*o = ProfileScheduleUpdateInput1(varProfileScheduleUpdateInput1)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -194,38 +194,38 @@ func (o *ProfileScheduleUpdateInput) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableProfileScheduleUpdateInput struct {
-	value *ProfileScheduleUpdateInput
+type NullableProfileScheduleUpdateInput1 struct {
+	value *ProfileScheduleUpdateInput1
 	isSet bool
 }
 
-func (v NullableProfileScheduleUpdateInput) Get() *ProfileScheduleUpdateInput {
+func (v NullableProfileScheduleUpdateInput1) Get() *ProfileScheduleUpdateInput1 {
 	return v.value
 }
 
-func (v *NullableProfileScheduleUpdateInput) Set(val *ProfileScheduleUpdateInput) {
+func (v *NullableProfileScheduleUpdateInput1) Set(val *ProfileScheduleUpdateInput1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableProfileScheduleUpdateInput) IsSet() bool {
+func (v NullableProfileScheduleUpdateInput1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableProfileScheduleUpdateInput) Unset() {
+func (v *NullableProfileScheduleUpdateInput1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableProfileScheduleUpdateInput(val *ProfileScheduleUpdateInput) *NullableProfileScheduleUpdateInput {
-	return &NullableProfileScheduleUpdateInput{value: val, isSet: true}
+func NewNullableProfileScheduleUpdateInput1(val *ProfileScheduleUpdateInput1) *NullableProfileScheduleUpdateInput1 {
+	return &NullableProfileScheduleUpdateInput1{value: val, isSet: true}
 }
 
-func (v NullableProfileScheduleUpdateInput) MarshalJSON() ([]byte, error) {
+func (v NullableProfileScheduleUpdateInput1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableProfileScheduleUpdateInput) UnmarshalJSON(src []byte) error {
+func (v *NullableProfileScheduleUpdateInput1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

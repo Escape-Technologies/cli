@@ -15,37 +15,37 @@ import (
 	"fmt"
 )
 
-// checks if the BulkUpdateAssets200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BulkUpdateAssets200Response{}
+// checks if the BulkUpdateProfiles200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BulkUpdateProfiles200Response{}
 
-// BulkUpdateAssets200Response struct for BulkUpdateAssets200Response
-type BulkUpdateAssets200Response struct {
+// BulkUpdateProfiles200Response struct for BulkUpdateProfiles200Response
+type BulkUpdateProfiles200Response struct {
 	Success              bool `json:"success"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _BulkUpdateAssets200Response BulkUpdateAssets200Response
+type _BulkUpdateProfiles200Response BulkUpdateProfiles200Response
 
-// NewBulkUpdateAssets200Response instantiates a new BulkUpdateAssets200Response object
+// NewBulkUpdateProfiles200Response instantiates a new BulkUpdateProfiles200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkUpdateAssets200Response(success bool) *BulkUpdateAssets200Response {
-	this := BulkUpdateAssets200Response{}
+func NewBulkUpdateProfiles200Response(success bool) *BulkUpdateProfiles200Response {
+	this := BulkUpdateProfiles200Response{}
 	this.Success = success
 	return &this
 }
 
-// NewBulkUpdateAssets200ResponseWithDefaults instantiates a new BulkUpdateAssets200Response object
+// NewBulkUpdateProfiles200ResponseWithDefaults instantiates a new BulkUpdateProfiles200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBulkUpdateAssets200ResponseWithDefaults() *BulkUpdateAssets200Response {
-	this := BulkUpdateAssets200Response{}
+func NewBulkUpdateProfiles200ResponseWithDefaults() *BulkUpdateProfiles200Response {
+	this := BulkUpdateProfiles200Response{}
 	return &this
 }
 
 // GetSuccess returns the Success field value
-func (o *BulkUpdateAssets200Response) GetSuccess() bool {
+func (o *BulkUpdateProfiles200Response) GetSuccess() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -56,7 +56,7 @@ func (o *BulkUpdateAssets200Response) GetSuccess() bool {
 
 // GetSuccessOk returns a tuple with the Success field value
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateAssets200Response) GetSuccessOk() (*bool, bool) {
+func (o *BulkUpdateProfiles200Response) GetSuccessOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *BulkUpdateAssets200Response) GetSuccessOk() (*bool, bool) {
 }
 
 // SetSuccess sets field value
-func (o *BulkUpdateAssets200Response) SetSuccess(v bool) {
+func (o *BulkUpdateProfiles200Response) SetSuccess(v bool) {
 	o.Success = v
 }
 
-func (o BulkUpdateAssets200Response) MarshalJSON() ([]byte, error) {
+func (o BulkUpdateProfiles200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,7 +76,7 @@ func (o BulkUpdateAssets200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BulkUpdateAssets200Response) ToMap() (map[string]interface{}, error) {
+func (o BulkUpdateProfiles200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["success"] = o.Success
 
@@ -87,7 +87,7 @@ func (o BulkUpdateAssets200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *BulkUpdateAssets200Response) UnmarshalJSON(data []byte) (err error) {
+func (o *BulkUpdateProfiles200Response) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -109,15 +109,15 @@ func (o *BulkUpdateAssets200Response) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varBulkUpdateAssets200Response := _BulkUpdateAssets200Response{}
+	varBulkUpdateProfiles200Response := _BulkUpdateProfiles200Response{}
 
-	err = json.Unmarshal(data, &varBulkUpdateAssets200Response)
+	err = json.Unmarshal(data, &varBulkUpdateProfiles200Response)
 
 	if err != nil {
 		return err
 	}
 
-	*o = BulkUpdateAssets200Response(varBulkUpdateAssets200Response)
+	*o = BulkUpdateProfiles200Response(varBulkUpdateProfiles200Response)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -129,38 +129,38 @@ func (o *BulkUpdateAssets200Response) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableBulkUpdateAssets200Response struct {
-	value *BulkUpdateAssets200Response
+type NullableBulkUpdateProfiles200Response struct {
+	value *BulkUpdateProfiles200Response
 	isSet bool
 }
 
-func (v NullableBulkUpdateAssets200Response) Get() *BulkUpdateAssets200Response {
+func (v NullableBulkUpdateProfiles200Response) Get() *BulkUpdateProfiles200Response {
 	return v.value
 }
 
-func (v *NullableBulkUpdateAssets200Response) Set(val *BulkUpdateAssets200Response) {
+func (v *NullableBulkUpdateProfiles200Response) Set(val *BulkUpdateProfiles200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBulkUpdateAssets200Response) IsSet() bool {
+func (v NullableBulkUpdateProfiles200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBulkUpdateAssets200Response) Unset() {
+func (v *NullableBulkUpdateProfiles200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBulkUpdateAssets200Response(val *BulkUpdateAssets200Response) *NullableBulkUpdateAssets200Response {
-	return &NullableBulkUpdateAssets200Response{value: val, isSet: true}
+func NewNullableBulkUpdateProfiles200Response(val *BulkUpdateProfiles200Response) *NullableBulkUpdateProfiles200Response {
+	return &NullableBulkUpdateProfiles200Response{value: val, isSet: true}
 }
 
-func (v NullableBulkUpdateAssets200Response) MarshalJSON() ([]byte, error) {
+func (v NullableBulkUpdateProfiles200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBulkUpdateAssets200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableBulkUpdateProfiles200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

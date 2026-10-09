@@ -34,7 +34,7 @@ func (r ApiBulkDeleteAssetsRequest) BulkDeleteAssetsRequest(bulkDeleteAssetsRequ
 	return r
 }
 
-func (r ApiBulkDeleteAssetsRequest) Execute() (*BulkUpdateAssets200Response, *http.Response, error) {
+func (r ApiBulkDeleteAssetsRequest) Execute() (*BulkUpdateProfiles200Response, *http.Response, error) {
 	return r.ApiService.BulkDeleteAssetsExecute(r)
 }
 
@@ -55,13 +55,13 @@ func (a *AssetsAPIService) BulkDeleteAssets(ctx context.Context) ApiBulkDeleteAs
 
 // Execute executes the request
 //
-//	@return BulkUpdateAssets200Response
-func (a *AssetsAPIService) BulkDeleteAssetsExecute(r ApiBulkDeleteAssetsRequest) (*BulkUpdateAssets200Response, *http.Response, error) {
+//	@return BulkUpdateProfiles200Response
+func (a *AssetsAPIService) BulkDeleteAssetsExecute(r ApiBulkDeleteAssetsRequest) (*BulkUpdateProfiles200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *BulkUpdateAssets200Response
+		localVarReturnValue *BulkUpdateProfiles200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.BulkDeleteAssets")
@@ -298,7 +298,7 @@ func (r ApiBulkUpdateAssetsRequest) BulkUpdateAssetsRequest(bulkUpdateAssetsRequ
 	return r
 }
 
-func (r ApiBulkUpdateAssetsRequest) Execute() (*BulkUpdateAssets200Response, *http.Response, error) {
+func (r ApiBulkUpdateAssetsRequest) Execute() (*BulkUpdateProfiles200Response, *http.Response, error) {
 	return r.ApiService.BulkUpdateAssetsExecute(r)
 }
 
@@ -319,13 +319,13 @@ func (a *AssetsAPIService) BulkUpdateAssets(ctx context.Context) ApiBulkUpdateAs
 
 // Execute executes the request
 //
-//	@return BulkUpdateAssets200Response
-func (a *AssetsAPIService) BulkUpdateAssetsExecute(r ApiBulkUpdateAssetsRequest) (*BulkUpdateAssets200Response, *http.Response, error) {
+//	@return BulkUpdateProfiles200Response
+func (a *AssetsAPIService) BulkUpdateAssetsExecute(r ApiBulkUpdateAssetsRequest) (*BulkUpdateProfiles200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *BulkUpdateAssets200Response
+		localVarReturnValue *BulkUpdateProfiles200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetsAPIService.BulkUpdateAssets")

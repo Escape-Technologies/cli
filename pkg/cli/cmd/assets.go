@@ -932,7 +932,7 @@ var assetBulkUpdateCmd = &cobra.Command{
 	Short: "Update multiple assets matching a filter",
 	Long:  `Bulk update tags, projects, or status of assets matching a filter predicate.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.Schema(v3.BulkUpdateAssets200Response{}) {
+		if out.Schema(escape.BulkOperationResult{}) {
 			return nil
 		}
 
@@ -985,7 +985,7 @@ var assetBulkDeleteCmd = &cobra.Command{
 	Short: "Delete multiple assets matching a filter",
 	Long:  `Schedule multiple assets matching a filter predicate for deletion.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.Schema(v3.BulkUpdateAssets200Response{}) {
+		if out.Schema(escape.BulkOperationResult{}) {
 			return nil
 		}
 

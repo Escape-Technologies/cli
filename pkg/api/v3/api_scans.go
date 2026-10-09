@@ -1562,6 +1562,8 @@ type ApiListScansRequest struct {
 	problemCodes      *[]string
 	problemSeverities *[]string
 	noTags            *string
+	commitBranch      *string
+	latestBranchScans *string
 	dnf               *string
 }
 
@@ -1676,6 +1678,18 @@ func (r ApiListScansRequest) ProblemSeverities(problemSeverities []string) ApiLi
 // Filter by assets with no tags
 func (r ApiListScansRequest) NoTags(noTags string) ApiListScansRequest {
 	r.noTags = &noTags
+	return r
+}
+
+// Filter by commit branch. Not supported by the GraphQL where input, so it is applied after fetching.
+func (r ApiListScansRequest) CommitBranch(commitBranch string) ApiListScansRequest {
+	r.commitBranch = &commitBranch
+	return r
+}
+
+// Keep only the latest scan of each commit branch. Not supported by the GraphQL where input, so it is applied after fetching.
+func (r ApiListScansRequest) LatestBranchScans(latestBranchScans string) ApiListScansRequest {
+	r.latestBranchScans = &latestBranchScans
 	return r
 }
 
@@ -1836,6 +1850,12 @@ func (a *ScansAPIService) ListScansExecute(r ApiListScansRequest) (*ListScans200
 	}
 	if r.noTags != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "noTags", r.noTags, "form", "")
+	}
+	if r.commitBranch != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "commitBranch", r.commitBranch, "form", "")
+	}
+	if r.latestBranchScans != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "latestBranchScans", r.latestBranchScans, "form", "")
 	}
 	if r.dnf != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "dnf", r.dnf, "form", "")

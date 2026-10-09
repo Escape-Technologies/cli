@@ -26,8 +26,12 @@ type UpdateProfileRequest struct {
 	// Deprecated: use `schedule.cron` instead.
 	// Deprecated
 	Cron          *string                            `json:"cron,omitempty"`
-	Schedule      *ProfileScheduleUpdateInput        `json:"schedule,omitempty"`
+	Schedule      *ProfileScheduleUpdateInput1       `json:"schedule,omitempty"`
 	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
+	// Whether to use all available extra assets for the profile
+	UseAllAvailableExtraAssets *bool                         `json:"useAllAvailableExtraAssets,omitempty"`
+	Tags                       *UpdateProfileRequestTags     `json:"tags,omitempty"`
+	Projects                   *UpdateProfileRequestProjects `json:"projects,omitempty"`
 	// Maximum scan duration in minutes. DAST profiles allow 60-600; AI pentest profiles allow 360-1440.
 	MaxDurationMinutes *int `json:"maxDurationMinutes,omitempty"`
 	// The proxy ID (private location) for the profile. Omit and set `defaultProxyType` to `PRIVATE` to auto-select any healthy private location at scan time.
@@ -172,9 +176,9 @@ func (o *UpdateProfileRequest) SetCron(v string) {
 }
 
 // GetSchedule returns the Schedule field value if set, zero value otherwise.
-func (o *UpdateProfileRequest) GetSchedule() ProfileScheduleUpdateInput {
+func (o *UpdateProfileRequest) GetSchedule() ProfileScheduleUpdateInput1 {
 	if o == nil || IsNil(o.Schedule) {
-		var ret ProfileScheduleUpdateInput
+		var ret ProfileScheduleUpdateInput1
 		return ret
 	}
 	return *o.Schedule
@@ -182,7 +186,7 @@ func (o *UpdateProfileRequest) GetSchedule() ProfileScheduleUpdateInput {
 
 // GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateProfileRequest) GetScheduleOk() (*ProfileScheduleUpdateInput, bool) {
+func (o *UpdateProfileRequest) GetScheduleOk() (*ProfileScheduleUpdateInput1, bool) {
 	if o == nil || IsNil(o.Schedule) {
 		return nil, false
 	}
@@ -198,8 +202,8 @@ func (o *UpdateProfileRequest) HasSchedule() bool {
 	return false
 }
 
-// SetSchedule gets a reference to the given ProfileScheduleUpdateInput and assigns it to the Schedule field.
-func (o *UpdateProfileRequest) SetSchedule(v ProfileScheduleUpdateInput) {
+// SetSchedule gets a reference to the given ProfileScheduleUpdateInput1 and assigns it to the Schedule field.
+func (o *UpdateProfileRequest) SetSchedule(v ProfileScheduleUpdateInput1) {
 	o.Schedule = &v
 }
 
@@ -233,6 +237,102 @@ func (o *UpdateProfileRequest) HasExtraAssetIds() bool {
 // SetExtraAssetIds gets a reference to the given UpdateProfileRequestExtraAssetIds and assigns it to the ExtraAssetIds field.
 func (o *UpdateProfileRequest) SetExtraAssetIds(v UpdateProfileRequestExtraAssetIds) {
 	o.ExtraAssetIds = &v
+}
+
+// GetUseAllAvailableExtraAssets returns the UseAllAvailableExtraAssets field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetUseAllAvailableExtraAssets() bool {
+	if o == nil || IsNil(o.UseAllAvailableExtraAssets) {
+		var ret bool
+		return ret
+	}
+	return *o.UseAllAvailableExtraAssets
+}
+
+// GetUseAllAvailableExtraAssetsOk returns a tuple with the UseAllAvailableExtraAssets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetUseAllAvailableExtraAssetsOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseAllAvailableExtraAssets) {
+		return nil, false
+	}
+	return o.UseAllAvailableExtraAssets, true
+}
+
+// HasUseAllAvailableExtraAssets returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasUseAllAvailableExtraAssets() bool {
+	if o != nil && !IsNil(o.UseAllAvailableExtraAssets) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseAllAvailableExtraAssets gets a reference to the given bool and assigns it to the UseAllAvailableExtraAssets field.
+func (o *UpdateProfileRequest) SetUseAllAvailableExtraAssets(v bool) {
+	o.UseAllAvailableExtraAssets = &v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetTags() UpdateProfileRequestTags {
+	if o == nil || IsNil(o.Tags) {
+		var ret UpdateProfileRequestTags
+		return ret
+	}
+	return *o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetTagsOk() (*UpdateProfileRequestTags, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given UpdateProfileRequestTags and assigns it to the Tags field.
+func (o *UpdateProfileRequest) SetTags(v UpdateProfileRequestTags) {
+	o.Tags = &v
+}
+
+// GetProjects returns the Projects field value if set, zero value otherwise.
+func (o *UpdateProfileRequest) GetProjects() UpdateProfileRequestProjects {
+	if o == nil || IsNil(o.Projects) {
+		var ret UpdateProfileRequestProjects
+		return ret
+	}
+	return *o.Projects
+}
+
+// GetProjectsOk returns a tuple with the Projects field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateProfileRequest) GetProjectsOk() (*UpdateProfileRequestProjects, bool) {
+	if o == nil || IsNil(o.Projects) {
+		return nil, false
+	}
+	return o.Projects, true
+}
+
+// HasProjects returns a boolean if a field has been set.
+func (o *UpdateProfileRequest) HasProjects() bool {
+	if o != nil && !IsNil(o.Projects) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjects gets a reference to the given UpdateProfileRequestProjects and assigns it to the Projects field.
+func (o *UpdateProfileRequest) SetProjects(v UpdateProfileRequestProjects) {
+	o.Projects = &v
 }
 
 // GetMaxDurationMinutes returns the MaxDurationMinutes field value if set, zero value otherwise.
@@ -676,6 +776,15 @@ func (o UpdateProfileRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExtraAssetIds) {
 		toSerialize["extraAssetIds"] = o.ExtraAssetIds
 	}
+	if !IsNil(o.UseAllAvailableExtraAssets) {
+		toSerialize["useAllAvailableExtraAssets"] = o.UseAllAvailableExtraAssets
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
+	}
+	if !IsNil(o.Projects) {
+		toSerialize["projects"] = o.Projects
+	}
 	if !IsNil(o.MaxDurationMinutes) {
 		toSerialize["maxDurationMinutes"] = o.MaxDurationMinutes
 	}
@@ -742,6 +851,9 @@ func (o *UpdateProfileRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cron")
 		delete(additionalProperties, "schedule")
 		delete(additionalProperties, "extraAssetIds")
+		delete(additionalProperties, "useAllAvailableExtraAssets")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "projects")
 		delete(additionalProperties, "maxDurationMinutes")
 		delete(additionalProperties, "proxyId")
 		delete(additionalProperties, "defaultProxyType")

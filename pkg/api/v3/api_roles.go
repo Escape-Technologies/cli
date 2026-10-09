@@ -704,6 +704,27 @@ func (a *RolesAPIService) GetRoleExecute(r ApiGetRoleRequest) (*CreateRole200Res
 type ApiListRolesRequest struct {
 	ctx        context.Context
 	ApiService *RolesAPIService
+	cursor     *string
+	size       *int
+	search     *string
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListRolesRequest) Cursor(cursor string) ApiListRolesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListRolesRequest) Size(size int) ApiListRolesRequest {
+	r.size = &size
+	return r
+}
+
+// Search term to filter roles by name
+func (r ApiListRolesRequest) Search(search string) ApiListRolesRequest {
+	r.search = &search
+	return r
 }
 
 func (r ApiListRolesRequest) Execute() ([]ListRoles200ResponseInner, *http.Response, error) {
@@ -747,6 +768,18 @@ func (a *RolesAPIService) ListRolesExecute(r ApiListRolesRequest) ([]ListRoles20
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -799,6 +832,16 @@ func (a *RolesAPIService) ListRolesExecute(r ApiListRolesRequest) ([]ListRoles20
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v PaginationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

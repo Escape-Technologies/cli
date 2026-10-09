@@ -18,10 +18,10 @@ import (
 // checks if the PaginationError type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PaginationError{}
 
-// PaginationError Returned when an invalid pagination cursor is supplied
+// PaginationError Returned when an invalid pagination cursor is supplied or when the branch filters page limit is reached
 type PaginationError struct {
-	Message              ENUMINVALIDCURSOR `json:"message"`
-	Details              string            `json:"details"`
+	Message              ENUMPROPERTIESMESSAGE `json:"message"`
+	Details              string                `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,7 +31,7 @@ type _PaginationError PaginationError
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaginationError(message ENUMINVALIDCURSOR, details string) *PaginationError {
+func NewPaginationError(message ENUMPROPERTIESMESSAGE, details string) *PaginationError {
 	this := PaginationError{}
 	this.Message = message
 	this.Details = details
@@ -47,9 +47,9 @@ func NewPaginationErrorWithDefaults() *PaginationError {
 }
 
 // GetMessage returns the Message field value
-func (o *PaginationError) GetMessage() ENUMINVALIDCURSOR {
+func (o *PaginationError) GetMessage() ENUMPROPERTIESMESSAGE {
 	if o == nil {
-		var ret ENUMINVALIDCURSOR
+		var ret ENUMPROPERTIESMESSAGE
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *PaginationError) GetMessage() ENUMINVALIDCURSOR {
 
 // GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *PaginationError) GetMessageOk() (*ENUMINVALIDCURSOR, bool) {
+func (o *PaginationError) GetMessageOk() (*ENUMPROPERTIESMESSAGE, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *PaginationError) GetMessageOk() (*ENUMINVALIDCURSOR, bool) {
 }
 
 // SetMessage sets field value
-func (o *PaginationError) SetMessage(v ENUMINVALIDCURSOR) {
+func (o *PaginationError) SetMessage(v ENUMPROPERTIESMESSAGE) {
 	o.Message = v
 }
 

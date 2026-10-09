@@ -31,10 +31,12 @@ type StartScanRequest struct {
 	// The commit author to scan
 	CommitAuthor *string `json:"commitAuthor,omitempty"`
 	// The commit author profile picture link to scan
-	CommitAuthorProfilePictureLink *string                  `json:"commitAuthorProfilePictureLink,omitempty"`
-	ConfigurationOverride          interface{}              `json:"configurationOverride,omitempty"`
-	Initiator                      *ENUMPROPERTIESINITIATOR `json:"initiator,omitempty"`
-	AdditionalProperties           map[string]interface{}
+	CommitAuthorProfilePictureLink *string `json:"commitAuthorProfilePictureLink,omitempty"`
+	// Bypass the lock that prevents concurrent scans of the same profile
+	ForceLockBypass       *bool                    `json:"forceLockBypass,omitempty"`
+	ConfigurationOverride interface{}              `json:"configurationOverride,omitempty"`
+	Initiator             *ENUMPROPERTIESINITIATOR `json:"initiator,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _StartScanRequest StartScanRequest
@@ -245,6 +247,38 @@ func (o *StartScanRequest) SetCommitAuthorProfilePictureLink(v string) {
 	o.CommitAuthorProfilePictureLink = &v
 }
 
+// GetForceLockBypass returns the ForceLockBypass field value if set, zero value otherwise.
+func (o *StartScanRequest) GetForceLockBypass() bool {
+	if o == nil || IsNil(o.ForceLockBypass) {
+		var ret bool
+		return ret
+	}
+	return *o.ForceLockBypass
+}
+
+// GetForceLockBypassOk returns a tuple with the ForceLockBypass field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StartScanRequest) GetForceLockBypassOk() (*bool, bool) {
+	if o == nil || IsNil(o.ForceLockBypass) {
+		return nil, false
+	}
+	return o.ForceLockBypass, true
+}
+
+// HasForceLockBypass returns a boolean if a field has been set.
+func (o *StartScanRequest) HasForceLockBypass() bool {
+	if o != nil && !IsNil(o.ForceLockBypass) {
+		return true
+	}
+
+	return false
+}
+
+// SetForceLockBypass gets a reference to the given bool and assigns it to the ForceLockBypass field.
+func (o *StartScanRequest) SetForceLockBypass(v bool) {
+	o.ForceLockBypass = &v
+}
+
 // GetConfigurationOverride returns the ConfigurationOverride field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StartScanRequest) GetConfigurationOverride() interface{} {
 	if o == nil {
@@ -336,6 +370,9 @@ func (o StartScanRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CommitAuthorProfilePictureLink) {
 		toSerialize["commitAuthorProfilePictureLink"] = o.CommitAuthorProfilePictureLink
 	}
+	if !IsNil(o.ForceLockBypass) {
+		toSerialize["forceLockBypass"] = o.ForceLockBypass
+	}
 	if o.ConfigurationOverride != nil {
 		toSerialize["configurationOverride"] = o.ConfigurationOverride
 	}
@@ -391,6 +428,7 @@ func (o *StartScanRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "commitBranch")
 		delete(additionalProperties, "commitAuthor")
 		delete(additionalProperties, "commitAuthorProfilePictureLink")
+		delete(additionalProperties, "forceLockBypass")
 		delete(additionalProperties, "configurationOverride")
 		delete(additionalProperties, "initiator")
 		o.AdditionalProperties = additionalProperties

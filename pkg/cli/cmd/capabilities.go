@@ -163,8 +163,8 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli assets update":                       {Output: v3.UpdateAsset200Response{}},
 		"escape-cli assets comment":                      {Output: v3.CreateAssetComment200Response{}},
 		"escape-cli assets delete":                       {Output: v3.DeleteProfile200Response{}}, // generated client reuses this {"message": string} schema
-		"escape-cli assets bulk-update":                  {Output: v3.BulkUpdateAssets200Response{}},
-		"escape-cli assets bulk-delete":                  {Output: v3.BulkUpdateAssets200Response{}},
+		"escape-cli assets bulk-update":                  {Output: escape.BulkOperationResult{}},  // {"success": bool}
+		"escape-cli assets bulk-delete":                  {Output: escape.BulkOperationResult{}},  // same {"success": bool} body as assets bulk-update
 		"escape-cli assets bulk-import":                  {Input: v3.BulkImportAssets{}, Output: v3.BulkImportAssets200Response{}},
 		"escape-cli asm trigger":                         {Output: v3.TriggerAsmScans200Response{}},
 		"escape-cli custom-rules list":                   {Output: []v3.CustomRuleSummarized{}},

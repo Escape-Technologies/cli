@@ -292,6 +292,15 @@ func UpdateAsset(ctx context.Context, id string, input UpdateAssetInput) (*v3.Up
 	return data, nil
 }
 
+// BulkOperationResult is the {"success": bool} body returned by the bulk asset
+// endpoints. The generated client names the bulk response model after whichever
+// operation the spec lists first (BulkUpdateAssets200Response,
+// BulkUpdateProfiles200Response, ...), so the CLI decodes into this stable local
+// type instead of the generated one and keeps compiling across regenerations.
+type BulkOperationResult struct {
+	Success bool `json:"success"`
+}
+
 // BulkImportAssets starts an asynchronous job that creates multiple assets. The
 // raw JSON body is the BulkImportAssets request, so callers can pass the stdin
 // payload straight through.
@@ -315,7 +324,7 @@ func BulkImportAssets(ctx context.Context, data []byte) (*v3.BulkImportAssets200
 }
 
 // BulkUpdateAssets updates multiple assets matching a filter
-func BulkUpdateAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere, tagIDs, projectIDs []string, status *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) (*v3.BulkUpdateAssets200Response, error) {
+func BulkUpdateAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere, tagIDs, projectIDs []string, status *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) (*BulkOperationResult, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -339,11 +348,11 @@ func BulkUpdateAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
-	return data, nil
+	return &BulkOperationResult{Success: data.GetSuccess()}, nil
 }
 
 // BulkDeleteAssets deletes multiple assets matching a filter
-func BulkDeleteAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere) (*v3.BulkUpdateAssets200Response, error) {
+func BulkDeleteAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere) (*BulkOperationResult, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -355,7 +364,7 @@ func BulkDeleteAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
-	return data, nil
+	return &BulkOperationResult{Success: data.GetSuccess()}, nil
 }
 
 // CommentAsset adds a comment to an asset

@@ -6,6 +6,7 @@ import (
 	"slices"
 	"testing"
 
+	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	climcp "github.com/Escape-Technologies/cli/pkg/mcp"
 )
@@ -16,8 +17,8 @@ func TestCommandSchemaRegistryIncludesDestructiveCommands(t *testing.T) {
 	wantOutput := map[string]any{
 		"escape-cli profiles delete":     v3.DeleteProfile200Response{},
 		"escape-cli assets delete":       v3.DeleteProfile200Response{},
-		"escape-cli assets bulk-delete":  v3.BulkUpdateAssets200Response{},
-		"escape-cli assets bulk-update":  v3.BulkUpdateAssets200Response{},
+		"escape-cli assets bulk-delete":  escape.BulkOperationResult{},
+		"escape-cli assets bulk-update":  escape.BulkOperationResult{},
 		"escape-cli tags delete":         v3.DeleteProfile200Response{},
 		"escape-cli custom-rules delete": v3.DeleteCustomRule200Response{},
 		"escape-cli locations delete":    v3.DeleteLocation200Response{},

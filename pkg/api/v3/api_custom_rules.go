@@ -425,12 +425,33 @@ func (a *CustomRulesAPIService) GetCustomRuleExecute(r ApiGetCustomRuleRequest) 
 type ApiListCustomRulesRequest struct {
 	ctx        context.Context
 	ApiService *CustomRulesAPIService
+	cursor     *string
+	size       *int
 	context    *string
+	search     *string
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListCustomRulesRequest) Cursor(cursor string) ApiListCustomRulesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListCustomRulesRequest) Size(size int) ApiListCustomRulesRequest {
+	r.size = &size
+	return r
 }
 
 // Filter by custom rule context
 func (r ApiListCustomRulesRequest) Context(context string) ApiListCustomRulesRequest {
 	r.context = &context
+	return r
+}
+
+// Search term to filter custom rules by name
+func (r ApiListCustomRulesRequest) Search(search string) ApiListCustomRulesRequest {
+	r.search = &search
 	return r
 }
 
@@ -475,8 +496,20 @@ func (a *CustomRulesAPIService) ListCustomRulesExecute(r ApiListCustomRulesReque
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
 	if r.context != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "context", r.context, "form", "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

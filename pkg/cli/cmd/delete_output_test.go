@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	"github.com/spf13/cobra"
@@ -80,7 +81,7 @@ func TestDestructiveDeletesPrintTheirDeclaredDocument(t *testing.T) {
 			run: func() error {
 				return assetBulkUpdateCmd.RunE(assetBulkUpdateCmd, nil)
 			},
-			dest: func() any { return &v3.BulkUpdateAssets200Response{} },
+			dest: func() any { return &escape.BulkOperationResult{} },
 		},
 		{
 			name:   "assets bulk-delete",
@@ -94,7 +95,7 @@ func TestDestructiveDeletesPrintTheirDeclaredDocument(t *testing.T) {
 			run: func() error {
 				return assetBulkDeleteCmd.RunE(assetBulkDeleteCmd, nil)
 			},
-			dest: func() any { return &v3.BulkUpdateAssets200Response{} },
+			dest: func() any { return &escape.BulkOperationResult{} },
 		},
 		{
 			name:   "tags delete",
