@@ -13,6 +13,7 @@ package v3
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the GetMe200ResponseOrganization type satisfies the MappedNullable interface at compile time
@@ -23,7 +24,13 @@ type GetMe200ResponseOrganization struct {
 	// The id of the current organization
 	Id string `json:"id"`
 	// The name of the current organization
-	Name                 string `json:"name"`
+	Name string `json:"name"`
+	// The id of the scan inbox mailbox of the current organization
+	MailboxId string `json:"mailboxId"`
+	// Whether the organization is on a paid subscription
+	Paying bool `json:"paying"`
+	// The date and time the current subscription or trial expires
+	ExpiresAt            time.Time `json:"expiresAt"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,10 +40,13 @@ type _GetMe200ResponseOrganization GetMe200ResponseOrganization
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetMe200ResponseOrganization(id string, name string) *GetMe200ResponseOrganization {
+func NewGetMe200ResponseOrganization(id string, name string, mailboxId string, paying bool, expiresAt time.Time) *GetMe200ResponseOrganization {
 	this := GetMe200ResponseOrganization{}
 	this.Id = id
 	this.Name = name
+	this.MailboxId = mailboxId
+	this.Paying = paying
+	this.ExpiresAt = expiresAt
 	return &this
 }
 
@@ -96,6 +106,78 @@ func (o *GetMe200ResponseOrganization) SetName(v string) {
 	o.Name = v
 }
 
+// GetMailboxId returns the MailboxId field value
+func (o *GetMe200ResponseOrganization) GetMailboxId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.MailboxId
+}
+
+// GetMailboxIdOk returns a tuple with the MailboxId field value
+// and a boolean to check if the value has been set.
+func (o *GetMe200ResponseOrganization) GetMailboxIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MailboxId, true
+}
+
+// SetMailboxId sets field value
+func (o *GetMe200ResponseOrganization) SetMailboxId(v string) {
+	o.MailboxId = v
+}
+
+// GetPaying returns the Paying field value
+func (o *GetMe200ResponseOrganization) GetPaying() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Paying
+}
+
+// GetPayingOk returns a tuple with the Paying field value
+// and a boolean to check if the value has been set.
+func (o *GetMe200ResponseOrganization) GetPayingOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Paying, true
+}
+
+// SetPaying sets field value
+func (o *GetMe200ResponseOrganization) SetPaying(v bool) {
+	o.Paying = v
+}
+
+// GetExpiresAt returns the ExpiresAt field value
+func (o *GetMe200ResponseOrganization) GetExpiresAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.ExpiresAt
+}
+
+// GetExpiresAtOk returns a tuple with the ExpiresAt field value
+// and a boolean to check if the value has been set.
+func (o *GetMe200ResponseOrganization) GetExpiresAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ExpiresAt, true
+}
+
+// SetExpiresAt sets field value
+func (o *GetMe200ResponseOrganization) SetExpiresAt(v time.Time) {
+	o.ExpiresAt = v
+}
+
 func (o GetMe200ResponseOrganization) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -108,6 +190,9 @@ func (o GetMe200ResponseOrganization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+	toSerialize["mailboxId"] = o.MailboxId
+	toSerialize["paying"] = o.Paying
+	toSerialize["expiresAt"] = o.ExpiresAt
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -123,6 +208,9 @@ func (o *GetMe200ResponseOrganization) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
+		"mailboxId",
+		"paying",
+		"expiresAt",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -154,6 +242,9 @@ func (o *GetMe200ResponseOrganization) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "mailboxId")
+		delete(additionalProperties, "paying")
+		delete(additionalProperties, "expiresAt")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -48,6 +48,8 @@ type APIClient struct {
 
 	// API Services
 
+	AIChatsAPI *AIChatsAPIService
+
 	AsmAPI *AsmAPIService
 
 	AssetsAPI *AssetsAPIService
@@ -67,6 +69,8 @@ type APIClient struct {
 	IssuesAPI *IssuesAPIService
 
 	JobsAPI *JobsAPIService
+
+	KnowledgeFilesAPI *KnowledgeFilesAPIService
 
 	LocationsAPI *LocationsAPIService
 
@@ -119,6 +123,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AIChatsAPI = (*AIChatsAPIService)(&c.common)
 	c.AsmAPI = (*AsmAPIService)(&c.common)
 	c.AssetsAPI = (*AssetsAPIService)(&c.common)
 	c.AuditAPI = (*AuditAPIService)(&c.common)
@@ -129,6 +134,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.IntegrationsAPI = (*IntegrationsAPIService)(&c.common)
 	c.IssuesAPI = (*IssuesAPIService)(&c.common)
 	c.JobsAPI = (*JobsAPIService)(&c.common)
+	c.KnowledgeFilesAPI = (*KnowledgeFilesAPIService)(&c.common)
 	c.LocationsAPI = (*LocationsAPIService)(&c.common)
 	c.OrganizationSettingsAPI = (*OrganizationSettingsAPIService)(&c.common)
 	c.ProfilesAPI = (*ProfilesAPIService)(&c.common)

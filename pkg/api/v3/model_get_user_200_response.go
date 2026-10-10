@@ -29,6 +29,12 @@ type GetUser200Response struct {
 	CreatedAt time.Time `json:"createdAt"`
 	// The date and time the user was activated
 	ActivatedAt *time.Time `json:"activatedAt,omitempty"`
+	// The date and time the user was deactivated
+	DeactivatedAt *time.Time `json:"deactivatedAt,omitempty"`
+	// The date and time the user first logged in
+	FirstLoginAt *time.Time `json:"firstLoginAt,omitempty"`
+	// The date and time the user last logged in
+	LastLoginAt *time.Time `json:"lastLoginAt,omitempty"`
 	// The bindings of the user
 	RoleBindings         []CreateProject200ResponseBindingsInner `json:"roleBindings"`
 	AdditionalProperties map[string]interface{}
@@ -161,6 +167,102 @@ func (o *GetUser200Response) SetActivatedAt(v time.Time) {
 	o.ActivatedAt = &v
 }
 
+// GetDeactivatedAt returns the DeactivatedAt field value if set, zero value otherwise.
+func (o *GetUser200Response) GetDeactivatedAt() time.Time {
+	if o == nil || IsNil(o.DeactivatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.DeactivatedAt
+}
+
+// GetDeactivatedAtOk returns a tuple with the DeactivatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetUser200Response) GetDeactivatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.DeactivatedAt) {
+		return nil, false
+	}
+	return o.DeactivatedAt, true
+}
+
+// HasDeactivatedAt returns a boolean if a field has been set.
+func (o *GetUser200Response) HasDeactivatedAt() bool {
+	if o != nil && !IsNil(o.DeactivatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeactivatedAt gets a reference to the given time.Time and assigns it to the DeactivatedAt field.
+func (o *GetUser200Response) SetDeactivatedAt(v time.Time) {
+	o.DeactivatedAt = &v
+}
+
+// GetFirstLoginAt returns the FirstLoginAt field value if set, zero value otherwise.
+func (o *GetUser200Response) GetFirstLoginAt() time.Time {
+	if o == nil || IsNil(o.FirstLoginAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.FirstLoginAt
+}
+
+// GetFirstLoginAtOk returns a tuple with the FirstLoginAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetUser200Response) GetFirstLoginAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.FirstLoginAt) {
+		return nil, false
+	}
+	return o.FirstLoginAt, true
+}
+
+// HasFirstLoginAt returns a boolean if a field has been set.
+func (o *GetUser200Response) HasFirstLoginAt() bool {
+	if o != nil && !IsNil(o.FirstLoginAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetFirstLoginAt gets a reference to the given time.Time and assigns it to the FirstLoginAt field.
+func (o *GetUser200Response) SetFirstLoginAt(v time.Time) {
+	o.FirstLoginAt = &v
+}
+
+// GetLastLoginAt returns the LastLoginAt field value if set, zero value otherwise.
+func (o *GetUser200Response) GetLastLoginAt() time.Time {
+	if o == nil || IsNil(o.LastLoginAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastLoginAt
+}
+
+// GetLastLoginAtOk returns a tuple with the LastLoginAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetUser200Response) GetLastLoginAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastLoginAt) {
+		return nil, false
+	}
+	return o.LastLoginAt, true
+}
+
+// HasLastLoginAt returns a boolean if a field has been set.
+func (o *GetUser200Response) HasLastLoginAt() bool {
+	if o != nil && !IsNil(o.LastLoginAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastLoginAt gets a reference to the given time.Time and assigns it to the LastLoginAt field.
+func (o *GetUser200Response) SetLastLoginAt(v time.Time) {
+	o.LastLoginAt = &v
+}
+
 // GetRoleBindings returns the RoleBindings field value
 func (o *GetUser200Response) GetRoleBindings() []CreateProject200ResponseBindingsInner {
 	if o == nil {
@@ -200,6 +302,15 @@ func (o GetUser200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["createdAt"] = o.CreatedAt
 	if !IsNil(o.ActivatedAt) {
 		toSerialize["activatedAt"] = o.ActivatedAt
+	}
+	if !IsNil(o.DeactivatedAt) {
+		toSerialize["deactivatedAt"] = o.DeactivatedAt
+	}
+	if !IsNil(o.FirstLoginAt) {
+		toSerialize["firstLoginAt"] = o.FirstLoginAt
+	}
+	if !IsNil(o.LastLoginAt) {
+		toSerialize["lastLoginAt"] = o.LastLoginAt
 	}
 	toSerialize["roleBindings"] = o.RoleBindings
 
@@ -252,6 +363,9 @@ func (o *GetUser200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "activatedAt")
+		delete(additionalProperties, "deactivatedAt")
+		delete(additionalProperties, "firstLoginAt")
+		delete(additionalProperties, "lastLoginAt")
 		delete(additionalProperties, "roleBindings")
 		o.AdditionalProperties = additionalProperties
 	}

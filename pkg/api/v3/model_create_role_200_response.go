@@ -26,7 +26,7 @@ type CreateRole200Response struct {
 	// The name of the role
 	Name string `json:"name"`
 	// The permissions of the role
-	Permissions []ENUMITEMSPROPERTIESPERMISSIONSITEMS `json:"permissions"`
+	Permissions []ENUMITEMSPROPERTIESID `json:"permissions"`
 	// The date and time the role was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The bindings of the role
@@ -40,7 +40,7 @@ type _CreateRole200Response CreateRole200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateRole200Response(id string, name string, permissions []ENUMITEMSPROPERTIESPERMISSIONSITEMS, createdAt time.Time, bindings []CreateProject200ResponseBindingsInner) *CreateRole200Response {
+func NewCreateRole200Response(id string, name string, permissions []ENUMITEMSPROPERTIESID, createdAt time.Time, bindings []CreateProject200ResponseBindingsInner) *CreateRole200Response {
 	this := CreateRole200Response{}
 	this.Id = id
 	this.Name = name
@@ -107,9 +107,9 @@ func (o *CreateRole200Response) SetName(v string) {
 }
 
 // GetPermissions returns the Permissions field value
-func (o *CreateRole200Response) GetPermissions() []ENUMITEMSPROPERTIESPERMISSIONSITEMS {
+func (o *CreateRole200Response) GetPermissions() []ENUMITEMSPROPERTIESID {
 	if o == nil {
-		var ret []ENUMITEMSPROPERTIESPERMISSIONSITEMS
+		var ret []ENUMITEMSPROPERTIESID
 		return ret
 	}
 
@@ -118,7 +118,7 @@ func (o *CreateRole200Response) GetPermissions() []ENUMITEMSPROPERTIESPERMISSION
 
 // GetPermissionsOk returns a tuple with the Permissions field value
 // and a boolean to check if the value has been set.
-func (o *CreateRole200Response) GetPermissionsOk() ([]ENUMITEMSPROPERTIESPERMISSIONSITEMS, bool) {
+func (o *CreateRole200Response) GetPermissionsOk() ([]ENUMITEMSPROPERTIESID, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *CreateRole200Response) GetPermissionsOk() ([]ENUMITEMSPROPERTIESPERMISS
 }
 
 // SetPermissions sets field value
-func (o *CreateRole200Response) SetPermissions(v []ENUMITEMSPROPERTIESPERMISSIONSITEMS) {
+func (o *CreateRole200Response) SetPermissions(v []ENUMITEMSPROPERTIESID) {
 	o.Permissions = v
 }
 

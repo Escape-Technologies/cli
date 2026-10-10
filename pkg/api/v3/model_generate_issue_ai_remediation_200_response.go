@@ -47,8 +47,6 @@ func NewGenerateIssueAiRemediation200Response(kind ENUMPROPERTIESKIND, generated
 // but it doesn't guarantee that properties required by API are set
 func NewGenerateIssueAiRemediation200ResponseWithDefaults() *GenerateIssueAiRemediation200Response {
 	this := GenerateIssueAiRemediation200Response{}
-	var kind ENUMPROPERTIESKIND = ENUMPROPERTIESKIND_REMEDIATION
-	this.Kind = kind
 	return &this
 }
 

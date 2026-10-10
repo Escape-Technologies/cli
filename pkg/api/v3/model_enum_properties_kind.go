@@ -15,17 +15,21 @@ import (
 	"fmt"
 )
 
-// ENUMPROPERTIESKIND Which AI remediation artefact to act on: `remediation` for the full issue-panel remediation, `summary` for the short overview summary.
+// ENUMPROPERTIESKIND The kind of summary to generate
 type ENUMPROPERTIESKIND string
 
 // List of ENUM_PROPERTIES_KIND
 const (
+	ENUMPROPERTIESKIND_EXPLORATION ENUMPROPERTIESKIND = "EXPLORATION"
+	ENUMPROPERTIESKIND_PENTESTING  ENUMPROPERTIESKIND = "PENTESTING"
 	ENUMPROPERTIESKIND_REMEDIATION ENUMPROPERTIESKIND = "remediation"
 	ENUMPROPERTIESKIND_SUMMARY     ENUMPROPERTIESKIND = "summary"
 )
 
 // All allowed values of ENUMPROPERTIESKIND enum
 var AllowedENUMPROPERTIESKINDEnumValues = []ENUMPROPERTIESKIND{
+	"EXPLORATION",
+	"PENTESTING",
 	"remediation",
 	"summary",
 }

@@ -33,8 +33,6 @@ type _SaveIssueAiRemediationFeedbackRequest SaveIssueAiRemediationFeedbackReques
 // will change when the set of required properties is changed
 func NewSaveIssueAiRemediationFeedbackRequest() *SaveIssueAiRemediationFeedbackRequest {
 	this := SaveIssueAiRemediationFeedbackRequest{}
-	var kind ENUMPROPERTIESKIND = ENUMPROPERTIESKIND_REMEDIATION
-	this.Kind = &kind
 	return &this
 }
 
@@ -43,8 +41,6 @@ func NewSaveIssueAiRemediationFeedbackRequest() *SaveIssueAiRemediationFeedbackR
 // but it doesn't guarantee that properties required by API are set
 func NewSaveIssueAiRemediationFeedbackRequestWithDefaults() *SaveIssueAiRemediationFeedbackRequest {
 	this := SaveIssueAiRemediationFeedbackRequest{}
-	var kind ENUMPROPERTIESKIND = ENUMPROPERTIESKIND_REMEDIATION
-	this.Kind = &kind
 	return &this
 }
 

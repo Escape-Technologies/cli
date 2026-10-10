@@ -26,7 +26,7 @@ type ListRoles200ResponseInner struct {
 	// The name of the role
 	Name string `json:"name"`
 	// The permissions of the role
-	Permissions []ENUMITEMSPROPERTIESPERMISSIONSITEMS `json:"permissions"`
+	Permissions []ENUMITEMSPROPERTIESID `json:"permissions"`
 	// The date and time the role was created
 	CreatedAt time.Time `json:"createdAt"`
 	// The bindings of the role
@@ -40,7 +40,7 @@ type _ListRoles200ResponseInner ListRoles200ResponseInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListRoles200ResponseInner(id string, name string, permissions []ENUMITEMSPROPERTIESPERMISSIONSITEMS, createdAt time.Time, bindings []ListProjects200ResponseDataInnerBindingsInner) *ListRoles200ResponseInner {
+func NewListRoles200ResponseInner(id string, name string, permissions []ENUMITEMSPROPERTIESID, createdAt time.Time, bindings []ListProjects200ResponseDataInnerBindingsInner) *ListRoles200ResponseInner {
 	this := ListRoles200ResponseInner{}
 	this.Id = id
 	this.Name = name
@@ -107,9 +107,9 @@ func (o *ListRoles200ResponseInner) SetName(v string) {
 }
 
 // GetPermissions returns the Permissions field value
-func (o *ListRoles200ResponseInner) GetPermissions() []ENUMITEMSPROPERTIESPERMISSIONSITEMS {
+func (o *ListRoles200ResponseInner) GetPermissions() []ENUMITEMSPROPERTIESID {
 	if o == nil {
-		var ret []ENUMITEMSPROPERTIESPERMISSIONSITEMS
+		var ret []ENUMITEMSPROPERTIESID
 		return ret
 	}
 
@@ -118,7 +118,7 @@ func (o *ListRoles200ResponseInner) GetPermissions() []ENUMITEMSPROPERTIESPERMIS
 
 // GetPermissionsOk returns a tuple with the Permissions field value
 // and a boolean to check if the value has been set.
-func (o *ListRoles200ResponseInner) GetPermissionsOk() ([]ENUMITEMSPROPERTIESPERMISSIONSITEMS, bool) {
+func (o *ListRoles200ResponseInner) GetPermissionsOk() ([]ENUMITEMSPROPERTIESID, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *ListRoles200ResponseInner) GetPermissionsOk() ([]ENUMITEMSPROPERTIESPER
 }
 
 // SetPermissions sets field value
-func (o *ListRoles200ResponseInner) SetPermissions(v []ENUMITEMSPROPERTIESPERMISSIONSITEMS) {
+func (o *ListRoles200ResponseInner) SetPermissions(v []ENUMITEMSPROPERTIESID) {
 	o.Permissions = v
 }
 

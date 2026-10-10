@@ -19,267 +19,34 @@ import (
 	"strings"
 )
 
-// UsersAPIService UsersAPI service
-type UsersAPIService service
+// AIChatsAPIService AIChatsAPI service
+type AIChatsAPIService service
 
-type ApiGetMeRequest struct {
-	ctx        context.Context
-	ApiService *UsersAPIService
+type ApiCreateAIChatRequest struct {
+	ctx                 context.Context
+	ApiService          *AIChatsAPIService
+	createAIChatRequest *CreateAIChatRequest
 }
 
-func (r ApiGetMeRequest) Execute() (*GetMe200Response, *http.Response, error) {
-	return r.ApiService.GetMeExecute(r)
-}
-
-/*
-GetMe Get current user context
-
-Get basic information about the authenticated user and current organization, including subscription and trial state.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetMeRequest
-*/
-func (a *UsersAPIService) GetMe(ctx context.Context) ApiGetMeRequest {
-	return ApiGetMeRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return GetMe200Response
-func (a *UsersAPIService) GetMeExecute(r ApiGetMeRequest) (*GetMe200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetMe200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.GetMe")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/me"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetUserRequest struct {
-	ctx        context.Context
-	ApiService *UsersAPIService
-	userId     string
-}
-
-func (r ApiGetUserRequest) Execute() (*GetUser200Response, *http.Response, error) {
-	return r.ApiService.GetUserExecute(r)
-}
-
-/*
-GetUser Get a user
-
-Get a user by ID.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param userId The user ID
-	@return ApiGetUserRequest
-*/
-func (a *UsersAPIService) GetUser(ctx context.Context, userId string) ApiGetUserRequest {
-	return ApiGetUserRequest{
-		ApiService: a,
-		ctx:        ctx,
-		userId:     userId,
-	}
-}
-
-// Execute executes the request
-//
-//	@return GetUser200Response
-func (a *UsersAPIService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetUser200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.GetUser")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/users/{userId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiInviteUserRequest struct {
-	ctx               context.Context
-	ApiService        *UsersAPIService
-	inviteUserRequest *InviteUserRequest
-}
-
-// Body of the request to invite users
-func (r ApiInviteUserRequest) InviteUserRequest(inviteUserRequest InviteUserRequest) ApiInviteUserRequest {
-	r.inviteUserRequest = &inviteUserRequest
+func (r ApiCreateAIChatRequest) CreateAIChatRequest(createAIChatRequest CreateAIChatRequest) ApiCreateAIChatRequest {
+	r.createAIChatRequest = &createAIChatRequest
 	return r
 }
 
-func (r ApiInviteUserRequest) Execute() ([]ListUsers200ResponseInner, *http.Response, error) {
-	return r.ApiService.InviteUserExecute(r)
+func (r ApiCreateAIChatRequest) Execute() (*CreateAIChat200Response, *http.Response, error) {
+	return r.ApiService.CreateAIChatExecute(r)
 }
 
 /*
-InviteUser Invite users
+CreateAIChat Create a Copilot chat
 
-Invite users to the organization, and give them roles.
+Create a Copilot chat for the authenticated user. The organization is resolved from the API key and is never taken from the request body. Chats are always created as non-internal.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiInviteUserRequest
+	@return ApiCreateAIChatRequest
 */
-func (a *UsersAPIService) InviteUser(ctx context.Context) ApiInviteUserRequest {
-	return ApiInviteUserRequest{
+func (a *AIChatsAPIService) CreateAIChat(ctx context.Context) ApiCreateAIChatRequest {
+	return ApiCreateAIChatRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -287,27 +54,27 @@ func (a *UsersAPIService) InviteUser(ctx context.Context) ApiInviteUserRequest {
 
 // Execute executes the request
 //
-//	@return []ListUsers200ResponseInner
-func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers200ResponseInner, *http.Response, error) {
+//	@return CreateAIChat200Response
+func (a *AIChatsAPIService) CreateAIChatExecute(r ApiCreateAIChatRequest) (*CreateAIChat200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []ListUsers200ResponseInner
+		localVarReturnValue *CreateAIChat200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.InviteUser")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIChatsAPIService.CreateAIChat")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/users/invite"
+	localVarPath := localBasePath + "/ai-chats"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.inviteUserRequest == nil {
-		return localVarReturnValue, nil, reportError("inviteUserRequest is required and must be specified")
+	if r.createAIChatRequest == nil {
+		return localVarReturnValue, nil, reportError("createAIChatRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -328,7 +95,7 @@ func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.inviteUserRequest
+	localVarPostBody = r.createAIChatRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -390,198 +157,63 @@ func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListUsersRequest struct {
-	ctx         context.Context
-	ApiService  *UsersAPIService
-	deactivated *string
-	search      *string
+type ApiCreateAIChatMessageRequest struct {
+	ctx                        context.Context
+	ApiService                 *AIChatsAPIService
+	chatId                     string
+	createAIChatMessageRequest *CreateAIChatMessageRequest
 }
 
-// Filter by activation status: &#x60;true&#x60; returns only deactivated users, &#x60;false&#x60; only active ones. Omit to return both.
-func (r ApiListUsersRequest) Deactivated(deactivated string) ApiListUsersRequest {
-	r.deactivated = &deactivated
+func (r ApiCreateAIChatMessageRequest) CreateAIChatMessageRequest(createAIChatMessageRequest CreateAIChatMessageRequest) ApiCreateAIChatMessageRequest {
+	r.createAIChatMessageRequest = &createAIChatMessageRequest
 	return r
 }
 
-// Search users whose email contains this value
-func (r ApiListUsersRequest) Search(search string) ApiListUsersRequest {
-	r.search = &search
-	return r
-}
-
-func (r ApiListUsersRequest) Execute() ([]ListUsers200ResponseInner, *http.Response, error) {
-	return r.ApiService.ListUsersExecute(r)
+func (r ApiCreateAIChatMessageRequest) Execute() (*CreateAIChatMessage200Response, *http.Response, error) {
+	return r.ApiService.CreateAIChatMessageExecute(r)
 }
 
 /*
-ListUsers List users
+CreateAIChatMessage Send a Copilot chat message
 
-List users of the organization. Filter by activation status with `deactivated`, and search by email with `search`.
+Append a user message to a Copilot chat owned by the authenticated user and return the assistant reply.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListUsersRequest
+	@param chatId The chat ID
+	@return ApiCreateAIChatMessageRequest
 */
-func (a *UsersAPIService) ListUsers(ctx context.Context) ApiListUsersRequest {
-	return ApiListUsersRequest{
+func (a *AIChatsAPIService) CreateAIChatMessage(ctx context.Context, chatId string) ApiCreateAIChatMessageRequest {
+	return ApiCreateAIChatMessageRequest{
 		ApiService: a,
 		ctx:        ctx,
+		chatId:     chatId,
 	}
 }
 
 // Execute executes the request
 //
-//	@return []ListUsers200ResponseInner
-func (a *UsersAPIService) ListUsersExecute(r ApiListUsersRequest) ([]ListUsers200ResponseInner, *http.Response, error) {
+//	@return CreateAIChatMessage200Response
+func (a *AIChatsAPIService) CreateAIChatMessageExecute(r ApiCreateAIChatMessageRequest) (*CreateAIChatMessage200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
+		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []ListUsers200ResponseInner
+		localVarReturnValue *CreateAIChatMessage200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.ListUsers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIChatsAPIService.CreateAIChatMessage")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/users"
+	localVarPath := localBasePath + "/ai-chats/{chatId}/messages"
+	localVarPath = strings.Replace(localVarPath, "{"+"chatId"+"}", url.PathEscape(parameterValueToString(r.chatId, "chatId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-
-	if r.deactivated != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "deactivated", r.deactivated, "form", "")
-	}
-	if r.search != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUpdateUserRequest struct {
-	ctx               context.Context
-	ApiService        *UsersAPIService
-	userId            string
-	updateUserRequest *UpdateUserRequest
-}
-
-// Body of the request to update a user
-func (r ApiUpdateUserRequest) UpdateUserRequest(updateUserRequest UpdateUserRequest) ApiUpdateUserRequest {
-	r.updateUserRequest = &updateUserRequest
-	return r
-}
-
-func (r ApiUpdateUserRequest) Execute() (*ListUsers200ResponseInner, *http.Response, error) {
-	return r.ApiService.UpdateUserExecute(r)
-}
-
-/*
-UpdateUser Deactivate or reactivate a user
-
-Deactivate or reactivate a user of the organization. Setting `deactivated` to `true` records the deactivation time, `false` clears it. Requires the ADMIN permission on the target user. The caller cannot deactivate themselves.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param userId The user ID
-	@return ApiUpdateUserRequest
-*/
-func (a *UsersAPIService) UpdateUser(ctx context.Context, userId string) ApiUpdateUserRequest {
-	return ApiUpdateUserRequest{
-		ApiService: a,
-		ctx:        ctx,
-		userId:     userId,
-	}
-}
-
-// Execute executes the request
-//
-//	@return ListUsers200ResponseInner
-func (a *UsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*ListUsers200ResponseInner, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListUsers200ResponseInner
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersAPIService.UpdateUser")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/users/{userId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterValueToString(r.userId, "userId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.updateUserRequest == nil {
-		return localVarReturnValue, nil, reportError("updateUserRequest is required and must be specified")
+	if r.createAIChatMessageRequest == nil {
+		return localVarReturnValue, nil, reportError("createAIChatMessageRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -602,7 +234,7 @@ func (a *UsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*ListUsers2
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateUserRequest
+	localVarPostBody = r.createAIChatMessageRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -650,8 +282,445 @@ func (a *UsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*ListUsers2
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v InternalServerError
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetAIChatRequest struct {
+	ctx        context.Context
+	ApiService *AIChatsAPIService
+	chatId     string
+}
+
+func (r ApiGetAIChatRequest) Execute() (*GetAIChat200Response, *http.Response, error) {
+	return r.ApiService.GetAIChatExecute(r)
+}
+
+/*
+GetAIChat Get a Copilot chat
+
+Get a Copilot chat owned by the authenticated user together with a preview of its message history (up to 100 messages, oldest first). Use `messagesTotalCount` to detect a truncated preview and GET /v3/ai-chats/{chatId}/messages to page through the full history.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param chatId The chat ID
+	@return ApiGetAIChatRequest
+*/
+func (a *AIChatsAPIService) GetAIChat(ctx context.Context, chatId string) ApiGetAIChatRequest {
+	return ApiGetAIChatRequest{
+		ApiService: a,
+		ctx:        ctx,
+		chatId:     chatId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetAIChat200Response
+func (a *AIChatsAPIService) GetAIChatExecute(r ApiGetAIChatRequest) (*GetAIChat200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetAIChat200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIChatsAPIService.GetAIChat")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/ai-chats/{chatId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"chatId"+"}", url.PathEscape(parameterValueToString(r.chatId, "chatId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListAIChatMessagesRequest struct {
+	ctx        context.Context
+	ApiService *AIChatsAPIService
+	chatId     string
+	cursor     *string
+	size       *int
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page is returned.
+func (r ApiListAIChatMessagesRequest) Cursor(cursor string) ApiListAIChatMessagesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListAIChatMessagesRequest) Size(size int) ApiListAIChatMessagesRequest {
+	r.size = &size
+	return r
+}
+
+func (r ApiListAIChatMessagesRequest) Execute() (*ListAIChatMessages200Response, *http.Response, error) {
+	return r.ApiService.ListAIChatMessagesExecute(r)
+}
+
+/*
+ListAIChatMessages List Copilot chat messages
+
+List the messages of a Copilot chat owned by the authenticated user, oldest first, with cursor pagination.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param chatId The chat ID
+	@return ApiListAIChatMessagesRequest
+*/
+func (a *AIChatsAPIService) ListAIChatMessages(ctx context.Context, chatId string) ApiListAIChatMessagesRequest {
+	return ApiListAIChatMessagesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		chatId:     chatId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListAIChatMessages200Response
+func (a *AIChatsAPIService) ListAIChatMessagesExecute(r ApiListAIChatMessagesRequest) (*ListAIChatMessages200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListAIChatMessages200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIChatsAPIService.ListAIChatMessages")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/ai-chats/{chatId}/messages"
+	localVarPath = strings.Replace(localVarPath, "{"+"chatId"+"}", url.PathEscape(parameterValueToString(r.chatId, "chatId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v PaginationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListAIChatsRequest struct {
+	ctx        context.Context
+	ApiService *AIChatsAPIService
+	cursor     *string
+	size       *int
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page is returned.
+func (r ApiListAIChatsRequest) Cursor(cursor string) ApiListAIChatsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListAIChatsRequest) Size(size int) ApiListAIChatsRequest {
+	r.size = &size
+	return r
+}
+
+func (r ApiListAIChatsRequest) Execute() (*ListAIChats200Response, *http.Response, error) {
+	return r.ApiService.ListAIChatsExecute(r)
+}
+
+/*
+ListAIChats List Copilot chats
+
+List the Copilot chats of the authenticated user, most recent first, with cursor pagination. Only the chats owned by the caller are returned.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListAIChatsRequest
+*/
+func (a *AIChatsAPIService) ListAIChats(ctx context.Context) ApiListAIChatsRequest {
+	return ApiListAIChatsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListAIChats200Response
+func (a *AIChatsAPIService) ListAIChatsExecute(r ApiListAIChatsRequest) (*ListAIChats200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListAIChats200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIChatsAPIService.ListAIChats")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/ai-chats"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v PaginationError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

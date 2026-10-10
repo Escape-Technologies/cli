@@ -31,8 +31,6 @@ type _GenerateIssueAiRemediationRequest GenerateIssueAiRemediationRequest
 // will change when the set of required properties is changed
 func NewGenerateIssueAiRemediationRequest() *GenerateIssueAiRemediationRequest {
 	this := GenerateIssueAiRemediationRequest{}
-	var kind ENUMPROPERTIESKIND = ENUMPROPERTIESKIND_REMEDIATION
-	this.Kind = &kind
 	return &this
 }
 
@@ -41,8 +39,6 @@ func NewGenerateIssueAiRemediationRequest() *GenerateIssueAiRemediationRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewGenerateIssueAiRemediationRequestWithDefaults() *GenerateIssueAiRemediationRequest {
 	this := GenerateIssueAiRemediationRequest{}
-	var kind ENUMPROPERTIESKIND = ENUMPROPERTIESKIND_REMEDIATION
-	this.Kind = &kind
 	return &this
 }
 

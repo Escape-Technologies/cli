@@ -23,7 +23,7 @@ type CreateRoleRequest struct {
 	// The name of the role
 	Name string `json:"name"`
 	// The permissions of the role
-	Permissions []ENUMITEMSPROPERTIESPERMISSIONSITEMS `json:"permissions"`
+	Permissions []ENUMITEMSPROPERTIESID `json:"permissions"`
 	// An optional list of role bindings to create for the role
 	Bindings             []CreateProjectRequestBindingsInner `json:"bindings"`
 	AdditionalProperties map[string]interface{}
@@ -35,7 +35,7 @@ type _CreateRoleRequest CreateRoleRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateRoleRequest(name string, permissions []ENUMITEMSPROPERTIESPERMISSIONSITEMS, bindings []CreateProjectRequestBindingsInner) *CreateRoleRequest {
+func NewCreateRoleRequest(name string, permissions []ENUMITEMSPROPERTIESID, bindings []CreateProjectRequestBindingsInner) *CreateRoleRequest {
 	this := CreateRoleRequest{}
 	this.Name = name
 	this.Permissions = permissions
@@ -76,9 +76,9 @@ func (o *CreateRoleRequest) SetName(v string) {
 }
 
 // GetPermissions returns the Permissions field value
-func (o *CreateRoleRequest) GetPermissions() []ENUMITEMSPROPERTIESPERMISSIONSITEMS {
+func (o *CreateRoleRequest) GetPermissions() []ENUMITEMSPROPERTIESID {
 	if o == nil {
-		var ret []ENUMITEMSPROPERTIESPERMISSIONSITEMS
+		var ret []ENUMITEMSPROPERTIESID
 		return ret
 	}
 
@@ -87,7 +87,7 @@ func (o *CreateRoleRequest) GetPermissions() []ENUMITEMSPROPERTIESPERMISSIONSITE
 
 // GetPermissionsOk returns a tuple with the Permissions field value
 // and a boolean to check if the value has been set.
-func (o *CreateRoleRequest) GetPermissionsOk() ([]ENUMITEMSPROPERTIESPERMISSIONSITEMS, bool) {
+func (o *CreateRoleRequest) GetPermissionsOk() ([]ENUMITEMSPROPERTIESID, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *CreateRoleRequest) GetPermissionsOk() ([]ENUMITEMSPROPERTIESPERMISSIONS
 }
 
 // SetPermissions sets field value
-func (o *CreateRoleRequest) SetPermissions(v []ENUMITEMSPROPERTIESPERMISSIONSITEMS) {
+func (o *CreateRoleRequest) SetPermissions(v []ENUMITEMSPROPERTIESID) {
 	o.Permissions = v
 }
 

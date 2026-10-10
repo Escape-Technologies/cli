@@ -44,8 +44,6 @@ func NewSaveIssueAiRemediationFeedback200Response(kind ENUMPROPERTIESKIND, saved
 // but it doesn't guarantee that properties required by API are set
 func NewSaveIssueAiRemediationFeedback200ResponseWithDefaults() *SaveIssueAiRemediationFeedback200Response {
 	this := SaveIssueAiRemediationFeedback200Response{}
-	var kind ENUMPROPERTIESKIND = ENUMPROPERTIESKIND_REMEDIATION
-	this.Kind = kind
 	return &this
 }
 

@@ -22,7 +22,7 @@ type UpdateRoleRequestRole struct {
 	// The name of the role
 	Name *string `json:"name,omitempty"`
 	// The permissions of the role
-	Permissions          []ENUMITEMSPROPERTIESPERMISSIONSITEMS `json:"permissions,omitempty"`
+	Permissions          []ENUMITEMSPROPERTIESID `json:"permissions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -78,9 +78,9 @@ func (o *UpdateRoleRequestRole) SetName(v string) {
 }
 
 // GetPermissions returns the Permissions field value if set, zero value otherwise.
-func (o *UpdateRoleRequestRole) GetPermissions() []ENUMITEMSPROPERTIESPERMISSIONSITEMS {
+func (o *UpdateRoleRequestRole) GetPermissions() []ENUMITEMSPROPERTIESID {
 	if o == nil || IsNil(o.Permissions) {
-		var ret []ENUMITEMSPROPERTIESPERMISSIONSITEMS
+		var ret []ENUMITEMSPROPERTIESID
 		return ret
 	}
 	return o.Permissions
@@ -88,7 +88,7 @@ func (o *UpdateRoleRequestRole) GetPermissions() []ENUMITEMSPROPERTIESPERMISSION
 
 // GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateRoleRequestRole) GetPermissionsOk() ([]ENUMITEMSPROPERTIESPERMISSIONSITEMS, bool) {
+func (o *UpdateRoleRequestRole) GetPermissionsOk() ([]ENUMITEMSPROPERTIESID, bool) {
 	if o == nil || IsNil(o.Permissions) {
 		return nil, false
 	}
@@ -104,8 +104,8 @@ func (o *UpdateRoleRequestRole) HasPermissions() bool {
 	return false
 }
 
-// SetPermissions gets a reference to the given []ENUMITEMSPROPERTIESPERMISSIONSITEMS and assigns it to the Permissions field.
-func (o *UpdateRoleRequestRole) SetPermissions(v []ENUMITEMSPROPERTIESPERMISSIONSITEMS) {
+// SetPermissions gets a reference to the given []ENUMITEMSPROPERTIESID and assigns it to the Permissions field.
+func (o *UpdateRoleRequestRole) SetPermissions(v []ENUMITEMSPROPERTIESID) {
 	o.Permissions = v
 }
 

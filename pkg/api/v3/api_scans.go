@@ -162,6 +162,156 @@ func (a *ScansAPIService) CancelScanExecute(r ApiCancelScanRequest) (*StartScan2
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGenerateScanTargetAISummaryRequest struct {
+	ctx                                context.Context
+	ApiService                         *ScansAPIService
+	scanId                             string
+	generateScanTargetAISummaryRequest *GenerateScanTargetAISummaryRequest
+}
+
+func (r ApiGenerateScanTargetAISummaryRequest) GenerateScanTargetAISummaryRequest(generateScanTargetAISummaryRequest GenerateScanTargetAISummaryRequest) ApiGenerateScanTargetAISummaryRequest {
+	r.generateScanTargetAISummaryRequest = &generateScanTargetAISummaryRequest
+	return r
+}
+
+func (r ApiGenerateScanTargetAISummaryRequest) Execute() (*GenerateScanTargetAISummary200Response, *http.Response, error) {
+	return r.ApiService.GenerateScanTargetAISummaryExecute(r)
+}
+
+/*
+GenerateScanTargetAISummary Generate an AI summary for a scan target
+
+Generate an AI exploration or pentesting summary for a target of a DAST scan and return it. The target must belong to the scan. Generated summaries are also readable on the target through the scan targets endpoint.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param scanId The scan ID
+	@return ApiGenerateScanTargetAISummaryRequest
+*/
+func (a *ScansAPIService) GenerateScanTargetAISummary(ctx context.Context, scanId string) ApiGenerateScanTargetAISummaryRequest {
+	return ApiGenerateScanTargetAISummaryRequest{
+		ApiService: a,
+		ctx:        ctx,
+		scanId:     scanId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GenerateScanTargetAISummary200Response
+func (a *ScansAPIService) GenerateScanTargetAISummaryExecute(r ApiGenerateScanTargetAISummaryRequest) (*GenerateScanTargetAISummary200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateScanTargetAISummary200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.GenerateScanTargetAISummary")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/scans/{scanId}/targets/ai-summaries"
+	localVarPath = strings.Replace(localVarPath, "{"+"scanId"+"}", url.PathEscape(parameterValueToString(r.scanId, "scanId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.generateScanTargetAISummaryRequest == nil {
+		return localVarReturnValue, nil, reportError("generateScanTargetAISummaryRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.generateScanTargetAISummaryRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetScanRequest struct {
 	ctx        context.Context
 	ApiService *ScansAPIService

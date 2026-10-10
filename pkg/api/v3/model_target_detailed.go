@@ -21,10 +21,14 @@ var _ MappedNullable = &TargetDetailed{}
 // TargetDetailed Detailed information about a target
 type TargetDetailed struct {
 	// The date and time the target was created
-	CreatedAt       string                   `json:"createdAt"`
-	ApiRoute        *ApiRouteDetailed        `json:"apiRoute,omitempty"`
-	CodeFile        *CodeFileDetailed        `json:"codeFile,omitempty"`
-	GraphqlResolver *GraphqlResolverDetailed `json:"graphqlResolver,omitempty"`
+	CreatedAt string `json:"createdAt"`
+	// AI-generated summary of the exploration results for the target
+	AiExplorationSummary *string `json:"aiExplorationSummary,omitempty"`
+	// AI-generated pentesting summary for the target
+	AiPentestingSummary *string                  `json:"aiPentestingSummary,omitempty"`
+	ApiRoute            *ApiRouteDetailed        `json:"apiRoute,omitempty"`
+	CodeFile            *CodeFileDetailed        `json:"codeFile,omitempty"`
+	GraphqlResolver     *GraphqlResolverDetailed `json:"graphqlResolver,omitempty"`
 	// The id of the target
 	Id                   string                 `json:"id"`
 	Port                 *PortDetailed          `json:"port,omitempty"`
@@ -77,6 +81,70 @@ func (o *TargetDetailed) GetCreatedAtOk() (*string, bool) {
 // SetCreatedAt sets field value
 func (o *TargetDetailed) SetCreatedAt(v string) {
 	o.CreatedAt = v
+}
+
+// GetAiExplorationSummary returns the AiExplorationSummary field value if set, zero value otherwise.
+func (o *TargetDetailed) GetAiExplorationSummary() string {
+	if o == nil || IsNil(o.AiExplorationSummary) {
+		var ret string
+		return ret
+	}
+	return *o.AiExplorationSummary
+}
+
+// GetAiExplorationSummaryOk returns a tuple with the AiExplorationSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TargetDetailed) GetAiExplorationSummaryOk() (*string, bool) {
+	if o == nil || IsNil(o.AiExplorationSummary) {
+		return nil, false
+	}
+	return o.AiExplorationSummary, true
+}
+
+// HasAiExplorationSummary returns a boolean if a field has been set.
+func (o *TargetDetailed) HasAiExplorationSummary() bool {
+	if o != nil && !IsNil(o.AiExplorationSummary) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiExplorationSummary gets a reference to the given string and assigns it to the AiExplorationSummary field.
+func (o *TargetDetailed) SetAiExplorationSummary(v string) {
+	o.AiExplorationSummary = &v
+}
+
+// GetAiPentestingSummary returns the AiPentestingSummary field value if set, zero value otherwise.
+func (o *TargetDetailed) GetAiPentestingSummary() string {
+	if o == nil || IsNil(o.AiPentestingSummary) {
+		var ret string
+		return ret
+	}
+	return *o.AiPentestingSummary
+}
+
+// GetAiPentestingSummaryOk returns a tuple with the AiPentestingSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TargetDetailed) GetAiPentestingSummaryOk() (*string, bool) {
+	if o == nil || IsNil(o.AiPentestingSummary) {
+		return nil, false
+	}
+	return o.AiPentestingSummary, true
+}
+
+// HasAiPentestingSummary returns a boolean if a field has been set.
+func (o *TargetDetailed) HasAiPentestingSummary() bool {
+	if o != nil && !IsNil(o.AiPentestingSummary) {
+		return true
+	}
+
+	return false
+}
+
+// SetAiPentestingSummary gets a reference to the given string and assigns it to the AiPentestingSummary field.
+func (o *TargetDetailed) SetAiPentestingSummary(v string) {
+	o.AiPentestingSummary = &v
 }
 
 // GetApiRoute returns the ApiRoute field value if set, zero value otherwise.
@@ -338,6 +406,12 @@ func (o TargetDetailed) MarshalJSON() ([]byte, error) {
 func (o TargetDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["createdAt"] = o.CreatedAt
+	if !IsNil(o.AiExplorationSummary) {
+		toSerialize["aiExplorationSummary"] = o.AiExplorationSummary
+	}
+	if !IsNil(o.AiPentestingSummary) {
+		toSerialize["aiPentestingSummary"] = o.AiPentestingSummary
+	}
 	if !IsNil(o.ApiRoute) {
 		toSerialize["apiRoute"] = o.ApiRoute
 	}
@@ -405,6 +479,8 @@ func (o *TargetDetailed) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "aiExplorationSummary")
+		delete(additionalProperties, "aiPentestingSummary")
 		delete(additionalProperties, "apiRoute")
 		delete(additionalProperties, "codeFile")
 		delete(additionalProperties, "graphqlResolver")
