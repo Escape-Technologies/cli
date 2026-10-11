@@ -196,12 +196,16 @@ for path, path_data in data["paths"].items():
         ]:
             continue
 
-        # Remove "Beta" tag from operations that have other tags to avoid duplicate type declarations
-        # The generator creates request types per tag, causing redeclarations when the same operation
-        # appears under multiple tags (e.g., both "Beta" and "Integrations")
+        # Carry the "Beta" marker instead of dropping it. The generator creates request
+        # types per tag, so a second tag redeclares the operation: keep the first tag on
+        # `tags` and move the marker to the vendor extension plus the description, which
+        # becomes the generated docblock and every consumer of the converted spec.
         tags = operation_object.get("tags", [])
         if len(tags) > 1 and "Beta" in tags:
             operation_object["tags"] = [t for t in tags if t != "Beta"]
+            operation_object["x-escape-beta"] = True
+            description = operation_object.get("description") or operation_object.get("summary") or ""
+            operation_object["description"] = f"{description}\n\nBeta: subject to change.".strip()
 
         list_params = [
             "profileIds",

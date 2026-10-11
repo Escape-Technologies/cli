@@ -393,8 +393,22 @@ func (a *UsersAPIService) InviteUserExecute(r ApiInviteUserRequest) ([]ListUsers
 type ApiListUsersRequest struct {
 	ctx         context.Context
 	ApiService  *UsersAPIService
+	cursor      *string
+	size        *int
 	deactivated *string
 	search      *string
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListUsersRequest) Cursor(cursor string) ApiListUsersRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListUsersRequest) Size(size int) ApiListUsersRequest {
+	r.size = &size
+	return r
 }
 
 // Filter by activation status: &#x60;true&#x60; returns only deactivated users, &#x60;false&#x60; only active ones. Omit to return both.
@@ -416,7 +430,7 @@ func (r ApiListUsersRequest) Execute() ([]ListUsers200ResponseInner, *http.Respo
 /*
 ListUsers List users
 
-List users of the organization. Filter by activation status with `deactivated`, and search by email with `search`.
+List users of the organization. Filter by activation status with `deactivated`, and search by email with `search`. Pass `cursor` and `size` to page through the members: without them the whole organization is returned, as before.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListUsersRequest
@@ -450,6 +464,15 @@ func (a *UsersAPIService) ListUsersExecute(r ApiListUsersRequest) ([]ListUsers20
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
 	if r.deactivated != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "deactivated", r.deactivated, "form", "")
 	}
@@ -508,6 +531,16 @@ func (a *UsersAPIService) ListUsersExecute(r ApiListUsersRequest) ([]ListUsers20
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v PaginationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -161,6 +161,11 @@ var destructiveMCPCommands = map[string]struct{}{
 	"escape-cli roles unbind":            {},
 	"escape-cli integrations delete":     {},
 	"escape-cli regression-tests delete": {},
+	"escape-cli views delete":            {},
+	"escape-cli vault variables delete":  {},
+	"escape-cli knowledge-files delete":  {},
+	"escape-cli users deactivate":        {},
+	"escape-cli locations tags":          {},
 }
 
 func isDestructiveMCPCommand(path string) bool {
@@ -443,9 +448,13 @@ func skipMCPCommand(path string) bool {
 
 // markMCPSkip hides a flag from the MCP catalog. The flag must already be
 // registered on flags. A missing flag is a declaration bug, so init panics.
-func markMCPSkip(flags *pflag.FlagSet, name string) {
-	if err := flags.SetAnnotation(name, mcpSkipAnnotation, []string{mcpSkipValue}); err != nil {
-		panic(err)
+// markMCPSkip hides one or more flags from the MCP catalog on the command that
+// declared them. A missing flag is a declaration bug, so init panics.
+func markMCPSkip(flags *pflag.FlagSet, names ...string) {
+	for _, name := range names {
+		if err := flags.SetAnnotation(name, mcpSkipAnnotation, []string{mcpSkipValue}); err != nil {
+			panic(err)
+		}
 	}
 }
 
@@ -517,12 +526,15 @@ var mcpPollHint = map[string]string{
 	"escape-cli jobs get":              " Poll jobs_get with a job id until the job reaches a terminal status.",
 	"escape-cli authentications start": " Returns when the authentication check has been created. Poll authentications_get with the returned id until it finishes.",
 	"escape-cli authentications get":   " Poll authentications_get with an authentication id until the check reaches a terminal status.",
+	"escape-cli validations start":     " Returns when the validation has been created. Poll validations_get with the returned id until it finishes.",
+	"escape-cli validations get":       " Poll validations_get with a validation id until it reaches a terminal status.",
 }
 
 // mcpCatalogDescription is the tools/list text. It keeps Short plus the first
 // paragraph of Long, then adds the operational sentence the model must not
-// lose: a poll hint, or a bounded command's own description. Paged commands
-// add their page contract separately so that sentence stays inside the rune cap.
+// lose: a poll hint, a Beta marker, or a bounded command's own description.
+// Paged commands add their page contract separately so that sentence stays
+// inside the rune cap.
 func mcpCatalogDescription(path string, command *cobra.Command) string {
 	if bounded, ok := boundedMCPCommands[path]; ok && bounded.describe != nil {
 		return bounded.describe(command)
@@ -530,7 +542,11 @@ func mcpCatalogDescription(path string, command *cobra.Command) string {
 
 	base := mcpToolDescription(command)
 	if hint, ok := mcpPollHint[path]; ok {
-		return joinWithinRunes(base, hint, maxMCPToolDescriptionRunes)
+		base = joinWithinRunes(base, hint, maxMCPToolDescriptionRunes)
+	}
+
+	if note := betaMCPToolNoteFor(path); note != "" {
+		base = joinWithinRunes(base, note, maxMCPToolDescriptionRunes)
 	}
 
 	return base

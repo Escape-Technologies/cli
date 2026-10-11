@@ -34,8 +34,10 @@ type CreateakamaiIntegration200Response struct {
 	// The date and time the last pull workflow was executed
 	LastPullWorkflowAt *time.Time `json:"lastPullWorkflowAt,omitempty"`
 	// The date and time the integration was last validated
-	LastValidationAt *time.Time                            `json:"lastValidationAt,omitempty"`
-	Kind             ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
+	LastValidationAt *time.Time `json:"lastValidationAt,omitempty"`
+	// The date and time the integration was invalidated
+	InvalidatedAt *time.Time                            `json:"invalidatedAt,omitempty"`
+	Kind          ENUMPROPERTIESDATAITEMSPROPERTIESKIND `json:"kind"`
 	// Whether the integration is valid
 	Valid bool `json:"valid"`
 	// The validation errors of the integration
@@ -50,7 +52,13 @@ type CreateakamaiIntegration200Response struct {
 	Tags     []TagDetail       `json:"tags"`
 	Location *LocationDetailed `json:"location,omitempty"`
 	// The id of the location used by the integration
-	ProxyId              *string `json:"proxyId,omitempty"`
+	ProxyId *string `json:"proxyId,omitempty"`
+	// Deprecated
+	Organization *CreateakamaiIntegration200ResponseOrganization `json:"organization,omitempty"`
+	// Deprecated
+	Proxy *LocationDetailed1 `json:"proxy,omitempty"`
+	// Deprecated
+	LastWorkflow         *CreateakamaiIntegration200ResponseLastWorkflow `json:"lastWorkflow,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -273,6 +281,38 @@ func (o *CreateakamaiIntegration200Response) HasLastValidationAt() bool {
 // SetLastValidationAt gets a reference to the given time.Time and assigns it to the LastValidationAt field.
 func (o *CreateakamaiIntegration200Response) SetLastValidationAt(v time.Time) {
 	o.LastValidationAt = &v
+}
+
+// GetInvalidatedAt returns the InvalidatedAt field value if set, zero value otherwise.
+func (o *CreateakamaiIntegration200Response) GetInvalidatedAt() time.Time {
+	if o == nil || IsNil(o.InvalidatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.InvalidatedAt
+}
+
+// GetInvalidatedAtOk returns a tuple with the InvalidatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateakamaiIntegration200Response) GetInvalidatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.InvalidatedAt) {
+		return nil, false
+	}
+	return o.InvalidatedAt, true
+}
+
+// HasInvalidatedAt returns a boolean if a field has been set.
+func (o *CreateakamaiIntegration200Response) HasInvalidatedAt() bool {
+	if o != nil && !IsNil(o.InvalidatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetInvalidatedAt gets a reference to the given time.Time and assigns it to the InvalidatedAt field.
+func (o *CreateakamaiIntegration200Response) SetInvalidatedAt(v time.Time) {
+	o.InvalidatedAt = &v
 }
 
 // GetKind returns the Kind field value
@@ -549,6 +589,111 @@ func (o *CreateakamaiIntegration200Response) SetProxyId(v string) {
 	o.ProxyId = &v
 }
 
+// GetOrganization returns the Organization field value if set, zero value otherwise.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) GetOrganization() CreateakamaiIntegration200ResponseOrganization {
+	if o == nil || IsNil(o.Organization) {
+		var ret CreateakamaiIntegration200ResponseOrganization
+		return ret
+	}
+	return *o.Organization
+}
+
+// GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) GetOrganizationOk() (*CreateakamaiIntegration200ResponseOrganization, bool) {
+	if o == nil || IsNil(o.Organization) {
+		return nil, false
+	}
+	return o.Organization, true
+}
+
+// HasOrganization returns a boolean if a field has been set.
+func (o *CreateakamaiIntegration200Response) HasOrganization() bool {
+	if o != nil && !IsNil(o.Organization) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganization gets a reference to the given CreateakamaiIntegration200ResponseOrganization and assigns it to the Organization field.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) SetOrganization(v CreateakamaiIntegration200ResponseOrganization) {
+	o.Organization = &v
+}
+
+// GetProxy returns the Proxy field value if set, zero value otherwise.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) GetProxy() LocationDetailed1 {
+	if o == nil || IsNil(o.Proxy) {
+		var ret LocationDetailed1
+		return ret
+	}
+	return *o.Proxy
+}
+
+// GetProxyOk returns a tuple with the Proxy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) GetProxyOk() (*LocationDetailed1, bool) {
+	if o == nil || IsNil(o.Proxy) {
+		return nil, false
+	}
+	return o.Proxy, true
+}
+
+// HasProxy returns a boolean if a field has been set.
+func (o *CreateakamaiIntegration200Response) HasProxy() bool {
+	if o != nil && !IsNil(o.Proxy) {
+		return true
+	}
+
+	return false
+}
+
+// SetProxy gets a reference to the given LocationDetailed1 and assigns it to the Proxy field.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) SetProxy(v LocationDetailed1) {
+	o.Proxy = &v
+}
+
+// GetLastWorkflow returns the LastWorkflow field value if set, zero value otherwise.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) GetLastWorkflow() CreateakamaiIntegration200ResponseLastWorkflow {
+	if o == nil || IsNil(o.LastWorkflow) {
+		var ret CreateakamaiIntegration200ResponseLastWorkflow
+		return ret
+	}
+	return *o.LastWorkflow
+}
+
+// GetLastWorkflowOk returns a tuple with the LastWorkflow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) GetLastWorkflowOk() (*CreateakamaiIntegration200ResponseLastWorkflow, bool) {
+	if o == nil || IsNil(o.LastWorkflow) {
+		return nil, false
+	}
+	return o.LastWorkflow, true
+}
+
+// HasLastWorkflow returns a boolean if a field has been set.
+func (o *CreateakamaiIntegration200Response) HasLastWorkflow() bool {
+	if o != nil && !IsNil(o.LastWorkflow) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastWorkflow gets a reference to the given CreateakamaiIntegration200ResponseLastWorkflow and assigns it to the LastWorkflow field.
+// Deprecated
+func (o *CreateakamaiIntegration200Response) SetLastWorkflow(v CreateakamaiIntegration200ResponseLastWorkflow) {
+	o.LastWorkflow = &v
+}
+
 func (o CreateakamaiIntegration200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -572,6 +717,9 @@ func (o CreateakamaiIntegration200Response) ToMap() (map[string]interface{}, err
 	if !IsNil(o.LastValidationAt) {
 		toSerialize["lastValidationAt"] = o.LastValidationAt
 	}
+	if !IsNil(o.InvalidatedAt) {
+		toSerialize["invalidatedAt"] = o.InvalidatedAt
+	}
 	toSerialize["kind"] = o.Kind
 	toSerialize["valid"] = o.Valid
 	toSerialize["validationErrors"] = o.ValidationErrors
@@ -589,6 +737,15 @@ func (o CreateakamaiIntegration200Response) ToMap() (map[string]interface{}, err
 	}
 	if !IsNil(o.ProxyId) {
 		toSerialize["proxyId"] = o.ProxyId
+	}
+	if !IsNil(o.Organization) {
+		toSerialize["organization"] = o.Organization
+	}
+	if !IsNil(o.Proxy) {
+		toSerialize["proxy"] = o.Proxy
+	}
+	if !IsNil(o.LastWorkflow) {
+		toSerialize["lastWorkflow"] = o.LastWorkflow
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -649,6 +806,7 @@ func (o *CreateakamaiIntegration200Response) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "scheduledForDeletionAt")
 		delete(additionalProperties, "lastPullWorkflowAt")
 		delete(additionalProperties, "lastValidationAt")
+		delete(additionalProperties, "invalidatedAt")
 		delete(additionalProperties, "kind")
 		delete(additionalProperties, "valid")
 		delete(additionalProperties, "validationErrors")
@@ -659,6 +817,9 @@ func (o *CreateakamaiIntegration200Response) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "location")
 		delete(additionalProperties, "proxyId")
+		delete(additionalProperties, "organization")
+		delete(additionalProperties, "proxy")
+		delete(additionalProperties, "lastWorkflow")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -680,6 +680,9 @@ USE CASES:
     escape-cli scans cancel $scan_id
   done`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(out.Message{}) {
+			return nil
+		}
 
 		err := escape.CancelScan(cmd.Context(), args[0])
 		if err != nil {
@@ -721,6 +724,9 @@ NOTE: You can filter ignored scans in listings with --ignored flag`,
   # View only ignored scans
   escape-cli scans list --ignored true`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(out.Message{}) {
+			return nil
+		}
 
 		err := escape.IgnoreScan(cmd.Context(), args[0])
 		if err != nil {

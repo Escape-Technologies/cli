@@ -42,6 +42,8 @@ CreateAIChat Create a Copilot chat
 
 Create a Copilot chat for the authenticated user. The organization is resolved from the API key and is never taken from the request body. Chats are always created as non-internal.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateAIChatRequest
 */
@@ -177,6 +179,8 @@ func (r ApiCreateAIChatMessageRequest) Execute() (*CreateAIChatMessage200Respons
 CreateAIChatMessage Send a Copilot chat message
 
 Append a user message to a Copilot chat owned by the authenticated user and return the assistant reply.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param chatId The chat ID
@@ -322,6 +326,8 @@ GetAIChat Get a Copilot chat
 
 Get a Copilot chat owned by the authenticated user together with a preview of its message history (up to 100 messages, oldest first). Use `messagesTotalCount` to detect a truncated preview and GET /v3/ai-chats/{chatId}/messages to page through the full history.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param chatId The chat ID
 	@return ApiGetAIChatRequest
@@ -463,6 +469,8 @@ func (r ApiListAIChatMessagesRequest) Execute() (*ListAIChatMessages200Response,
 ListAIChatMessages List Copilot chat messages
 
 List the messages of a Copilot chat owned by the authenticated user, oldest first, with cursor pagination.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param chatId The chat ID
@@ -624,6 +632,8 @@ func (r ApiListAIChatsRequest) Execute() (*ListAIChats200Response, *http.Respons
 ListAIChats List Copilot chats
 
 List the Copilot chats of the authenticated user, most recent first, with cursor pagination. Only the chats owned by the caller are returned.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListAIChatsRequest

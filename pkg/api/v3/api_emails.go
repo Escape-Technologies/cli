@@ -79,6 +79,8 @@ ListInboxEmails List inbox emails
 
 Given a target email address, list inbox emails with cursor pagination.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListInboxEmailsRequest
 */
@@ -236,6 +238,8 @@ func (r ApiReadInboxEmailRequest) Execute() (*ScanEmailDetails, *http.Response, 
 ReadInboxEmail Read inbox email content
 
 Given an email id, fetch and return its full raw content.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The inbox email ID

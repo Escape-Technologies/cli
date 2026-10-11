@@ -73,6 +73,8 @@ func TestMCPCatalogDescribesPolling(t *testing.T) {
 		"jobs_get":              "jobs_get",
 		"authentications_start": "authentications_get",
 		"authentications_get":   "authentications_get",
+		"validations_start":     "validations_get",
+		"validations_get":       "validations_get",
 	}
 	for name, poll := range checks {
 		spec := specs[name]

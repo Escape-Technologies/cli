@@ -43,6 +43,8 @@ BulkUpdateSecurityTests Bulk update security tests
 
 Update the organization configuration of multiple security tests matching a filter predicate: enable or disable them, and/or override the severity assigned to their issues. Requires organization admin rights. A non-empty `where` or `all: true` is required. Set `dryRun` to preview the matching security test IDs without changing anything. When `enabled` is omitted, each matched test keeps the enabled state read at the start of the request; a concurrent change to the same test may therefore be overwritten. Pass `customSeverity: null` to reset the override to the scanner default.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiBulkUpdateSecurityTestsRequest
 */
@@ -540,6 +542,8 @@ func (r ApiUpdateSecurityTestRequest) Execute() (*GetSecurityTest200Response, *h
 UpdateSecurityTest Update a security test
 
 Update the organization configuration of a security test: enable or disable it, and/or override the severity assigned to its issues. At least one of `enabled` or `customSeverity` is required. Omitted fields are left unchanged. Pass `customSeverity: null` to reset the override to the scanner default.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param securityTestUid The security test ID (UID)

@@ -44,6 +44,8 @@ CreateVaultVariable Create a vault variable
 
 Create a vault variable for the organization. The secret value is write-only: it is stored but never returned by the API.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateVaultVariableRequest
 */
@@ -204,6 +206,8 @@ DeleteVaultVariable Delete a vault variable
 
 Delete a vault variable from the organization.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param variableId The ID of the vault variable
 	@return ApiDeleteVaultVariableRequest
@@ -359,6 +363,8 @@ func (r ApiLinkVaultRequest) Execute() (*LinkVault200Response, *http.Response, e
 LinkVault Link a vault
 
 Link a provider vault to the organization so variables can reference it. Idempotent: linking the same vault twice refreshes its name.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiLinkVaultRequest
@@ -526,6 +532,8 @@ func (r ApiListVaultEntriesRequest) Execute() ([]VaultEntry, *http.Response, err
 ListVaultEntries List vault entries
 
 List the entries currently in the vault at the provider that no variable of the organization uses yet. Only names are returned; values never leave the provider.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param vaultId The ID of the vault
@@ -714,6 +722,8 @@ ListVaultVariables List vault variables
 
 List the vault variables of the organization. Secret values are never returned: only names, ids and metadata.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListVaultVariablesRequest
 */
@@ -900,6 +910,8 @@ ListVaults List vaults
 
 List the vaults linked to the organization. A vault carries no secret material, only its provider coordinates.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListVaultsRequest
 */
@@ -1063,6 +1075,8 @@ ListakamaiVaults List Akamai vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListakamaiVaultsRequest
@@ -1222,6 +1236,8 @@ func (r ApiListawsAccountVaultsRequest) Execute() (*ListIntegrations200Response,
 ListawsAccountVaults List AWS Account (Legacy) vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -1383,6 +1399,8 @@ ListawsVaults List AWS vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListawsVaultsRequest
@@ -1542,6 +1560,8 @@ func (r ApiListazureBoardsVaultsRequest) Execute() (*ListIntegrations200Response
 ListazureBoardsVaults List Azure Boards vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -1703,6 +1723,8 @@ ListazureKeyVaultVaults List Azure Key Vault vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListazureKeyVaultVaultsRequest
@@ -1862,6 +1884,8 @@ func (r ApiListazureVaultsRequest) Execute() (*ListIntegrations200Response, *htt
 ListazureVaults List Azure vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -2023,6 +2047,8 @@ ListbitbucketVaults List Bitbucket vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListbitbucketVaultsRequest
@@ -2182,6 +2208,8 @@ func (r ApiListcloudflareVaultsRequest) Execute() (*ListIntegrations200Response,
 ListcloudflareVaults List Cloudflare vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -2343,6 +2371,8 @@ ListcustomVaults List Custom Integration vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListcustomVaultsRequest
@@ -2502,6 +2532,8 @@ func (r ApiListgcpVaultsRequest) Execute() (*ListIntegrations200Response, *http.
 ListgcpVaults List GCP vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -2663,6 +2695,8 @@ ListgithubVaults List GitHub vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListgithubVaultsRequest
@@ -2822,6 +2856,8 @@ func (r ApiListgitlabVaultsRequest) Execute() (*ListIntegrations200Response, *ht
 ListgitlabVaults List GitLab vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -2983,6 +3019,8 @@ ListjiraVaults List Jira vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListjiraVaultsRequest
@@ -3142,6 +3180,8 @@ func (r ApiListkubernetesVaultsRequest) Execute() (*ListIntegrations200Response,
 ListkubernetesVaults List Kubernetes vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
@@ -3303,6 +3343,8 @@ ListpostmanVaults List Postman vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListpostmanVaultsRequest
@@ -3463,6 +3505,8 @@ ListwizVaults List Wiz vaults.
 
 List the vaults the integration can see at its provider, with the coordinates needed to link one with POST /v3/vaults. Only names are returned; values never leave the provider.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The integration ID
 	@return ApiListwizVaultsRequest
@@ -3622,6 +3666,8 @@ func (r ApiRotateVaultVariableRequest) Execute() (*CreateVaultVariable200Respons
 RotateVaultVariable Rotate a vault variable
 
 Rotate the value of a vault variable. The new value is write-only: it is stored but never returned by the API.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param variableId The ID of the vault variable

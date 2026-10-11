@@ -2,6 +2,33 @@ package escape
 
 import "testing"
 
+func TestFileContentType(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		want string
+	}{
+		{name: "report.pdf", want: "application/pdf"},
+		{name: "notes.MD", want: "text/markdown"},
+		{name: "spec.yaml", want: "application/yaml"},
+		{name: "openapi.json", want: "application/json"},
+		{name: "findings.csv", want: "text/csv"},
+		{name: "readme.txt", want: "text/plain"},
+		{name: "archive.unknownext", want: "application/octet-stream"},
+		{name: "noextension", want: "application/octet-stream"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			if got := fileContentType(tt.name); got != tt.want {
+				t.Fatalf("fileContentType(%q) = %q, want %q", tt.name, got, tt.want)
+			}
+		})
+	}
+}
+
 func TestSchemaUploadContentType(t *testing.T) {
 	t.Parallel()
 

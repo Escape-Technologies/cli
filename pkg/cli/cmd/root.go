@@ -106,9 +106,9 @@ COMMAND CATEGORIES:
   Attack Surface:       asm, assets                        Discovery and inventory
   Findings:             issues, problems, events, retests  Vulnerabilities, retests, and diagnostics
   Infrastructure:       locations                          Private scanning locations
-  Organization:         users, roles, projects, audit      Access control and audit trail
+  Organization:         users, roles, projects, audit, org-settings   Access control and audit trail
   Automation:           workflows, jobs                    CI/CD triggers and exports
-  Customization:        custom-rules, tags, integrations   Rules, labels, and integrations
+  Customization:        custom-rules, tags, integrations, views, vault, knowledge-files   Rules, labels, integrations and saved state
 
 ENVIRONMENT VARIABLES:
   ESCAPE_API_KEY              API key for authentication

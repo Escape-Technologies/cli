@@ -204,6 +204,7 @@ func TestIssueBulkUpdateJSONIsOneTypedDocument(t *testing.T) {
 	saveBulkUpdateFlags(t)
 	bulkIssueStatus = "RESOLVED"
 	bulkIssueIDs = []string{issueID}
+	issueBulkUpdateCmd.SetIn(strings.NewReader(""))
 
 	stdout, stderr, err := captureJSONCommand(t, func() error {
 		return issueBulkUpdateCmd.RunE(issueBulkUpdateCmd, nil)

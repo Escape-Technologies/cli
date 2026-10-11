@@ -1184,6 +1184,14 @@ anything.`,
 			return err
 		}
 
+		// --dry-run only previews the matching IDs, so it never prompts.
+		if !bulkIssueDryRun {
+			proceed, err := confirmDestructive(cmd, "update every issue matching the given filters", nil)
+			if err != nil || !proceed {
+				return err
+			}
+		}
+
 		body, err := buildBulkUpdateIssuesRequest()
 		if err != nil {
 			return err
@@ -1329,6 +1337,7 @@ func init() {
 	issueTrendsCmd.Flags().StringSliceVar(&trendProjectIDs, "project-id", nil, "filter by project ID(s)")
 
 	issuesCmd.AddCommand(issueBulkUpdateCmd)
+	bindDestructiveGate(issueBulkUpdateCmd, false)
 	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueStatus, "status", "", "new status to apply")
 	issueBulkUpdateCmd.Flags().StringVar(&bulkIssueReason, "reason", "", "reason for the status and/or severity change (required if your organization enforces it)")
 	issueBulkUpdateCmd.Flags().StringVar(&setSeverity, "set-severity", "", "new severity to apply")

@@ -38,6 +38,8 @@ GetJob Get a job
 
 Returns job status, parameters, and artefacts (including signedUrl download links for completed export outputs).
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId The job ID
 	@return ApiGetJobRequest
@@ -225,6 +227,8 @@ ListJobs List jobs
 
 List jobs of the organization with optional filtering by kind and status.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListJobsRequest
 */
@@ -399,6 +403,8 @@ RenameExport Rename a report
 
 Rename an export job (report).
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId The job ID
 	@return ApiRenameExportRequest
@@ -556,6 +562,8 @@ func (r ApiSendJobArtefactsRequest) Execute() (*SendJobArtefacts200Response, *ht
 SendJobArtefacts Email report artefacts
 
 Send report artefacts (report files) by email. Only report jobs can be emailed.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId The job ID
@@ -724,6 +732,8 @@ func (r ApiTriggerExportRequest) Execute() (*TriggerExport200Response, *http.Res
 TriggerExport Trigger a template export job
 
 Schedules the same export job as the product UI (SAAS_EXPORT_TEMPLATE): PDF/report blocks, optional scan and issue scope. Use GET /jobs/{jobId} to read status and artefact download URLs when completed.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiTriggerExportRequest

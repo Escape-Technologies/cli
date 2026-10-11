@@ -20,7 +20,8 @@ type ListLocationsFilters struct {
 }
 
 // ListLocations lists one page of locations.
-// size 0 keeps the API default page size. The returned total is totalCount.
+// size 0 keeps the API default page size. The logs endpoint reports no total,
+// so the returned count is the length of the page.
 func ListLocations(ctx context.Context, next string, filters *ListLocationsFilters, size int) ([]v3.LocationSummarized, *string, int, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
@@ -161,6 +162,58 @@ func DeleteLocation(ctx context.Context, id string) (*v3.DeleteLocation200Respon
 	data, _, err := client.LocationsAPI.DeleteLocation(ctx, id).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("unable to delete location: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// ListLocationLogsFilters holds the optional filters of the log listing.
+type ListLocationLogsFilters struct {
+	Search string
+}
+
+// ListLocationLogs lists one page of the logs a location produced.
+// size 0 keeps the API default page size. The returned total is totalCount.
+func ListLocationLogs(ctx context.Context, locationID, next string, size int, filters *ListLocationLogsFilters) ([]v3.LocationLog, *string, int, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	req := client.LocationsAPI.ListLocationLogs(ctx, locationID)
+	if next != "" {
+		req = req.Cursor(next)
+	}
+
+	if size > 0 {
+		req = req.Size(size)
+	}
+
+	if filters != nil && filters.Search != "" {
+		req = req.Search(filters.Search)
+	}
+
+	data, _, listErr := req.Execute()
+	if listErr != nil {
+		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(listErr))
+	}
+
+	nextCursor := data.GetNextCursor()
+
+	return data.GetData(), &nextCursor, len(data.GetData()), nil
+}
+
+// UpdateLocationTags replaces the tags of a location.
+func UpdateLocationTags(ctx context.Context, locationID string, tagIDs []string) (*v3.GetLocation200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	req := v3.NewUpdateLocationTagsRequest(tagIDs)
+	data, _, err := client.LocationsAPI.UpdateLocationTags(ctx, locationID).UpdateLocationTagsRequest(*req).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
 	return data, nil

@@ -476,11 +476,13 @@ Create a new profile for testing GraphQL APIs. Provide configuration via JSON th
 var profileCreateAiPentestCmd = &cobra.Command{
 	Use:     "create-ai-pentest",
 	Aliases: []string{"caip"},
-	Short:   "Create an AI pentest profile",
+	Short:   "Create an AI pentest profile (Beta)",
 	Long: `Create AI Pentest Profile
 
 Creates a profile via POST /v3/profiles/ai-pentest. Send a JSON body on stdin;
-use the configuration object to target REST, GraphQL, or web application scanning.`,
+use the configuration object to target REST, GraphQL, or web application scanning.
+
+BETA: AI pentesting is a design-partner rollout, so this command can still change.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if out.InputSchema(createAiPentestProfileInput{}) {
 			return nil
@@ -1250,6 +1252,13 @@ and scheduled scans. The asset itself is NOT deleted.`,
 		}
 
 		profileID := args[0]
+		proceed, err := confirmDestructive(cmd, "delete profile "+profileID, func(ctx context.Context) (any, error) {
+			return escape.GetProfile(ctx, profileID)
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		result, err := escape.DeleteProfile(cmd.Context(), profileID)
 		if err != nil {
 			return fmt.Errorf("unable to delete profile %s: %w", profileID, err)
@@ -1278,6 +1287,7 @@ func init() {
 		profileUploadSchemaCmd,
 		profileDeleteCmd,
 	)
+	bindDestructiveGate(profileDeleteCmd, true)
 	profileGetSchemaCmd.Flags().StringVar(&profileGetSchemaID, "schema-id", "", "specific schema asset ID to pick from extraAssets (default: active schema)")
 	profileGetSchemaCmd.Flags().StringVarP(&profileGetSchemaOutFile, "file", "f", "", "write schema bytes to file path (- for stdout); omit to print JSON metadata")
 	profileGetSchemaCmd.Flags().DurationVar(&profileGetSchemaTimeout, "timeout", profileGetSchemaDefaultTimeout, "end-to-end timeout bounding both the GetProfile API call and the signed-URL body fetch (when -f is used)")

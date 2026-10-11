@@ -527,6 +527,13 @@ BEFORE DELETING:
 			return nil
 		}
 
+		proceed, err := confirmDestructive(cmd, "delete asset "+args[0], func(ctx context.Context) (any, error) {
+			return escape.GetAsset(ctx, args[0])
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		result, err := escape.DeleteAsset(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to delete asset: %w", err)
@@ -749,6 +756,9 @@ COMMON ASSET TYPES & EXAMPLES:
   DNS:
     {"asset_type": "DNS", "name": "example.com"}
 
+  APK (Beta, MOBILE_APP_PENTEST flag):
+    {"asset_type": "APK", "name": "my-app.apk", "key": "<s3 object key>"}
+
 OPTIONAL FIELDS:
   • description  - Human-readable description
   • status       - Initial status (default: MONITORED)
@@ -940,6 +950,11 @@ var assetBulkUpdateCmd = &cobra.Command{
 			return err
 		}
 
+		proceed, err := confirmDestructive(cmd, "update every asset matching the given filters", nil)
+		if err != nil || !proceed {
+			return err
+		}
+
 		where := v3.BulkUpdateAssetsRequestWhere{}
 		if len(bulkAssetIDs) > 0 {
 			where.AssetIds = bulkAssetIDs
@@ -990,6 +1005,11 @@ var assetBulkDeleteCmd = &cobra.Command{
 		}
 
 		if err := requireAssetBulkSelection(); err != nil {
+			return err
+		}
+
+		proceed, err := confirmDestructive(cmd, "schedule every asset matching the given filters for deletion", nil)
+		if err != nil || !proceed {
 			return err
 		}
 
@@ -1127,6 +1147,7 @@ func init() {
 	assetsCmd.AddCommand(assetDownloadCmd)
 	assetDownloadCmd.Flags().StringVar(&assetDownloadOutputFile, "output", "", "write the asset content to this file instead of stdout")
 	assetsCmd.AddCommand(assetDeleteCmd)
+	bindDestructiveGate(assetDeleteCmd, true)
 
 	assetsCmd.AddCommand(assetUpdateCmd)
 	assetUpdateCmd.Flags().StringVarP(&assetDescription, "description", "d", "", "human-readable description of the asset")
@@ -1155,6 +1176,7 @@ func init() {
 	assetsCmd.AddCommand(assetListActivitiesCmd)
 
 	assetsCmd.AddCommand(assetBulkUpdateCmd)
+	bindDestructiveGate(assetBulkUpdateCmd, true)
 	assetBulkUpdateCmd.Flags().StringSliceVar(&bulkAssetIDs, "asset-id", nil, "filter by asset ID(s)")
 	assetBulkUpdateCmd.Flags().StringSliceVar(&bulkAssetTypes, "type", nil, "filter by asset type(s)")
 	assetBulkUpdateCmd.Flags().StringSliceVar(&bulkAssetStatuses, "asset-status", nil, "filter by current status")
@@ -1163,6 +1185,7 @@ func init() {
 	assetBulkUpdateCmd.Flags().StringVar(&bulkAssetStatus, "status", "", "new status to apply")
 
 	assetsCmd.AddCommand(assetBulkDeleteCmd)
+	bindDestructiveGate(assetBulkDeleteCmd, true)
 	assetBulkDeleteCmd.Flags().StringSliceVar(&bulkAssetIDs, "asset-id", nil, "filter by asset ID(s)")
 	assetBulkDeleteCmd.Flags().StringSliceVar(&bulkAssetTypes, "type", nil, "filter by asset type(s)")
 	assetBulkDeleteCmd.Flags().StringSliceVar(&bulkAssetStatuses, "asset-status", nil, "filter by current status")

@@ -683,6 +683,14 @@ func stdinBodyFor(path string) string {
 		return `{"name":"stdinProbe","stdinProbe":"body"}`
 	case "escape-cli regression-tests answer":
 		return `{"content":"stdinProbe","stdinProbe":"body"}`
+	case "escape-cli validations start":
+		return `{"asset":{"asset_class":"HOST","asset_type":"DNS","address":"stdinProbe.example.com"}}`
+	case "escape-cli views create":
+		return `{"name":"stdinProbe","target":"ISSUES","stdinProbe":"body"}`
+	case "escape-cli views reorder":
+		return `{"target":"ISSUES","order":["` + id + `"],"stdinProbe":"body"}`
+	case "escape-cli org-settings update":
+		return `{"aiSystemPrompt":"stdinProbe","stdinProbe":"body"}`
 	case "escape-cli custom-rules create":
 		return `{"content":{"rule":{"type":"API","alert":{"severity":"INFO","name":"stdinProbe","context":"probe","category":"CUSTOM"},"detect":[{"if":"scan.type"}]}}}`
 	default:

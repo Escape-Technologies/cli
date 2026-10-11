@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -162,6 +163,13 @@ var customRulesDeleteCmd = &cobra.Command{
 		}
 
 		id := args[0]
+		proceed, err := confirmDestructive(cmd, "delete custom rule "+id, func(ctx context.Context) (any, error) {
+			return escape.GetCustomRule(ctx, id)
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		res, err := escape.DeleteCustomRule(cmd.Context(), id)
 		if err != nil {
 			return fmt.Errorf("failed to delete custom rule: %w", err)
@@ -323,5 +331,6 @@ func init() {
 	customRulesCmd.AddCommand(customRulesCreateCmd)
 	customRulesCmd.AddCommand(customRulesUpdateCmd)
 	customRulesCmd.AddCommand(customRulesDeleteCmd)
+	bindDestructiveGate(customRulesDeleteCmd, true)
 	rootCmd.AddCommand(customRulesCmd)
 }

@@ -51,6 +51,8 @@ GetRetest Get a retest
 
 Get a retest by scan ID. Reports are cursor-paginated. Returns 404 if the scan is not a retest.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The scan ID of the retest
 	@return ApiGetRetestRequest
@@ -233,6 +235,8 @@ ListRetests List retests
 
 List issue retests of the organization. The id of each item is the scan id.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListRetestsRequest
 */
@@ -384,6 +388,8 @@ func (r ApiStartRetestRequest) Execute() (*StartRetest200Response, *http.Respons
 StartRetest Start a retest
 
 Start an issue retest on a DAST or AI pentest profile. Provide either issueIds or filter, not both. The returned id is the scan id.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiStartRetestRequest

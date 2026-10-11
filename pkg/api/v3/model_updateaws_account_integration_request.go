@@ -22,7 +22,7 @@ type UpdateawsAccountIntegrationRequest struct {
 	// The new name of the integration
 	Name       *string                                       `json:"name,omitempty"`
 	Parameters *UpdateawsAccountIntegrationRequestParameters `json:"parameters,omitempty"`
-	// Optional proxy ID to attach to the integration
+	// Optional proxy ID to attach to the integration. Send `null` to detach the current location.
 	ProxyId *string `json:"proxyId,omitempty"`
 	// Optional list of project IDs to attach to the integration
 	ProjectIds []string `json:"projectIds,omitempty"`

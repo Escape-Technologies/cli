@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"strings"
@@ -206,6 +207,13 @@ Permanently delete a tag from your organization`,
 		}
 
 		id := args[0]
+		proceed, err := confirmDestructive(cmd, "delete tag "+id, func(ctx context.Context) (any, error) {
+			return escape.GetTag(ctx, id)
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		result, err := escape.DeleteTag(cmd.Context(), id)
 		if err != nil {
 			return fmt.Errorf("unable to delete tag: %w", err)
@@ -223,6 +231,8 @@ func init() {
 	tagsCmd.AddCommand(tagsCreateCmd)
 	tagsCmd.AddCommand(tagsUpdateCmd)
 	tagsCmd.AddCommand(tagsDeleteCmd)
+
+	bindDestructiveGate(tagsDeleteCmd, true)
 
 	tagsCreateCmd.Flags().StringP("name", "n", "", "Name of the tag")
 	tagsCreateCmd.Flags().StringP("color", "c", "", "Color of the tag")

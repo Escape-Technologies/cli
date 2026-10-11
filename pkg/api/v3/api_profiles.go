@@ -176,6 +176,8 @@ CreateAiPentestProfile Create an AI Pentest profile
 
 Create an AI Pentest profile.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateAiPentestProfileRequest
 */
@@ -308,6 +310,8 @@ func (r ApiCreateContinuousPentestRequest) Execute() (*UpdateContinuousPentest20
 CreateContinuousPentest Create a continuous pentest
 
 Set up continuous pentesting on an AI Pentest profile: watch repositories on branches and review diffs on a cron. Each repository must be visible to a GitHub App installation.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param profileId The AI Pentest profile ID
@@ -988,6 +992,8 @@ DisableContinuousPentest Disable a continuous pentest
 
 Stop the timer and keep the repositories. A run in flight still finishes.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param profileId The AI Pentest profile ID
 	@return ApiDisableContinuousPentestRequest
@@ -1132,6 +1138,8 @@ func (r ApiEnableContinuousPentestRequest) Execute() (*UpdateContinuousPentest20
 EnableContinuousPentest Enable a continuous pentest
 
 Turn the timer back on, optionally replacing the watched repositories. Each repository restarts at its current head. The cron is required, since disabling clears it.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param profileId The AI Pentest profile ID
@@ -2411,6 +2419,8 @@ func (r ApiUpdateContinuousPentestRequest) Execute() (*UpdateContinuousPentest20
 UpdateContinuousPentest Update a continuous pentest
 
 Edit the watched repositories and the cadence of an enabled continuous pentest. Omitted fields are left unchanged. Refuses a disabled setup: re-enable it instead.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param profileId The AI Pentest profile ID

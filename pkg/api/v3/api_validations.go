@@ -37,6 +37,8 @@ GetValidation Get target validation status
 
 Returns the current status, progress, output, and events for a validation started via `POST /validations`.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param validationId Identifier returned by the start endpoint
 	@return ApiGetValidationRequest
@@ -169,6 +171,8 @@ func (r ApiStartValidationRequest) Execute() (*StartValidation200Response, *http
 StartValidation Start a target validation
 
 Validates that a target (asset) is reachable and in scope without running a full scan. The asset type determines the validation workflow (DNS, IP, range, REST, GraphQL, webapp). Poll `GET /validations/{id}` until `status` is FINISHED, FAILED, or CANCELED.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiStartValidationRequest

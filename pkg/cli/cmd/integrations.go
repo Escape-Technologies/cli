@@ -20,6 +20,7 @@ var (
 	integrationsProjectIDs  []string
 	integrationsLocationIDs []string
 	integrationListPage     pageFlags
+	integrationRunsPage     pageFlags
 )
 
 var integrationsCmd = &cobra.Command{
@@ -188,6 +189,13 @@ var integrationsDeleteCmd = &cobra.Command{
 			return errors.New("--kind is required")
 		}
 
+		proceed, err := confirmDestructive(cmd, fmt.Sprintf("delete %s integration %s", integrationsKind, args[0]), func(ctx context.Context) (any, error) {
+			return escape.GetIntegration(ctx, integrationsKind, args[0])
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		item, err := escape.DeleteIntegration(cmd.Context(), integrationsKind, args[0])
 		if err != nil {
 			return fmt.Errorf("failed to delete integration: %w", err)
@@ -197,6 +205,117 @@ var integrationsDeleteCmd = &cobra.Command{
 
 		return nil
 	},
+}
+
+var integrationsTestCmd = &cobra.Command{
+	Use:   "test integration-id",
+	Short: "Test an integration's credentials",
+	Long: `Test Integration - Check the Stored Credentials
+
+Ask the integration to check its credentials. The API returns the run it
+scheduled, with its status.`,
+	Example: `  escape-cli integrations test <integration-id> --kind JIRA`,
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.SyncAkamaiIntegration200Response{}) {
+			return nil
+		}
+
+		if integrationsKind == "" {
+			return errors.New("--kind is required")
+		}
+
+		run, err := escape.TestIntegration(cmd.Context(), integrationsKind, args[0])
+		if err != nil {
+			return fmt.Errorf("failed to test integration: %w", err)
+		}
+
+		printIntegrationRun(run)
+
+		return nil
+	},
+}
+
+var integrationsSyncCmd = &cobra.Command{
+	Use:   "sync integration-id",
+	Short: "Schedule a synchronization run of an integration",
+	Long: `Sync Integration - Pull the Provider's Latest State
+
+Schedule a run that pulls the latest state from the provider (repositories,
+projects, tickets). The API returns the run it scheduled, with its status.`,
+	Example: `  escape-cli integrations sync <integration-id> --kind JIRA`,
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.SyncAkamaiIntegration200Response{}) {
+			return nil
+		}
+
+		if integrationsKind == "" {
+			return errors.New("--kind is required")
+		}
+
+		run, err := escape.SyncIntegration(cmd.Context(), integrationsKind, args[0])
+		if err != nil {
+			return fmt.Errorf("failed to sync integration: %w", err)
+		}
+
+		printIntegrationRun(run)
+
+		return nil
+	},
+}
+
+var integrationsRunsCmd = &cobra.Command{
+	Use:     "runs integration-id",
+	Aliases: []string{"run", "history"},
+	Short:   "List the runs of an integration",
+	Long: `List the runs of an integration: the synchronizations and tests the
+platform executed, with their status, timing and progress.`,
+	Example: `  escape-cli integrations runs <integration-id> --kind JIRA`,
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]map[string]interface{}{}) {
+			return nil
+		}
+
+		if integrationsKind == "" {
+			return errors.New("--kind is required")
+		}
+
+		if err := runPagedList(cmd, integrationRunsPage, func(ctx context.Context, cursor string, size int) ([]map[string]interface{}, *string, int, error) {
+			return escape.ListIntegrationRuns(ctx, integrationsKind, args[0], cursor, size)
+		}, func(runs []map[string]interface{}) []string {
+			res := []string{"ID\tKIND\tSTATUS\tCREATED AT\tFINISHED AT\tPROGRESS"}
+			for _, run := range runs {
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%v",
+					stringValue(run["id"]),
+					stringValue(run["kind"]),
+					stringValue(run["status"]),
+					stringValue(run["createdAt"]),
+					stringValue(run["finishedAt"]),
+					run["progressRatio"],
+				))
+			}
+
+			return res
+		}); err != nil {
+			return fmt.Errorf("failed to list integration runs: %w", err)
+		}
+
+		return nil
+	},
+}
+
+// percentScale converts a 0..1 ratio to a percentage.
+const percentScale = 100
+
+func printIntegrationRun(run *v3.SyncAkamaiIntegration200Response) {
+	out.Table(run, func() []string {
+		return []string{
+			"ID\tKIND\tSTATUS\tPROGRESS",
+			fmt.Sprintf("%s\t%s\t%s\t%.0f%%", run.GetId(), run.GetKind(), run.GetStatus(), run.GetProgressRatio()*percentScale),
+		}
+	})
 }
 
 func stringValue(value interface{}) string {
@@ -281,7 +400,7 @@ func integrationInputSchema(build func() (*clischema.JSONSchema, error)) (bool, 
 }
 
 func init() {
-	integrationsCmd.AddCommand(integrationsListCmd, integrationsGetCmd, integrationsCreateCmd, integrationsUpdateCmd, integrationsDeleteCmd)
+	integrationsCmd.AddCommand(integrationsListCmd, integrationsGetCmd, integrationsCreateCmd, integrationsUpdateCmd, integrationsDeleteCmd, integrationsTestCmd, integrationsSyncCmd, integrationsRunsCmd)
 	kinds := integrationKinds()
 	kindUsage := "integration kind: " + strings.Join(kinds, ", ")
 	for _, subcommand := range []*cobra.Command{
@@ -290,6 +409,9 @@ func init() {
 		integrationsCreateCmd,
 		integrationsUpdateCmd,
 		integrationsDeleteCmd,
+		integrationsTestCmd,
+		integrationsSyncCmd,
+		integrationsRunsCmd,
 	} {
 		subcommand.Flags().StringVar(&integrationsKind, "kind", "", kindUsage)
 		if err := subcommand.Flags().SetAnnotation("kind", flagEnumAnnotation, kinds); err != nil {
@@ -301,5 +423,7 @@ func init() {
 	integrationsListCmd.Flags().StringSliceVar(&integrationsProjectIDs, "project-id", []string{}, "filter by project ID")
 	integrationsListCmd.Flags().StringSliceVar(&integrationsLocationIDs, "location-id", []string{}, "filter by location ID")
 	integrationListPage.bind(integrationsListCmd)
+	integrationRunsPage.bind(integrationsRunsCmd)
+	bindDestructiveGate(integrationsDeleteCmd, true)
 	rootCmd.AddCommand(integrationsCmd)
 }

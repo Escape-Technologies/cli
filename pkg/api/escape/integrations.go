@@ -208,3 +208,56 @@ func DeleteIntegration(ctx context.Context, kind, integrationID string) (*v3.Cre
 
 	return &resp, nil
 }
+
+// integrationRunResponse is the per-kind run-listing envelope: every kind
+// returns the same paginated document.
+type integrationRunResponse struct {
+	Data       []map[string]interface{} `json:"data"`
+	NextCursor *string                  `json:"nextCursor"`
+	TotalCount int                      `json:"totalCount"`
+}
+
+// TestIntegration asks the integration to check its credentials.
+func TestIntegration(ctx context.Context, kind, integrationID string) (*v3.SyncAkamaiIntegration200Response, error) {
+	var resp v3.SyncAkamaiIntegration200Response
+	if err := rawRequest(ctx, http.MethodPost, rawPath("integrations", kind, integrationID, "test"), nil, &resp); err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return &resp, nil
+}
+
+// SyncIntegration schedules a synchronization run of the integration.
+func SyncIntegration(ctx context.Context, kind, integrationID string) (*v3.SyncAkamaiIntegration200Response, error) {
+	var resp v3.SyncAkamaiIntegration200Response
+	if err := rawRequest(ctx, http.MethodPost, rawPath("integrations", kind, integrationID, "sync"), nil, &resp); err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return &resp, nil
+}
+
+// ListIntegrationRuns lists one page of the runs of an integration.
+// size 0 keeps the API default page size. The returned total is totalCount.
+func ListIntegrationRuns(ctx context.Context, kind, integrationID, next string, size int) ([]map[string]interface{}, *string, int, error) {
+	path := rawPath("integrations", kind, integrationID, "runs")
+	query := url.Values{}
+	if next != "" {
+		query.Set("cursor", next)
+	}
+
+	if size > 0 {
+		query.Set("size", strconv.Itoa(size))
+	}
+
+	if encoded := query.Encode(); encoded != "" {
+		path += "?" + encoded
+	}
+
+	var resp integrationRunResponse
+	if err := rawRequest(ctx, http.MethodGet, path, nil, &resp); err != nil {
+		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return resp.Data, resp.NextCursor, resp.TotalCount, nil
+}

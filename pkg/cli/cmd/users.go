@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"strings"
@@ -217,9 +218,57 @@ They will receive an invitation to set up their account.`,
 	},
 }
 
+var usersDeactivateCmd = &cobra.Command{
+	Use:   "deactivate user-id",
+	Short: "Deactivate a user of the organization",
+	Long: `Deactivate User - Revoke Platform Access
+
+Deactivate a user of the organization. The API records the deactivation time
+and the user can no longer sign in. Requires the ADMIN permission on the
+target user, and a user cannot deactivate themselves.`,
+	Example: `  # Deactivate a user
+  escape-cli users deactivate 00000000-0000-0000-0000-000000000000
+
+  # Skip the confirmation prompt
+  escape-cli users deactivate <user-id> --yes`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.ListUsers200ResponseInner{}) {
+			return nil
+		}
+
+		proceed, err := confirmDestructive(cmd, "deactivate user "+args[0], func(ctx context.Context) (any, error) {
+			return escape.GetUser(ctx, args[0])
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
+		user, err := escape.DeactivateUser(cmd.Context(), args[0])
+		if err != nil {
+			return fmt.Errorf("unable to deactivate user: %w", err)
+		}
+
+		out.Table(user, func() []string {
+			res := []string{"ID\tEMAIL\tDEACTIVATED AT"}
+			deactivatedAt := user.GetDeactivatedAt().String()
+			if user.DeactivatedAt == nil {
+				deactivatedAt = ""
+			}
+
+			res = append(res, fmt.Sprintf("%s\t%s\t%s", user.GetId(), user.GetEmail(), deactivatedAt))
+
+			return res
+		})
+
+		return nil
+	},
+}
+
 func init() {
-	usersCmd.AddCommand(usersMeCmd, usersListCmd, usersGetCmd, usersInviteCmd)
-	usersListCmd.Flags().StringVar(&usersSearch, "search", "", "search users by name or email")
+	usersCmd.AddCommand(usersMeCmd, usersListCmd, usersGetCmd, usersInviteCmd, usersDeactivateCmd)
+	bindDestructiveGate(usersDeactivateCmd, true)
+	usersListCmd.Flags().StringVar(&usersSearch, "search", "", "search users by email (the API matches the email only)")
 	usersInviteCmd.Flags().StringArrayVar(&usersInviteEmails, "email", []string{}, "email address to invite (can be specified multiple times)")
 	usersInviteCmd.Flags().StringVar(&usersInviteRoleID, "role-id", "", "role ID to bind to invited users")
 	rootCmd.AddCommand(meCmd)

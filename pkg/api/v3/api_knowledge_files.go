@@ -37,6 +37,8 @@ DeleteKnowledgeFile Delete a knowledge file
 
 Delete a file from the organization knowledge library.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param fileId The knowledge file ID
 	@return ApiDeleteKnowledgeFileRequest
@@ -203,6 +205,8 @@ ListKnowledgeFiles List knowledge files
 
 List the files of the organization knowledge library, with cursor pagination. Files are used as context by AI pentests.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListKnowledgeFilesRequest
 */
@@ -361,6 +365,8 @@ This is a two-step flow:
 The file is processed asynchronously: poll the list endpoint until the status is `COMPLETED` or `FAILED`.
 
 File names must be unique within the organization: names that sanitize to the same storage key (for example `report v1.md` and `report-v1.md`) share a single object, and uploading a new file overwrites the previous one.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiUploadKnowledgeFileRequest

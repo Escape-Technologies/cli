@@ -195,6 +195,9 @@ func TestDestructiveDeletesPrintTheirDeclaredDocument(t *testing.T) {
 				tt.prepare(t)
 			}
 
+			// A terminal stdin would trigger the confirmation prompt; the
+			// prompt itself is covered by confirm_test.go.
+			commandFor(tt.name).SetIn(strings.NewReader(""))
 			commandFor(tt.name).SetContext(context.Background())
 
 			stdout, stderr, err := captureJSONCommand(t, tt.run)
@@ -271,7 +274,10 @@ func assertExactlyOneJSON(t *testing.T, stdout string, dest any) {
 	}
 }
 
-func TestSchemaModeDoesNotDelete(t *testing.T) {
+// TestSchemaModeRunsNoMutation runs every mutation command with `--output schema`.
+// A command that calls the API in schema mode either sends a request the caller only
+// wanted to introspect, or fails because the host is unreachable. Both show up here.
+func TestSchemaModeRunsNoMutation(t *testing.T) {
 	if err := out.SetOutput("schema"); err != nil {
 		t.Fatal(err)
 	}
@@ -303,6 +309,12 @@ func TestSchemaModeDoesNotDelete(t *testing.T) {
 		{"projects delete", func() error { return projectsDeleteCmd.RunE(projectsDeleteCmd, []string{deleteOutputID}) }},
 		{"roles delete", func() error { return rolesDeleteCmd.RunE(rolesDeleteCmd, []string{deleteOutputID}) }},
 		{"integrations delete", func() error { return integrationsDeleteCmd.RunE(integrationsDeleteCmd, []string{deleteOutputID}) }},
+		{"scans cancel", func() error { return scanCancelCmd.RunE(scanCancelCmd, []string{deleteOutputID}) }},
+		{"scans ignore", func() error { return scanIgnoreCmd.RunE(scanIgnoreCmd, []string{deleteOutputID}) }},
+		{"upload schema", func() error { return uploadSchemaCmd.RunE(uploadSchemaCmd, nil) }},
+		{"validations start", func() error { return validationsStartCmd.RunE(validationsStartCmd, nil) }},
+		{"ai-chats create", func() error { return aiChatsCreateCmd.RunE(aiChatsCreateCmd, nil) }},
+		{"ai-chats message", func() error { return aiChatsMessageCmd.RunE(aiChatsMessageCmd, []string{deleteOutputID}) }},
 	}
 	for _, call := range calls {
 		if err := call.fn(); err != nil {
@@ -323,11 +335,17 @@ func outputSchemaNotExercised() map[string]string {
 		}
 	}
 	note("prints a page or array after unmarshalling a different wire document, often across more than one request",
+		"escape-cli security-tests list",
+		"escape-cli ai-chats list",
+		"escape-cli ai-chats messages",
+		"escape-cli jobs list",
 		"escape-cli users list",
 		"escape-cli roles list",
 		"escape-cli projects list",
 		"escape-cli integrations list",
+		"escape-cli integrations runs",
 		"escape-cli workflows list",
+		"escape-cli workflows executions",
 		"escape-cli profiles list",
 		"escape-cli profiles problems",
 		"escape-cli issues list",
@@ -341,6 +359,7 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli events list",
 		"escape-cli emails list",
 		"escape-cli locations list",
+		"escape-cli locations logs",
 		"escape-cli assets list",
 		"escape-cli assets list-activities",
 		"escape-cli custom-rules list",
@@ -350,6 +369,14 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli problems",
 		"escape-cli regression-tests list",
 		"escape-cli regression-tests history",
+		"escape-cli knowledge-files list",
+		"escape-cli knowledge-files upload",
+		"escape-cli views list",
+		"escape-cli views issues",
+		"escape-cli vault variables list",
+		"escape-cli vault list",
+		"escape-cli vault entries",
+		"escape-cli knowledge-files list",
 	)
 	note("needs a valid stdin body; TestAdvertisedBodiesReachTheAPI checks the body reaches the API",
 		"escape-cli roles create",
@@ -360,6 +387,10 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli integrations update",
 		"escape-cli workflows create",
 		"escape-cli workflows update",
+		"escape-cli views create",
+		"escape-cli views update",
+		"escape-cli views reorder",
+		"escape-cli org-settings update",
 		"escape-cli profiles create-rest",
 		"escape-cli profiles create-webapp",
 		"escape-cli profiles create-graphql",
@@ -377,8 +408,22 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli regression-tests create",
 		"escape-cli regression-tests update",
 		"escape-cli regression-tests answer",
+		"escape-cli validations start",
 	)
 	note("a dedicated contract test already decodes this command, or it needs more than one response, a file, or a summary it builds itself",
+		"escape-cli ai-chats create",
+		"escape-cli security-tests get",
+		"escape-cli compliance list",
+		"escape-cli compliance enabled",
+		"escape-cli compliance per-application",
+		"escape-cli scans compliance",
+		"escape-cli statistics endpoints",
+		"escape-cli statistics issues",
+		"escape-cli statistics trends",
+		"escape-cli permissions list",
+		"escape-cli validations get",
+		"escape-cli ai-chats get",
+		"escape-cli ai-chats message",
 		"escape-cli me",
 		"escape-cli users me",
 		"escape-cli users get",
@@ -454,6 +499,18 @@ func TestEveryOutputSchemaToolIsExercisedOrExplained(t *testing.T) {
 		"escape-cli profiles continuous-pentest update":  {},
 		"escape-cli profiles continuous-pentest enable":  {},
 		"escape-cli profiles continuous-pentest disable": {},
+		"escape-cli views delete":                        {},
+		"escape-cli vault variables create":              {},
+		"escape-cli vault variables delete":              {},
+		"escape-cli vault variables rotate":              {},
+		"escape-cli vault link":                          {},
+		"escape-cli knowledge-files delete":              {},
+		"escape-cli org-settings get":                    {},
+		"escape-cli users deactivate":                    {},
+		"escape-cli workflows pause":                     {},
+		"escape-cli locations tags":                      {},
+		"escape-cli integrations test":                   {},
+		"escape-cli integrations sync":                   {},
 	}
 	explained := outputSchemaNotExercised()
 	seen := map[string]struct{}{}

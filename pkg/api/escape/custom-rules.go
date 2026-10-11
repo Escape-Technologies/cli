@@ -5,24 +5,37 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/http"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
-// ListCustomRules lists all custom rules
+// ListCustomRules lists every custom rule, draining every page the
+// X-Next-Cursor header announces.
 func ListCustomRules(ctx context.Context) ([]v3.CustomRuleSummarized, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	req := client.CustomRulesAPI.ListCustomRules(ctx)
-	data, _, err := req.Execute()
+	rules, err := drainCursorPages(func(cursor string) ([]v3.CustomRuleSummarized, *http.Response, error) {
+		req := client.CustomRulesAPI.ListCustomRules(ctx).Size(maxRolePageSize)
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		}
+
+		data, httpRes, err := req.Execute()
+		if err != nil {
+			return nil, nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+		}
+
+		return data, httpRes, nil
+	})
 	if err != nil {
-		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+		return nil, err
 	}
 
-	return data, nil
+	return rules, nil
 }
 
 // GetCustomRule gets a custom rule

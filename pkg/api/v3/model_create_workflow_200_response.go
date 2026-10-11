@@ -24,8 +24,10 @@ type CreateWorkflow200Response struct {
 	// The workflow ID.
 	Id *string `json:"id,omitempty"`
 	// The name of the workflow.
-	Name    *string                                  `json:"name,omitempty"`
-	Trigger ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
+	Name *string `json:"name,omitempty"`
+	// The description of the workflow. Null when the workflow has no description.
+	Description *string                                  `json:"description,omitempty"`
+	Trigger     ENUMPROPERTIESDATAITEMSPROPERTIESTRIGGER `json:"trigger"`
 	// Whether the workflow is paused.
 	Paused bool `json:"paused"`
 	// The throttle in milliseconds for the workflow.
@@ -141,6 +143,38 @@ func (o *CreateWorkflow200Response) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *CreateWorkflow200Response) SetName(v string) {
 	o.Name = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *CreateWorkflow200Response) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateWorkflow200Response) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateWorkflow200Response) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *CreateWorkflow200Response) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetTrigger returns the Trigger field value
@@ -417,6 +451,9 @@ func (o CreateWorkflow200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["trigger"] = o.Trigger
 	toSerialize["paused"] = o.Paused
 	if !IsNil(o.ThrottleMs) {
@@ -483,6 +520,7 @@ func (o *CreateWorkflow200Response) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "trigger")
 		delete(additionalProperties, "paused")
 		delete(additionalProperties, "throttleMs")

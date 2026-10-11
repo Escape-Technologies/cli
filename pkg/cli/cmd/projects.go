@@ -189,6 +189,13 @@ var projectsDeleteCmd = &cobra.Command{
 			return nil
 		}
 
+		proceed, err := confirmDestructive(cmd, "delete project "+args[0], func(ctx context.Context) (any, error) {
+			return escape.GetProject(ctx, args[0])
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		if err := escape.DeleteProject(cmd.Context(), args[0]); err != nil {
 			return fmt.Errorf("failed to delete project: %w", err)
 		}
@@ -201,6 +208,7 @@ var projectsDeleteCmd = &cobra.Command{
 
 func init() {
 	projectsCmd.AddCommand(projectsListCmd, projectsGetCmd, projectsCreateCmd, projectsUpdateCmd, projectsDeleteCmd)
+	bindDestructiveGate(projectsDeleteCmd, true)
 	projectsListCmd.Flags().StringVarP(&projectsSearchFlag, "search", "s", "", "search projects by name")
 	projectListPage.bind(projectsListCmd)
 	rootCmd.AddCommand(projectsCmd)

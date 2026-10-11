@@ -64,6 +64,52 @@ func ListWorkflows(ctx context.Context, next string, filters *ListWorkflowsFilte
 	return data.Data, data.NextCursor, data.GetTotalCount(), nil
 }
 
+// PauseWorkflow pauses or resumes a workflow. The API carries the pause flag
+// on the generic update route; this wrapper keeps the intent explicit.
+func PauseWorkflow(ctx context.Context, workflowID string, paused bool) (*v3.CreateWorkflow200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	req := v3.NewUpdateWorkflowRequest()
+	req.SetPaused(paused)
+
+	data, _, err := client.WorkflowsAPI.UpdateWorkflow(ctx, workflowID).UpdateWorkflowRequest(*req).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// ListWorkflowExecutions lists one page of the runs of a workflow.
+// size 0 keeps the API default page size. The returned total is totalCount.
+func ListWorkflowExecutions(ctx context.Context, workflowID, next string, size int) ([]v3.WorkflowExecution, *string, int, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	req := client.WorkflowsAPI.ListWorkflowExecutions(ctx, workflowID)
+	if next != "" {
+		req = req.Cursor(next)
+	}
+
+	if size > 0 {
+		req = req.Size(size)
+	}
+
+	data, _, listErr := req.Execute()
+	if listErr != nil {
+		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(listErr))
+	}
+
+	nextCursor := data.GetNextCursor()
+
+	return data.GetData(), &nextCursor, data.GetTotalCount(), nil
+}
+
 // GetWorkflow gets a workflow by ID
 func GetWorkflow(ctx context.Context, workflowID string) (*v3.CreateWorkflow200Response, error) {
 	client, err := newAPIV3Client()

@@ -263,6 +263,11 @@ func TestMCPListToolsDefaultToOnePage(t *testing.T) {
 		"profiles_problems",
 		"scans_problems",
 		"retests_list",
+		"security_tests_list",
+		"compliance_per_application",
+		"ai_chats_list",
+		"ai_chats_messages",
+		"jobs_list",
 	} {
 		spec, ok := byName[name]
 		if !ok {
@@ -327,6 +332,11 @@ func TestPagedCommandsDocumentPageShape(t *testing.T) {
 		"escape-cli scans problems",
 		"escape-cli problems",
 		"escape-cli retests list",
+		"escape-cli security-tests list",
+		"escape-cli compliance per-application",
+		"escape-cli ai-chats list",
+		"escape-cli ai-chats messages",
+		"escape-cli jobs list",
 	} {
 		schemas, ok := registry[path]
 		if !ok {

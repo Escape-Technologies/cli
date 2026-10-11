@@ -26,6 +26,14 @@ USE CASES:
   • Any schema file referenced in profile creation`,
 }
 
+// schemaUploadResult is what `upload schema` prints: the id of the uploaded object.
+// Schema mode declares it and returns before the upload starts.
+type uploadSchemaOutput struct {
+	ID string `json:"id"`
+}
+
+var schemaUploadResult = uploadSchemaOutput{}
+
 var uploadSchemaCmd = &cobra.Command{
 	Use:     "schema",
 	Aliases: []string{"s"},
@@ -43,6 +51,10 @@ when creating profiles that reference large schema files.`,
 
   # Use in profile creation
   echo '{"schema_upload_id": "'$UPLOAD_ID'", ...}' | escape-cli profiles create-rest`, RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema(schemaUploadResult) {
+			return nil
+		}
+
 		data, err := io.ReadAll(os.Stdin)
 		if err != nil {
 			return fmt.Errorf("failed to read stdin: %w", err)

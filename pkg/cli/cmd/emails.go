@@ -64,12 +64,14 @@ var emailsCmd = &cobra.Command{
 	Long: `Read emails sent to Escape scan inboxes.
 
 Use these commands to inspect inbox traffic for scan addresses and block until the
-next new email is received.`,
+next new email is received.
+
+BETA: scan inbox emails expose raw email content and the surface can still change.`,
 }
 
 var emailsListCmd = &cobra.Command{
 	Use:   "list",
-	Short: "List inbox emails for a target scan address",
+	Short: "List inbox emails for a target scan address (Beta)",
 	Example: `  escape-cli emails list --email test.abc123@scan.escape.tech
   escape-cli emails list --email test.abc123@scan.escape.tech --limit 10
   escape-cli emails list --email test.abc123@scan.escape.tech --after 2026-04-15T16:47:32Z`,
@@ -123,7 +125,7 @@ var emailsListCmd = &cobra.Command{
 var emailsReadCmd = &cobra.Command{
 	Use:     "read email-id",
 	Aliases: []string{"get", "show"},
-	Short:   "Read a full inbox email by ID",
+	Short:   "Read a full inbox email by ID (Beta)",
 	Example: `  escape-cli emails read 1126f550-e77b-49e8-9952-e74ac3014825
   escape-cli emails read 1126f550-e77b-49e8-9952-e74ac3014825 -o json`,
 	Args: func(cmd *cobra.Command, args []string) error {
@@ -152,7 +154,7 @@ var emailsReadCmd = &cobra.Command{
 
 var emailsWaitCmd = &cobra.Command{
 	Use:   "wait",
-	Short: "Poll until the next new inbox email is received",
+	Short: "Poll until the next new inbox email is received (Beta)",
 	Example: `  escape-cli emails wait --email test.abc123@scan.escape.tech
   escape-cli emails wait --email test.abc123@scan.escape.tech --timeout 2m
   escape-cli emails wait --email test.abc123@scan.escape.tech --after 2026-04-15T16:47:32Z --seen-id 1126f550-e77b-49e8-9952-e74ac3014825`,

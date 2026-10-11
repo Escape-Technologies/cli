@@ -3,7 +3,6 @@ package escape
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -23,33 +22,26 @@ func GetMe(ctx context.Context) (*v3.GetMe200Response, error) {
 	return data, nil
 }
 
-// ListUsers lists all users in the organization.
-// Search is applied client-side because the public API does not expose a search filter.
+// ListUsers lists users in the organization. Search is sent to the API, whose
+// search matches the email only: filtering names client-side promised a match
+// the endpoint never performs.
 func ListUsers(ctx context.Context, search string) ([]v3.ListUsers200ResponseInner, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
-	data, _, err := client.UsersAPI.ListUsers(ctx).Execute()
+	req := client.UsersAPI.ListUsers(ctx)
+	if search != "" {
+		req = req.Search(search)
+	}
+
+	data, _, err := req.Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
-	term := strings.TrimSpace(strings.ToLower(search))
-	if term == "" {
-		return data, nil
-	}
-
-	filtered := make([]v3.ListUsers200ResponseInner, 0, len(data))
-	for _, user := range data {
-		if strings.Contains(strings.ToLower(user.GetEmail()), term) ||
-			strings.Contains(strings.ToLower(fmt.Sprint(user.AdditionalProperties["name"])), term) {
-			filtered = append(filtered, user)
-		}
-	}
-
-	return filtered, nil
+	return data, nil
 }
 
 // GetUser gets a user by ID
@@ -60,6 +52,24 @@ func GetUser(ctx context.Context, userID string) (*v3.GetUser200Response, error)
 	}
 
 	data, _, err := client.UsersAPI.GetUser(ctx, userID).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// DeactivateUser deactivates a user of the organization. The same route
+// reactivates a user, but the CLI exposes the one operation the ticket asks
+// for; the API refuses a self-deactivation.
+func DeactivateUser(ctx context.Context, userID string) (*v3.ListUsers200ResponseInner, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	req := v3.NewUpdateUserRequest(true)
+	data, _, err := client.UsersAPI.UpdateUser(ctx, userID).UpdateUserRequest(*req).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}

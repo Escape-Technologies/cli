@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io"
@@ -229,6 +230,11 @@ var rolesUnbindCmd = &cobra.Command{
 			return nil
 		}
 
+		proceed, err := confirmDestructive(cmd, "remove role binding "+args[0], nil)
+		if err != nil || !proceed {
+			return err
+		}
+
 		result, err := escape.DeleteRoleBinding(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("failed to unbind role: %w", err)
@@ -257,6 +263,13 @@ var rolesDeleteCmd = &cobra.Command{
 			return nil
 		}
 
+		proceed, err := confirmDestructive(cmd, "delete role "+args[0], func(ctx context.Context) (any, error) {
+			return escape.GetRole(ctx, args[0])
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		if err := escape.DeleteRole(cmd.Context(), args[0]); err != nil {
 			return fmt.Errorf("failed to delete role: %w", err)
 		}
@@ -269,6 +282,8 @@ var rolesDeleteCmd = &cobra.Command{
 
 func init() {
 	rolesCmd.AddCommand(rolesListCmd, rolesGetCmd, rolesCreateCmd, rolesUpdateCmd, rolesDeleteCmd, rolesBindCmd, rolesUnbindCmd)
+	bindDestructiveGate(rolesDeleteCmd, true)
+	bindDestructiveGate(rolesUnbindCmd, false)
 	rolesBindCmd.Flags().StringVar(&rolesBindRoleID, "role-id", "", "role ID to bind")
 	rolesBindCmd.Flags().StringVar(&rolesBindUserID, "user-id", "", "user ID to bind the role to")
 	rootCmd.AddCommand(rolesCmd)

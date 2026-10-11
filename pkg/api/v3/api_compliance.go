@@ -555,6 +555,8 @@ UpdateEnabledCompliances Update enabled compliance frameworks
 
 Enable or disable compliance frameworks for the organization. Requires admin permissions. Provide the full list of frameworks to enable; any framework not listed will be disabled.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiUpdateEnabledCompliancesRequest
 */

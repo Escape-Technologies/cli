@@ -33,7 +33,9 @@ var workflowsSearchFlag string
 var workflowsProjectIDs []string
 var workflowsIntegrationIDs []string
 var workflowsWorkflowIDs []string
+var workflowsResume bool
 var workflowListPage pageFlags
+var workflowExecutionsPage pageFlags
 
 var workflowsListCmd = &cobra.Command{
 	Use:     "list",
@@ -199,6 +201,13 @@ var workflowsDeleteCmd = &cobra.Command{
 			return nil
 		}
 
+		proceed, err := confirmDestructive(cmd, "delete workflow "+args[0], func(ctx context.Context) (any, error) {
+			return escape.GetWorkflow(ctx, args[0])
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		result, err := escape.DeleteWorkflow(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("failed to delete workflow: %w", err)
@@ -210,13 +219,94 @@ var workflowsDeleteCmd = &cobra.Command{
 	},
 }
 
+var workflowsPauseCmd = &cobra.Command{
+	Use:   "pause workflow-id",
+	Short: "Pause a workflow",
+	Long: `Pause Workflow - Stop It From Running
+
+Pause a workflow: it stops triggering on new events until it is resumed. The
+runs already scheduled still execute.`,
+	Example: `  # Pause a workflow
+  escape-cli workflows pause 00000000-0000-0000-0000-000000000000
+
+  # Resume it
+  escape-cli workflows pause <workflow-id> --resume`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.CreateWorkflow200Response{}) {
+			return nil
+		}
+
+		workflow, err := escape.PauseWorkflow(cmd.Context(), args[0], !workflowsResume)
+		if err != nil {
+			return fmt.Errorf("failed to pause workflow: %w", err)
+		}
+
+		state := "paused"
+		if workflowsResume {
+			state = "resumed"
+		}
+
+		out.Table(workflow, func() []string {
+			res := []string{"ID\tNAME\tTRIGGER\tPAUSED"}
+			res = append(res, fmt.Sprintf("%s\t%s\t%s\t%t", workflow.GetId(), workflow.GetName(), workflow.GetTrigger(), workflow.GetPaused()))
+
+			return res
+		})
+		out.Log(fmt.Sprintf("Workflow %s %s", args[0], state))
+
+		return nil
+	},
+}
+
+var workflowsExecutionsCmd = &cobra.Command{
+	Use:     "executions workflow-id",
+	Aliases: []string{"runs", "history"},
+	Short:   "List the executions of a workflow",
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]v3.WorkflowExecution{}) {
+			return nil
+		}
+
+		if err := runPagedList(cmd, workflowExecutionsPage, func(ctx context.Context, cursor string, size int) ([]v3.WorkflowExecution, *string, int, error) {
+			return escape.ListWorkflowExecutions(ctx, args[0], cursor, size)
+		}, func(executions []v3.WorkflowExecution) []string {
+			res := []string{"ID\tSTATUS\tKIND\tCREATED AT\tCOMPLETED AT"}
+			for _, execution := range executions {
+				completed := ""
+				if execution.CompletedAt != nil {
+					completed = *execution.CompletedAt
+				}
+
+				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s",
+					execution.GetId(),
+					execution.GetStatus(),
+					execution.GetKind(),
+					execution.GetCreatedAt(),
+					completed,
+				))
+			}
+
+			return res
+		}); err != nil {
+			return fmt.Errorf("unable to list workflow executions: %w", err)
+		}
+
+		return nil
+	},
+}
+
 func init() {
-	workflowsCmd.AddCommand(workflowsListCmd, workflowsGetCmd, workflowsCreateCmd, workflowsUpdateCmd, workflowsDeleteCmd)
+	workflowsCmd.AddCommand(workflowsListCmd, workflowsGetCmd, workflowsCreateCmd, workflowsUpdateCmd, workflowsDeleteCmd, workflowsPauseCmd, workflowsExecutionsCmd)
+	bindDestructiveGate(workflowsDeleteCmd, true)
 	workflowsListCmd.Flags().StringSliceVar(&workflowsTriggersFlag, "trigger", []string{}, "filter by trigger type (e.g. SCAN_FINISHED)")
 	workflowsListCmd.Flags().StringVarP(&workflowsSearchFlag, "search", "s", "", "search workflows by name")
 	workflowsListCmd.Flags().StringSliceVar(&workflowsProjectIDs, "project-id", []string{}, "filter by project ID(s)")
 	workflowsListCmd.Flags().StringSliceVar(&workflowsIntegrationIDs, "integration-id", []string{}, "filter by integration ID(s)")
 	workflowsListCmd.Flags().StringSliceVar(&workflowsWorkflowIDs, "workflow-id", []string{}, "filter by workflow ID(s)")
 	workflowListPage.bind(workflowsListCmd)
+	workflowExecutionsPage.bind(workflowsExecutionsCmd)
+	workflowsPauseCmd.Flags().BoolVar(&workflowsResume, "resume", false, "resume the workflow instead of pausing it")
 	rootCmd.AddCommand(workflowsCmd)
 }

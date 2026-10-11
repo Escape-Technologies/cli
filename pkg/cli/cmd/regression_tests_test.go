@@ -183,6 +183,9 @@ func TestRegressionTestsCommandsPrintDeclaredDocument(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.stdin != "" {
 				tt.cmd.SetIn(strings.NewReader(tt.stdin))
+			} else {
+				// A terminal stdin would trigger the confirmation prompt.
+				tt.cmd.SetIn(strings.NewReader(""))
 			}
 
 			tt.cmd.SetContext(context.Background())

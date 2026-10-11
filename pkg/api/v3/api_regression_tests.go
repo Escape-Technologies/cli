@@ -42,6 +42,8 @@ CreateRegressionTest Create a regression test
 
 Create a regression test from a source report. Upload the report first with POST /v3/upload/signed-url, then pass the returned id as `temporaryObjectKey`.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateRegressionTestRequest
 */
@@ -168,6 +170,8 @@ func (r ApiDeleteRegressionTestRequest) Execute() (*DeleteProfile200Response, *h
 DeleteRegressionTest Delete a regression test
 
 Delete a regression test and its source report. This is a destructive operation. When the test does not exist (or belongs to another organization), the internal API returns an error that is forwarded as a 404 to avoid leaking its existence.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regressionTestId The regression test ID
@@ -307,6 +311,8 @@ func (r ApiGetRegressionTestRequest) Execute() (*CreateRegressionTest200Response
 GetRegressionTest Get a regression test
 
 Get a regression test by ID, including its runs. When the test does not exist (or belongs to another organization), the internal API returns an error that is forwarded as a 404 to avoid leaking its existence.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regressionTestId The regression test ID
@@ -460,6 +466,8 @@ func (r ApiListRegressionTestHistoryRequest) Execute() (*ListRegressionTestHisto
 ListRegressionTestHistory List the runs of a regression test
 
 List the runs of a regression test, most recent first. When the test does not exist (or belongs to another organization), the internal API returns an error that is forwarded as a 404 to avoid leaking its existence.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regressionTestId The regression test ID
@@ -629,6 +637,8 @@ ListRegressionTests List regression tests
 
 List the regression tests of the organization, most recent first.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListRegressionTestsRequest
 */
@@ -772,6 +782,8 @@ func (r ApiReplyRegressionTestClarificationRequest) Execute() (*ReplyRegressionT
 ReplyRegressionTestClarification Reply to a clarification
 
 Answer the clarification question asked by the agent during a run. The run must be waiting for a clarification (status CLARIFICATION_REQUIRED or CLARIFICATION_GIVEN).
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regressionTestId The regression test ID
@@ -917,6 +929,8 @@ RunRegressionTest Run a regression test
 
 Start a run of the regression test. The run is asynchronous: poll the test or its history to track the status. Fails when a run is already in progress.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regressionTestId The regression test ID
 	@return ApiRunRegressionTestRequest
@@ -1055,6 +1069,8 @@ func (r ApiStopRegressionTestRequest) Execute() (*CreateRegressionTest200Respons
 StopRegressionTest Stop a regression test
 
 Stop the run in progress for a regression test. A run that already finished is left unchanged. When the test does not exist (or belongs to another organization), the internal API returns an error that is forwarded as a 404 to avoid leaking its existence.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regressionTestId The regression test ID
@@ -1200,6 +1216,8 @@ func (r ApiUpdateRegressionTestRequest) Execute() (*CreateRegressionTest200Respo
 UpdateRegressionTest Update a regression test
 
 Update the name and/or the additional context of a regression test.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regressionTestId The regression test ID

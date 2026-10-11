@@ -183,6 +183,8 @@ GenerateScanTargetAISummary Generate an AI summary for a scan target
 
 Generate an AI exploration or pentesting summary for a target of a DAST scan and return it. The target must belong to the scan. Generated summaries are also readable on the target through the scan targets endpoint.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param scanId The scan ID
 	@return ApiGenerateScanTargetAISummaryRequest
@@ -484,6 +486,136 @@ func (a *ScansAPIService) GetScanConfigurationExecute(r ApiGetScanConfigurationR
 	}
 
 	localVarPath := localBasePath + "/scans/{scanId}/configuration"
+	localVarPath = strings.Replace(localVarPath, "{"+"scanId"+"}", url.PathEscape(parameterValueToString(r.scanId, "scanId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-ESCAPE-API-KEY"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetScanEventsOverTimeRequest struct {
+	ctx        context.Context
+	ApiService *ScansAPIService
+	scanId     string
+}
+
+func (r ApiGetScanEventsOverTimeRequest) Execute() (*GetScanEventsOverTime200Response, *http.Response, error) {
+	return r.ApiService.GetScanEventsOverTimeExecute(r)
+}
+
+/*
+GetScanEventsOverTime Get the scan event time series
+
+Returns the number of scanner events per time bucket for a scan. It is a wrapper over the `eventsOverTime` series already embedded in `GET /scans/{scanId}/statistics`, for clients that only need the series. Beta: the shape of a scan time series is not settled yet.
+
+Beta: subject to change.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param scanId The scan ID
+	@return ApiGetScanEventsOverTimeRequest
+*/
+func (a *ScansAPIService) GetScanEventsOverTime(ctx context.Context, scanId string) ApiGetScanEventsOverTimeRequest {
+	return ApiGetScanEventsOverTimeRequest{
+		ApiService: a,
+		ctx:        ctx,
+		scanId:     scanId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetScanEventsOverTime200Response
+func (a *ScansAPIService) GetScanEventsOverTimeExecute(r ApiGetScanEventsOverTimeRequest) (*GetScanEventsOverTime200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetScanEventsOverTime200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScansAPIService.GetScanEventsOverTime")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/scans/{scanId}/statistics/events-over-time"
 	localVarPath = strings.Replace(localVarPath, "{"+"scanId"+"}", url.PathEscape(parameterValueToString(r.scanId, "scanId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -913,6 +1045,8 @@ ListScanAgentLogs List reasoning logs for an AI pentest agent
 
 Returns reasoning and action logs for a single AI pentest agent within a scan.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param scanId The scan ID
 	@param agentId The agent ID
@@ -1136,6 +1270,8 @@ ListScanAgents List AI pentest agents for a scan
 
 Returns the AI pentest agents that ran during a scan. Filter by title or by text found in any related reasoning log.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param scanId The scan ID
 	@return ApiListScanAgentsRequest
@@ -1330,6 +1466,8 @@ ListScanScenarios List attack scenarios for a scan
 
 Returns the attack scenarios explored during an AI pentest scan, each mapped to its attack vector. Filter by vector to build the vector/scenario matrix, or search scenario titles and surfaces. Credentials and secrets in scenario descriptions are redacted.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param scanId The scan ID
 	@return ApiListScanScenariosRequest
@@ -1479,6 +1617,11 @@ type ApiListScanTargetsRequest struct {
 	sortDirection *string
 	types         *[]string
 	sources       *[]string
+	coverage      *[]string
+	severities    *[]string
+	issues        *[]string
+	methods       *[]string
+	search        *string
 }
 
 // The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
@@ -1514,6 +1657,36 @@ func (r ApiListScanTargetsRequest) Types(types []string) ApiListScanTargetsReque
 // Optional filter by how the target was discovered (comma-separated or repeated). SOURCE_SPECIFICATION comes from the API schema; SOURCE_INFERRED was found during the scan. Applies to API_ROUTE and GRAPHQL_RESOLVER.
 func (r ApiListScanTargetsRequest) Sources(sources []string) ApiListScanTargetsRequest {
 	r.sources = &sources
+	return r
+}
+
+// Optional filter by the coverage status the scanner observed on the target (comma-separated or repeated), e.g. OK or SERVER_ERROR
+func (r ApiListScanTargetsRequest) Coverage(coverage []string) ApiListScanTargetsRequest {
+	r.coverage = &coverage
+	return r
+}
+
+// Optional filter by the severity of the issues found on the target (comma-separated or repeated)
+func (r ApiListScanTargetsRequest) Severities(severities []string) ApiListScanTargetsRequest {
+	r.severities = &severities
+	return r
+}
+
+// Optional filter by issue IDs found on the target
+func (r ApiListScanTargetsRequest) Issues(issues []string) ApiListScanTargetsRequest {
+	r.issues = &issues
+	return r
+}
+
+// Optional filter by HTTP method (comma-separated or repeated). Applies to API_ROUTE.
+func (r ApiListScanTargetsRequest) Methods(methods []string) ApiListScanTargetsRequest {
+	r.methods = &methods
+	return r
+}
+
+// Optional free-text search on the target path
+func (r ApiListScanTargetsRequest) Search(search string) ApiListScanTargetsRequest {
+	r.search = &search
 	return r
 }
 
@@ -1600,6 +1773,53 @@ func (a *ScansAPIService) ListScanTargetsExecute(r ApiListScanTargetsRequest) (*
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "sources", t, "form", "multi")
 		}
+	}
+	if r.coverage != nil {
+		t := *r.coverage
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "coverage", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "coverage", t, "form", "multi")
+		}
+	}
+	if r.severities != nil {
+		t := *r.severities
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "severities", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "severities", t, "form", "multi")
+		}
+	}
+	if r.issues != nil {
+		t := *r.issues
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "issues", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "issues", t, "form", "multi")
+		}
+	}
+	if r.methods != nil {
+		t := *r.methods
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "methods", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "methods", t, "form", "multi")
+		}
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

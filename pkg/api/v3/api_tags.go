@@ -447,6 +447,20 @@ func (a *TagsAPIService) GetTagExecute(r ApiGetTagRequest) (*CreateTag200Respons
 type ApiListTagsRequest struct {
 	ctx        context.Context
 	ApiService *TagsAPIService
+	cursor     *string
+	size       *int
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListTagsRequest) Cursor(cursor string) ApiListTagsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListTagsRequest) Size(size int) ApiListTagsRequest {
+	r.size = &size
+	return r
 }
 
 func (r ApiListTagsRequest) Execute() ([]TagDetail, *http.Response, error) {
@@ -456,7 +470,7 @@ func (r ApiListTagsRequest) Execute() ([]TagDetail, *http.Response, error) {
 /*
 ListTags List tags
 
-List and search tags of the organization.
+List and search tags of the organization. Pass `cursor` and `size` to page through the tags: without them every tag is returned, as before.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListTagsRequest
@@ -490,6 +504,15 @@ func (a *TagsAPIService) ListTagsExecute(r ApiListTagsRequest) ([]TagDetail, *ht
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

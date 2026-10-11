@@ -483,6 +483,8 @@ type ApiListViewsRequest struct {
 	ctx        context.Context
 	ApiService *ViewsAPIService
 	target     *string
+	cursor     *string
+	size       *int
 	projectId  *string
 	next       *string
 }
@@ -490,6 +492,18 @@ type ApiListViewsRequest struct {
 // The resource the views apply to
 func (r ApiListViewsRequest) Target(target string) ApiListViewsRequest {
 	r.target = &target
+	return r
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListViewsRequest) Cursor(cursor string) ApiListViewsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListViewsRequest) Size(size int) ApiListViewsRequest {
+	r.size = &size
 	return r
 }
 
@@ -512,7 +526,7 @@ func (r ApiListViewsRequest) Execute() (*ListViews200Response, *http.Response, e
 /*
 ListViews List views
 
-List the saved views of the organization for a given target. By default this returns the next-generation views; set `next` to false to list legacy table views instead. Legacy table views only expose their identity and ordering: their stored configuration is kept in an internal format that the internal API does not expose.
+List the saved views of the organization for a given target. By default this returns the next-generation views; set `next` to false to list legacy table views instead. Legacy table views only expose their identity and ordering: their stored configuration is kept in an internal format that the internal API does not expose. Pass `cursor` and `size` to page through the views: without them every view is returned, as before.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListViewsRequest
@@ -549,6 +563,15 @@ func (a *ViewsAPIService) ListViewsExecute(r ApiListViewsRequest) (*ListViews200
 		return localVarReturnValue, nil, reportError("target is required and must be specified")
 	}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "target", r.target, "form", "")
 	if r.projectId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
@@ -608,6 +631,16 @@ func (a *ViewsAPIService) ListViewsExecute(r ApiListViewsRequest) (*ListViews200
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v PaginationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

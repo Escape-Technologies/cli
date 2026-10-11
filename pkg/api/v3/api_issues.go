@@ -467,6 +467,8 @@ ExportIssuesCsv Export issues as CSV
 
 Export issues as a CSV file, optionally filtered by a JSON-encoded IssueWhereInput.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiExportIssuesCsvRequest
 */
@@ -622,6 +624,8 @@ func (r ApiExportIssuesSarifRequest) Execute() (interface{}, *http.Response, err
 ExportIssuesSarif Export issues as SARIF
 
 Export issues as a SARIF 2.1.0 JSON file, optionally filtered by a JSON-encoded IssueWhereInput.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiExportIssuesSarifRequest

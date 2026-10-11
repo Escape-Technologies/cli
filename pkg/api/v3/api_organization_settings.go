@@ -42,6 +42,8 @@ CreateOrganizationScannerConfiguration Create an organization scanner configurat
 
 Create a new organization-wide scanner configuration version. Requires organization admin rights. The configuration content is validated by the internal API and is never returned.
 
+Beta: subject to change.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateOrganizationScannerConfigurationRequest
 */
@@ -309,6 +311,8 @@ func (r ApiUpdateOrganizationSettingsRequest) Execute() (*GetOrganizationSetting
 UpdateOrganizationSettings Update organization settings
 
 Update the organization issue SLA policy and the organization-wide AI system prompt. Requires organization admin rights. Read-only scan kill switches cannot be changed here. Organization settings toggles (project propagation, scoped webhook export) are not writable through the public API because the internal mutation replaces the whole settings list and would drop settings the public API cannot see.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiUpdateOrganizationSettingsRequest

@@ -438,7 +438,9 @@ func (r ApiCreateAssetAPKRequest) Execute() (*UpdateAsset200Response, *http.Resp
 /*
 CreateAssetAPK Create asset apk
 
-Create a apk
+# Create a apk
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateAssetAPKRequest
@@ -3312,6 +3314,8 @@ func (r ApiExportAssetsCsvRequest) Execute() (string, *http.Response, error) {
 ExportAssetsCsv Export assets as CSV
 
 Export assets as a CSV file, optionally filtered by a JSON-encoded AssetWhereInput.
+
+Beta: subject to change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiExportAssetsCsvRequest

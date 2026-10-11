@@ -27,6 +27,9 @@ A regression test is built from a source report (PDF or Markdown) uploaded
 beforehand. Run it to have the agent reproduce the reported findings, follow
 the run status, and answer the clarification question when the agent asks one.
 
+BETA: regression tests are a design-partner feature (REGRESSION_TESTING flag), so
+this group can still change.
+
 COMMON WORKFLOWS:
   • Create a test from an uploaded report:
     $ escape-cli regression-tests create < body.json
@@ -43,7 +46,7 @@ COMMON WORKFLOWS:
 var regressionTestsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
-	Short:   "List regression tests",
+	Short:   "List regression tests (Beta)",
 	Long: `List Regression Tests - Most Recent First
 
 List the regression tests of the organization. With --size or --cursor the
@@ -91,7 +94,7 @@ every page.`,
 var regressionTestsGetCmd = &cobra.Command{
 	Use:     "get regression-test-id",
 	Aliases: []string{"describe", "show"},
-	Short:   "Get a regression test and its recent runs",
+	Short:   "Get a regression test and its recent runs (Beta)",
 	Long: `Get Regression Test - Read Status and Recent Runs
 
 Fetch a regression test by ID. The response embeds the most recent runs; use
@@ -117,7 +120,7 @@ history to page through every run.`,
 
 var regressionTestsCreateCmd = &cobra.Command{
 	Use:   "create",
-	Short: "Create a regression test from an uploaded report",
+	Short: "Create a regression test from an uploaded report (Beta)",
 	Long: `Create Regression Test - From an Uploaded Report
 
 Upload the source report first with "escape-cli upload" (POST /upload/signed-url),
@@ -164,7 +167,7 @@ BODY:
 var regressionTestsUpdateCmd = &cobra.Command{
 	Use:     "update regression-test-id",
 	Aliases: []string{"u", "edit"},
-	Short:   "Update a regression test name or context",
+	Short:   "Update a regression test name or context (Beta)",
 	Long: `Update Regression Test - Rename or Edit the Context
 
 Update the name and/or the additional context of a regression test. Send a JSON
@@ -200,7 +203,7 @@ body on stdin with at least one of the two fields.`,
 var regressionTestsDeleteCmd = &cobra.Command{
 	Use:     "delete regression-test-id",
 	Aliases: []string{"del", "rm"},
-	Short:   "Delete a regression test",
+	Short:   "Delete a regression test (Beta)",
 	Long: `Delete Regression Test - Remove the Test and Its Runs
 
 Permanently delete a regression test and its run history.`,
@@ -209,6 +212,13 @@ Permanently delete a regression test and its run history.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if out.Schema(v3.DeleteProfile200Response{}) {
 			return nil
+		}
+
+		proceed, err := confirmDestructive(cmd, "delete regression test "+args[0], func(ctx context.Context) (any, error) {
+			return escape.GetRegressionTest(ctx, args[0])
+		})
+		if err != nil || !proceed {
+			return err
 		}
 
 		result, err := escape.DeleteRegressionTest(cmd.Context(), args[0])
@@ -225,7 +235,7 @@ Permanently delete a regression test and its run history.`,
 var regressionTestsRunCmd = &cobra.Command{
 	Use:     "run regression-test-id",
 	Aliases: []string{"start"},
-	Short:   "Run a regression test",
+	Short:   "Run a regression test (Beta)",
 	Long: `Run Regression Test - Reproduce the Reported Findings
 
 Start a run of the regression test. The run is asynchronous: poll the test or
@@ -251,7 +261,7 @@ its history to track the status. It fails when a run is already in progress.`,
 
 var regressionTestsStopCmd = &cobra.Command{
 	Use:   "stop regression-test-id",
-	Short: "Stop the run in progress",
+	Short: "Stop the run in progress (Beta)",
 	Long: `Stop Regression Test - Cancel the Run in Progress
 
 Stop the run in progress for a regression test. A run that already finished is
@@ -277,7 +287,7 @@ left unchanged.`,
 var regressionTestsHistoryCmd = &cobra.Command{
 	Use:     "history regression-test-id",
 	Aliases: []string{"runs"},
-	Short:   "List the runs of a regression test",
+	Short:   "List the runs of a regression test (Beta)",
 	Long: `List Regression Test History - Runs, Most Recent First
 
 List the runs of a regression test. With --size or --cursor the command returns
@@ -303,7 +313,7 @@ one page as {items, nextCursor, totalCount}; otherwise it walks every page.`,
 var regressionTestsAnswerCmd = &cobra.Command{
 	Use:     "answer regression-test-id run-id",
 	Aliases: []string{"clarify", "reply"},
-	Short:   "Answer a run clarification question",
+	Short:   "Answer a run clarification question (Beta)",
 	Long: `Answer Clarification - Reply to the Agent's Question
 
 Answer the clarification question asked by the agent during a run. The run must
@@ -421,6 +431,7 @@ func init() {
 		regressionTestsHistoryCmd,
 		regressionTestsAnswerCmd,
 	)
+	bindDestructiveGate(regressionTestsDeleteCmd, true)
 
 	regressionTestsListCmd.Flags().StringVar(&regressionTestsSearch, "search", "", "search term to filter regression tests by name")
 	regressionTestsListPage.bind(regressionTestsListCmd)

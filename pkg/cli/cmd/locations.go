@@ -186,6 +186,13 @@ Location deleted`,
 			return nil
 		}
 
+		proceed, err := confirmDestructive(cmd, "delete location "+args[0], func(ctx context.Context) (any, error) {
+			return escape.GetLocation(ctx, args[0])
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
 		result, err := escape.DeleteLocation(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("failed to delete location: %w", err)
@@ -318,6 +325,106 @@ var locationsUpdateCmd = &cobra.Command{
 	},
 }
 
+var locationsLogsCmd = &cobra.Command{
+	Use:   "logs location-id",
+	Short: "List the logs of a location",
+	Long: `List Location Logs - Inspect the Agent's Output
+
+List the log entries a private location produced, newest first. Useful to
+debug an agent that connects but does not run scans.`,
+	Example: `  # Tail the last entries
+  escape-cli locations logs <location-id>
+
+  # Search the logs and take one page
+  escape-cli locations logs <location-id> --search "tunnel" --size 50`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]v3.LocationLog{}) {
+			return nil
+		}
+
+		filters := &escape.ListLocationLogsFilters{Search: locationsLogsSearch}
+		if err := runPagedList(cmd, locationLogsPage, func(ctx context.Context, cursor string, size int) ([]v3.LocationLog, *string, int, error) {
+			return escape.ListLocationLogs(ctx, args[0], cursor, size, filters)
+		}, func(logs []v3.LocationLog) []string {
+			res := []string{"TIMESTAMP\tNODE ID\tMESSAGE"}
+			for _, entry := range logs {
+				timestamp := entry.GetCliTimestamp()
+				if timestamp == "" {
+					timestamp = entry.GetCreatedAt()
+				}
+
+				res = append(res, fmt.Sprintf("%s\t%s\t%s", timestamp, entry.GetNodeId(), entry.GetMessage()))
+			}
+
+			return res
+		}); err != nil {
+			return fmt.Errorf("failed to list location logs: %w", err)
+		}
+
+		return nil
+	},
+}
+
+var (
+	locationsLogsSearch string
+	locationLogsPage    pageFlags
+	locationsTagsIDs    []string
+	locationsTagsClear  bool
+)
+
+var locationsTagsCmd = &cobra.Command{
+	Use:   "tags location-id",
+	Short: "Replace the tags of a location",
+	Long: `Replace Tags - Re-label a Location
+
+Replace the tags associated with a location. The full list is sent: pass every
+tag the location should carry. Without --tag-id and with --clear, the location
+loses all its tags.`,
+	Example: `  # Tag a location
+  escape-cli locations tags <location-id> --tag-id <tag-id-1> --tag-id <tag-id-2>
+
+  # Remove every tag
+  escape-cli locations tags <location-id> --clear`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.GetLocation200Response{}) {
+			return nil
+		}
+
+		if len(locationsTagsIDs) == 0 && !locationsTagsClear {
+			return errors.New("at least one --tag-id is required, or --clear to remove every tag")
+		}
+
+		proceed, err := confirmDestructive(cmd, "replace the tags of location "+args[0], func(ctx context.Context) (any, error) {
+			location, err := escape.GetLocation(ctx, args[0])
+			if err != nil {
+				return nil, fmt.Errorf("failed to get location: %w", err)
+			}
+
+			return location, nil
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
+		// --clear sends an empty array: a nil slice would serialize as null.
+		tagIDs := locationsTagsIDs
+		if tagIDs == nil {
+			tagIDs = []string{}
+		}
+
+		location, err := escape.UpdateLocationTags(cmd.Context(), args[0], tagIDs)
+		if err != nil {
+			return fmt.Errorf("failed to update location tags: %w", err)
+		}
+
+		out.Print(location, fmt.Sprintf("Location %s tags updated", args[0]))
+
+		return nil
+	},
+}
+
 // locationBody is the stdin shape advertised for location create and update.
 // Pointers keep omitted fields distinct from empty and false.
 type locationBody struct {
@@ -415,8 +522,11 @@ func init() {
 	locationsCmd.AddCommand(locationsGetCmd)
 	locationsCmd.AddCommand(locationsStartCmd)
 	locationsCmd.AddCommand(locationsDeleteCmd)
+	bindDestructiveGate(locationsDeleteCmd, true)
 	locationsCmd.AddCommand(locationsCreateCmd)
 	locationsCmd.AddCommand(locationsUpdateCmd)
+	locationsCmd.AddCommand(locationsLogsCmd)
+	locationsCmd.AddCommand(locationsTagsCmd)
 	rootCmd.AddCommand(locationsCmd)
 	locationsListCmd.Flags().StringVarP(&locationsSearch, "search", "s", "", "Search term to filter locations by")
 	locationsListCmd.Flags().BoolVarP(&locationsEnabled, "enabled", "e", false, "Filter by enabled locations")
@@ -424,6 +534,11 @@ func init() {
 	locationsListCmd.Flags().StringVar(&locationsSortType, "sort-by", "", "sort field")
 	locationsListCmd.Flags().StringVar(&locationsSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	locationListPage.bind(locationsListCmd)
+	locationLogsPage.bind(locationsLogsCmd)
+	locationsLogsCmd.Flags().StringVar(&locationsLogsSearch, "search", "", "search the log messages")
+	locationsTagsCmd.Flags().StringSliceVar(&locationsTagsIDs, "tag-id", nil, "tag ID to set (repeat for every tag the location should carry)")
+	locationsTagsCmd.Flags().BoolVar(&locationsTagsClear, "clear", false, "remove every tag from the location")
+	bindDestructiveGate(locationsTagsCmd, true)
 	locationsCreateCmd.Flags().StringVar(&locationCreateName, "name", "", "location name")
 	locationsCreateCmd.Flags().StringVar(&locationCreateSSHPublicKey, "ssh-public-key", "", "SSH public key for the location")
 	locationsUpdateCmd.Flags().StringVar(&locationUpdateName, "name", "", "new location name")
