@@ -23,12 +23,12 @@ type UpdateProfileRequest struct {
 	Name *string `json:"name,omitempty"`
 	// The description of the profile
 	Description *string `json:"description,omitempty"`
-	// Deprecated: use `schedule.cron` instead.
+	// Deprecated: use `schedule.cron` instead. Not supported by AI pentest profiles, whose recurring runs are delivered by continuous pentest.
 	// Deprecated
 	Cron          *string                            `json:"cron,omitempty"`
 	Schedule      *ProfileScheduleUpdateInput1       `json:"schedule,omitempty"`
 	ExtraAssetIds *UpdateProfileRequestExtraAssetIds `json:"extraAssetIds,omitempty"`
-	// Whether to use all available extra assets for the profile
+	// Whether to use all available extra assets for the profile (DAST profiles only; AI pentest profiles list their targets in extraAssetIds)
 	UseAllAvailableExtraAssets *bool                         `json:"useAllAvailableExtraAssets,omitempty"`
 	Tags                       *UpdateProfileRequestTags     `json:"tags,omitempty"`
 	Projects                   *UpdateProfileRequestProjects `json:"projects,omitempty"`

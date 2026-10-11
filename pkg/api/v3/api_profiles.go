@@ -41,7 +41,7 @@ func (r ApiBulkUpdateProfilesRequest) Execute() (*BulkUpdateProfiles200Response,
 /*
 BulkUpdateProfiles Bulk update profiles
 
-Update the schedule, tags, or projects of multiple profiles at once. At least one of tagIds, projectIds or schedule is required.
+Update the schedule, tags, or projects of multiple profiles at once. At least one of tagIds, projectIds or schedule is required. A recurring schedule is rejected when the batch contains an AI pentest profile.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiBulkUpdateProfilesRequest

@@ -23,6 +23,7 @@ type CreateExportWorkflowActionUsingWiz struct {
 	Type                 ENUMEXPORT                                   `json:"type"`
 	Parameters           CreateExportWorkflowActionUsingWizParameters `json:"parameters"`
 	IntegrationKind      ENUMWIZ                                      `json:"integrationKind"`
+	IntegrationId        string                                       `json:"integrationId"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,11 +33,12 @@ type _CreateExportWorkflowActionUsingWiz CreateExportWorkflowActionUsingWiz
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateExportWorkflowActionUsingWiz(type_ ENUMEXPORT, parameters CreateExportWorkflowActionUsingWizParameters, integrationKind ENUMWIZ) *CreateExportWorkflowActionUsingWiz {
+func NewCreateExportWorkflowActionUsingWiz(type_ ENUMEXPORT, parameters CreateExportWorkflowActionUsingWizParameters, integrationKind ENUMWIZ, integrationId string) *CreateExportWorkflowActionUsingWiz {
 	this := CreateExportWorkflowActionUsingWiz{}
 	this.Type = type_
 	this.Parameters = parameters
 	this.IntegrationKind = integrationKind
+	this.IntegrationId = integrationId
 	return &this
 }
 
@@ -120,6 +122,30 @@ func (o *CreateExportWorkflowActionUsingWiz) SetIntegrationKind(v ENUMWIZ) {
 	o.IntegrationKind = v
 }
 
+// GetIntegrationId returns the IntegrationId field value
+func (o *CreateExportWorkflowActionUsingWiz) GetIntegrationId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.IntegrationId
+}
+
+// GetIntegrationIdOk returns a tuple with the IntegrationId field value
+// and a boolean to check if the value has been set.
+func (o *CreateExportWorkflowActionUsingWiz) GetIntegrationIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IntegrationId, true
+}
+
+// SetIntegrationId sets field value
+func (o *CreateExportWorkflowActionUsingWiz) SetIntegrationId(v string) {
+	o.IntegrationId = v
+}
+
 func (o CreateExportWorkflowActionUsingWiz) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -133,6 +159,7 @@ func (o CreateExportWorkflowActionUsingWiz) ToMap() (map[string]interface{}, err
 	toSerialize["type"] = o.Type
 	toSerialize["parameters"] = o.Parameters
 	toSerialize["integrationKind"] = o.IntegrationKind
+	toSerialize["integrationId"] = o.IntegrationId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -149,6 +176,7 @@ func (o *CreateExportWorkflowActionUsingWiz) UnmarshalJSON(data []byte) (err err
 		"type",
 		"parameters",
 		"integrationKind",
+		"integrationId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -181,6 +209,7 @@ func (o *CreateExportWorkflowActionUsingWiz) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "integrationKind")
+		delete(additionalProperties, "integrationId")
 		o.AdditionalProperties = additionalProperties
 	}
 

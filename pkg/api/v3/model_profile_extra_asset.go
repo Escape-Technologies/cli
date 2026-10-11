@@ -18,7 +18,7 @@ import (
 // checks if the ProfileExtraAsset type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProfileExtraAsset{}
 
-// ProfileExtraAsset Extra asset linked to a profile. Entries with `class === \"SCHEMA\"` are API schema assets used during scans; a profile may include several schemas. Use `isActive` to see which schema drives the current scan when multiple are linked.
+// ProfileExtraAsset Extra asset linked to a profile. Entries with `class === \"SCHEMA\"` are API schema assets used during scans; a profile may include several schemas and every one of them is used.
 type ProfileExtraAsset struct {
 	// The id of the asset
 	Id string `json:"id"`
@@ -29,7 +29,7 @@ type ProfileExtraAsset struct {
 	Status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"status"`
 	// The date and time the asset was created
 	CreatedAt string `json:"createdAt"`
-	// True when this asset's id equals the profile's resolved `schemaAssetId`. Callers can filter `class === 'SCHEMA' && isActive` to find the schema currently driving scans.
+	// True for schema assets (`class === 'SCHEMA'`). A profile scans with every schema it is linked to, so there is no single driving schema; false for the other asset classes.
 	IsActive bool `json:"isActive"`
 	// Time-limited HTTPS URL to download the backing schema bytes. Non-null only for `class === \"SCHEMA\"` entries; null for other asset classes.
 	SignedUrl            *string `json:"signedUrl,omitempty"`

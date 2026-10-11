@@ -18,7 +18,7 @@ import (
 // checks if the ProfileScheduleUpdateInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProfileScheduleUpdateInput{}
 
-// ProfileScheduleUpdateInput Schedule to apply
+// ProfileScheduleUpdateInput Schedule to apply. A recurring schedule cannot target AI pentest profiles, whose recurrence is delivered by continuous pentest.
 type ProfileScheduleUpdateInput struct {
 	// Recurring cron expression
 	Cron *string `json:"cron,omitempty"`
