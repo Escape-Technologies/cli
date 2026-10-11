@@ -9707,7 +9707,21 @@ type ApiListJiraProjectsRequest struct {
 	ctx        context.Context
 	ApiService *IntegrationsAPIService
 	id         string
+	cursor     *string
+	size       *int
 	search     *string
+}
+
+// The cursor to start the pagination from. Returned by the previous page response. If not provided, the first page will be returned.
+func (r ApiListJiraProjectsRequest) Cursor(cursor string) ApiListJiraProjectsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// The number of items to return per page
+func (r ApiListJiraProjectsRequest) Size(size int) ApiListJiraProjectsRequest {
+	r.size = &size
+	return r
 }
 
 // Search term to filter projects by name
@@ -9723,7 +9737,7 @@ func (r ApiListJiraProjectsRequest) Execute() (*ListIntegrations200Response, *ht
 /*
 ListJiraProjects List Jira projects.
 
-List the projects the Jira integration can open tickets in. Use a project ID as `projectId` on the issue types lookup, then to create a ticket.
+List the projects the Jira integration can open tickets in. Use a project ID as `projectId` on the issue types lookup, then to create a ticket. Pass `size` to return at most that many projects and `cursor` to resume; `X-Next-Cursor` is set when more remain. Without `cursor` or `size`, every project within the page budget is returned, and `X-Next-Cursor` is set only when that budget stops the listing early.
 
 Beta: subject to change.
 
@@ -9762,6 +9776,15 @@ func (a *IntegrationsAPIService) ListJiraProjectsExecute(r ApiListJiraProjectsRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int = 50
+		r.size = &defaultValue
+	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
 	}

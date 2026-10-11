@@ -95,6 +95,71 @@ func TestGetAssetContentReturnsDownloadMetadata(t *testing.T) {
 	}
 }
 
+func TestDeleteAssetAcceptsBooleanAndMessageBodies(t *testing.T) {
+	const assetID = "00000000-0000-0000-0000-000000000001"
+	tests := []struct {
+		name    string
+		body    string
+		want    string
+		wantErr string
+	}{
+		{
+			name: "boolean true",
+			body: `true`,
+			want: "Asset deleted successfully",
+		},
+		{
+			name: "message object",
+			body: `{"message":"Asset deleted successfully"}`,
+			want: "Asset deleted successfully",
+		},
+		{
+			name: "message object is returned as sent",
+			body: `{"message":"queued for removal"}`,
+			want: "queued for removal",
+		},
+		{
+			name:    "boolean false",
+			body:    `false`,
+			wantErr: "not deleted",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				if r.Method != http.MethodDelete || r.URL.Path != "/v3/assets/"+assetID {
+					t.Errorf("request = %s %s", r.Method, r.URL.Path)
+				}
+
+				w.Header().Set("Content-Type", "application/json")
+				w.WriteHeader(http.StatusOK)
+				_, _ = w.Write([]byte(tt.body))
+			}))
+			t.Cleanup(server.Close)
+			t.Setenv("ESCAPE_API_URL", server.URL)
+			t.Setenv("ESCAPE_API_KEY", "00000000-0000-0000-0000-000000000000")
+
+			ack, err := DeleteAsset(context.Background(), assetID)
+			if tt.wantErr != "" {
+				if err == nil || !strings.Contains(err.Error(), tt.wantErr) {
+					t.Fatalf("error = %v, want it to contain %q", err, tt.wantErr)
+				}
+
+				return
+			}
+
+			if err != nil {
+				t.Fatalf("delete asset: %v", err)
+			}
+
+			if ack.GetMessage() != tt.want {
+				t.Fatalf("message = %q, want %q", ack.GetMessage(), tt.want)
+			}
+		})
+	}
+}
+
 func errorResult(err error) reflect.Value {
 	wrapped := err
 	return reflect.ValueOf(&wrapped).Elem()

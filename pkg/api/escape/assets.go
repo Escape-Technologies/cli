@@ -191,11 +191,11 @@ func DeleteAsset(ctx context.Context, id string) (*v3.DeleteProfile200Response, 
 	return data, nil
 }
 
-// deleteAssetAcknowledgement handles the body DELETE /v3/assets/{id} really
-// sends. The route declares {"message": string} but returns the GraphQL
-// mutation result, a bare JSON boolean, so the generated client fails to
-// decode a successful response. ok is false when err is not that decode
-// failure on a 2xx response.
+// deleteAssetAcknowledgement reads a 2xx DELETE /v3/assets/{id} that the
+// generated client rejected. Execute already returns the documented
+// {"message": string} body. A bare JSON boolean is still accepted: true is
+// reported as a successful deletion, false is an error. ok is false when err
+// is not that boolean on a 2xx response.
 func deleteAssetAcknowledgement(httpRes *http.Response, err error) (*v3.DeleteProfile200Response, bool, error) {
 	if httpRes == nil || httpRes.StatusCode < http.StatusOK || httpRes.StatusCode >= http.StatusMultipleChoices {
 		return nil, false, nil
