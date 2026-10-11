@@ -337,6 +337,24 @@ func TestReadOnlyToolSpecsAdvertiseOutputSchemas(t *testing.T) {
 	}
 }
 
+func TestProfilesGetHidesExtraAssetsFlag(t *testing.T) {
+	spec := specByName(t, mcpSpecs(t), "profiles_get")
+	input := decodeMCPToolSchema(t, "profiles_get", spec.Tool.RawInputSchema)
+	if _, exists := input.Properties["extra_assets"]; exists {
+		t.Fatal("profiles_get must not expose --extra-assets: it prints {items:[...]} instead of the profile")
+	}
+
+	for _, binding := range spec.FlagBindings {
+		if binding.FlagName == "extra-assets" {
+			t.Fatalf("profiles_get binds --extra-assets: %+v", binding)
+		}
+	}
+
+	if !skipMCPFlag(profileGetCmd, "extra-assets") {
+		t.Fatal("extra-assets is not marked skipped")
+	}
+}
+
 func TestProfilesGetSchemaToolOmitsFileFlag(t *testing.T) {
 	spec := specByName(t, mcpSpecs(t), "profiles_get_schema")
 

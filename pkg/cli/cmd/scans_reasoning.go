@@ -51,7 +51,7 @@ var reasoningStages = []string{
 var scansReasoningCmd = &cobra.Command{
 	Use:     "reasoning scan-id",
 	Aliases: []string{"reasoning-logs", "agent-reasoning"},
-	Short:   "List AI agent reasoning logs for a scan",
+	Short:   "List AI agent reasoning logs for a scan (Beta)",
 	Long: `List AI Agent Reasoning Logs - Inspect How an Assessment Unfolded
 
 Fetches AGENT_REASONING and AGENT_ACTION events for a scan. Summaries are always

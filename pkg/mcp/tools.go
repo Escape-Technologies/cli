@@ -22,6 +22,15 @@ const defaultToolExecutionTimeout = 30 * time.Second
 // scans reasoning and scans coverage, which paginate large assessments.
 const ReasoningToolExecutionTimeout = 2 * time.Minute //nolint:mnd
 
+// SchemaAssetCreateToolExecutionTimeout is the MCP budget for assets create.
+// A SCHEMA body waits on a server-side build that the public API polls for
+// up to 10 minutes. The tool cannot tell a SCHEMA body from another asset
+// type before the subprocess starts, so every assets create call gets this
+// budget. 15 minutes is the same ceiling as the profile schema upload: the
+// 10 minute poll, plus slack so this process is not killed while the API
+// is still polling. The budget stays finite.
+const SchemaAssetCreateToolExecutionTimeout = 15 * time.Minute //nolint:mnd
+
 // DefaultListPageSize is the page size injected when an MCP list tool is called
 // without size or cursor. The CLI still fetches every page unless those flags are set.
 const DefaultListPageSize = 50
@@ -179,8 +188,11 @@ func buildToolHandler(
 			return mcpgo.NewToolResultError(commandFailureText(err, result)), nil
 		}
 
-		if result.Payload != nil {
-			return mcpgo.NewToolResultStructured(wrapStructuredPayload(result.Payload), result.Stdout), nil
+		// Root JSON null unmarshals as a nil payload. StructuredToolPayload
+		// tells that null apart from an empty non-JSON stdout.
+		nullStdout := strings.TrimSpace(result.Stdout) == "null"
+		if structured, ok := StructuredToolPayload(result.Payload, spec.Tool.RawOutputSchema, nullStdout); ok {
+			return mcpgo.NewToolResultStructured(structured, result.Stdout), nil
 		}
 
 		return mcpgo.NewToolResultText(result.Stdout), nil
@@ -202,6 +214,71 @@ func wrapStructuredPayload(payload any) any {
 	default:
 		return map[string]any{"value": typed}
 	}
+}
+
+// StructuredToolPayload is the object an MCP client validates as
+// structuredContent. payload is the CLI stdout decoded as JSON. nullStdout
+// is true only when that stdout is the JSON literal null.
+//
+// A nil payload with any other stdout yields no structured content: the
+// command printed text, or nothing. A root null against a collection schema
+// (properties.items is an array) is the empty collection. The CLI prints
+// null for a nil slice, and the tool schema requires an array. A null value
+// of a top-level array property is the same empty collection. Stdout text
+// is left unchanged; only the structured object is normalized.
+func StructuredToolPayload(payload any, outputSchema json.RawMessage, nullStdout bool) (any, bool) {
+	if payload == nil {
+		if !nullStdout || !schemaHasItemsArray(outputSchema) {
+			return nil, false
+		}
+
+		return map[string]any{"items": []any{}}, true
+	}
+
+	wrapped := wrapStructuredPayload(payload)
+	object, ok := wrapped.(map[string]any)
+	if !ok {
+		return wrapped, true
+	}
+
+	fillNullArrayProperties(object, outputSchema)
+
+	return object, true
+}
+
+func schemaHasItemsArray(outputSchema json.RawMessage) bool {
+	return schemaPropertyTypes(outputSchema)["items"] == "array"
+}
+
+// fillNullArrayProperties replaces a JSON null with an empty array when the
+// tool schema says that property is an array. Other nulls stay null.
+func fillNullArrayProperties(object map[string]any, outputSchema json.RawMessage) {
+	properties := schemaPropertyTypes(outputSchema)
+	for name, value := range object {
+		if value != nil || properties[name] != "array" {
+			continue
+		}
+
+		object[name] = []any{}
+	}
+}
+
+func schemaPropertyTypes(outputSchema json.RawMessage) map[string]string {
+	var doc struct {
+		Properties map[string]struct {
+			Type string `json:"type"`
+		} `json:"properties"`
+	}
+	if err := json.Unmarshal(outputSchema, &doc); err != nil {
+		return nil
+	}
+
+	types := make(map[string]string, len(doc.Properties))
+	for name, property := range doc.Properties {
+		types[name] = property.Type
+	}
+
+	return types
 }
 
 // guardDestructive refuses a destructive tool call until confirm is exactly true.
@@ -488,6 +565,13 @@ func buildFlagArgs(binding FlagBinding, value any) ([]string, error) {
 		values, err := stringifyCLIArray(value)
 		if err != nil {
 			return nil, err
+		}
+
+		// pflag reads `--flag=` as a set stringSlice whose value is an empty
+		// list. Dropping the flag would look like "not provided", and the CLI
+		// would leave the field unchanged instead of clearing it.
+		if len(values) == 0 {
+			return []string{"--" + binding.FlagName + "="}, nil
 		}
 
 		args := make([]string, 0, len(values)*stringSliceFlagArgsPerValue)

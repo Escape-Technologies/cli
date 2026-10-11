@@ -6,8 +6,10 @@ import (
 	"reflect"
 	"strings"
 	"testing"
+	"time"
 
 	mcpgo "github.com/mark3labs/mcp-go/mcp"
+	"github.com/spf13/cobra"
 )
 
 func TestBuildCommandArgs(t *testing.T) {
@@ -63,6 +65,64 @@ func TestBuildCommandArgs(t *testing.T) {
 
 	if bodyMap["name"] != "demo" {
 		t.Fatalf("expected body name demo, got %#v", bodyMap["name"])
+	}
+}
+
+func TestBuildCommandArgsPassesEmptyStringAndEmptySlice(t *testing.T) {
+	t.Parallel()
+
+	args, _, err := buildCommandArgs(ToolSpec{
+		FlagBindings: []FlagBinding{
+			{Property: "description", FlagName: "description", Kind: "string"},
+			{Property: "tag_ids", FlagName: "tag-ids", Kind: "stringSlice"},
+			{Property: "project_ids", FlagName: "project-id", Kind: "stringSlice"},
+			{Property: "name", FlagName: "name", Kind: "string"},
+		},
+	}, map[string]any{
+		"description": "",
+		"tag_ids":     []any{},
+		"project_ids": []string{},
+	})
+	if err != nil {
+		t.Fatalf("buildCommandArgs: %v", err)
+	}
+
+	want := []string{"--description", "", "--tag-ids=", "--project-id="}
+	if len(args) != len(want) {
+		t.Fatalf("args = %#v, want %#v", args, want)
+	}
+
+	for index, value := range want {
+		if args[index] != value {
+			t.Fatalf("args = %#v, want %#v", args, want)
+		}
+	}
+
+	var description, name string
+	var tags, projects []string
+	command := &cobra.Command{Use: "update"}
+	command.Flags().StringVar(&description, "description", "default", "")
+	command.Flags().StringVar(&name, "name", "default", "")
+	command.Flags().StringSliceVar(&tags, "tag-ids", []string{"stale"}, "")
+	command.Flags().StringSliceVar(&projects, "project-id", []string{"stale"}, "")
+	if err := command.ParseFlags(args); err != nil {
+		t.Fatalf("parse flags: %v", err)
+	}
+
+	if !command.Flags().Changed("description") || description != "" {
+		t.Fatalf("description changed=%v value=%q", command.Flags().Changed("description"), description)
+	}
+
+	if command.Flags().Changed("name") || name != "default" {
+		t.Fatalf("name changed=%v value=%q", command.Flags().Changed("name"), name)
+	}
+
+	if !command.Flags().Changed("tag-ids") || len(tags) != 0 {
+		t.Fatalf("tag-ids changed=%v values=%#v", command.Flags().Changed("tag-ids"), tags)
+	}
+
+	if !command.Flags().Changed("project-id") || len(projects) != 0 {
+		t.Fatalf("project-id changed=%v values=%#v", command.Flags().Changed("project-id"), projects)
 	}
 }
 
@@ -181,6 +241,67 @@ func TestWrapStructuredPayload(t *testing.T) {
 				t.Fatalf("expected %#v, got %#v", testCase.expected, actual)
 			}
 		})
+	}
+}
+
+func TestSchemaAssetCreateBudgetCoversTheAPIPoll(t *testing.T) {
+	t.Parallel()
+
+	// pollUntilOutput defaults to 10 minutes. The MCP listener leaves
+	// http.Server.WriteTimeout unset, so a write deadline cannot cut this
+	// budget off while the subprocess is still waiting on the API.
+	const schemaBuildPollWindow = 10 * time.Minute //nolint:mnd
+	if SchemaAssetCreateToolExecutionTimeout <= schemaBuildPollWindow {
+		t.Fatalf("assets create budget %s does not cover the %s schema-build poll", SchemaAssetCreateToolExecutionTimeout, schemaBuildPollWindow)
+	}
+}
+
+func TestStructuredToolPayloadNormalizesNullCollections(t *testing.T) {
+	t.Parallel()
+
+	listSchema := json.RawMessage(`{"type":"object","properties":{"items":{"type":"array"}}}`)
+	agentsSchema := json.RawMessage(`{"type":"object","properties":{"scanId":{"type":"string"},"agents":{"type":"array"}}}`)
+
+	if _, ok := StructuredToolPayload(nil, listSchema, false); ok {
+		t.Fatal("empty non-JSON stdout must not become structured content")
+	}
+
+	got, ok := StructuredToolPayload(nil, listSchema, true)
+	if !ok {
+		t.Fatal("root null against an items array produced no structured content")
+	}
+
+	if !reflect.DeepEqual(got, map[string]any{"items": []any{}}) {
+		t.Fatalf("root null = %#v", got)
+	}
+
+	if _, ok := StructuredToolPayload(nil, agentsSchema, true); ok {
+		t.Fatal("root null against a non-collection schema must stay unstructured")
+	}
+
+	got, ok = StructuredToolPayload(map[string]any{"scanId": "scan-1", "agents": nil}, agentsSchema, false)
+	if !ok {
+		t.Fatal("object payload was dropped")
+	}
+
+	object, _ := got.(map[string]any)
+	agents, isSlice := object["agents"].([]any)
+	if !isSlice || len(agents) != 0 {
+		t.Fatalf("agents = %#v", object["agents"])
+	}
+
+	if object["scanId"] != "scan-1" {
+		t.Fatalf("scanId = %#v", object["scanId"])
+	}
+
+	untouched := map[string]any{"agents": nil}
+	got, ok = StructuredToolPayload(untouched, json.RawMessage(`{"type":"object","properties":{"agents":{"type":"string"}}}`), false)
+	if !ok {
+		t.Fatal("non-array null was dropped")
+	}
+
+	if got.(map[string]any)["agents"] != nil {
+		t.Fatal("a null string property was rewritten")
 	}
 }
 

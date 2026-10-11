@@ -202,7 +202,7 @@ Permanently delete a tag from your organization`,
 	Example: `  # Delete a tag
   escape-cli tags delete 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteProfile200Response{}) {
+		if out.Schema(tagDeleteOutput) {
 			return nil
 		}
 

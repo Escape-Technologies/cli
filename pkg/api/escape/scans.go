@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -39,6 +40,8 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 		return nil, nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
+	ctx = withArrayQuery(ctx, scansArrayQuery(filters))
+
 	req := client.ScansAPI.ListScans(ctx)
 
 	batchSize := 100
@@ -72,6 +75,17 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 	return data.Data, data.NextCursor, nil
 }
 
+// scansArrayQuery collects the scan list filters the generated client wraps in
+// a union-typed query parameter and serializes as a Go type name.
+func scansArrayQuery(filters *ListScansFilters) url.Values {
+	values := url.Values{}
+	if filters != nil && filters.ProjectIDs != nil {
+		addArrayQuery(values, "projectIds", *filters.ProjectIDs)
+	}
+
+	return values
+}
+
 // applyListScansFilters adds every set filter to the request.
 func applyListScansFilters(req v3.ApiListScansRequest, filters *ListScansFilters) v3.ApiListScansRequest {
 	if filters.After != "" {
@@ -92,10 +106,6 @@ func applyListScansFilters(req v3.ApiListScansRequest, filters *ListScansFilters
 
 	if filters.ProfileIDs != nil && len(*filters.ProfileIDs) > 0 {
 		req = req.ProfileIds(strings.Join(*filters.ProfileIDs, ","))
-	}
-
-	if filters.ProjectIDs != nil && len(*filters.ProjectIDs) > 0 {
-		req = req.ProjectIds(v3.ListScansProjectIdsParameter{ArrayOfString: filters.ProjectIDs})
 	}
 
 	if filters.TagIDs != nil && len(*filters.TagIDs) > 0 {
@@ -264,7 +274,9 @@ func CancelScan(ctx context.Context, scanID string) error {
 
 	_, httpResp, err := client.ScansAPI.CancelScan(ctx, scanID).Execute()
 	if err != nil {
-		if httpResp.StatusCode == http.StatusBadRequest {
+		// A transport failure (connection refused, DNS, timeout) returns a nil
+		// response. StatusCode is only meaningful once the server answered.
+		if httpResp != nil && httpResp.StatusCode == http.StatusBadRequest {
 			return errors.New("scan is not running or already canceled")
 		}
 
@@ -336,6 +348,18 @@ type ListScanProblemsFilters struct {
 // size 0 keeps it. The public API rejects a size above 100.
 const scanProblemsDefaultPageSize = 100
 
+// scanProblemsArrayQuery collects the scan problems filters the generated
+// client wraps in a union-typed query parameter and serializes as a Go type
+// name.
+func scanProblemsArrayQuery(filters *ListScanProblemsFilters) url.Values {
+	values := url.Values{}
+	if filters != nil {
+		addArrayQuery(values, "projectIds", filters.ProjectIDs)
+	}
+
+	return values
+}
+
 // ListScanProblems lists one page of scans together with their validation problems.
 // The returned total is totalCount.
 func ListScanProblems(ctx context.Context, next string, filters *ListScanProblemsFilters, size int) ([]v3.ScanSummarizedWithProblems2, *string, int, error) {
@@ -343,6 +367,8 @@ func ListScanProblems(ctx context.Context, next string, filters *ListScanProblem
 	if err != nil {
 		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
 	}
+
+	ctx = withArrayQuery(ctx, scanProblemsArrayQuery(filters))
 
 	req := client.ScansAPI.ScansProblems(ctx)
 
@@ -383,11 +409,6 @@ func ListScanProblems(ctx context.Context, next string, filters *ListScanProblem
 
 		if len(filters.ProfileIDs) > 0 {
 			req = req.ProfileIds(strings.Join(filters.ProfileIDs, ","))
-		}
-
-		if len(filters.ProjectIDs) > 0 {
-			ids := filters.ProjectIDs
-			req = req.ProjectIds(v3.ListScansProjectIdsParameter{ArrayOfString: &ids})
 		}
 
 		if filters.Ignored != "" {

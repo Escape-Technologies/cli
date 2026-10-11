@@ -210,7 +210,7 @@ Permanently delete a regression test and its run history.`,
 	Example: `  escape-cli regression-tests delete <test-id>`,
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteProfile200Response{}) {
+		if out.Schema(regressionTestDeleteOutput) {
 			return nil
 		}
 

@@ -17,6 +17,7 @@ var (
 	statisticsTrendsStart        string
 	statisticsTrendsEnd          string
 	statisticsTrendsInterval     string
+	statisticsTrendsProjectIDs   []string
 )
 
 // statisticsSourceUsage names the scanner sources the sub-resources accept.
@@ -164,7 +165,8 @@ The resolved count of a bucket is cumulative: once an issue is resolved it is
 counted in every later bucket, so a value repeats. Difference two consecutive
 buckets to get the resolutions of that bucket.`,
 	Example: `  escape-cli statistics trends --start 2026-07-01T00:00:00Z --end 2026-10-01T00:00:00Z
-  escape-cli statistics trends --start 2026-07-01T00:00:00Z --end 2026-10-01T00:00:00Z --interval 1 week`,
+  escape-cli statistics trends --start 2026-07-01T00:00:00Z --end 2026-10-01T00:00:00Z --interval 1 week
+  escape-cli statistics trends --start 2026-07-01T00:00:00Z --end 2026-10-01T00:00:00Z --project-id <project-id>`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if out.Schema(v3.GetStatisticsTrends200Response{}) {
@@ -176,6 +178,7 @@ buckets to get the resolutions of that bucket.`,
 			statisticsTrendsStart,
 			statisticsTrendsEnd,
 			statisticsTrendsInterval,
+			statisticsTrendsProjectIDs,
 		)
 		if err != nil {
 			return fmt.Errorf("unable to get statistics trends: %w", err)
@@ -236,6 +239,7 @@ func init() {
 	statisticsTrendsCmd.Flags().StringVar(&statisticsTrendsStart, "start", "", "window start (ISO 8601, required)")
 	statisticsTrendsCmd.Flags().StringVar(&statisticsTrendsEnd, "end", "", "window end (ISO 8601, required)")
 	statisticsTrendsCmd.Flags().StringVar(&statisticsTrendsInterval, "interval", "", `bucket width (e.g. "1 day", "1 week")`)
+	statisticsTrendsCmd.Flags().StringSliceVar(&statisticsTrendsProjectIDs, "project-id", nil, "filter by project ID(s)")
 	_ = statisticsTrendsCmd.MarkFlagRequired("start")
 	_ = statisticsTrendsCmd.MarkFlagRequired("end")
 

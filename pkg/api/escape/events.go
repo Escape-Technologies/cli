@@ -3,6 +3,7 @@ package escape
 import (
 	"context"
 	"fmt"
+	"net/url"
 	"strconv"
 	"strings"
 
@@ -36,6 +37,23 @@ type ListEventsFilters struct {
 	SortDirection       string
 }
 
+// eventsArrayQuery collects the event list filters the generated client wraps
+// in a union-typed query parameter and serializes as a Go type name.
+func eventsArrayQuery(filters *ListEventsFilters) url.Values {
+	values := url.Values{}
+	if filters == nil {
+		return values
+	}
+
+	addScalarQuery(values, "eventIds", filters.EventIDs)
+	addScalarQuery(values, "targetIds", filters.TargetIDs)
+	addScalarQuery(values, "workflowIds", filters.WorkflowIDs)
+	addScalarQuery(values, "groups", filters.Groups)
+	addScalarQuery(values, "responseStatusCodes", filters.ResponseStatusCodes)
+
+	return values
+}
+
 // ListEvents lists one page of events.
 // size 0 keeps the historical page size of 100. The returned total is totalCount.
 func ListEvents(ctx context.Context, next string, filters *ListEventsFilters, size int) ([]v3.EventSummarized, *string, int, error) {
@@ -48,6 +66,8 @@ func ListEvents(ctx context.Context, next string, filters *ListEventsFilters, si
 	if size > 0 {
 		maxSize = size
 	}
+
+	ctx = withArrayQuery(ctx, eventsArrayQuery(filters))
 
 	req := client.EventsAPI.ListEvents(ctx).Size(maxSize)
 	if filters != nil && filters.SortType != "" {
@@ -106,22 +126,6 @@ func applyListEventsFilters(req v3.ApiListEventsRequest, filters *ListEventsFilt
 		req = req.IssueIds(strings.Join(filters.IssueIDs, ","))
 	}
 
-	if filters.EventIDs != "" {
-		req = req.EventIds(v3.ListEventsEventIdsParameter{String: &filters.EventIDs})
-	}
-
-	if filters.TargetIDs != "" {
-		req = req.TargetIds(v3.ListEventsTargetIdsParameter{String: &filters.TargetIDs})
-	}
-
-	if filters.WorkflowIDs != "" {
-		req = req.WorkflowIds(v3.ListEventsWorkflowIdsParameter{String: &filters.WorkflowIDs})
-	}
-
-	if filters.Groups != "" {
-		req = req.Groups(v3.ListEventsGroupsParameter{String: &filters.Groups})
-	}
-
 	if len(filters.Stages) > 0 {
 		req = req.Stages(filters.Stages)
 	}
@@ -148,10 +152,6 @@ func applyListEventsFilters(req v3.ApiListEventsRequest, filters *ListEventsFilt
 
 	if len(filters.ScanProblemCodes) > 0 {
 		req = req.ScanProblemCodes(filters.ScanProblemCodes)
-	}
-
-	if filters.ResponseStatusCodes != "" {
-		req = req.ResponseStatusCodes(v3.ListEventsResponseStatusCodesParameter{String: &filters.ResponseStatusCodes})
 	}
 
 	if filters.Public != "" {

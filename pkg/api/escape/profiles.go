@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -37,6 +38,20 @@ type ListProfilesFilters struct {
 	SortDirection     string
 }
 
+// profilesArrayQuery collects the profile list filters the generated client
+// wraps in a union-typed query parameter and serializes as a Go type name.
+func profilesArrayQuery(filters *ListProfilesFilters) url.Values {
+	values := url.Values{}
+	if filters == nil {
+		return values
+	}
+
+	addScalarQuery(values, "assetSchemaIds", filters.AssetSchemaIDs)
+	addArrayQuery(values, "projectIds", filters.ProjectIDs)
+
+	return values
+}
+
 // ListProfiles lists one page of profiles.
 // size 0 keeps the API default page size. The returned total is totalCount.
 func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters, size int) ([]v3.ProfileSummarized, *string, int, error) {
@@ -44,6 +59,8 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 	if err != nil {
 		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
 	}
+
+	ctx = withArrayQuery(ctx, profilesArrayQuery(filters))
 
 	req := client.ProfilesAPI.ListProfiles(ctx)
 	if next != "" {
@@ -65,10 +82,6 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 
 		if len(filters.AssetIDs) > 0 {
 			req = req.AssetIds(strings.Join(filters.AssetIDs, ","))
-		}
-
-		if filters.AssetSchemaIDs != "" {
-			req = req.AssetSchemaIds(v3.ListProfilesAssetSchemaIdsParameter{String: &filters.AssetSchemaIDs})
 		}
 
 		if len(filters.AssetTypes) > 0 {
@@ -93,11 +106,6 @@ func ListProfiles(ctx context.Context, next string, filters *ListProfilesFilters
 
 		if len(filters.TagsIDs) > 0 {
 			req = req.TagIds(strings.Join(filters.TagsIDs, ","))
-		}
-
-		if len(filters.ProjectIDs) > 0 {
-			ids := filters.ProjectIDs
-			req = req.ProjectIds(v3.ListProfilesProjectIdsParameter{ArrayOfString: &ids})
 		}
 
 		if filters.ScanIDs != "" {
@@ -327,19 +335,25 @@ func DisableContinuousPentest(ctx context.Context, profileID string) (*v3.Update
 	return result, nil
 }
 
-// UpdateProfile updates profile metadata (name, description, cron, extra assets)
+// UpdateProfile updates profile metadata (name, description, schedule, extra
+// assets, and the AI pentest fields). The body is checked against
+// UpdateProfileRequest, then forwarded unchanged. The generated client's ToMap
+// drops explicit nulls, and the API uses null to clear proxyId, a context
+// field, offLimitsAreas, and the other nullable update fields. The call still
+// goes through the generated client so a 400, 401, or 404 stays a
+// *v3.GenericOpenAPIError that humanizeAPIError and IsInvalidAPIKey can read.
 func UpdateProfile(ctx context.Context, profileID string, data []byte) (*v3.GetProfile200Response, error) {
-	client, err := newAPIV3Client()
-	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
-	}
-
 	var payload v3.UpdateProfileRequest
 	if err := json.Unmarshal(data, &payload); err != nil {
 		return nil, fmt.Errorf("invalid JSON for UpdateProfileRequest: %w", err)
 	}
 
-	profile, _, err := client.ProfilesAPI.UpdateProfile(ctx, profileID).UpdateProfileRequest(payload).Execute()
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	profile, _, err := client.ProfilesAPI.UpdateProfile(withRawBody(ctx, data), profileID).UpdateProfileRequest(payload).Execute()
 	if err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}

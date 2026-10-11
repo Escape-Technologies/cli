@@ -162,6 +162,12 @@ Run with -v for detailed logging. Use Ctrl+C to stop gracefully.`,
   # Run as systemd service
   sudo systemctl start escape-location@my-location`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// The agent upserts the location and then runs until interrupted.
+		// Schema mode has no location document to describe; it must not sync.
+		if out.Schema(out.Message{}) {
+			return nil
+		}
+
 		if rootCmdVerbose == 0 {
 			out.SetupTerminalLog()
 			defer out.StopTerminalLog()
@@ -182,7 +188,7 @@ Location deleted`,
 	Args:    cobra.ExactArgs(1),
 	Example: `escape-cli locations delete 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteLocation200Response{}) {
+		if out.Schema(locationDeleteOutput) {
 			return nil
 		}
 

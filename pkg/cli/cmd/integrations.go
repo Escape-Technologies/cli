@@ -33,12 +33,12 @@ var integrationsListCmd = &cobra.Command{
 	Short: "List integrations for a given kind",
 	Args:  cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if integrationsKind == "" {
-			return errors.New("--kind is required")
-		}
-
 		if out.Schema([]map[string]interface{}{}) {
 			return nil
+		}
+
+		if integrationsKind == "" {
+			return errors.New("--kind is required")
 		}
 
 		filters := &escape.ListIntegrationsFilters{
@@ -75,12 +75,12 @@ var integrationsGetCmd = &cobra.Command{
 	Short:   "Get an integration by ID",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if integrationsKind == "" {
-			return errors.New("--kind is required")
-		}
-
 		if out.Schema(map[string]interface{}{}) {
 			return nil
+		}
+
+		if integrationsKind == "" {
+			return errors.New("--kind is required")
 		}
 
 		item, err := escape.GetIntegration(cmd.Context(), integrationsKind, args[0])
@@ -181,7 +181,7 @@ var integrationsDeleteCmd = &cobra.Command{
 	Short:   "Delete an integration",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.CreateakamaiIntegration200Response{}) {
+		if out.Schema(integrationDeleteOutput) {
 			return nil
 		}
 

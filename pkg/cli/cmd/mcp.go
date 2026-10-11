@@ -213,9 +213,14 @@ func buildMCPToolSpecs(
 			BodyProperty:   bodyProperty,
 			Destructive:    destructive,
 		}
-		if capability.Path == "escape-cli scans reasoning" ||
-			capability.Path == "escape-cli scans coverage" {
+		switch capability.Path {
+		case "escape-cli scans reasoning", "escape-cli scans coverage":
 			spec.ExecutionTimeout = climcp.ReasoningToolExecutionTimeout
+		case "escape-cli assets create":
+			// SCHEMA creation blocks on the public API's build poll. The
+			// default 30s tool budget kills that wait. See
+			// SchemaAssetCreateToolExecutionTimeout.
+			spec.ExecutionTimeout = climcp.SchemaAssetCreateToolExecutionTimeout
 		}
 
 		if pagedListCommand(command) {

@@ -233,7 +233,7 @@ target user, and a user cannot deactivate themselves.`,
   escape-cli users deactivate <user-id> --yes`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.ListUsers200ResponseInner{}) {
+		if out.Schema(userDeactivateOutput) {
 			return nil
 		}
 

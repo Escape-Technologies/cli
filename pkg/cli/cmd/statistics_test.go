@@ -3,6 +3,8 @@ package cmd
 import (
 	"context"
 	"net/http"
+	"net/url"
+	"reflect"
 	"testing"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -133,6 +135,54 @@ func TestStatisticsTrendsRequiresTheWindow(t *testing.T) {
 		if flag == nil || !isRequiredFlag(flag) {
 			t.Fatalf("--%s must be marked required so the MCP schema advertises it", name)
 		}
+	}
+}
+
+// TestStatisticsTrendsForwardsProjectIDs checks the repeatable --project-id
+// flag reaches the trends request as one projectIds value per ID. The
+// generated client cannot serialize that union parameter, so the wrapper
+// writes the keys itself.
+func TestStatisticsTrendsForwardsProjectIDs(t *testing.T) {
+	flag := statisticsTrendsCmd.Flags().Lookup("project-id")
+	if flag == nil || flag.Value.Type() != "stringSlice" {
+		t.Fatalf("--project-id = %#v, want a repeatable string slice", flag)
+	}
+
+	var query url.Values
+	serveJSON(t, func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/v3/statistics/trends" {
+			http.NotFound(w, r)
+
+			return
+		}
+
+		query = r.URL.Query()
+		writeJSON(t, w, map[string]any{
+			"openResolved":     []map[string]any{},
+			"averageApiHealth": []map[string]any{},
+		})
+	})
+
+	statisticsTrendsStart = "2026-08-01T00:00:00Z"
+	statisticsTrendsEnd = "2026-10-01T00:00:00Z"
+	statisticsTrendsProjectIDs = []string{"project-1", "project-2"}
+	t.Cleanup(func() {
+		statisticsTrendsStart = ""
+		statisticsTrendsEnd = ""
+		statisticsTrendsProjectIDs = nil
+	})
+
+	statisticsTrendsCmd.SetContext(context.Background())
+
+	_, stderr, err := captureJSONCommand(t, func() error {
+		return statisticsTrendsCmd.RunE(statisticsTrendsCmd, nil)
+	})
+	if err != nil {
+		t.Fatalf("trends: %v\nstderr: %s", err, stderr)
+	}
+
+	if got := query["projectIds"]; !reflect.DeepEqual(got, []string{"project-1", "project-2"}) {
+		t.Fatalf("projectIds = %v, want [project-1 project-2]", got)
 	}
 }
 

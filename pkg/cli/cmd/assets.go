@@ -388,6 +388,31 @@ func formatAssetPorts(asset *v3.AssetDetailed1) string {
 	return strings.Join(values, ",")
 }
 
+// changedString is the string to send when the flag was set, including "".
+// An unset flag returns nil so the API leaves the field unchanged.
+func changedString(cmd *cobra.Command, name, value string) *string {
+	if !cmd.Flags().Changed(name) {
+		return nil
+	}
+
+	return &value
+}
+
+// changedStrings is the list to send when the flag was set, including an
+// explicit empty list that clears the field. An unset flag returns nil. A nil
+// slice becomes empty so the generated client does not omit the clear.
+func changedStrings(cmd *cobra.Command, name string, values []string) *[]string {
+	if !cmd.Flags().Changed(name) {
+		return nil
+	}
+
+	if values == nil {
+		values = []string{}
+	}
+
+	return &values
+}
+
 // parseAssetLinks parses a --parent-links/--child-links JSON object into the
 // API link-update shape, e.g.
 // {"create":[{"targetId":"<id>","verb":"USES"}],"delete":[...],"set":[...]}.
@@ -425,6 +450,12 @@ endpoint.`,
   escape-cli assets download <asset-id> --output schema.json`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// The bytes are not a JSON document. Schema mode still has to return
+		// before the signed URL is fetched, or -o schema downloads the asset.
+		if out.Schema(v3.GetAssetContent200Response{}) {
+			return nil
+		}
+
 		content, err := escape.GetAssetContent(cmd.Context(), args[0])
 		if err != nil {
 			return fmt.Errorf("unable to get asset content: %w", err)
@@ -523,7 +554,7 @@ BEFORE DELETING:
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteProfile200Response{}) {
+		if out.Schema(assetDeleteOutput) {
 			return nil
 		}
 
@@ -626,6 +657,7 @@ USE CASES:
 			return nil
 		}
 
+		// Enums reject "", so an empty flag is left unset rather than sent as a clear.
 		var framework *v3.ENUMPROPERTIESFRAMEWORK
 		if assetFramework != "" {
 			f := v3.ENUMPROPERTIESFRAMEWORK(assetFramework)
@@ -638,31 +670,6 @@ USE CASES:
 			status = &s
 		}
 
-		var desc *string
-		if assetDescription != "" {
-			desc = &assetDescription
-		}
-
-		var name *string
-		if assetName != "" {
-			name = &assetName
-		}
-
-		var owners *[]string
-		if len(assetOwners) > 0 {
-			owners = &assetOwners
-		}
-
-		var tagIDs *[]string
-		if len(assetTagIDs) > 0 {
-			tagIDs = &assetTagIDs
-		}
-
-		var projectIDs *[]string
-		if len(assetUpdateProjectIDs) > 0 {
-			projectIDs = &assetUpdateProjectIDs
-		}
-
 		var environment *v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT
 		if assetEnvironment != "" {
 			e := v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSERVICEPROPERTIESENVIRONMENT(assetEnvironment)
@@ -672,6 +679,24 @@ USE CASES:
 		var manuallySetStatus *bool
 		if cmd.Flags().Changed("manually-set-status") {
 			manuallySetStatus = &assetManuallySetStatus
+		}
+
+		parentLinks, err := parseAssetLinks(assetParentLinks)
+		if err != nil {
+			return fmt.Errorf("invalid --parent-links: %w", err)
+		}
+
+		childLinks, err := parseAssetLinks(assetChildLinks)
+		if err != nil {
+			return fmt.Errorf("invalid --child-links: %w", err)
+		}
+
+		// "" is not a clear for these fields. name is nullable, but the API
+		// reads "" as a name, not null. address, base URL, and best schema id
+		// are plain optional strings, so "" would blank a HOST address.
+		var name *string
+		if assetName != "" {
+			name = &assetName
 		}
 
 		var baseURL *string
@@ -689,30 +714,20 @@ USE CASES:
 			bestSchemaID = &assetBestSchemaID
 		}
 
-		parentLinks, err := parseAssetLinks(assetParentLinks)
-		if err != nil {
-			return fmt.Errorf("invalid --parent-links: %w", err)
-		}
-
-		childLinks, err := parseAssetLinks(assetChildLinks)
-		if err != nil {
-			return fmt.Errorf("invalid --child-links: %w", err)
-		}
-
 		asset, err := escape.UpdateAsset(cmd.Context(), args[0], escape.UpdateAssetInput{
-			Description:       desc,
+			Description:       changedString(cmd, "description", assetDescription),
 			Framework:         framework,
-			Owners:            owners,
+			Owners:            changedStrings(cmd, "owners", assetOwners),
 			Status:            status,
-			TagIDs:            tagIDs,
-			ProjectIDs:        projectIDs,
+			TagIDs:            changedStrings(cmd, "tag-ids", assetTagIDs),
+			ProjectIDs:        changedStrings(cmd, "project-id", assetUpdateProjectIDs),
 			Name:              name,
 			Environment:       environment,
 			ManuallySetStatus: manuallySetStatus,
 			BaseURL:           baseURL,
 			Address:           address,
 			BestSchemaID:      bestSchemaID,
-			SchemaIDs:         assetSchemaIDs,
+			SchemaIDs:         changedStrings(cmd, "schema-ids", assetSchemaIDs),
 			ParentLinks:       parentLinks,
 			ChildLinks:        (*v3.UpdateAssetChildLinks)(childLinks),
 		})
@@ -942,7 +957,7 @@ var assetBulkUpdateCmd = &cobra.Command{
 	Short: "Update multiple assets matching a filter",
 	Long:  `Bulk update tags, projects, or status of assets matching a filter predicate.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.Schema(escape.BulkOperationResult{}) {
+		if out.Schema(assetBulkUpdateOutput) {
 			return nil
 		}
 
@@ -984,7 +999,17 @@ var assetBulkUpdateCmd = &cobra.Command{
 			status = &s
 		}
 
-		result, err := escape.BulkUpdateAssets(cmd.Context(), where, bulkAssetTagIDs, bulkAssetProjIDs, status)
+		var tagIDs []string
+		if set := changedStrings(cmd, "tag-id", bulkAssetTagIDs); set != nil {
+			tagIDs = *set
+		}
+
+		var projectIDs []string
+		if set := changedStrings(cmd, "project-id", bulkAssetProjIDs); set != nil {
+			projectIDs = *set
+		}
+
+		result, err := escape.BulkUpdateAssets(cmd.Context(), where, tagIDs, projectIDs, status)
 		if err != nil {
 			return fmt.Errorf("unable to bulk update assets: %w", err)
 		}
@@ -1000,7 +1025,7 @@ var assetBulkDeleteCmd = &cobra.Command{
 	Short: "Delete multiple assets matching a filter",
 	Long:  `Schedule multiple assets matching a filter predicate for deletion.`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		if out.Schema(escape.BulkOperationResult{}) {
+		if out.Schema(assetBulkDeleteOutput) {
 			return nil
 		}
 

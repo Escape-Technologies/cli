@@ -146,7 +146,7 @@ var vaultVariablesDeleteCmd = &cobra.Command{
 	Short:   "Delete a vault variable (Beta)",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteProfile200Response{}) {
+		if out.Schema(out.Message{}) {
 			return nil
 		}
 

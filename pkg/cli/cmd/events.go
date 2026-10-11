@@ -101,6 +101,10 @@ FILTER OPTIONS:
   # Search event logs
   escape-cli events list --search "timeout"`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema(Page[v3.EventSummarized]{}) {
+			return nil
+		}
+
 		filters := &escape.ListEventsFilters{
 			Search:              search,
 			After:               eventAfter,

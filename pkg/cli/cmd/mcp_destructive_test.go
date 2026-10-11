@@ -2,29 +2,37 @@ package cmd
 
 import (
 	"encoding/json"
-	"reflect"
 	"slices"
 	"testing"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
+	"github.com/Escape-Technologies/cli/pkg/cli/out"
+	clischema "github.com/Escape-Technologies/cli/pkg/cli/schema"
 	climcp "github.com/Escape-Technologies/cli/pkg/mcp"
 )
 
 func TestCommandSchemaRegistryIncludesDestructiveCommands(t *testing.T) {
 	registry := CommandSchemaRegistry()
 
+	// confirm.go prints a different document on --dry-run than the mutation
+	// result, so those commands declare both. workflows delete prints the
+	// workflow either way. issues bulk-update forwards the API's own dryRun
+	// field on the same response. The expectation is the schema of those
+	// types, not the providedSchema wrapper they happen to share.
 	wantOutput := map[string]any{
-		"escape-cli profiles delete":     v3.DeleteProfile200Response{},
-		"escape-cli assets delete":       v3.DeleteProfile200Response{},
-		"escape-cli assets bulk-delete":  escape.BulkOperationResult{},
-		"escape-cli assets bulk-update":  escape.BulkOperationResult{},
-		"escape-cli tags delete":         v3.DeleteProfile200Response{},
-		"escape-cli custom-rules delete": v3.DeleteCustomRule200Response{},
-		"escape-cli locations delete":    v3.DeleteLocation200Response{},
-		"escape-cli workflows delete":    v3.CreateWorkflow200Response{},
-		"escape-cli integrations delete": v3.CreateakamaiIntegration200Response{},
-		"escape-cli issues bulk-update":  v3.BulkUpdateIssues200Response{},
+		"escape-cli profiles delete":         outputWithDryRun(v3.DeleteProfile200Response{}, v3.GetProfile200Response{}),
+		"escape-cli assets delete":           outputWithDryRun(v3.DeleteProfile200Response{}, v3.AssetDetailed1{}),
+		"escape-cli assets bulk-delete":      outputWithDryRun(escape.BulkOperationResult{}, out.Message{}),
+		"escape-cli assets bulk-update":      outputWithDryRun(escape.BulkOperationResult{}, out.Message{}),
+		"escape-cli tags delete":             outputWithDryRun(v3.DeleteProfile200Response{}, v3.CreateTag200Response{}),
+		"escape-cli custom-rules delete":     outputWithDryRun(v3.DeleteCustomRule200Response{}, v3.CreateCustomRule200Response{}),
+		"escape-cli locations delete":        outputWithDryRun(v3.DeleteLocation200Response{}, v3.GetLocation200Response{}),
+		"escape-cli workflows delete":        v3.CreateWorkflow200Response{},
+		"escape-cli integrations delete":     outputWithDryRun(v3.CreateakamaiIntegration200Response{}, map[string]interface{}{}),
+		"escape-cli issues bulk-update":      v3.BulkUpdateIssues200Response{},
+		"escape-cli regression-tests delete": outputWithDryRun(v3.DeleteProfile200Response{}, v3.CreateRegressionTest200Response{}),
+		"escape-cli users deactivate":        outputWithDryRun(v3.ListUsers200ResponseInner{}, v3.GetUser200Response{}),
 	}
 
 	for path, output := range wantOutput {
@@ -33,18 +41,21 @@ func TestCommandSchemaRegistryIncludesDestructiveCommands(t *testing.T) {
 			t.Fatalf("expected %q in CommandSchemaRegistry", path)
 		}
 
-		if output == nil {
-			if schemas.Output != nil {
-				t.Fatalf("%s: expected no output schema, got %T", path, schemas.Output)
-			}
-
-			continue
-		}
-
-		if reflect.TypeOf(schemas.Output) != reflect.TypeOf(output) {
-			t.Fatalf("%s: output type %T, want %T", path, schemas.Output, output)
+		if got, want := outputSchemaDocument(t, schemas.Output), outputSchemaDocument(t, output); got != want {
+			t.Fatalf("%s declared schema does not match the result and dry-run preview", path)
 		}
 	}
+}
+
+func outputSchemaDocument(t *testing.T, value any) string {
+	t.Helper()
+
+	encoded, err := json.Marshal(clischema.Generate(value))
+	if err != nil {
+		t.Fatalf("marshal schema: %v", err)
+	}
+
+	return string(encoded)
 }
 
 func TestBuildMCPToolSpecsRequiresConfirmOnDestructiveTools(t *testing.T) {

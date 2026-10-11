@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"reflect"
+	"slices"
 	"strings"
 	"testing"
 
@@ -154,6 +155,75 @@ func TestNamedToolsDeclareTypedOutputSchema(t *testing.T) {
 			if _, exists := props[key]; !exists {
 				t.Errorf("%s output schema missing %q in %s", testCase.name, key, raw)
 			}
+		}
+	}
+}
+
+func TestMessageOnlyCommandsAdvertiseMsg(t *testing.T) {
+	rawByName := toolOutputSchemas(t)
+	for _, name := range []string{
+		"views_delete",
+		"views_reorder",
+		"vault_variables_delete",
+		"knowledge_files_delete",
+	} {
+		raw, ok := rawByName[name]
+		if !ok {
+			t.Errorf("missing MCP tool %s", name)
+			continue
+		}
+
+		output := decodeMCPToolSchema(t, name, raw)
+		if _, exists := output.Properties["msg"]; !exists {
+			t.Errorf("%s output schema has no msg: %s", name, raw)
+		}
+
+		if _, exists := output.Properties["message"]; exists {
+			t.Errorf("%s still advertises message: %s", name, raw)
+		}
+
+		if !slices.Contains(output.Required, "msg") {
+			t.Errorf("%s msg is not required: %v", name, output.Required)
+		}
+	}
+}
+
+// dryRunSchemaBranches is the mutation result plus the --dry-run preview.
+const dryRunSchemaBranches = 2
+
+func TestDryRunOutputIncludesBothDocuments(t *testing.T) {
+	rawByName := toolOutputSchemas(t)
+	for _, name := range []string{
+		"assets_delete",
+		"assets_bulk_update",
+		"assets_bulk_delete",
+		"tags_delete",
+		"profiles_delete",
+		"locations_delete",
+		"custom_rules_delete",
+		"integrations_delete",
+		"regression_tests_delete",
+		"users_deactivate",
+	} {
+		raw, ok := rawByName[name]
+		if !ok {
+			t.Errorf("missing MCP tool %s", name)
+			continue
+		}
+
+		var doc map[string]any
+		if err := json.Unmarshal(raw, &doc); err != nil {
+			t.Errorf("%s: %v", name, err)
+			continue
+		}
+
+		if doc["type"] != "object" {
+			t.Errorf("%s type = %#v, want object", name, doc["type"])
+		}
+
+		anyOf, _ := doc["anyOf"].([]any)
+		if len(anyOf) != dryRunSchemaBranches {
+			t.Errorf("%s anyOf length = %d, want %d (%s)", name, len(anyOf), dryRunSchemaBranches, raw)
 		}
 	}
 }

@@ -218,8 +218,10 @@ func deleteAssetAcknowledgement(httpRes *http.Response, err error) (*v3.DeletePr
 	return v3.NewDeleteProfile200Response("Asset deleted successfully"), true, nil
 }
 
-// UpdateAssetInput is the optional body of PUT /v3/assets/{id}. Nil fields and
-// empty collections are omitted, so the API only touches what the caller set.
+// UpdateAssetInput is the optional body of PUT /v3/assets/{id}. A nil field is
+// omitted, so the API leaves it unchanged. A non-nil pointer is sent, including
+// a pointer to "" or to an empty slice, which clears that field. Enums stay
+// nil when unset: the API rejects an empty string for them.
 type UpdateAssetInput struct {
 	Description       *string
 	Framework         *v3.ENUMPROPERTIESFRAMEWORK
@@ -233,9 +235,19 @@ type UpdateAssetInput struct {
 	BaseURL           *string
 	Address           *string
 	BestSchemaID      *string
-	SchemaIDs         []string
+	SchemaIDs         *[]string
 	ParentLinks       *v3.UpdateAssetParentLinks
 	ChildLinks        *v3.UpdateAssetChildLinks
+}
+
+// concreteSlice returns values, or an empty non-nil slice when values is nil.
+// The generated client omits a nil slice, which would drop an explicit clear.
+func concreteSlice(values []string) []string {
+	if values == nil {
+		return []string{}
+	}
+
+	return values
 }
 
 // UpdateAsset updates an asset by ID
@@ -259,29 +271,33 @@ func UpdateAsset(ctx context.Context, id string, input UpdateAssetInput) (*v3.Up
 		ChildLinks:        input.ChildLinks,
 	}
 
-	if input.Owners != nil && len(*input.Owners) > 0 {
+	if input.Owners != nil {
+		owners := concreteSlice(*input.Owners)
 		updateAssetRequest.Owners = &v3.UpdateAssetOwners{
-			ArrayOfString: input.Owners,
+			ArrayOfString: &owners,
 		}
 	}
 
-	if input.TagIDs != nil && len(*input.TagIDs) > 0 {
+	if input.TagIDs != nil {
+		tagIDs := concreteSlice(*input.TagIDs)
 		updateAssetRequest.TagIds = &v3.UpdateAssetTagIds{
-			ArrayOfString: input.TagIDs,
+			ArrayOfString: &tagIDs,
 		}
 	}
 
-	if input.ProjectIDs != nil && len(*input.ProjectIDs) > 0 {
-		updateAssetRequest.ProjectIds = *input.ProjectIDs
+	if input.ProjectIDs != nil {
+		updateAssetRequest.ProjectIds = concreteSlice(*input.ProjectIDs)
 	}
 
-	if len(input.SchemaIDs) > 0 {
-		updateAssetRequest.SchemaIds = input.SchemaIDs
+	if input.SchemaIDs != nil {
+		updateAssetRequest.SchemaIds = concreteSlice(*input.SchemaIDs)
 	}
 
 	data, apiRes, err := client.AssetsAPI.UpdateAsset(ctx, id).UpdateAsset(updateAssetRequest).Execute()
 	if err != nil {
-		if apiRes.StatusCode == http.StatusBadRequest {
+		// A transport failure returns a nil response. Reading StatusCode or
+		// Body on it panics before the caller can see the error.
+		if apiRes != nil && apiRes.Body != nil && apiRes.StatusCode == http.StatusBadRequest {
 			body, _ := io.ReadAll(apiRes.Body)
 			return nil, fmt.Errorf("api error: %s", string(body))
 		}
@@ -323,7 +339,9 @@ func BulkImportAssets(ctx context.Context, data []byte) (*v3.BulkImportAssets200
 	return result, nil
 }
 
-// BulkUpdateAssets updates multiple assets matching a filter
+// BulkUpdateAssets updates multiple assets matching a filter. A nil tag or
+// project list is omitted. An empty non-nil list is sent, which clears that
+// assignment on every matching asset.
 func BulkUpdateAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere, tagIDs, projectIDs []string, status *v3.ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS) (*BulkOperationResult, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
@@ -331,11 +349,11 @@ func BulkUpdateAssets(ctx context.Context, where v3.BulkUpdateAssetsRequestWhere
 	}
 
 	body := v3.BulkUpdateAssetsRequest{Where: where}
-	if len(tagIDs) > 0 {
+	if tagIDs != nil {
 		body.TagIds = tagIDs
 	}
 
-	if len(projectIDs) > 0 {
+	if projectIDs != nil {
 		body.ProjectIds = projectIDs
 	}
 

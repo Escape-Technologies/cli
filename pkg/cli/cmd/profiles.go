@@ -652,20 +652,15 @@ Alternatively, provide a JSON object via stdin with any combination of fields.`,
 
 		profileID := args[0]
 
+		body, err := readPipedStdin(cmd.InOrStdin())
+		if err != nil {
+			return err
+		}
+
 		var payload map[string]interface{}
-
-		// Check if stdin has data
-		stat, _ := os.Stdin.Stat()
-		if (stat.Mode() & os.ModeCharDevice) == 0 {
-			b, err := io.ReadAll(os.Stdin)
-			if err != nil {
-				return fmt.Errorf("failed to read stdin: %w", err)
-			}
-
-			if len(b) > 0 {
-				if err := json.Unmarshal(b, &payload); err != nil {
-					return fmt.Errorf("invalid JSON: %w", err)
-				}
+		if len(body) > 0 {
+			if err := json.Unmarshal(body, &payload); err != nil {
+				return fmt.Errorf("invalid JSON: %w", err)
 			}
 		}
 
@@ -861,6 +856,12 @@ CONFIGURABLE SECTIONS:
   echo '{"configuration":{"mode":"read_only"}}' | escape-cli profiles update-configuration --merge <profile-id>`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// -o schema must return before stdin is read. InputSchema only handles
+		// --input-schema, so without this the JSON body is applied for real.
+		if out.Schema(map[string]interface{}{}) {
+			return nil
+		}
+
 		if out.InputSchema(v3.UpdateProfileConfigurationRequest{}) {
 			return nil
 		}
@@ -1247,7 +1248,7 @@ var profileDeleteCmd = &cobra.Command{
 Permanently delete a security testing profile. This will also remove scan history
 and scheduled scans. The asset itself is NOT deleted.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteProfile200Response{}) {
+		if out.Schema(profileDeleteOutput) {
 			return nil
 		}
 
@@ -1316,6 +1317,9 @@ func init() {
 	profileUpdateCmd.Flags().StringVar(&profileUpdateAdditionalContext, "additional-context", "", "AI pentest context: anything else testers should know")
 	profileUpdateCmd.MarkFlagsMutuallyExclusive("extra-asset-id", "clear-extra-assets")
 	profileGetCmd.Flags().BoolVar(&profileGetExtraAssets, "extra-assets", false, "list the extra assets attached to the profile (detailed table)")
+	// The normal profile document already includes extraAssets. --extra-assets
+	// prints a different {items:[...]} document, so MCP must not offer it.
+	markMCPSkip(profileGetCmd.Flags(), "extra-assets")
 	profilesListCmd.Flags().Bool("all", false, "Show profiles for all asset types")
 	profilesListCmd.Flags().StringSliceVarP(&profileAssetIDs, "asset-id", "a", []string{}, "asset ID")
 	profilesListCmd.Flags().StringSliceVarP(&profileDomains, "domain", "d", []string{}, "domain")

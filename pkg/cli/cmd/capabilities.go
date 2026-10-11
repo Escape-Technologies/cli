@@ -60,6 +60,73 @@ func schemaFor(v any) *clischema.JSONSchema {
 	return clischema.Generate(v)
 }
 
+// outputWithDryRun is the output schema of a command whose --dry-run prints
+// a different document from the mutation result. anyOf, not oneOf: a preview
+// that also matches the result schema (a loose object, or extra fields the
+// result schema allows) must still validate. oneOf would reject it.
+func outputWithDryRun(result, preview any) providedSchema {
+	branches := []*clischema.JSONSchema{
+		dryRunBranch(result),
+		dryRunBranch(preview),
+	}
+	defs := map[string]*clischema.JSONSchema{}
+	for _, branch := range branches {
+		for name, def := range branch.Defs {
+			if _, exists := defs[name]; !exists {
+				defs[name] = def
+			}
+		}
+
+		// $ref resolves at the document root. Nested $defs would make the
+		// MCP schema and schemaFor disagree after liftNestedDefs rewrites
+		// only one of them.
+		branch.Defs = nil
+		branch.Schema = ""
+	}
+
+	schema := &clischema.JSONSchema{
+		Schema:      jsonSchemaDraft,
+		Type:        "object",
+		Description: "Either the command result or the document --dry-run prints.",
+		AnyOf:       branches,
+	}
+	if len(defs) > 0 {
+		schema.Defs = defs
+	}
+
+	return providedSchema{schema: schema}
+}
+
+// dryRunBranch copies the generated root so clearing $schema and $defs does
+// not change a schema another command still holds. Generate returns a
+// schemaProvider document directly, without cloning.
+func dryRunBranch(value any) *clischema.JSONSchema {
+	generated := clischema.Generate(value)
+	cloned := *generated
+
+	return &cloned
+}
+
+// Dry-run previews are the document confirm.go prints when --dry-run is set
+// and the command can fetch the target. Message-only deletes print the same
+// {"msg"} document either way, so they stay out.Message.
+var (
+	assetDeleteOutput          = outputWithDryRun(v3.DeleteProfile200Response{}, v3.AssetDetailed1{})
+	assetBulkUpdateOutput      = outputWithDryRun(escape.BulkOperationResult{}, out.Message{})
+	assetBulkDeleteOutput      = outputWithDryRun(escape.BulkOperationResult{}, out.Message{})
+	tagDeleteOutput            = outputWithDryRun(v3.DeleteProfile200Response{}, v3.CreateTag200Response{})
+	profileDeleteOutput        = outputWithDryRun(v3.DeleteProfile200Response{}, v3.GetProfile200Response{})
+	locationDeleteOutput       = outputWithDryRun(v3.DeleteLocation200Response{}, v3.GetLocation200Response{})
+	customRuleDeleteOutput     = outputWithDryRun(v3.DeleteCustomRule200Response{}, v3.CreateCustomRule200Response{})
+	integrationDeleteOutput    = outputWithDryRun(v3.CreateakamaiIntegration200Response{}, map[string]interface{}{})
+	regressionTestDeleteOutput = outputWithDryRun(v3.DeleteProfile200Response{}, v3.CreateRegressionTest200Response{})
+	userDeactivateOutput       = outputWithDryRun(v3.ListUsers200ResponseInner{}, v3.GetUser200Response{})
+	// roles delete and projects delete are not MCP tools. --dry-run still
+	// prints the fetched resource, so the schema guard declares the same union.
+	roleDeleteOutput    = outputWithDryRun(out.Message{}, v3.CreateRole200Response{})
+	projectDeleteOutput = outputWithDryRun(out.Message{}, v3.CreateProject200Response{})
+)
+
 // CommandSchemaRegistry returns the explicit allowlist mapping Cobra command
 // paths to their input/output Go structs. New commands exposed to MCP must be
 // added here so the Cobra-to-MCP surface stays reviewed rather than derived.
@@ -86,7 +153,7 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli integrations get":              {Output: map[string]interface{}{}},
 		"escape-cli integrations create":           {Input: mustInputSchema(integrationCreateInputSchema), Output: map[string]interface{}{}},
 		"escape-cli integrations update":           {Input: mustInputSchema(integrationUpdateInputSchema), Output: map[string]interface{}{}},
-		"escape-cli integrations delete":           {Output: v3.CreateakamaiIntegration200Response{}},
+		"escape-cli integrations delete":           {Output: integrationDeleteOutput},
 		"escape-cli integrations test":             {Output: v3.SyncAkamaiIntegration200Response{}},
 		"escape-cli integrations sync":             {Output: v3.SyncAkamaiIntegration200Response{}},
 		"escape-cli integrations runs":             {Output: Page[map[string]interface{}]{}},
@@ -94,21 +161,21 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli views issues":                  {Output: Page[v3.IssueSummarized]{}},
 		"escape-cli views create":                  {Input: v3.CreateViewRequest{}, Output: v3.CreateView200Response{}},
 		"escape-cli views update":                  {Input: v3.UpdateViewRequest{}, Output: v3.CreateView200Response{}},
-		"escape-cli views reorder":                 {Input: v3.ReorderViewsRequest{}, Output: v3.ReorderViews200Response{}},
-		"escape-cli views delete":                  {Output: v3.DeleteProfile200Response{}},
+		"escape-cli views reorder":                 {Input: v3.ReorderViewsRequest{}, Output: out.Message{}},
+		"escape-cli views delete":                  {Output: out.Message{}},
 		"escape-cli vault variables list":          {Output: Page[v3.VaultVariableSummary]{}},
 		"escape-cli vault variables create":        {Output: v3.CreateVaultVariable200Response{}},
-		"escape-cli vault variables delete":        {Output: v3.DeleteProfile200Response{}},
+		"escape-cli vault variables delete":        {Output: out.Message{}},
 		"escape-cli vault variables rotate":        {Output: v3.CreateVaultVariable200Response{}},
 		"escape-cli vault list":                    {Output: Page[v3.VaultSummary1]{}},
 		"escape-cli vault link":                    {Output: v3.LinkVault200Response{}},
 		"escape-cli vault entries":                 {Output: []v3.VaultEntry{}},
 		"escape-cli knowledge-files list":          {Output: Page[v3.KnowledgeFileSummary]{}},
-		"escape-cli knowledge-files delete":        {Output: v3.DeleteProfile200Response{}},
+		"escape-cli knowledge-files delete":        {Output: out.Message{}},
 		"escape-cli knowledge-files upload":        {Output: v3.UploadKnowledgeFile200Response{}},
 		"escape-cli org-settings get":              {Output: v3.GetOrganizationSettings200Response{}},
 		"escape-cli org-settings update":           {Input: v3.UpdateOrganizationSettingsRequest{}, Output: v3.GetOrganizationSettings200Response{}},
-		"escape-cli users deactivate":              {Output: v3.ListUsers200ResponseInner{}},
+		"escape-cli users deactivate":              {Output: userDeactivateOutput},
 		"escape-cli workflows list":                {Output: Page[v3.WorkflowSummarized]{}},
 		"escape-cli workflows get":                 {Output: v3.CreateWorkflow200Response{}},
 		"escape-cli workflows create":              {Input: v3.CreateWorkflowRequest{}, Output: v3.CreateWorkflow200Response{}},
@@ -126,7 +193,7 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli profiles create-graphql":       {Input: createGraphqlProfileInput{}, Output: v3.GetProfile200Response{}},
 		"escape-cli profiles create-ai-pentest":    {Input: createAiPentestProfileInput{}, Output: v3.GetProfile200Response{}},
 		"escape-cli profiles update":               {Input: v3.UpdateProfileRequest{}, Output: v3.GetProfile200Response{}},
-		"escape-cli profiles update-configuration": {Input: v3.UpdateProfileConfigurationRequest{}},
+		"escape-cli profiles update-configuration": {Input: v3.UpdateProfileConfigurationRequest{}, Output: map[string]interface{}{}},
 		"escape-cli profiles continuous-pentest create": {
 			Input:  v3.ContinuousPentestCreateInput{},
 			Output: v3.UpdateContinuousPentest200Response{},
@@ -141,7 +208,7 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		},
 		"escape-cli profiles continuous-pentest disable": {Output: v3.UpdateContinuousPentest200Response{}},
 		"escape-cli profiles problems":                   {Output: Page[v3.ProfileScanProblemsRow]{}},
-		"escape-cli profiles delete":                     {Output: v3.DeleteProfile200Response{}},
+		"escape-cli profiles delete":                     {Output: profileDeleteOutput},
 		"escape-cli issues list":                         {Output: Page[v3.IssueSummarized]{}},
 		"escape-cli issues get":                          {Output: v3.GetIssue200Response{}},
 		"escape-cli issues get-with-events":              {Output: IssueWithEvents{}},
@@ -181,28 +248,28 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli locations get":                       {Output: v3.GetLocation200Response{}},
 		"escape-cli locations create":                    {Input: v3.CreateLocationRequest{}, Output: v3.CreateLocation200Response{}},
 		"escape-cli locations update":                    {Input: v3.UpdateLocationRequest{}, Output: v3.GetLocation200Response{}},
-		"escape-cli locations delete":                    {Output: v3.DeleteLocation200Response{}},
+		"escape-cli locations delete":                    {Output: locationDeleteOutput},
 		"escape-cli assets list":                         {Output: Page[v3.AssetSummarized]{}},
 		"escape-cli assets get":                          {Output: v3.AssetDetailed{}},
 		"escape-cli assets list-activities":              {Output: []v3.ActivitySummarized{}},
 		"escape-cli assets create":                       {Input: mustInputSchema(assetCreateInputSchema), Output: v3.AssetDetailed{}},
 		"escape-cli assets update":                       {Output: v3.UpdateAsset200Response{}},
 		"escape-cli assets comment":                      {Output: v3.CreateAssetComment200Response{}},
-		"escape-cli assets delete":                       {Output: v3.DeleteProfile200Response{}}, // generated client reuses this {"message": string} schema
-		"escape-cli assets bulk-update":                  {Output: escape.BulkOperationResult{}},  // {"success": bool}
-		"escape-cli assets bulk-delete":                  {Output: escape.BulkOperationResult{}},  // same {"success": bool} body as assets bulk-update
+		"escape-cli assets delete":                       {Output: assetDeleteOutput},
+		"escape-cli assets bulk-update":                  {Output: assetBulkUpdateOutput},
+		"escape-cli assets bulk-delete":                  {Output: assetBulkDeleteOutput},
 		"escape-cli assets bulk-import":                  {Input: v3.BulkImportAssets{}, Output: v3.BulkImportAssets200Response{}},
 		"escape-cli asm trigger":                         {Output: v3.TriggerAsmScans200Response{}},
 		"escape-cli custom-rules list":                   {Output: []v3.CustomRuleSummarized{}},
 		"escape-cli custom-rules get":                    {Output: v3.CreateCustomRule200Response{}},
 		"escape-cli custom-rules create":                 {Input: v3.CreateCustomRuleRequest{}, Output: v3.CreateCustomRule200Response{}},
 		"escape-cli custom-rules update":                 {Input: v3.UpdateCustomRuleRequest{}, Output: v3.CreateCustomRule200Response{}},
-		"escape-cli custom-rules delete":                 {Output: v3.DeleteCustomRule200Response{}},
+		"escape-cli custom-rules delete":                 {Output: customRuleDeleteOutput},
 		"escape-cli tags list":                           {Output: []v3.TagDetail{}},
 		"escape-cli tags get":                            {Output: v3.TagDetail{}},
 		"escape-cli tags create":                         {Output: v3.CreateTag200Response{}},
 		"escape-cli tags update":                         {Output: v3.CreateTag200Response{}},
-		"escape-cli tags delete":                         {Output: v3.DeleteProfile200Response{}}, // same generated schema as assets delete
+		"escape-cli tags delete":                         {Output: tagDeleteOutput},
 		"escape-cli audit list":                          {Output: []v3.AuditLogSummarized{}},
 		"escape-cli stats":                               {Output: v3.GetStatistics200Response{}},
 		"escape-cli problems":                            {Output: problemsCommandOutput},
@@ -214,7 +281,7 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 		"escape-cli regression-tests get":                {Output: v3.CreateRegressionTest200Response{}},
 		"escape-cli regression-tests create":             {Input: v3.CreateRegressionTestInput{}, Output: v3.CreateRegressionTest200Response{}},
 		"escape-cli regression-tests update":             {Input: v3.UpdateRegressionTestRequest{}, Output: v3.CreateRegressionTest200Response{}},
-		"escape-cli regression-tests delete":             {Output: v3.DeleteProfile200Response{}},
+		"escape-cli regression-tests delete":             {Output: regressionTestDeleteOutput},
 		"escape-cli regression-tests run":                {Output: v3.CreateRegressionTest200Response{}},
 		"escape-cli regression-tests stop":               {Output: v3.CreateRegressionTest200Response{}},
 		"escape-cli regression-tests history":            {Output: Page[v3.RegressionTestRun]{}},

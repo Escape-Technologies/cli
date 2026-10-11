@@ -3,6 +3,7 @@ package escape
 import (
 	"context"
 	"fmt"
+	"net/url"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -86,13 +87,16 @@ func GetStatisticsIssues(ctx context.Context, source StatisticsSource, projectID
 // GetStatisticsTrends returns the time-bucketed trends of the organization:
 // open versus resolved issue counts, and the average API health score. start
 // and end are ISO 8601 bounding the half-open window; interval empty keeps
-// the API default bucket width. The projectIds filter is not exposed: the generated
-// client serializes its union type as a Go type name instead of the IDs.
-func GetStatisticsTrends(ctx context.Context, start, end, interval string) (*v3.GetStatisticsTrends200Response, error) {
+// the API default bucket width; an empty projectIDs keeps every project.
+func GetStatisticsTrends(ctx context.Context, start, end, interval string, projectIDs []string) (*v3.GetStatisticsTrends200Response, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
+
+	values := url.Values{}
+	addArrayQuery(values, "projectIds", projectIDs)
+	ctx = withArrayQuery(ctx, values)
 
 	req := client.StatisticsAPI.GetStatisticsTrends(ctx).Start(start).End(end)
 	if interval != "" {

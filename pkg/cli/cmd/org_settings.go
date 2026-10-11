@@ -60,7 +60,7 @@ severity, the read-only kill switches, and the scanner configuration.`,
 
 var orgSettingsUpdateCmd = &cobra.Command{
 	Use:   "update",
-	Short: "Update the organization settings from JSON stdin",
+	Short: "Update the organization settings from JSON stdin (Beta)",
 	Long: `Update the organization settings from a JSON body.
 
 Only the fields present in the body change; an empty aiSystemPrompt clears the

@@ -185,7 +185,7 @@ var projectsDeleteCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(out.Message{}) {
+		if out.Schema(projectDeleteOutput) {
 			return nil
 		}
 

@@ -65,7 +65,7 @@ var (
 var retestsCmd = &cobra.Command{
 	Use:     "retests",
 	Aliases: []string{"retest"},
-	Short:   "List, start, and inspect issue retests",
+	Short:   "List, start, and inspect issue retests (Beta)",
 	Long: `Manage Issue Retests - Verify a Fix
 
 Retests rerun selected issues on a DAST or AI pentest profile. The retest id
@@ -86,7 +86,7 @@ COMMON WORKFLOWS:
 var retestsListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
-	Short:   "List issue retests",
+	Short:   "List issue retests (Beta)",
 	Long: `List Issue Retests - Review Verification Runs
 
 List retests for the organization. Each id is the scan id of that retest.
@@ -168,7 +168,7 @@ FILTER OPTIONS:
 var retestsGetCmd = &cobra.Command{
 	Use:     "get retest-id",
 	Aliases: []string{"describe", "show"},
-	Short:   "Get a retest and its issue outcomes",
+	Short:   "Get a retest and its issue outcomes (Beta)",
 	Long: `Get Retest - Read Status and Per-Issue Outcomes
 
 Fetch a retest by scan id. By default every report page is loaded and the
@@ -220,7 +220,7 @@ OUTCOMES:
 
 var retestsStartCmd = &cobra.Command{
 	Use:   "start",
-	Short: "Start an issue retest",
+	Short: "Start an issue retest (Beta)",
 	Long: `Start Retest - Verify Issues After a Fix
 
 Start a retest on a DAST or AI pentest profile. Provide exactly one of:

@@ -160,6 +160,54 @@ func TestEmailsWaitMCPArgsAreBounded(t *testing.T) {
 	}
 }
 
+func TestAssetsCreateMCPTimeoutCoversSchemaBuild(t *testing.T) {
+	specs := mcpSpecsByName(t)
+	if specs["assets_create"].ExecutionTimeout != climcp.SchemaAssetCreateToolExecutionTimeout {
+		t.Fatalf("assets_create timeout = %s, want %s", specs["assets_create"].ExecutionTimeout, climcp.SchemaAssetCreateToolExecutionTimeout)
+	}
+
+	if specs["scans_reasoning"].ExecutionTimeout != climcp.ReasoningToolExecutionTimeout {
+		t.Fatalf("scans_reasoning timeout = %s, want %s", specs["scans_reasoning"].ExecutionTimeout, climcp.ReasoningToolExecutionTimeout)
+	}
+
+	if specs["scans_coverage"].ExecutionTimeout != climcp.ReasoningToolExecutionTimeout {
+		t.Fatalf("scans_coverage timeout = %s, want %s", specs["scans_coverage"].ExecutionTimeout, climcp.ReasoningToolExecutionTimeout)
+	}
+}
+
+func TestEmptyScanCollectionsBecomeEmptyMCPArrays(t *testing.T) {
+	specs := mcpSpecsByName(t)
+
+	got, ok := climcp.StructuredToolPayload(nil, specs["scans_list"].Tool.RawOutputSchema, true)
+	if !ok {
+		t.Fatal("scans_list null stdout produced no structured content")
+	}
+
+	items, isSlice := got.(map[string]any)["items"].([]any)
+	if !isSlice || len(items) != 0 {
+		t.Fatalf("scans_list null = %#v", got)
+	}
+
+	got, ok = climcp.StructuredToolPayload(
+		map[string]any{"scanId": "scan-1", "agents": nil},
+		specs["scans_agents"].Tool.RawOutputSchema,
+		false,
+	)
+	if !ok {
+		t.Fatal("scans_agents payload was dropped")
+	}
+
+	object, _ := got.(map[string]any)
+	agents, isSlice := object["agents"].([]any)
+	if !isSlice || len(agents) != 0 {
+		t.Fatalf("agents = %#v", object["agents"])
+	}
+
+	if object["scanId"] != "scan-1" {
+		t.Fatalf("scanId = %#v", object["scanId"])
+	}
+}
+
 func mcpSpecsByName(t *testing.T) map[string]climcp.ToolSpec {
 	t.Helper()
 	specs, err := buildMCPToolSpecs(rootCmd, CommandSchemaRegistry())

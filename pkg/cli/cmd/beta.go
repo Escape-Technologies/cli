@@ -68,6 +68,18 @@ var betaMCPTools = map[string]string{
 	"escape-cli knowledge-files list":   betaMCPToolNote,
 	"escape-cli knowledge-files upload": betaMCPToolNote,
 	"escape-cli knowledge-files delete": betaMCPToolNote,
+
+	// Issue retests, gated by ISSUE_RETEST.
+	"escape-cli retests list":  betaMCPToolNote,
+	"escape-cli retests get":   betaMCPToolNote,
+	"escape-cli retests start": betaMCPToolNote,
+
+	// AI pentest agents and their reasoning logs.
+	"escape-cli scans agents":    betaMCPToolNote,
+	"escape-cli scans reasoning": betaMCPToolNote,
+
+	// Organization settings writes. GET settings is not Beta.
+	"escape-cli org-settings update": betaMCPToolNote,
 }
 
 // betaMCPToolNoteFor returns the Beta sentence of a command path, or "" when the

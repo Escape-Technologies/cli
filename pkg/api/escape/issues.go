@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/url"
 	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
@@ -81,6 +82,8 @@ func ListIssues(ctx context.Context, next string, filters *ListIssuesFilters, so
 		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
 	}
 
+	ctx = withArrayQuery(ctx, issueListArrayQuery(filters))
+
 	req := client.IssuesAPI.ListIssues(ctx)
 	if next != "" {
 		req = req.Cursor(next)
@@ -118,9 +121,27 @@ func applyIssueListFilters(req v3.ApiListIssuesRequest, filters *ListIssuesFilte
 	}
 
 	req = applyIssueListIDFilters(req, filters)
-	req = applyIssueListValueFilters(req, filters)
 
-	return applyIssueListParameterFilters(req, filters)
+	return applyIssueListValueFilters(req, filters)
+}
+
+// issueListArrayQuery collects the filters the generated client wraps in a
+// union-typed query parameter and serializes as a Go type name. The values ride
+// on the request context and arrayQueryTransport writes them as repeated keys.
+func issueListArrayQuery(filters *ListIssuesFilters) url.Values {
+	if filters == nil {
+		return nil
+	}
+
+	values := url.Values{}
+	addArrayQuery(values, "names", filters.Names)
+	addArrayQuery(values, "projectIds", filters.ProjectIDs)
+	addArrayQuery(values, "targetIds", filters.TargetIDs)
+	addArrayQuery(values, "securityTestUids", filters.SecurityTestUids)
+	addArrayQuery(values, "blacklistedIds", filters.BlacklistedIDs)
+	addArrayQuery(values, "blacklistedNames", filters.BlacklistedNames)
+
+	return values
 }
 
 // applyIssueListIDFilters applies the filters sent as one comma-separated
@@ -208,36 +229,6 @@ func applyIssueListValueFilters(req v3.ApiListIssuesRequest, filters *ListIssues
 		req = req.Dnf(filters.Dnf)
 	}
 
-	return req
-}
-
-// applyIssueListParameterFilters applies the filters the generated client
-// wraps in a typed parameter struct.
-func applyIssueListParameterFilters(req v3.ApiListIssuesRequest, filters *ListIssuesFilters) v3.ApiListIssuesRequest {
-	if len(filters.Names) > 0 {
-		req = req.Names(v3.ListIssuesNamesParameter{ArrayOfString: &filters.Names})
-	}
-
-	if len(filters.ProjectIDs) > 0 {
-		req = req.ProjectIds(v3.ListScansProjectIdsParameter{ArrayOfString: &filters.ProjectIDs})
-	}
-
-	if len(filters.TargetIDs) > 0 {
-		req = req.TargetIds(v3.ListIssuesTargetIdsParameter{ArrayOfString: &filters.TargetIDs})
-	}
-
-	if len(filters.SecurityTestUids) > 0 {
-		req = req.SecurityTestUids(v3.ListIssuesSecurityTestUidsParameter{ArrayOfString: &filters.SecurityTestUids})
-	}
-
-	if len(filters.BlacklistedIDs) > 0 {
-		req = req.BlacklistedIds(v3.ListIssuesBlacklistedIdsParameter{ArrayOfString: &filters.BlacklistedIDs})
-	}
-
-	if len(filters.BlacklistedNames) > 0 {
-		req = req.BlacklistedNames(v3.ListIssuesBlacklistedNamesParameter{ArrayOfString: &filters.BlacklistedNames})
-	}
-
 	// The API only honours noTags=true; false is rejected, so the flag is
 	// only forwarded when set.
 	if filters.NoTags != nil && *filters.NoTags {
@@ -320,10 +311,11 @@ func GetIssueFunnel(ctx context.Context, projectIDs []string) ([]IssueFunnelStep
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
+	values := url.Values{}
+	addArrayQuery(values, "projectIds", projectIDs)
+	ctx = withArrayQuery(ctx, values)
+
 	req := client.IssuesAPI.GetIssueFunnel(ctx)
-	if len(projectIDs) > 0 {
-		req = req.ProjectIds(v3.GetIssueFunnelProjectIdsParameter{ArrayOfString: &projectIDs})
-	}
 
 	data, _, err := req.Execute()
 	if err != nil {
@@ -340,17 +332,14 @@ func GetIssueTrends(ctx context.Context, after, before, interval string, applica
 		return nil, fmt.Errorf("unable to init client: %w", err)
 	}
 
+	values := url.Values{}
+	addArrayQuery(values, "applicationIds", applicationIDs)
+	addArrayQuery(values, "projectIds", projectIDs)
+	ctx = withArrayQuery(ctx, values)
+
 	req := client.IssuesAPI.GetIssueTrends(ctx).After(after).Before(before)
 	if interval != "" {
 		req = req.Interval(interval)
-	}
-
-	if len(applicationIDs) > 0 {
-		req = req.ApplicationIds(v3.GetIssueTrendsApplicationIdsParameter{ArrayOfString: &applicationIDs})
-	}
-
-	if len(projectIDs) > 0 {
-		req = req.ProjectIds(v3.ListProfilesProjectIdsParameter{ArrayOfString: &projectIDs})
 	}
 
 	data, _, err := req.Execute()

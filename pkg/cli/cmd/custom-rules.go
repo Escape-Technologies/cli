@@ -158,7 +158,7 @@ var customRulesDeleteCmd = &cobra.Command{
 	},
 	Example: `escape-cli custom-rules delete 00000000-0000-0000-0000-000000000000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteCustomRule200Response{}) {
+		if out.Schema(customRuleDeleteOutput) {
 			return nil
 		}
 

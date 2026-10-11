@@ -192,7 +192,7 @@ the provided ones.`,
 			return nil
 		}
 
-		if out.Schema(v3.ReorderViews200Response{}) {
+		if out.Schema(out.Message{}) {
 			return nil
 		}
 
@@ -217,7 +217,7 @@ var viewsDeleteCmd = &cobra.Command{
 	Short:   "Delete a saved view",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteProfile200Response{}) {
+		if out.Schema(out.Message{}) {
 			return nil
 		}
 

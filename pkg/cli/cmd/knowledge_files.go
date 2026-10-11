@@ -22,14 +22,21 @@ import (
 // bound is generous but finite.
 const knowledgeFileUploadTimeout = 15 * time.Minute
 
+// knowledgeFileInlineContentMaxBytes bounds --content. MCP sends the text as
+// one CLI argument, and Linux rejects a single argument longer than
+// MAX_ARG_STRLEN (128 KiB). 64 KiB stays under that. Larger documents use
+// --file, which is not an MCP input.
+const knowledgeFileInlineContentMaxBytes = 1 << 16 //nolint:mnd
+
 var (
 	knowledgeFilesSortType      string
 	knowledgeFilesSortDirection string
 	knowledgeFileListPage       pageFlags
 
-	knowledgeFileUploadName string
-	knowledgeFileUploadFile string
-	knowledgeFileUploadKind string
+	knowledgeFileUploadName    string
+	knowledgeFileUploadFile    string
+	knowledgeFileUploadContent string
+	knowledgeFileUploadKind    string
 )
 
 var knowledgeFilesCmd = &cobra.Command{
@@ -104,16 +111,27 @@ File names must be unique within the organization: names that sanitize to the
 same storage key share a single object, so uploading a new file overwrites
 the previous one.`,
 	Example: `  escape-cli knowledge-files upload --file architecture.md
-  cat spec.pdf | escape-cli knowledge-files upload --name spec.pdf`,
+  cat spec.pdf | escape-cli knowledge-files upload --name spec.pdf
+  escape-cli knowledge-files upload --name notes.md --content '# Notes'`,
 	Args: cobra.NoArgs,
 	RunE: func(cmd *cobra.Command, _ []string) error {
 		if out.Schema(v3.UploadKnowledgeFile200Response{}) {
 			return nil
 		}
 
+		if knowledgeFileUploadContent != "" && knowledgeFileUploadFile != "" {
+			return errors.New("--content and --file cannot both be set")
+		}
+
 		var data []byte
 		var err error
-		if knowledgeFileUploadFile != "" {
+		if knowledgeFileUploadContent != "" {
+			if err := validateKnowledgeFileInlineContent(); err != nil {
+				return err
+			}
+
+			data = []byte(knowledgeFileUploadContent)
+		} else if knowledgeFileUploadFile != "" {
 			data, err = os.ReadFile(knowledgeFileUploadFile)
 			if err != nil {
 				return fmt.Errorf("unable to read %s: %w", knowledgeFileUploadFile, err)
@@ -126,7 +144,7 @@ the previous one.`,
 		}
 
 		if len(data) == 0 {
-			return errors.New("no file content provided: pass --file or pipe the file via stdin")
+			return errors.New("no file content provided: pass --file, --content, or pipe the file via stdin")
 		}
 
 		name := knowledgeFileUploadName
@@ -181,7 +199,7 @@ var knowledgeFilesDeleteCmd = &cobra.Command{
 	Short:   "Delete a knowledge file (Beta)",
 	Args:    cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema(v3.DeleteProfile200Response{}) {
+		if out.Schema(out.Message{}) {
 			return nil
 		}
 
@@ -200,6 +218,42 @@ var knowledgeFilesDeleteCmd = &cobra.Command{
 	},
 }
 
+// validateKnowledgeFileInlineContent rejects --content that MCP could not
+// upload: a missing name, a payload past the argument-size bound, or a
+// binary kind such as PDF. The kind is the one the upload will register.
+func validateKnowledgeFileInlineContent() error {
+	if knowledgeFileUploadName == "" {
+		return errors.New("--name is required with --content")
+	}
+
+	if len(knowledgeFileUploadContent) > knowledgeFileInlineContentMaxBytes {
+		return fmt.Errorf("--content exceeds %d bytes", knowledgeFileInlineContentMaxBytes)
+	}
+
+	kind := knowledgeFileUploadKind
+	if kind == "" {
+		kind = escape.KnowledgeFileKind(knowledgeFileUploadName)
+	}
+
+	if !knowledgeFileKindAllowsInlineContent(kind) {
+		return fmt.Errorf("--content does not support %s files; pass --file for binary uploads", kind)
+	}
+
+	return nil
+}
+
+// knowledgeFileKindAllowsInlineContent is the text kinds --content can carry.
+// Binary kinds (PDF, Office, archives) and the unknown FILE kind are rejected
+// so a string flag is not asked to hold bytes it would corrupt.
+func knowledgeFileKindAllowsInlineContent(kind string) bool {
+	switch kind {
+	case "CSV", "GRAPHQL", "HTML", "JSON", "MD", "TXT", "XML":
+		return true
+	default:
+		return false
+	}
+}
+
 func init() {
 	knowledgeFilesCmd.AddCommand(knowledgeFilesListCmd, knowledgeFilesUploadCmd, knowledgeFilesDeleteCmd)
 
@@ -208,8 +262,17 @@ func init() {
 	knowledgeFilesListCmd.Flags().StringVar(&knowledgeFilesSortDirection, "sort-direction", "", "sort direction: asc, desc")
 
 	knowledgeFilesUploadCmd.Flags().StringVar(&knowledgeFileUploadFile, "file", "", "path to the file to upload (reads stdin when omitted)")
+	knowledgeFilesUploadCmd.Flags().StringVar(&knowledgeFileUploadContent, "content", "", "inline text content (requires --name; mutually exclusive with --file; text kinds only)")
 	knowledgeFilesUploadCmd.Flags().StringVar(&knowledgeFileUploadName, "name", "", "stored file name including its extension (defaults to the base name of --file)")
 	knowledgeFilesUploadCmd.Flags().StringVar(&knowledgeFileUploadKind, "kind", "", "file kind (derived from the extension when omitted)")
+	knowledgeFilesUploadCmd.MarkFlagsMutuallyExclusive("file", "content")
+
+	// name and content stay optional on the CLI: --file supplies both the
+	// bytes and, when --name is omitted, the stored name. MCP has no stdin
+	// and must not take a server-local path, so the tool call has to carry
+	// the text and the name.
+	markMCPRequired(knowledgeFilesUploadCmd.Flags(), "name")
+	markMCPRequired(knowledgeFilesUploadCmd.Flags(), "content")
 	bindDestructiveGate(knowledgeFilesDeleteCmd, true)
 
 	rootCmd.AddCommand(knowledgeFilesCmd)

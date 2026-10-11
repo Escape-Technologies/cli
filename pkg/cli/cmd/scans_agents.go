@@ -25,7 +25,7 @@ type ScanAgents struct {
 var scansAgentsCmd = &cobra.Command{
 	Use:     "agents scan-id",
 	Aliases: []string{"agent-list"},
-	Short:   "List AI pentest agents for a scan",
+	Short:   "List AI pentest agents for a scan (Beta)",
 	Long: `List AI Pentest Agents
 
 Returns the agents that ran during an AI pentest scan. Use --search to filter by
