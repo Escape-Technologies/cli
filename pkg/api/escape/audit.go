@@ -14,6 +14,7 @@ type ListAuditLogsFilters struct {
 	ActionType    string
 	Actor         string
 	Search        string
+	Target        string
 	SortType      string
 	SortDirection string
 	Size          int
@@ -60,6 +61,10 @@ func ListAuditLogs(ctx context.Context, next string, filters *ListAuditLogsFilte
 
 		if filters.Search != "" {
 			req = req.Search(filters.Search)
+		}
+
+		if filters.Target != "" {
+			req = req.Target(filters.Target)
 		}
 
 		if filters.Size > 0 {

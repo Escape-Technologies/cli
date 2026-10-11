@@ -27,7 +27,7 @@ func TestListUsersSendsTheSearchToTheAPI(t *testing.T) {
 	t.Setenv("ESCAPE_API_URL", server.URL)
 	t.Setenv("ESCAPE_API_KEY", "00000000-0000-0000-0000-000000000000")
 
-	users, err := ListUsers(context.Background(), "alice")
+	users, err := ListUsers(context.Background(), "alice", "")
 	if err != nil {
 		t.Fatalf("list users: %v", err)
 	}
@@ -54,7 +54,7 @@ func TestListUsersWithoutSearchSendsNoParameter(t *testing.T) {
 	t.Setenv("ESCAPE_API_URL", server.URL)
 	t.Setenv("ESCAPE_API_KEY", "00000000-0000-0000-0000-000000000000")
 
-	if _, err := ListUsers(context.Background(), ""); err != nil {
+	if _, err := ListUsers(context.Background(), "", ""); err != nil {
 		t.Fatalf("list users: %v", err)
 	}
 

@@ -139,7 +139,7 @@ func TestArrayFiltersAreRepeatedQueryKeys(t *testing.T) {
 			name: "scans projectIds",
 			key:  "projectIds",
 			call: func(values []string) error {
-				_, _, err := ListScans(context.Background(), "", &ListScansFilters{ProjectIDs: &values})
+				_, _, _, err := ListScans(context.Background(), "", &ListScansFilters{ProjectIDs: &values}, 1)
 				return err
 			},
 		},

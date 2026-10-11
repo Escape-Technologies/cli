@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/Escape-Technologies/cli/pkg/api/escape"
@@ -21,6 +22,19 @@ var (
 	integrationsLocationIDs []string
 	integrationListPage     pageFlags
 	integrationRunsPage     pageFlags
+
+	integrationsReposIntegrationID string
+	integrationsReposSearch        string
+	integrationsReposFullNames     []string
+	integrationReposPage           pageFlags
+
+	integrationsVaultsKind   string
+	integrationsVaultsSearch string
+
+	integrationsJiraProjectsSearch      string
+	integrationsJiraIssueTypesProjectID string
+	integrationsAzureAreasProject       string
+	integrationsAzureAreasWorkItemType  string
 )
 
 var integrationsCmd = &cobra.Command{
@@ -306,6 +320,218 @@ platform executed, with their status, timing and progress.`,
 	},
 }
 
+var integrationsRepositoriesCmd = &cobra.Command{
+	Use:     "repositories",
+	Aliases: []string{"repos"},
+	Short:   "List the repositories the GitHub integrations can see",
+	Long: `List GitHub Repositories - Pick a Target for Code Scanning
+
+List the repositories the organization's GitHub credentials can reach, the
+coordinates ` + "`escape-cli assets create --asset-type GITHUB_REPOSITORY`" + `
+needs. Without --integration-id the listing spans every GitHub integration;
+with it, only that integration's repositories.`,
+	Example: `  # Every repository across the GitHub integrations
+  escape-cli integrations repositories
+
+  # One integration's repositories, matching a name
+  escape-cli integrations repositories --integration-id <integration-id> --search api`,
+	Args: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema(Page[escape.GithubRepository]{}) {
+			return nil
+		}
+
+		filters := &escape.ListGithubRepositoriesFilters{
+			Search:    integrationsReposSearch,
+			FullNames: integrationsReposFullNames,
+		}
+
+		if err := runPagedList(cmd, integrationReposPage, func(ctx context.Context, cursor string, size int) ([]escape.GithubRepository, *string, int, error) {
+			return escape.ListGithubRepositories(ctx, integrationsReposIntegrationID, cursor, size, filters)
+		}, integrationsRepositoriesTable); err != nil {
+			return fmt.Errorf("failed to list GitHub repositories: %w", err)
+		}
+
+		return nil
+	},
+}
+
+var integrationsVaultsCmd = &cobra.Command{
+	Use:   "vaults integration-id",
+	Short: "List the vaults an integration sees at its provider (Beta)",
+	Long: `List Provider Vaults - Discover What Can Be Linked
+
+List the vaults an integration can see at its provider, before any of them is
+linked to the organization. Each row carries the externalId
+'escape-cli vault link' needs. Only names are returned: the values never leave
+the provider.`,
+	Example: `  # What the Azure integration can see
+  escape-cli integrations vaults <integration-id> --kind azure-key-vault
+
+  # Narrow the discovery by name
+  escape-cli integrations vaults <integration-id> --kind aws --search prod`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]escape.RemoteVault{}) {
+			return nil
+		}
+
+		if integrationsVaultsKind == "" {
+			return errors.New("--kind is required")
+		}
+
+		vaults, err := escape.ListIntegrationVaults(cmd.Context(), integrationsVaultsKind, args[0], integrationsVaultsSearch)
+		if err != nil {
+			return fmt.Errorf("failed to list provider vaults: %w", err)
+		}
+
+		out.Table(vaults, func() []string {
+			rows := []string{"NAME\tEXTERNAL ID"}
+			for _, vault := range vaults {
+				rows = append(rows, fmt.Sprintf("%s\t%s", vault.Name, vault.ExternalID))
+			}
+
+			return rows
+		})
+
+		return nil
+	},
+}
+
+var integrationsJiraProjectsCmd = &cobra.Command{
+	Use:   "jira-projects integration-id",
+	Short: "List Jira projects an integration can file tickets against (Beta)",
+	Long: `List Jira Projects - Ticket Workflow Lookup
+
+List the Jira projects an integration can see, so a workflow can target one of them.`,
+	Example: `  escape-cli integrations jira-projects <integration-id>
+  escape-cli integrations jira-projects <integration-id> --search core`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]escape.JiraProject{}) {
+			return nil
+		}
+
+		projects, err := escape.ListJiraProjects(cmd.Context(), args[0], integrationsJiraProjectsSearch)
+		if err != nil {
+			return fmt.Errorf("failed to list Jira projects: %w", err)
+		}
+
+		out.Table(projects, func() []string {
+			rows := []string{"ID\tNAME\tPROJECT TYPE\tENTITY ID"}
+			for _, project := range projects {
+				entityID := ""
+				if project.EntityID != nil {
+					entityID = *project.EntityID
+				}
+
+				rows = append(rows, fmt.Sprintf("%s\t%s\t%s\t%s", project.ID, project.Name, project.ProjectTypeKey, entityID))
+			}
+
+			return rows
+		})
+
+		return nil
+	},
+}
+
+var integrationsJiraIssueTypesCmd = &cobra.Command{
+	Use:   "jira-issue-types integration-id",
+	Short: "List Jira issue types for a project (Beta)",
+	Long: `List Jira Issue Types - Ticket Workflow Lookup
+
+List the issue types of one Jira project. --project-id is the Jira project id.`,
+	Example: `  escape-cli integrations jira-issue-types <integration-id> --project-id CT`,
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]escape.JiraIssueType{}) {
+			return nil
+		}
+
+		if integrationsJiraIssueTypesProjectID == "" {
+			return errors.New("--project-id is required")
+		}
+
+		issueTypes, err := escape.ListJiraIssueTypes(cmd.Context(), args[0], integrationsJiraIssueTypesProjectID)
+		if err != nil {
+			return fmt.Errorf("failed to list Jira issue types: %w", err)
+		}
+
+		out.Table(issueTypes, func() []string {
+			rows := []string{"ID\tNAME\tSUBTASK\tDESCRIPTION"}
+			for _, issueType := range issueTypes {
+				subtask := ""
+				if issueType.Subtask != nil {
+					subtask = strconv.FormatBool(*issueType.Subtask)
+				}
+
+				description := ""
+				if issueType.Description != nil {
+					description = *issueType.Description
+				}
+
+				rows = append(rows, fmt.Sprintf("%s\t%s\t%s\t%s", issueType.ID, issueType.Name, subtask, description))
+			}
+
+			return rows
+		})
+
+		return nil
+	},
+}
+
+var integrationsAzureAreasCmd = &cobra.Command{
+	Use:   "azure-areas integration-id",
+	Short: "List Azure Boards area paths (Beta)",
+	Long: `List Azure Boards Areas - Ticket Workflow Lookup
+
+List the area paths of one Azure Boards project and work item type.`,
+	Example: `  escape-cli integrations azure-areas <integration-id> --project MyProject --work-item-type Bug`,
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema([]string{}) {
+			return nil
+		}
+
+		if integrationsAzureAreasProject == "" {
+			return errors.New("--project is required")
+		}
+
+		if integrationsAzureAreasWorkItemType == "" {
+			return errors.New("--work-item-type is required")
+		}
+
+		areas, err := escape.ListAzureBoardsAreas(cmd.Context(), args[0], integrationsAzureAreasProject, integrationsAzureAreasWorkItemType)
+		if err != nil {
+			return fmt.Errorf("failed to list Azure Boards areas: %w", err)
+		}
+
+		out.Table(areas, func() []string {
+			rows := []string{"AREA"}
+			rows = append(rows, areas...)
+
+			return rows
+		})
+
+		return nil
+	},
+}
+
+func integrationsRepositoriesTable(repositories []escape.GithubRepository) []string {
+	rows := []string{"FULL NAME\tDEFAULT BRANCH\tPRIVATE\tARCHIVED\tCLONE URL"}
+	for _, repository := range repositories {
+		rows = append(rows, fmt.Sprintf("%s\t%s\t%t\t%t\t%s",
+			repository.FullName,
+			repository.DefaultBranch,
+			repository.Private,
+			repository.Archived,
+			repository.CloneURL,
+		))
+	}
+
+	return rows
+}
+
 // percentScale converts a 0..1 ratio to a percentage.
 const percentScale = 100
 
@@ -400,7 +626,7 @@ func integrationInputSchema(build func() (*clischema.JSONSchema, error)) (bool, 
 }
 
 func init() {
-	integrationsCmd.AddCommand(integrationsListCmd, integrationsGetCmd, integrationsCreateCmd, integrationsUpdateCmd, integrationsDeleteCmd, integrationsTestCmd, integrationsSyncCmd, integrationsRunsCmd)
+	integrationsCmd.AddCommand(integrationsListCmd, integrationsGetCmd, integrationsCreateCmd, integrationsUpdateCmd, integrationsDeleteCmd, integrationsTestCmd, integrationsSyncCmd, integrationsRunsCmd, integrationsRepositoriesCmd, integrationsVaultsCmd, integrationsJiraProjectsCmd, integrationsJiraIssueTypesCmd, integrationsAzureAreasCmd)
 	kinds := integrationKinds()
 	kindUsage := "integration kind: " + strings.Join(kinds, ", ")
 	for _, subcommand := range []*cobra.Command{
@@ -418,6 +644,29 @@ func init() {
 			panic(err)
 		}
 	}
+
+	// Provider vault discovery is GitHub-independent but still kind-addressed:
+	// the --kind value is the URL slug the vaults route uses.
+	integrationsVaultsCmd.Flags().StringVar(&integrationsVaultsKind, "kind", "", kindUsage)
+	if err := integrationsVaultsCmd.Flags().SetAnnotation("kind", flagEnumAnnotation, kinds); err != nil {
+		panic(err)
+	}
+
+	markMCPRequired(integrationsVaultsCmd.Flags(), "kind")
+	integrationsVaultsCmd.Flags().StringVar(&integrationsVaultsSearch, "search", "", "search term to filter vaults by name")
+
+	integrationsJiraProjectsCmd.Flags().StringVar(&integrationsJiraProjectsSearch, "search", "", "search term to filter Jira projects by name")
+	integrationsJiraIssueTypesCmd.Flags().StringVar(&integrationsJiraIssueTypesProjectID, "project-id", "", "Jira project id")
+	markMCPRequired(integrationsJiraIssueTypesCmd.Flags(), "project-id")
+	integrationsAzureAreasCmd.Flags().StringVar(&integrationsAzureAreasProject, "project", "", "Azure Boards project")
+	markMCPRequired(integrationsAzureAreasCmd.Flags(), "project")
+	integrationsAzureAreasCmd.Flags().StringVar(&integrationsAzureAreasWorkItemType, "work-item-type", "", "Azure Boards work item type")
+	markMCPRequired(integrationsAzureAreasCmd.Flags(), "work-item-type")
+
+	integrationsRepositoriesCmd.Flags().StringVar(&integrationsReposIntegrationID, "integration-id", "", "list only this integration's repositories (default: every GitHub integration)")
+	integrationsRepositoriesCmd.Flags().StringVar(&integrationsReposSearch, "search", "", "search term to filter repositories by full name")
+	integrationsRepositoriesCmd.Flags().StringSliceVar(&integrationsReposFullNames, "full-name", []string{}, "filter by repository full names (owner/name)")
+	integrationReposPage.bind(integrationsRepositoriesCmd)
 
 	integrationsListCmd.Flags().StringVar(&integrationsSearch, "search", "", "search integrations by name")
 	integrationsListCmd.Flags().StringSliceVar(&integrationsProjectIDs, "project-id", []string{}, "filter by project ID")

@@ -399,8 +399,8 @@ var schemaModeUtilityCommands = []string{
 	schemaModeMCPServe,
 }
 
-// schemaModeOriginalCommands are the commands the first schema-mode test
-// named. They stay under the strict check. projects delete, roles delete, and
+// schemaModeOriginalCommands are the commands the schema-mode tests named.
+// They stay under the strict check. projects delete, roles delete, and
 // upload schema are not MCP tools, so the registry check alone would drop them.
 var schemaModeOriginalCommands = []string{
 	"escape-cli projects delete",
@@ -412,6 +412,22 @@ var schemaModeOriginalCommands = []string{
 	"escape-cli validations start",
 	"escape-cli ai-chats create",
 	"escape-cli ai-chats message",
+	"escape-cli issues bulk-workflow",
+	"escape-cli profiles bulk-update",
+	"escape-cli security-tests update",
+	"escape-cli security-tests bulk-update",
+	"escape-cli compliance enable",
+	"escape-cli jobs rename",
+	"escape-cli jobs send-artefacts",
+	"escape-cli org-settings scanner-configuration create",
+	"escape-cli integrations repositories",
+	"escape-cli integrations vaults",
+	"escape-cli integrations jira-projects",
+	"escape-cli integrations jira-issue-types",
+	"escape-cli integrations azure-areas",
+	"escape-cli scans scenarios",
+	"escape-cli issues export",
+	"escape-cli assets export",
 }
 
 var (
@@ -836,6 +852,7 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli scans issues",
 		"escape-cli scans targets",
 		"escape-cli scans problems",
+		"escape-cli scans scenarios",
 		"escape-cli events list",
 		"escape-cli emails list",
 		"escape-cli locations list",
@@ -854,6 +871,7 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli views list",
 		"escape-cli views issues",
 		"escape-cli vault variables list",
+		"escape-cli integrations repositories",
 		"escape-cli vault list",
 		"escape-cli vault entries",
 		"escape-cli knowledge-files list",
@@ -889,6 +907,9 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli regression-tests update",
 		"escape-cli regression-tests answer",
 		"escape-cli validations start",
+		"escape-cli issues bulk-workflow",
+		"escape-cli profiles bulk-update",
+		"escape-cli org-settings scanner-configuration create",
 	)
 	note("a dedicated contract test already decodes this command, or it needs more than one response, a file, or a summary it builds itself",
 		"escape-cli ai-chats create",
@@ -935,6 +956,8 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli authentications get",
 		"escape-cli jobs trigger-export",
 		"escape-cli jobs get",
+		"escape-cli issues export",
+		"escape-cli assets export",
 		"escape-cli locations get",
 		"escape-cli locations create",
 		"escape-cli locations update",
@@ -952,6 +975,15 @@ func outputSchemaNotExercised() map[string]string {
 		"escape-cli regression-tests delete",
 		"escape-cli regression-tests run",
 		"escape-cli regression-tests stop",
+		"escape-cli security-tests update",
+		"escape-cli security-tests bulk-update",
+		"escape-cli compliance enable",
+		"escape-cli jobs rename",
+		"escape-cli jobs send-artefacts",
+		"escape-cli integrations vaults",
+		"escape-cli integrations jira-projects",
+		"escape-cli integrations jira-issue-types",
+		"escape-cli integrations azure-areas",
 	)
 
 	return reasons

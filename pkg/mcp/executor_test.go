@@ -137,7 +137,7 @@ func TestFinalizeCapturedOutputReplacesTruncatedStdout(t *testing.T) {
 		Stdout:          strings.TrimSpace(buffer.Text()),
 		StdoutTruncated: buffer.Truncated(),
 	}
-	finalizeCapturedOutput(result, buffer)
+	finalizeCapturedOutput(result, buffer, nil)
 
 	if !result.StdoutTruncated {
 		t.Fatal("expected truncated result")
@@ -175,6 +175,30 @@ func TestFinalizeCapturedOutputReplacesTruncatedStdout(t *testing.T) {
 	}
 }
 
+func TestExportTruncationNamesWhere(t *testing.T) {
+	t.Parallel()
+
+	for _, command := range [][]string{{"issues", "export"}, {"assets", "export"}} {
+		buffer := newCappedBuffer(8)
+		if _, err := buffer.Write([]byte(`{"content":"id,name"}`)); err != nil {
+			t.Fatalf("write: %v", err)
+		}
+
+		result := &ExecutionResult{
+			Stdout:          strings.TrimSpace(buffer.Text()),
+			StdoutTruncated: buffer.Truncated(),
+		}
+		finalizeCapturedOutput(result, buffer, command)
+		if !strings.Contains(result.Stdout, "8 bytes") || !strings.Contains(result.Stdout, "where") {
+			t.Fatalf("%v message = %q", command, result.Stdout)
+		}
+
+		if strings.Contains(result.Stdout, "cursor") || strings.Contains(result.Stdout, "--size") {
+			t.Fatalf("%v truncation must name where, got %q", command, result.Stdout)
+		}
+	}
+}
+
 func TestFinalizeCapturedOutputParsesCompleteJSON(t *testing.T) {
 	t.Parallel()
 
@@ -184,7 +208,7 @@ func TestFinalizeCapturedOutputParsesCompleteJSON(t *testing.T) {
 	}
 
 	result := &ExecutionResult{Stdout: strings.TrimSpace(buffer.Text())}
-	finalizeCapturedOutput(result, buffer)
+	finalizeCapturedOutput(result, buffer, nil)
 
 	if result.StdoutTruncated {
 		t.Fatal("complete JSON must not be marked truncated")
@@ -371,6 +395,37 @@ func TestExecuteCLICommandSuccessIsNotADeadline(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatalf("expected success, got %v", err)
+	}
+}
+
+func TestExecuteCLICommandKeepsEmptyArguments(t *testing.T) {
+	var got []string
+	original := commandContext
+	commandContext = func(ctx context.Context, _ string, args ...string) *exec.Cmd {
+		got = append([]string(nil), args...)
+
+		return exec.CommandContext(ctx, "true")
+	}
+	t.Cleanup(func() { commandContext = original })
+
+	_, err := ExecuteCLICommand(context.Background(), ExecutionOptions{
+		Command:        []string{"scans", "targets", "scan-1", "--cursor", ""},
+		DisplayCommand: []string{"scans", "targets"},
+		Timeout:        time.Second,
+	})
+	if err != nil {
+		t.Fatalf("execute: %v", err)
+	}
+
+	want := []string{"scans", "targets", "scan-1", "--cursor", "", "--output", "json"}
+	if len(got) != len(want) {
+		t.Fatalf("args = %#v", got)
+	}
+
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("args = %#v, want %#v", got, want)
+		}
 	}
 }
 

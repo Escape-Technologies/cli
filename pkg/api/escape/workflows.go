@@ -15,6 +15,7 @@ type ListWorkflowsFilters struct {
 	ProjectIDs     []string
 	IntegrationIDs []string
 	WorkflowIDs    []string
+	Dnf            string
 }
 
 // ListWorkflows lists one page of workflows.
@@ -53,6 +54,10 @@ func ListWorkflows(ctx context.Context, next string, filters *ListWorkflowsFilte
 
 		if len(filters.WorkflowIDs) > 0 {
 			req = req.WorkflowIds(filters.WorkflowIDs)
+		}
+
+		if filters.Dnf != "" {
+			req = req.Dnf(filters.Dnf)
 		}
 	}
 

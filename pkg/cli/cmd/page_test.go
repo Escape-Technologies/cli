@@ -274,7 +274,14 @@ func TestListCommandsBindPageFlags(t *testing.T) {
 		problemsCmd,
 		profileProblemsCmd,
 		scansProblemsCmd,
+		scansScenariosCmd,
 		retestsListCmd,
+		// PRD-2313: scans list and scans agents enter page mode when --size or
+		// --cursor is set. scans targets still binds both flags, but --size
+		// without --cursor stays a total cap; page mode starts at --cursor.
+		scansListCmd,
+		scansAgentsCmd,
+		scanTargetsCmd,
 	}
 	for _, command := range commands {
 		if command.Flags().Lookup("size") == nil || command.Flags().Lookup("cursor") == nil {
@@ -288,10 +295,6 @@ func TestListCommandsBindPageFlags(t *testing.T) {
 
 	if pagedListCommand(retestsGetCmd) {
 		t.Fatal("retests get has --size and --cursor but is not a paged list")
-	}
-
-	if scanTargetsCmd.Flags().Lookup("cursor") != nil {
-		t.Fatal("scans targets --size is a result cap, not a page cursor")
 	}
 }
 

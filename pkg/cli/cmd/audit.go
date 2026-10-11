@@ -20,6 +20,7 @@ var (
 	auditCmdEventType  = ""
 	auditCmdActor      = ""
 	auditCmdSearch     = ""
+	auditCmdTarget     = ""
 	auditCmdLimit      int
 	auditSortType      string
 	auditSortDirection string
@@ -100,6 +101,7 @@ FILTER OPTIONS:
 			ActionType:    auditCmdEventType,
 			Actor:         auditCmdActor,
 			Search:        auditCmdSearch,
+			Target:        auditCmdTarget,
 			SortType:      auditSortType,
 			SortDirection: auditSortDirection,
 			Size:          pageSize,
@@ -167,6 +169,7 @@ func init() {
 	auditListCmd.Flags().StringVarP(&auditCmdEventType, "event-type", "e", "", "Filter by event type: (scan.scheduled, scan.started, scan.finished, user.authenticated)")
 	auditListCmd.Flags().StringVarP(&auditCmdActor, "actor", "a", "", "Filter by actor")
 	auditListCmd.Flags().StringVarP(&auditCmdSearch, "search", "s", "", "Search term to filter audit logs by")
+	auditListCmd.Flags().StringVar(&auditCmdTarget, "target", "", "filter by target")
 	auditListCmd.Flags().StringVar(&auditSortType, "sort-by", "", "sort field")
 	auditListCmd.Flags().StringVar(&auditSortDirection, "sort-direction", "", "sort direction: asc, desc")
 	auditListCmd.Flags().IntVar(&auditCmdLimit, "limit", 0, "maximum number of audit logs to return (0 = no limit)")

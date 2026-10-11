@@ -268,6 +268,13 @@ func TestMCPListToolsDefaultToOnePage(t *testing.T) {
 		"ai_chats_list",
 		"ai_chats_messages",
 		"jobs_list",
+		"integrations_repositories",
+		"scans_scenarios",
+		// PRD-2313: MCP asks for one page. scans targets --size used to be a
+		// total cap, so the tool had no default page size.
+		"scans_list",
+		"scans_agents",
+		"scans_targets",
 	} {
 		spec, ok := byName[name]
 		if !ok {
@@ -296,7 +303,7 @@ func TestMCPListToolsDefaultToOnePage(t *testing.T) {
 		}
 	}
 
-	for _, name := range []string{"issues_get", "scans_targets", "retests_get"} {
+	for _, name := range []string{"issues_get", "retests_get"} {
 		spec, ok := byName[name]
 		if !ok {
 			t.Fatalf("missing tool %s", name)
@@ -330,6 +337,7 @@ func TestPagedCommandsDocumentPageShape(t *testing.T) {
 		"escape-cli workflows list",
 		"escape-cli scans issues",
 		"escape-cli scans problems",
+		"escape-cli scans scenarios",
 		"escape-cli problems",
 		"escape-cli retests list",
 		"escape-cli security-tests list",
@@ -337,6 +345,10 @@ func TestPagedCommandsDocumentPageShape(t *testing.T) {
 		"escape-cli ai-chats list",
 		"escape-cli ai-chats messages",
 		"escape-cli jobs list",
+		"escape-cli integrations repositories",
+		"escape-cli scans list",
+		"escape-cli scans agents",
+		"escape-cli scans targets",
 	} {
 		schemas, ok := registry[path]
 		if !ok {
@@ -403,14 +415,16 @@ func TestCommandSchemaRegistryIncludesNonDestructiveWriteTools(t *testing.T) {
 	// registry entries must declare the response type they print as Output and
 	// no Input schema.
 	wantOutputs := map[string]any{
-		"escape-cli tags create":    v3.CreateTag200Response{},
-		"escape-cli tags update":    v3.CreateTag200Response{},
-		"escape-cli assets update":  v3.UpdateAsset200Response{},
-		"escape-cli assets comment": v3.CreateAssetComment200Response{},
-		"escape-cli issues notify":  v3.NotifyIssueOwners200Response{},
-		"escape-cli asm trigger":    v3.TriggerAsmScans200Response{},
-		"escape-cli roles bind":     []v3.CreateRoleBindings200ResponseInner{},
-		"escape-cli roles unbind":   v3.DeleteCustomRule200Response{},
+		"escape-cli tags create":         v3.CreateTag200Response{},
+		"escape-cli tags update":         v3.CreateTag200Response{},
+		"escape-cli assets update":       v3.UpdateAsset200Response{},
+		"escape-cli assets comment":      v3.CreateAssetComment200Response{},
+		"escape-cli issues notify":       v3.NotifyIssueOwners200Response{},
+		"escape-cli asm trigger":         v3.TriggerAsmScans200Response{},
+		"escape-cli roles bind":          []v3.CreateRoleBindings200ResponseInner{},
+		"escape-cli roles unbind":        v3.DeleteCustomRule200Response{},
+		"escape-cli jobs rename":         v3.RenameExport200Response{},
+		"escape-cli jobs send-artefacts": v3.SendJobArtefacts200Response{},
 	}
 
 	for path, wantOutput := range wantOutputs {
@@ -449,6 +463,8 @@ func TestBuildMCPToolSpecsIncludesNonDestructiveWriteTools(t *testing.T) {
 		{tool: "asm_trigger", path: "escape-cli asm trigger", required: []string{"asset_id"}, properties: []string{"asset_id"}},
 		{tool: "roles_bind", path: "escape-cli roles bind", properties: []string{"role_id", "user_id"}},
 		{tool: "roles_unbind", path: "escape-cli roles unbind", required: []string{"binding_id", "confirm"}, properties: []string{"binding_id", "confirm"}},
+		{tool: "jobs_rename", path: "escape-cli jobs rename", required: []string{"job_id", "name"}, properties: []string{"job_id", "name"}},
+		{tool: "jobs_send_artefacts", path: "escape-cli jobs send-artefacts", required: []string{"job_id", "email"}, properties: []string{"job_id", "email", "subject"}},
 	}
 
 	for _, tt := range tests {

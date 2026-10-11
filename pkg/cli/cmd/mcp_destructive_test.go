@@ -10,6 +10,7 @@ import (
 	"github.com/Escape-Technologies/cli/pkg/cli/out"
 	clischema "github.com/Escape-Technologies/cli/pkg/cli/schema"
 	climcp "github.com/Escape-Technologies/cli/pkg/mcp"
+	"github.com/spf13/cobra"
 )
 
 func TestCommandSchemaRegistryIncludesDestructiveCommands(t *testing.T) {
@@ -33,6 +34,14 @@ func TestCommandSchemaRegistryIncludesDestructiveCommands(t *testing.T) {
 		"escape-cli issues bulk-update":      v3.BulkUpdateIssues200Response{},
 		"escape-cli regression-tests delete": outputWithDryRun(v3.DeleteProfile200Response{}, v3.CreateRegressionTest200Response{}),
 		"escape-cli users deactivate":        outputWithDryRun(v3.ListUsers200ResponseInner{}, v3.GetUser200Response{}),
+		// These print one document on --dry-run and on the mutation: the API
+		// preview is the same type, or --dry-run only logs and stays off MCP.
+		"escape-cli issues bulk-workflow":                      v3.BulkTriggerIssueWorkflows200Response{},
+		"escape-cli profiles bulk-update":                      v3.BulkUpdateProfiles200Response{},
+		"escape-cli security-tests update":                     v3.GetSecurityTest200Response{},
+		"escape-cli security-tests bulk-update":                v3.BulkUpdateSecurityTests200Response{},
+		"escape-cli compliance enable":                         v3.GetEnabledCompliances200Response{},
+		"escape-cli org-settings scanner-configuration create": v3.CreateOrganizationScannerConfiguration200Response{},
 	}
 
 	for path, output := range wantOutput {
@@ -81,6 +90,12 @@ func TestBuildMCPToolSpecsRequiresConfirmOnDestructiveTools(t *testing.T) {
 		"roles_unbind",
 		"integrations_delete",
 		"issues_bulk_update",
+		"issues_bulk_workflow",
+		"profiles_bulk_update",
+		"security_tests_update",
+		"security_tests_bulk_update",
+		"compliance_enable",
+		"org_settings_scanner_configuration_create",
 	} {
 		spec, ok := byName[name]
 		if !ok {
@@ -178,6 +193,45 @@ func TestIntegrationsDeleteExposesKindFlag(t *testing.T) {
 	}
 
 	t.Fatalf("integrations_delete missing --kind binding, got %#v", spec.FlagBindings)
+}
+
+// TestMCPCatalogOmitsNilFetcherDryRun keeps --dry-run on the CLI and off the
+// MCP tools whose dry run only logs. An empty log does not match the output
+// schema those tools declare.
+func TestMCPCatalogOmitsNilFetcherDryRun(t *testing.T) {
+	for _, command := range []*cobra.Command{profileBulkUpdateCmd, orgSettingsScannerConfigurationCreateCmd} {
+		if command.Flags().Lookup("dry-run") == nil {
+			t.Fatalf("%s: CLI --dry-run was removed", command.CommandPath())
+		}
+	}
+
+	specs, err := buildMCPToolSpecs(rootCmd, CommandSchemaRegistry())
+	if err != nil {
+		t.Fatalf("buildMCPToolSpecs: %v", err)
+	}
+
+	byName := make(map[string]climcp.ToolSpec, len(specs))
+	for _, spec := range specs {
+		byName[spec.Name] = spec
+	}
+
+	for _, name := range []string{"profiles_bulk_update", "org_settings_scanner_configuration_create"} {
+		spec, ok := byName[name]
+		if !ok {
+			t.Fatalf("expected MCP tool %q", name)
+		}
+
+		props, _ := mcpInputSchema(t, spec)["properties"].(map[string]any)
+		if _, exists := props["dry_run"]; exists {
+			t.Fatalf("%s: dry_run is in the MCP schema", name)
+		}
+
+		for _, binding := range spec.FlagBindings {
+			if binding.FlagName == "dry-run" || binding.Property == "dry_run" {
+				t.Fatalf("%s: dry-run is bound %#v", name, binding)
+			}
+		}
+	}
 }
 
 func mcpInputSchema(t *testing.T, spec climcp.ToolSpec) map[string]any {

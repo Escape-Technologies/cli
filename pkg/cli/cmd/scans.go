@@ -31,10 +31,13 @@ var scanProblemCodes []string
 var scanProblemSeverities []string
 var scanNoTags string
 var scanDnf string
+var scanCommitBranch string
+var scanLatestBranchScans string
 var scanSortType string
 var scanSortDirection string
 var scanListAllKinds bool
 var scanListLimit int
+var scanListPage pageFlags
 
 var (
 	scanKindUsage      = fmt.Sprintf("filter by scanner type: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMSEnumValues)
@@ -98,6 +101,8 @@ FILTER OPTIONS:
   -k, --kind          Filter by scanner type (overrides the default)
   --all-kinds         Include ASM and all scan kinds (default: DAST + AI Pentesting)
   --limit             Cap how many scans are fetched (0 = no limit)
+  --size              With --size or --cursor, return one page instead of every scan
+  --cursor            Page cursor (nextCursor from the previous page)
   -i, --initiator     Filter by who started the scan (MANUAL, API, SCHEDULED, CI)
   --after             Show scans created after this date (RFC3339 format)
   --before            Show scans created before this date (RFC3339 format)
@@ -110,6 +115,8 @@ FILTER OPTIONS:
   --problem-severity  Filter by validation problem severity
   --no-tags           Filter by assets with no tags (true/false)
   --dnf               Filter by a DNF expression (JSON)
+  --commit-branch     Filter by the git branch recorded on the scan
+  --latest-branch-scans  Keep only the latest scan of each branch (true/false)
 
 SCANNER TYPES:
   • BLST_REST                  - REST API security testing
@@ -136,10 +143,20 @@ ID                                      PROFILE ID                              
   escape-cli scans list --search checkout --asset-type WEBAPP
 
   # Export scan list to JSON for processing
-  escape-cli scans list -o json > scans.json`,
+  escape-cli scans list -o json > scans.json
+
+  # One page, then the next
+  escape-cli scans list --size 20 -o json
+  escape-cli scans list --cursor <nextCursor> -o json`,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		// Output JSON Schema if requested
-		if out.Schema([]v3.ScanSummarized{}) {
+		// Page mode prints {items, nextCursor, totalCount}. The default walk
+		// still prints the scan array, so -o schema has to match that shape.
+		// MCP always pages and keeps Page in CommandSchemaRegistry.
+		if singlePageRequested(cmd) {
+			if out.Schema(Page[v3.ScanSummarized2]{}) {
+				return nil
+			}
+		} else if out.Schema([]v3.ScanSummarized2{}) {
 			return nil
 		}
 
@@ -161,9 +178,22 @@ ID                                      PROFILE ID                              
 			ProblemSeverities: &scanProblemSeverities,
 			NoTags:            scanNoTags,
 			Dnf:               scanDnf,
+			CommitBranch:      scanCommitBranch,
+			LatestBranchScans: scanLatestBranchScans,
 			SortType:          scanSortType,
 			SortDirection:     scanSortDirection,
 		}
+		// --size or --cursor is one page. --limit only caps the full walk.
+		if singlePageRequested(cmd) {
+			if err := runPagedList(cmd, scanListPage, func(ctx context.Context, cursor string, size int) ([]v3.ScanSummarized2, *string, int, error) {
+				return escape.ListScans(ctx, cursor, filters, size)
+			}, scanSummariesTable); err != nil {
+				return fmt.Errorf("unable to list scans: %w", err)
+			}
+
+			return nil
+		}
+
 		allScans, err := fetchAllScans(cmd.Context(), filters, scanListLimit, isPrettyOutput())
 		if err != nil {
 			return err
@@ -177,16 +207,20 @@ ID                                      PROFILE ID                              
 		}
 
 		out.Table(allScans, func() []string {
-			res := []string{"ID\tPROFILE ID\tASSET ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
-			for _, scan := range allScans {
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetProfileId(), scan.GetAssetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
-			}
-
-			return res
+			return scanSummariesTable(allScans)
 		})
 
 		return nil
 	},
+}
+
+func scanSummariesTable(scans []v3.ScanSummarized2) []string {
+	res := []string{"ID\tPROFILE ID\tASSET ID\tCREATED AT\tKIND\tSTATUS\tPROGRESS\tLINK"}
+	for _, scan := range scans {
+		res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%s\t%f\t%s", scan.GetId(), scan.GetProfileId(), scan.GetAssetId(), scan.GetCreatedAt(), scan.GetKind(), scan.GetStatus(), scan.GetProgressRatio(), scan.GetLinks().ScanIssues))
+	}
+
+	return res
 }
 
 var scanGetCmd = &cobra.Command{
@@ -1150,9 +1184,32 @@ ID                                      SEVERITY    CATEGORY                  NA
 }
 
 var (
-	scanTargetsType string
-	scanTargetsSize int
+	scanTargetsType          string
+	scanTargetsSources       []string
+	scanTargetsCoverage      []string
+	scanTargetsSeverities    []string
+	scanTargetsIssues        []string
+	scanTargetsMethods       []string
+	scanTargetsSearch        string
+	scanTargetsSortType      string
+	scanTargetsSortDirection string
+	scanTargetsPage          pageFlags
 )
+
+// The target sort enum is not generated. These are the OpenAPI values.
+var scanTargetSortTypes = []string{"CREATED_AT", "ISSUES_COUNT", "NAME"}
+
+var scanTargetSortDirections = []string{"asc", "desc"}
+
+var (
+	scanScenariosVector string
+	scanScenariosSearch string
+	scanScenariosPage   pageFlags
+)
+
+var scanProblemsProblemCodes []string
+
+var scanProblemsProblemSeverities []string
 
 var scanTargetsCmd = &cobra.Command{
 	Use:     "targets scan-id",
@@ -1164,16 +1221,29 @@ Display all API endpoints and GraphQL resolvers discovered and tested
 during a scan. Useful for coverage analysis and CI/CD quality gates.
 
 FILTER OPTIONS:
-  --type    Filter by target type: API_ROUTE, GRAPHQL_RESOLVER
-  --size    Total cap on results (0 = fetch every page; not a page size). Prefer 'scans coverage' for per-user coverage questions.`,
+  --type             Filter by target kind
+  --source           Filter by how the route was found
+  --coverage         Filter by coverage status
+  --severity         Filter by issue severity
+  --issue            Filter by issue ID
+  --method           Filter by HTTP method
+  --search           Search targets
+  --sort-by          Sort field
+  --sort-direction   asc or desc
+  --size             Total cap on the returned targets (0 = every page). With --cursor, the page size
+  --cursor           Return one page as {items, nextCursor, totalCount}. --cursor= is the first page`,
 	Example: `  # List all targets for a scan
   escape-cli scans targets <scan-id>
 
   # List only REST endpoints
   escape-cli scans targets <scan-id> --type API_ROUTE
 
-  # Export to JSON for coverage reporting
-  escape-cli scans targets <scan-id> -o json`,
+  # Cap the full listing. The output stays an array
+  escape-cli scans targets <scan-id> --size 20
+
+  # One page, then the next
+  escape-cli scans targets <scan-id> --cursor= --size 20 -o json
+  escape-cli scans targets <scan-id> --cursor <nextCursor> -o json`,
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
 			_ = cmd.Help()
@@ -1183,43 +1253,125 @@ FILTER OPTIONS:
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema([]v3.TargetDetailed{}) {
+		// --size alone is a total cap and the output is an array, as it was
+		// before paging. Page mode starts only when --cursor is present,
+		// including an explicit empty --cursor= (the first page).
+		if cmd.Flags().Changed("cursor") {
+			if out.Schema(Page[v3.TargetDetailed]{}) {
+				return nil
+			}
+		} else if out.Schema([]v3.TargetDetailed{}) {
 			return nil
 		}
 
-		if scanTargetsSize < 0 {
+		filters := scanTargetFilters()
+		if cmd.Flags().Changed("cursor") {
+			if err := runPagedList(cmd, scanTargetsPage, func(ctx context.Context, cursor string, size int) ([]v3.TargetDetailed, *string, int, error) {
+				return escape.ListScanTargets(ctx, args[0], cursor, filters, size)
+			}, scanTargetsTable); err != nil {
+				return fmt.Errorf("unable to list targets: %w", err)
+			}
+
+			return nil
+		}
+
+		if scanTargetsPage.size < 0 {
 			return errors.New("--size must be greater than or equal to 0")
 		}
 
-		all, _, _, err := listScanTargets(cmd.Context(), args[0], scanTargetsType, scanTargetsSize)
+		all, _, _, err := listScanTargets(cmd.Context(), args[0], filters, scanTargetsPage.size)
 		if err != nil {
 			return fmt.Errorf("unable to list targets: %w", err)
 		}
 
 		out.Table(all, func() []string {
-			res := []string{"ID\tTYPE\tMETHOD\tPATH/RESOLVER\tCOVERAGE\tREQUEST COUNT\tMEAN DURATION MS"}
-			for _, t := range all {
-				row := compactScanTarget(t)
-				coverage := row.Coverage
-				if coverage == "" {
-					coverage = "-"
-				}
-
-				var meanDuration float32
-				if route, ok := t.GetApiRouteOk(); ok && route != nil {
-					meanDuration = route.GetMeanDuration()
-				} else if resolver, ok := t.GetGraphqlResolverOk(); ok && resolver != nil {
-					meanDuration = resolver.GetMeanDuration()
-				}
-
-				res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%d\t%.0f", t.GetId(), row.Type, row.Method, row.Name, coverage, row.RequestCount, meanDuration))
-			}
-
-			return res
+			return scanTargetsTable(all)
 		})
 
 		return nil
 	},
+}
+
+func scanTargetFilters() *escape.ListScanTargetsFilters {
+	filters := &escape.ListScanTargetsFilters{
+		Sources:       scanTargetsSources,
+		Coverage:      scanTargetsCoverage,
+		Severities:    scanTargetsSeverities,
+		Issues:        scanTargetsIssues,
+		Methods:       scanTargetsMethods,
+		Search:        scanTargetsSearch,
+		SortType:      scanTargetsSortType,
+		SortDirection: scanTargetsSortDirection,
+	}
+	if scanTargetsType != "" {
+		filters.Types = strings.Split(scanTargetsType, ",")
+	}
+
+	return filters
+}
+
+func scanTargetsTable(targets []v3.TargetDetailed) []string {
+	res := []string{"ID\tTYPE\tMETHOD\tPATH/RESOLVER\tCOVERAGE\tREQUEST COUNT\tMEAN DURATION MS"}
+	for _, target := range targets {
+		row := compactScanTarget(target)
+		coverage := row.Coverage
+		if coverage == "" {
+			coverage = "-"
+		}
+
+		var meanDuration float32
+		if route, ok := target.GetApiRouteOk(); ok && route != nil {
+			meanDuration = route.GetMeanDuration()
+		} else if resolver, ok := target.GetGraphqlResolverOk(); ok && resolver != nil {
+			meanDuration = resolver.GetMeanDuration()
+		}
+
+		res = append(res, fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%d\t%.0f", target.GetId(), row.Type, row.Method, row.Name, coverage, row.RequestCount, meanDuration))
+	}
+
+	return res
+}
+
+var scansScenariosCmd = &cobra.Command{
+	Use:   "scenarios scan-id",
+	Short: "List attack scenarios explored during a scan (Beta)",
+	Long: `List Scan Scenarios - Attack Vectors Explored
+
+Returns the scenarios an AI pentest explored during the scan. Filter by vector or search titles and surfaces.`,
+	Example: `  # List every scenario
+  escape-cli scans scenarios <scan-id>
+
+  # One vector
+  escape-cli scans scenarios <scan-id> --vector INJECTION`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(Page[v3.PentestScenario]{}) {
+			return nil
+		}
+
+		if err := runPagedList(cmd, scanScenariosPage, func(ctx context.Context, cursor string, size int) ([]v3.PentestScenario, *string, int, error) {
+			return escape.ListScanScenarios(ctx, args[0], cursor, scanScenariosVector, scanScenariosSearch, size)
+		}, scanScenariosTable); err != nil {
+			return fmt.Errorf("unable to list scan scenarios: %w", err)
+		}
+
+		return nil
+	},
+}
+
+func scanScenariosTable(scenarios []v3.PentestScenario) []string {
+	rows := []string{"ID\tTITLE\tSTATUS\tVECTOR\tSURFACES"}
+	for _, scenario := range scenarios {
+		rows = append(rows, fmt.Sprintf("%s\t%s\t%s\t%s\t%s",
+			scenario.GetId(),
+			scenario.GetTitle(),
+			scenario.GetStatus(),
+			scenario.GetVector(),
+			strings.Join(scenario.GetSurfaces(), ","),
+		))
+	}
+
+	return rows
 }
 
 var scansProblemsCmd = &cobra.Command{
@@ -1249,17 +1401,19 @@ unreachable target, schema invalid, etc.). Diagnostic counterpart of
 
 		kinds := resolveScanKinds(cmd)
 		filters := &escape.ListScanProblemsFilters{
-			After:         scanAfter,
-			Before:        scanBefore,
-			AssetIDs:      scanAssetIDs,
-			ProfileIDs:    scanProfileIDs,
-			ProjectIDs:    scanProjectIDs,
-			Ignored:       scanIgnored,
-			Initiator:     scanInitiator,
-			Kinds:         kinds,
-			Status:        scanStatus,
-			SortType:      scanSortType,
-			SortDirection: scanSortDirection,
+			After:             scanAfter,
+			Before:            scanBefore,
+			AssetIDs:          scanAssetIDs,
+			ProfileIDs:        scanProfileIDs,
+			ProjectIDs:        scanProjectIDs,
+			Ignored:           scanIgnored,
+			Initiator:         scanInitiator,
+			Kinds:             kinds,
+			Status:            scanStatus,
+			ProblemCodes:      scanProblemsProblemCodes,
+			ProblemSeverities: scanProblemsProblemSeverities,
+			SortType:          scanSortType,
+			SortDirection:     scanSortDirection,
 		}
 
 		return runPagedList(cmd, scanProblemsPage, func(ctx context.Context, cursor string, size int) ([]v3.ScanSummarizedWithProblems2, *string, int, error) {
@@ -1319,7 +1473,7 @@ func fetchAllScans(
 			out.Log(fmt.Sprintf("Fetching scans (page %d, %d loaded)...", page, len(allScans)))
 		}
 
-		scans, cursor, err := escape.ListScans(ctx, next, filters)
+		scans, cursor, _, err := escape.ListScans(ctx, next, filters, 0)
 		if err != nil {
 			return nil, fmt.Errorf("unable to list scans: %w", err)
 		}
@@ -1355,6 +1509,8 @@ func init() {
 	scansListCmd.Flags().StringSliceVar(&scanProblemSeverities, "problem-severity", []string{}, fmt.Sprintf("filter by validation problem severity(ies): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues))
 	scansListCmd.Flags().StringVar(&scanNoTags, "no-tags", "", "filter by assets with no tags (true/false)")
 	scansListCmd.Flags().StringVar(&scanDnf, "dnf", "", "filter by a DNF expression (JSON)")
+	scansListCmd.Flags().StringVar(&scanCommitBranch, "commit-branch", "", "filter by the git branch recorded on the scan")
+	scansListCmd.Flags().StringVar(&scanLatestBranchScans, "latest-branch-scans", "", "keep only the latest scan of each branch (true/false)")
 	scansListCmd.Flags().StringVar(&scanAfter, "after", "", "show scans created after this date (RFC3339 format, e.g., 2025-01-01T00:00:00Z)")
 	scansListCmd.Flags().StringVar(&scanBefore, "before", "", "show scans created before this date (RFC3339 format)")
 	scansListCmd.Flags().StringVar(&scanIgnored, "ignored", "", "filter by ignored status (true/false)")
@@ -1363,6 +1519,7 @@ func init() {
 	scansListCmd.Flags().StringSliceVarP(&scanStatus, "status", "s", []string{}, scanStatusUsage)
 	scansListCmd.Flags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
 	scansListCmd.Flags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	scanListPage.bind(scansListCmd)
 	scanStartCmd.Flags().BoolVarP(&scanStartCmdWatch, "watch", "w", false, "watch scan progress in real-time until completion")
 	markMCPSkip(scanStartCmd.Flags(), "watch")
 	scanStartCmd.Flags().StringVar(&scanFailOnSeverity, "fail-on-severity", "", failOnSeverityUsage)
@@ -1404,14 +1561,36 @@ func init() {
 	scansAgentsCmd.Flags().StringVar(&scanAgentsSearch, "search", "", "filter agents by title")
 	scansAgentsCmd.Flags().StringVar(&scanAgentsEventSearch, "event-search", "", "filter agents by text found in their reasoning logs")
 	scansAgentsCmd.Flags().BoolVar(&scanAgentsRootsOnly, "roots-only", false, "return only root agents")
+	scanAgentsPage.bind(scansAgentsCmd)
 	scansCmd.AddCommand(scanTargetsCmd)
-	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
-	scanTargetsCmd.Flags().IntVar(
-		&scanTargetsSize,
-		"size",
-		0,
-		"total cap on returned targets, not a page size (0 = fetch every page)",
-	)
+	// Comma-separated, one string flag, same as origin/prod. A bracket list or
+	// an enum annotation would make the MCP schema a single-value enum and
+	// reject "API_ROUTE,GRAPHQL_RESOLVER".
+	targetKinds := make([]string, len(v3.AllowedENUMPROPERTIESTARGETSITEMSPROPERTIESKINDEnumValues))
+	for i, kind := range v3.AllowedENUMPROPERTIESTARGETSITEMSPROPERTIESKINDEnumValues {
+		targetKinds[i] = string(kind)
+	}
+
+	scanTargetsCmd.Flags().StringVar(&scanTargetsType, "type", "", "filter by target kind, comma-separated: "+strings.Join(targetKinds, ", "))
+	scanTargetsCmd.Flags().StringSliceVar(&scanTargetsSources, "source", []string{}, fmt.Sprintf("filter by source: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCEEnumValues))
+	setEnumAnnotation(scanTargetsCmd.Flags(), "source", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESAPIROUTEPROPERTIESSOURCEEnumValues)
+	scanTargetsCmd.Flags().StringSliceVar(&scanTargetsCoverage, "coverage", []string{}, fmt.Sprintf("filter by coverage: %v", v3.AllowedENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMSEnumValues))
+	setEnumAnnotation(scanTargetsCmd.Flags(), "coverage", v3.AllowedENUMPROPERTIESISSUEPROPERTIESCOVERAGEITEMSEnumValues)
+	scanTargetsCmd.Flags().StringSliceVar(&scanTargetsSeverities, "severity", []string{}, fmt.Sprintf("filter by severity: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	setEnumAnnotation(scanTargetsCmd.Flags(), "severity", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
+	scanTargetsCmd.Flags().StringSliceVar(&scanTargetsIssues, "issue", []string{}, "filter by issue ID")
+	scanTargetsCmd.Flags().StringSliceVar(&scanTargetsMethods, "method", []string{}, fmt.Sprintf("filter by HTTP method: %v", v3.AllowedENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHODEnumValues))
+	setEnumAnnotation(scanTargetsCmd.Flags(), "method", v3.AllowedENUMPROPERTIESCONFIGURATIONPROPERTIESSCOPEPROPERTIESALLOWLISTITEMS3PROPERTIESMETHODEnumValues)
+	scanTargetsCmd.Flags().StringVar(&scanTargetsSearch, "search", "", "search targets")
+	scanTargetsCmd.Flags().StringVar(&scanTargetsSortType, "sort-by", "", fmt.Sprintf("sort field: %v", scanTargetSortTypes))
+	setEnumAnnotation(scanTargetsCmd.Flags(), "sort-by", scanTargetSortTypes)
+	scanTargetsCmd.Flags().StringVar(&scanTargetsSortDirection, "sort-direction", "", fmt.Sprintf("sort direction: %v", scanTargetSortDirections))
+	setEnumAnnotation(scanTargetsCmd.Flags(), "sort-direction", scanTargetSortDirections)
+	scanTargetsPage.bind(scanTargetsCmd)
+	// bind describes --size as entering page mode. On this command --size
+	// without --cursor is still the total cap.
+	scanTargetsCmd.Flags().Lookup("size").Usage = fmt.Sprintf("total cap on returned targets (0 = fetch every page). With --cursor, page size from 1 to %d; the output is then {items, nextCursor, totalCount}.", maxPageSize)
+	scanTargetsCmd.Flags().Lookup("cursor").Usage = "Page cursor. Passing --cursor, including an empty --cursor=, returns one page as {items, nextCursor, totalCount}. Without it, --size is a total cap and the output is an array."
 	scansCmd.AddCommand(scansCoverageCmd)
 	scansCoverageCmd.Flags().StringVar(&scanCoverageType, "type", "", "filter by target type: API_ROUTE, GRAPHQL_RESOLVER")
 	scansCoverageCmd.Flags().StringVar(
@@ -1432,6 +1611,11 @@ func init() {
 		defaultCoverageTargetListSize,
 		fmt.Sprintf("max compact routes to return in targets (0 = all matching, max %d)", maxCoverageTargetListSize),
 	)
+	scansCmd.AddCommand(scansScenariosCmd)
+	scanScenariosPage.bind(scansScenariosCmd)
+	scansScenariosCmd.Flags().StringVar(&scanScenariosVector, "vector", "", fmt.Sprintf("filter by attack vector: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESVECTOREnumValues))
+	setEnumAnnotation(scansScenariosCmd.Flags(), "vector", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESVECTOREnumValues)
+	scansScenariosCmd.Flags().StringVar(&scanScenariosSearch, "search", "", "search scenario titles and surfaces")
 	scansCmd.AddCommand(scansProblemsCmd)
 	scanProblemsPage.bind(scansProblemsCmd)
 	scansProblemsCmd.Flags().BoolVar(&scanListAllKinds, "all-kinds", false, "include ASM and all scan kinds (default: DAST and AI Pentesting kinds only)")
@@ -1446,5 +1630,9 @@ func init() {
 	scansProblemsCmd.PersistentFlags().StringSliceVarP(&scanStatus, "status", "s", []string{}, scanStatusUsage)
 	scansProblemsCmd.PersistentFlags().StringVar(&scanSortType, "sort-by", "", "sort field (e.g., createdAt)")
 	scansProblemsCmd.PersistentFlags().StringVar(&scanSortDirection, "sort-direction", "", "sort direction: asc, desc")
+	scansProblemsCmd.PersistentFlags().StringSliceVar(&scanProblemsProblemCodes, "problem-code", []string{}, fmt.Sprintf("filter by validation problem code(s): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues))
+	setEnumAnnotation(scansProblemsCmd.PersistentFlags(), "problem-code", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues)
+	scansProblemsCmd.PersistentFlags().StringSliceVar(&scanProblemsProblemSeverities, "problem-severity", []string{}, fmt.Sprintf("filter by validation problem severity(ies): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues))
+	setEnumAnnotation(scansProblemsCmd.PersistentFlags(), "problem-severity", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues)
 	rootCmd.AddCommand(scansCmd)
 }

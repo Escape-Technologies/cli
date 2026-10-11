@@ -964,6 +964,16 @@ var (
 	bulkIssueAll          bool
 	bulkIssueDryRun       bool
 
+	bulkWorkflowIDs          []string
+	bulkWorkflowIssueIDs     []string
+	bulkWorkflowAssetIDs     []string
+	bulkWorkflowSeverities   []string
+	bulkWorkflowProfileIDs   []string
+	bulkWorkflowTagIDs       []string
+	bulkWorkflowScannerKinds []string
+	bulkWorkflowAll          bool
+	bulkWorkflowDryRun       bool
+
 	notifyScanID string
 
 	triggerWorkflowID string
@@ -1221,6 +1231,223 @@ anything.`,
 	},
 }
 
+var issueBulkWorkflowCmd = &cobra.Command{
+	Use:   "bulk-workflow",
+	Short: "Trigger manual workflows on many issues matching a filter",
+	Long: `Bulk Trigger Workflows - Automate an Entire Backlog at Once
+
+Trigger one or more manual workflows (for example, exporting to Jira) on every
+issue matching a filter. For example, push every HIGH issue of one asset to
+Jira. The API requires a non-empty filter or --all, and rejects --all combined
+with a filter.
+
+--dry-run forwards the API's own preview: it returns the matching issue IDs
+without triggering anything. Find the workflow IDs with
+'escape-cli workflows list --trigger MANUAL'.`,
+	Example: `  # Preview the issues an action would touch
+  escape-cli issues bulk-workflow --workflow-id <workflow-id> --severity HIGH --dry-run
+
+  # Export every HIGH issue of one asset to Jira
+  escape-cli issues bulk-workflow --workflow-id <workflow-id> \
+    --severity HIGH --asset-id <asset-id>`,
+	Args: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.BulkTriggerIssueWorkflowsRequest{}) {
+			return nil
+		}
+
+		if out.Schema(v3.BulkTriggerIssueWorkflows200Response{}) {
+			return nil
+		}
+
+		body, err := buildBulkTriggerIssueWorkflowsRequest(cmd)
+		if err != nil {
+			return err
+		}
+
+		// --dry-run only previews the matching IDs, so it never prompts.
+		if !bulkWorkflowDryRun {
+			proceed, err := confirmDestructive(cmd, "trigger the workflows on every issue matching the given filters", nil)
+			if err != nil || !proceed {
+				return err
+			}
+		}
+
+		result, err := escape.BulkTriggerIssueWorkflows(cmd.Context(), *body)
+		if err != nil {
+			return fmt.Errorf("unable to bulk trigger issue workflows: %w", err)
+		}
+
+		summary := fmt.Sprintf("Triggered %d workflows on %d issues", len(result.GetWorkflows()), result.GetCount())
+		if result.GetDryRun() {
+			summary = fmt.Sprintf("Dry run: %d issues would be targeted", result.GetCount())
+		}
+
+		out.Table(result, func() []string {
+			// A dry run returns the matching issue IDs and an empty workflow
+			// list: the workflows were not triggered, so the table is the IDs.
+			if result.GetDryRun() {
+				rows := []string{"MATCHING IDS (DRY RUN)"}
+				rows = append(rows, result.GetIds()...)
+
+				return rows
+			}
+
+			rows := []string{"WORKFLOW ID\tWORKFLOW NAME"}
+			for _, workflow := range result.GetWorkflows() {
+				rows = append(rows, fmt.Sprintf("%s\t%s", workflow.GetId(), workflow.GetName()))
+			}
+
+			return rows
+		})
+		out.Log(summary)
+
+		return nil
+	},
+}
+
+// buildBulkTriggerIssueWorkflowsRequest assembles the bulk-workflow payload.
+// The filter flags mirror issues bulk-update so the same issues can be updated
+// and then automated. A flag that carries a value overwrites that one where
+// field; every other field stays as stdin sent it. Replacing the whole where
+// would drop, for example, assetIds when only --severity was passed. The where
+// is omitted when no filter flag and no stdin where is present, since the API
+// rejects a non-empty where combined with --all.
+func buildBulkTriggerIssueWorkflowsRequest(cmd *cobra.Command) (*v3.BulkTriggerIssueWorkflowsRequest, error) {
+	body, err := readBulkWorkflowBody(cmd)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(bulkWorkflowIDs) > 0 {
+		body.WorkflowIds = bulkWorkflowIDs
+	}
+
+	if len(body.WorkflowIds) == 0 {
+		return nil, errors.New("at least one --workflow-id is required")
+	}
+
+	// --all and a where are mutually exclusive on the API, whether the where
+	// came from flags or from the piped body.
+	targetingAll := bulkWorkflowAll || (body.All != nil && *body.All)
+	if targetingAll && (bulkWorkflowFilterFlagsSet() || bulkWorkflowWherePresent(body)) {
+		return nil, errors.New("--all cannot be combined with a filter; pass --all alone to target every issue")
+	}
+
+	if !targetingAll && !bulkWorkflowFilterFlagsSet() && !bulkWorkflowWherePresent(body) {
+		return nil, errors.New("at least one of --issue-id, --asset-id, --severity, --profile-id, --tag-id, --scanner-kind, --all, or a where filter on stdin is required")
+	}
+
+	if bulkWorkflowFilterFlagsSet() {
+		// Start from the stdin where, including AdditionalProperties the flags
+		// cannot express. A flag overwrites a field only when it carries a
+		// value. An unset StringSlice is nil, so len > 0 is "this flag was
+		// set": callers that assign the package variables (the same ones the
+		// flags bind) keep working without a cobra parse.
+		where := v3.BulkTriggerIssueWorkflowsRequestWhere{}
+		if existing, ok := body.GetWhereOk(); ok && existing != nil {
+			where = *existing
+		}
+
+		if len(bulkWorkflowAssetIDs) > 0 {
+			where.AssetIds = bulkWorkflowAssetIDs
+		}
+
+		if len(bulkWorkflowSeverities) > 0 {
+			severities := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, len(bulkWorkflowSeverities))
+			for i, s := range bulkWorkflowSeverities {
+				severities[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(s)
+			}
+
+			where.Severities = severities
+		}
+
+		if len(bulkWorkflowProfileIDs) > 0 {
+			where.ProfileIds = bulkWorkflowProfileIDs
+		}
+
+		if len(bulkWorkflowTagIDs) > 0 {
+			where.TagIds = bulkWorkflowTagIDs
+		}
+
+		if len(bulkWorkflowScannerKinds) > 0 {
+			kinds := make([]v3.ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS, len(bulkWorkflowScannerKinds))
+			for i, k := range bulkWorkflowScannerKinds {
+				kinds[i] = v3.ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS(k)
+			}
+
+			where.ScannerKinds = kinds
+		}
+
+		if len(bulkWorkflowIssueIDs) > 0 {
+			where.Ids = bulkWorkflowIssueIDs
+		}
+
+		body.SetWhere(where)
+	}
+
+	// All and DryRun are pointers with omitempty, so they are only forwarded
+	// when set: an explicit false would be accepted by the API but adds noise.
+	if targetingAll {
+		body.SetAll(true)
+	}
+
+	if bulkWorkflowDryRun {
+		body.SetDryRun(true)
+	}
+
+	return body, nil
+}
+
+func bulkWorkflowFilterFlagsSet() bool {
+	return len(bulkWorkflowIssueIDs) > 0 ||
+		len(bulkWorkflowAssetIDs) > 0 ||
+		len(bulkWorkflowSeverities) > 0 ||
+		len(bulkWorkflowProfileIDs) > 0 ||
+		len(bulkWorkflowTagIDs) > 0 ||
+		len(bulkWorkflowScannerKinds) > 0
+}
+
+// readBulkWorkflowBody parses the JSON body piped on stdin, if any, so a filter
+// too complex for the flags (or more than the flags carry) can be sent whole.
+// Flags win over the body, the same way --message wins over a piped comment.
+func readBulkWorkflowBody(cmd *cobra.Command) (*v3.BulkTriggerIssueWorkflowsRequest, error) {
+	body := v3.NewBulkTriggerIssueWorkflowsRequestWithDefaults()
+
+	raw, err := readPipedStdin(cmd.InOrStdin())
+	if err != nil {
+		return nil, err
+	}
+
+	if len(raw) == 0 {
+		return body, nil
+	}
+
+	if err := json.Unmarshal(raw, body); err != nil {
+		return nil, fmt.Errorf("invalid JSON on stdin: %w", err)
+	}
+
+	return body, nil
+}
+
+// bulkWorkflowWherePresent reports whether the piped body already scopes the
+// issues. Without a where or --all, a body carrying only workflowIds would
+// silently widen to every issue, so the command asks for a selection first.
+func bulkWorkflowWherePresent(body *v3.BulkTriggerIssueWorkflowsRequest) bool {
+	if body == nil || body.Where == nil {
+		return false
+	}
+
+	where := body.GetWhere()
+
+	return len(where.GetIds()) > 0 ||
+		len(where.GetAssetIds()) > 0 ||
+		len(where.GetSeverities()) > 0 ||
+		len(where.GetProfileIds()) > 0 ||
+		len(where.GetTagIds()) > 0 ||
+		len(where.GetScannerKinds()) > 0
+}
+
 var issueNotifyCmd = &cobra.Command{
 	Use:   "notify issue-id",
 	Short: "Send notification to asset owners about an issue",
@@ -1350,6 +1577,21 @@ func init() {
 	issueBulkUpdateCmd.Flags().StringSliceVar(&bulkIssueScannerKinds, "scanner-kind", nil, "filter by scanner kind")
 	issueBulkUpdateCmd.Flags().BoolVar(&bulkIssueAll, "all", false, "target every issue in the organization; cannot be combined with filter flags")
 	issueBulkUpdateCmd.Flags().BoolVar(&bulkIssueDryRun, "dry-run", false, "print the matching issue IDs without updating anything")
+
+	issuesCmd.AddCommand(issueBulkWorkflowCmd)
+	bindDestructiveGate(issueBulkWorkflowCmd, false)
+	issueBulkWorkflowCmd.Flags().StringSliceVar(&bulkWorkflowIDs, "workflow-id", nil, "manual workflow ID to trigger on every matching issue (required; use 'workflows list --trigger MANUAL' to find IDs)")
+	issueBulkWorkflowCmd.Flags().StringSliceVar(&bulkWorkflowIssueIDs, "issue-id", nil, "filter by issue ID(s)")
+	issueBulkWorkflowCmd.Flags().StringSliceVar(&bulkWorkflowAssetIDs, "asset-id", nil, "filter by asset ID(s)")
+	issueBulkWorkflowCmd.Flags().StringSliceVar(&bulkWorkflowSeverities, "severity", nil, "filter by severity")
+	issueBulkWorkflowCmd.Flags().StringSliceVar(&bulkWorkflowProfileIDs, "profile-id", nil, "filter by profile ID(s)")
+	issueBulkWorkflowCmd.Flags().StringSliceVar(&bulkWorkflowTagIDs, "tag-id", nil, "filter by tag ID(s)")
+	issueBulkWorkflowCmd.Flags().StringSliceVar(&bulkWorkflowScannerKinds, "scanner-kind", nil, "filter by scanner kind")
+	issueBulkWorkflowCmd.Flags().BoolVar(&bulkWorkflowAll, "all", false, "target every issue in the organization; cannot be combined with filter flags")
+	issueBulkWorkflowCmd.Flags().BoolVar(&bulkWorkflowDryRun, "dry-run", false, "print the matching issue IDs without triggering anything")
+	markMCPRequired(issueBulkWorkflowCmd.Flags(), "workflow-id")
+	setEnumAnnotation(issueBulkWorkflowCmd.Flags(), "severity", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
+	setEnumAnnotation(issueBulkWorkflowCmd.Flags(), "scanner-kind", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMSEnumValues)
 
 	issuesCmd.AddCommand(issueNotifyCmd)
 	issueNotifyCmd.Flags().StringVar(&notifyScanID, "scan-id", "", "scan ID to reference in the notification (required)")

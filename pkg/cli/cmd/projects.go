@@ -29,6 +29,8 @@ COMMON WORKFLOWS:
 }
 
 var projectsSearchFlag string
+var projectsIDs []string
+var projectsPermissions []string
 var projectListPage pageFlags
 
 var projectsListCmd = &cobra.Command{
@@ -41,7 +43,11 @@ var projectsListCmd = &cobra.Command{
 			return nil
 		}
 
-		filters := &escape.ListProjectsFilters{Search: projectsSearchFlag}
+		filters := &escape.ListProjectsFilters{
+			Search:      projectsSearchFlag,
+			IDs:         projectsIDs,
+			Permissions: projectsPermissions,
+		}
 		if err := runPagedList(cmd, projectListPage, func(ctx context.Context, cursor string, size int) ([]v3.ListProjects200ResponseDataInner, *string, int, error) {
 			return escape.ListProjects(ctx, cursor, filters, size)
 		}, func(projects []v3.ListProjects200ResponseDataInner) []string {
@@ -210,6 +216,9 @@ func init() {
 	projectsCmd.AddCommand(projectsListCmd, projectsGetCmd, projectsCreateCmd, projectsUpdateCmd, projectsDeleteCmd)
 	bindDestructiveGate(projectsDeleteCmd, true)
 	projectsListCmd.Flags().StringVarP(&projectsSearchFlag, "search", "s", "", "search projects by name")
+	projectsListCmd.Flags().StringSliceVar(&projectsIDs, "id", []string{}, "filter by project ID")
+	projectsListCmd.Flags().StringSliceVar(&projectsPermissions, "permission", []string{}, fmt.Sprintf("filter by permission: %v", v3.AllowedENUMITEMSPROPERTIESIDEnumValues))
+	setEnumAnnotation(projectsListCmd.Flags(), "permission", v3.AllowedENUMITEMSPROPERTIESIDEnumValues)
 	projectListPage.bind(projectsListCmd)
 	rootCmd.AddCommand(projectsCmd)
 }

@@ -365,6 +365,23 @@ func BulkUpdateIssues(ctx context.Context, body v3.BulkUpdateIssuesRequest) (*v3
 	return data, nil
 }
 
+// BulkTriggerIssueWorkflows runs manual workflows on every issue matching a
+// filter. A body with All set targets every issue and cannot carry a filter;
+// DryRun previews the matching issue IDs without triggering anything.
+func BulkTriggerIssueWorkflows(ctx context.Context, body v3.BulkTriggerIssueWorkflowsRequest) (*v3.BulkTriggerIssueWorkflows200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	data, _, err := client.IssuesAPI.BulkTriggerIssueWorkflows(ctx).BulkTriggerIssueWorkflowsRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
 // NotifyIssueOwners sends a notification to asset owners about an issue
 func NotifyIssueOwners(ctx context.Context, issueID, scanID string) (*v3.NotifyIssueOwners200Response, error) {
 	client, err := newAPIV3Client()

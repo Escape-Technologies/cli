@@ -39,7 +39,7 @@ func TestListRolesDrainsCursorPages(t *testing.T) {
 
 	// The repeated page-2 cursor is a server fault: failing beats returning a
 	// truncated list as if it were complete.
-	_, err := ListRoles(context.Background())
+	_, err := ListRoles(context.Background(), "")
 	if err == nil || !strings.Contains(err.Error(), "did not advance") {
 		t.Fatalf("err = %v, want a pagination error", err)
 	}
@@ -73,7 +73,7 @@ func TestListCustomRulesDrainsCursorPages(t *testing.T) {
 	t.Setenv("ESCAPE_API_URL", server.URL)
 	t.Setenv("ESCAPE_API_KEY", "00000000-0000-0000-0000-000000000000")
 
-	rules, err := ListCustomRules(context.Background())
+	rules, err := ListCustomRules(context.Background(), nil)
 	if err != nil {
 		t.Fatalf("list custom rules: %v", err)
 	}

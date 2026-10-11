@@ -33,6 +33,7 @@ var workflowsSearchFlag string
 var workflowsProjectIDs []string
 var workflowsIntegrationIDs []string
 var workflowsWorkflowIDs []string
+var workflowsDnf string
 var workflowsResume bool
 var workflowListPage pageFlags
 var workflowExecutionsPage pageFlags
@@ -53,6 +54,7 @@ var workflowsListCmd = &cobra.Command{
 			ProjectIDs:     workflowsProjectIDs,
 			IntegrationIDs: workflowsIntegrationIDs,
 			WorkflowIDs:    workflowsWorkflowIDs,
+			Dnf:            workflowsDnf,
 		}
 		if err := runPagedList(cmd, workflowListPage, func(ctx context.Context, cursor string, size int) ([]v3.WorkflowSummarized, *string, int, error) {
 			return escape.ListWorkflows(ctx, cursor, filters, size)
@@ -305,6 +307,7 @@ func init() {
 	workflowsListCmd.Flags().StringSliceVar(&workflowsProjectIDs, "project-id", []string{}, "filter by project ID(s)")
 	workflowsListCmd.Flags().StringSliceVar(&workflowsIntegrationIDs, "integration-id", []string{}, "filter by integration ID(s)")
 	workflowsListCmd.Flags().StringSliceVar(&workflowsWorkflowIDs, "workflow-id", []string{}, "filter by workflow ID(s)")
+	workflowsListCmd.Flags().StringVar(&workflowsDnf, "dnf", "", "filter by a DNF expression (JSON)")
 	workflowListPage.bind(workflowsListCmd)
 	workflowExecutionsPage.bind(workflowsExecutionsCmd)
 	workflowsPauseCmd.Flags().BoolVar(&workflowsResume, "resume", false, "resume the workflow instead of pausing it")

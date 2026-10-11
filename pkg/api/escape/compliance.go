@@ -40,6 +40,28 @@ func GetEnabledCompliances(ctx context.Context) (*v3.GetEnabledCompliances200Res
 	return data, nil
 }
 
+// UpdateEnabledCompliances replaces the set of compliance frameworks the
+// organization measures. frameworks is the full list to enable: a framework
+// left out is disabled, so an empty list turns every framework off.
+func UpdateEnabledCompliances(ctx context.Context, frameworks []string) (*v3.GetEnabledCompliances200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	items := make([]v3.ENUMPROPERTIESISSUEPROPERTIESCOMPLIANCEITEMSPROPERTIESCOMPLIANCE, len(frameworks))
+	for i, framework := range frameworks {
+		items[i] = v3.ENUMPROPERTIESISSUEPROPERTIESCOMPLIANCEITEMSPROPERTIESCOMPLIANCE(framework)
+	}
+
+	data, _, err := client.ComplianceAPI.UpdateEnabledCompliances(ctx).UpdateEnabledCompliancesRequest(v3.UpdateEnabledCompliancesRequest{Frameworks: items}).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
 // GetScanCompliance returns the compliance posture of one scan: per-framework
 // enabled status and the compliance items the scan failed.
 func GetScanCompliance(ctx context.Context, scanID string) (*v3.GetScanCompliance200Response, error) {

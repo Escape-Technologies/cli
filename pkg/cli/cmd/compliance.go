@@ -14,18 +14,21 @@ import (
 var (
 	complianceProfileIDs string
 	complianceListPage   pageFlags
+
+	complianceEnableFrameworks []string
 )
 
 var complianceCmd = &cobra.Command{
 	Use:     "compliance",
 	Aliases: []string{"compliances"},
-	Short:   "Read the compliance posture of the organization",
+	Short:   "Report on, and choose, the compliance frameworks of the organization",
 	Long: `Compliance - From Scan Findings to Framework Items
 
 A compliance framework is a list of items; each item is satisfied by a set of
 security tests. This group reports where the organization stands: which
 frameworks are enabled, which of their items every application still fails,
-and the same picture for a single scan.
+and the same picture for a single scan. enable replaces the list of frameworks
+the organization measures.
 
 ` + fmt.Sprintf("FRAMEWORKS: %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues) + `
 
@@ -106,17 +109,100 @@ is not in this list is not measured, so its items never appear as failures.`,
 			return fmt.Errorf("unable to get enabled compliances: %w", err)
 		}
 
-		out.Table(enabled, func() []string {
-			rows := []string{"FRAMEWORK"}
-			for _, framework := range enabled.GetData() {
-				rows = append(rows, string(framework))
-			}
-
-			return rows
-		})
+		printEnabledCompliances(enabled)
 
 		return nil
 	},
+}
+
+var complianceEnableCmd = &cobra.Command{
+	Use:     "enable",
+	Aliases: []string{"set", "update"},
+	Short:   "Set the compliance frameworks the organization measures (Beta)",
+	Long: `Enable Compliance Frameworks - Choose What Is Measured
+
+Replace the list of compliance frameworks the organization measures. The body
+is the full list to enable, so a framework left out is disabled: an empty
+--framework turns every framework off. Requires admin permissions.`,
+	Example: `  # Measure one framework only
+  escape-cli compliance enable --framework OWASP
+
+  # Measure several
+  escape-cli compliance enable --framework OWASP --framework PCI_DSS
+
+  # Turn every framework off
+  escape-cli compliance enable --framework=`,
+	Args: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.Schema(v3.GetEnabledCompliances200Response{}) {
+			return nil
+		}
+
+		frameworks := dedupeComplianceFrameworks(complianceEnableFrameworks)
+		for _, framework := range frameworks {
+			if !v3.ENUMPROPERTIESISSUEPROPERTIESCOMPLIANCEITEMSPROPERTIESCOMPLIANCE(framework).IsValid() {
+				return fmt.Errorf("invalid framework %q; valid values: %s", framework, strings.Join(complianceFrameworkNames(), ", "))
+			}
+		}
+
+		proceed, err := confirmDestructive(cmd, "replace the compliance frameworks measured by the whole organization", func(ctx context.Context) (any, error) {
+			return escape.GetEnabledCompliances(ctx)
+		})
+		if err != nil || !proceed {
+			return err
+		}
+
+		enabled, err := escape.UpdateEnabledCompliances(cmd.Context(), frameworks)
+		if err != nil {
+			return fmt.Errorf("unable to update enabled compliances: %w", err)
+		}
+
+		printEnabledCompliances(enabled)
+
+		return nil
+	},
+}
+
+// dedupeComplianceFrameworks keeps the first occurrence of each value. The
+// server deduplicates too, but a dry answer here keeps the confirmation prompt
+// and the request the operator approved identical.
+func dedupeComplianceFrameworks(frameworks []string) []string {
+	seen := make(map[string]struct{}, len(frameworks))
+	unique := make([]string, 0, len(frameworks))
+	for _, framework := range frameworks {
+		if _, exists := seen[framework]; exists {
+			continue
+		}
+
+		seen[framework] = struct{}{}
+		unique = append(unique, framework)
+	}
+
+	return unique
+}
+
+// complianceFrameworkNames is the framework list PUT /compliance/enabled
+// accepts. It is narrower than the framework enum the posture listing prints:
+// that enum also names frontend stacks, which are not compliance frameworks.
+func complianceFrameworkNames() []string {
+	values := v3.AllowedENUMPROPERTIESISSUEPROPERTIESCOMPLIANCEITEMSPROPERTIESCOMPLIANCEEnumValues
+	names := make([]string, len(values))
+	for i, value := range values {
+		names[i] = string(value)
+	}
+
+	return names
+}
+
+func printEnabledCompliances(enabled *v3.GetEnabledCompliances200Response) {
+	out.Table(enabled, func() []string {
+		rows := []string{"FRAMEWORK"}
+		for _, framework := range enabled.GetData() {
+			rows = append(rows, string(framework))
+		}
+
+		return rows
+	})
 }
 
 var compliancePerApplicationCmd = &cobra.Command{
@@ -219,7 +305,18 @@ func init() {
 	compliancePerApplicationCmd.Flags().StringVar(&complianceProfileIDs, "profile-ids", "", "filter by profile IDs (comma-separated)")
 	complianceListPage.bind(compliancePerApplicationCmd)
 
-	complianceCmd.AddCommand(complianceListCmd, complianceEnabledCmd, compliancePerApplicationCmd)
+	complianceEnableCmd.Flags().StringSliceVar(&complianceEnableFrameworks, "framework", nil, "framework to measure; the full list replaces the current one: "+strings.Join(complianceFrameworkNames(), ", "))
+	if err := complianceEnableCmd.Flags().SetAnnotation("framework", flagEnumAnnotation, complianceFrameworkNames()); err != nil {
+		panic(err)
+	}
+
+	markMCPRequired(complianceEnableCmd.Flags(), "framework")
+	// An empty list is the request that disables every framework. Required
+	// still rejects an omitted property; allow-empty accepts [].
+	markMCPAllowEmpty(complianceEnableCmd.Flags(), "framework")
+	bindDestructiveGate(complianceEnableCmd, true)
+
+	complianceCmd.AddCommand(complianceListCmd, complianceEnabledCmd, complianceEnableCmd, compliancePerApplicationCmd)
 	scansCmd.AddCommand(scansComplianceCmd)
 	rootCmd.AddCommand(complianceCmd)
 }

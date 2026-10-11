@@ -130,3 +130,10 @@ func TestSecurityTestsListRejectsUnknownSortBeforeTheAPI(t *testing.T) {
 		t.Fatalf("err = %v", err)
 	}
 }
+
+func TestSecurityTestsUpdateDryRunSaysNoWrite(t *testing.T) {
+	usage := securityTestsUpdateCmd.Flags().Lookup("dry-run").Usage
+	if !strings.Contains(usage, "sends no write request") {
+		t.Fatalf("usage = %q", usage)
+	}
+}

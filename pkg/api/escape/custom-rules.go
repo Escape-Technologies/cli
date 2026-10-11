@@ -10,9 +10,16 @@ import (
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
+// ListCustomRulesFilters holds optional filters for listing custom rules.
+// Empty fields are omitted. Both are applied on every drained page.
+type ListCustomRulesFilters struct {
+	Search  string
+	Context string
+}
+
 // ListCustomRules lists every custom rule, draining every page the
-// X-Next-Cursor header announces.
-func ListCustomRules(ctx context.Context) ([]v3.CustomRuleSummarized, error) {
+// X-Next-Cursor header announces. A nil filters lists every rule.
+func ListCustomRules(ctx context.Context, filters *ListCustomRulesFilters) ([]v3.CustomRuleSummarized, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -22,6 +29,14 @@ func ListCustomRules(ctx context.Context) ([]v3.CustomRuleSummarized, error) {
 		req := client.CustomRulesAPI.ListCustomRules(ctx).Size(maxRolePageSize)
 		if cursor != "" {
 			req = req.Cursor(cursor)
+		}
+
+		if filters != nil && filters.Search != "" {
+			req = req.Search(filters.Search)
+		}
+
+		if filters != nil && filters.Context != "" {
+			req = req.Context(filters.Context)
 		}
 
 		data, httpRes, err := req.Execute()

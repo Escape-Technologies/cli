@@ -24,8 +24,9 @@ func GetMe(ctx context.Context) (*v3.GetMe200Response, error) {
 
 // ListUsers lists users in the organization. Search is sent to the API, whose
 // search matches the email only: filtering names client-side promised a match
-// the endpoint never performs.
-func ListUsers(ctx context.Context, search string) ([]v3.ListUsers200ResponseInner, error) {
+// the endpoint never performs. deactivated is the query enum "true" or "false";
+// an empty value lists every user.
+func ListUsers(ctx context.Context, search, deactivated string) ([]v3.ListUsers200ResponseInner, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -34,6 +35,10 @@ func ListUsers(ctx context.Context, search string) ([]v3.ListUsers200ResponseInn
 	req := client.UsersAPI.ListUsers(ctx)
 	if search != "" {
 		req = req.Search(search)
+	}
+
+	if deactivated != "" {
+		req = req.Deactivated(deactivated)
 	}
 
 	data, _, err := req.Execute()

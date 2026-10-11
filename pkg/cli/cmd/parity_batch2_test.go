@@ -23,6 +23,7 @@ type parityBatch2Case struct {
 	method  string
 	path    string
 	query   map[string]string
+	stdin   string
 	body    func(t *testing.T, got map[string]any)
 	respond func(w http.ResponseWriter)
 }
@@ -64,7 +65,7 @@ func runParityBatch2Case(t *testing.T, tt parityBatch2Case) {
 		tt.prepare(t)
 	}
 
-	tt.command.SetIn(strings.NewReader(""))
+	tt.command.SetIn(strings.NewReader(tt.stdin))
 	tt.command.SetOut(io.Discard)
 	tt.command.SetErr(io.Discard)
 	tt.command.SetContext(context.Background())
@@ -402,6 +403,19 @@ func TestBetaMarkersCoverTheFlaggedGroups(t *testing.T) {
 		"escape-cli knowledge-files list",
 		"escape-cli knowledge-files upload",
 		"escape-cli knowledge-files delete",
+		"escape-cli jobs rename",
+		"escape-cli jobs send-artefacts",
+		"escape-cli integrations vaults",
+		"escape-cli integrations jira-projects",
+		"escape-cli integrations jira-issue-types",
+		"escape-cli integrations azure-areas",
+		"escape-cli scans scenarios",
+		"escape-cli issues export",
+		"escape-cli assets export",
+		"escape-cli security-tests update",
+		"escape-cli security-tests bulk-update",
+		"escape-cli compliance enable",
+		"escape-cli org-settings scanner-configuration create",
 	} {
 		if betaMCPToolNoteFor(path) == "" {
 			t.Errorf("%s wraps a Beta operation and must carry the marker", path)
@@ -414,6 +428,9 @@ func TestBetaMarkersCoverTheFlaggedGroups(t *testing.T) {
 		"escape-cli users deactivate",
 		"escape-cli workflows pause",
 		"escape-cli locations logs",
+		"escape-cli integrations repositories",
+		"escape-cli issues bulk-workflow",
+		"escape-cli profiles bulk-update",
 	} {
 		if betaMCPToolNoteFor(path) != "" {
 			t.Errorf("%s is not a Beta operation", path)
@@ -452,6 +469,22 @@ func TestNewWriteCommandsAreRegistered(t *testing.T) {
 		"escape-cli integrations test",
 		"escape-cli integrations sync",
 		"escape-cli integrations runs",
+		"escape-cli integrations repositories",
+		"escape-cli integrations vaults",
+		"escape-cli integrations jira-projects",
+		"escape-cli integrations jira-issue-types",
+		"escape-cli integrations azure-areas",
+		"escape-cli scans scenarios",
+		"escape-cli issues bulk-workflow",
+		"escape-cli profiles bulk-update",
+		"escape-cli security-tests update",
+		"escape-cli security-tests bulk-update",
+		"escape-cli compliance enable",
+		"escape-cli jobs rename",
+		"escape-cli jobs send-artefacts",
+		"escape-cli org-settings scanner-configuration create",
+		"escape-cli issues export",
+		"escape-cli assets export",
 	} {
 		if _, ok := registry[path]; !ok {
 			t.Errorf("%s is not in CommandSchemaRegistry", path)

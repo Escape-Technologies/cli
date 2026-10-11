@@ -45,16 +45,21 @@ type ListScanAgentsFilters struct {
 	SortDirection string
 }
 
-// ListScanAgents lists AI pentest agents for a scan.
+// defaultScanAgentsPageSize is the page a full listing asks for.
+// A caller that passes size > 0, one CLI or MCP page, replaces it.
+const defaultScanAgentsPageSize = 100
+
+// ListScanAgents lists one page of AI pentest agents for a scan.
+// size 0 keeps defaultScanAgentsPageSize. The returned total is totalCount.
 func ListScanAgents(
 	ctx context.Context,
 	scanID string,
 	next string,
 	size int,
 	filters *ListScanAgentsFilters,
-) ([]AgentSummarized, *string, error) {
+) ([]AgentSummarized, *string, int, error) {
 	if strings.TrimSpace(scanID) == "" {
-		return nil, nil, errors.New("scanID is required")
+		return nil, nil, 0, errors.New("scanID is required")
 	}
 
 	query := url.Values{}
@@ -62,9 +67,12 @@ func ListScanAgents(
 		query.Set("cursor", next)
 	}
 
-	if size > 0 {
-		query.Set("size", strconv.Itoa(size))
+	pageSize := size
+	if pageSize <= 0 {
+		pageSize = defaultScanAgentsPageSize
 	}
+
+	query.Set("size", strconv.Itoa(pageSize))
 
 	if filters != nil {
 		if filters.Search != "" {
@@ -95,10 +103,10 @@ func ListScanAgents(
 
 	var page pageResponse[AgentSummarized]
 	if err := rawRequest(ctx, "GET", path, nil, &page); err != nil {
-		return nil, nil, fmt.Errorf("unable to list scan agents: %w", err)
+		return nil, nil, 0, fmt.Errorf("unable to list scan agents: %w", err)
 	}
 
-	return page.Data, page.NextCursor, nil
+	return page.Data, page.NextCursor, page.TotalCount, nil
 }
 
 // ListScanAgentLogsFilters holds optional filters for listing agent logs.

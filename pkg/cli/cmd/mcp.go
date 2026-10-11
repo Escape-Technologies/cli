@@ -52,8 +52,14 @@ const (
 
 // mcpRequiredAnnotation marks a flag the CLI leaves optional but the MCP tool
 // must receive. Omitting it would widen the call to every resource. The
-// executor refuses an empty value before it starts the subprocess.
+// executor refuses an empty value before it starts the subprocess, unless the
+// flag is also marked mcp-allow-empty (present, including an empty list).
 const mcpRequiredAnnotation = "mcp-required"
+
+// mcpAllowEmptyAnnotation marks a required MCP flag that may be empty.
+// compliance enable uses it so {"frameworks":[]} can disable every framework.
+// Every other required flag stays non-empty.
+const mcpAllowEmptyAnnotation = "mcp-allow-empty"
 
 // mcpDefaultAnnotation marks a boolean flag whose MCP schema default is true
 // while the CLI default stays false. schemaForFlag copies it onto the
@@ -149,23 +155,29 @@ func init() {
 // CommandSchemaRegistry does not make a command destructive, and a command
 // in this set is not exposed without the confirm gate applied in buildMCPTool.
 var destructiveMCPCommands = map[string]struct{}{
-	"escape-cli profiles delete":         {},
-	"escape-cli assets delete":           {},
-	"escape-cli assets bulk-delete":      {},
-	"escape-cli assets bulk-update":      {},
-	"escape-cli issues bulk-update":      {},
-	"escape-cli tags delete":             {},
-	"escape-cli custom-rules delete":     {},
-	"escape-cli locations delete":        {},
-	"escape-cli workflows delete":        {},
-	"escape-cli roles unbind":            {},
-	"escape-cli integrations delete":     {},
-	"escape-cli regression-tests delete": {},
-	"escape-cli views delete":            {},
-	"escape-cli vault variables delete":  {},
-	"escape-cli knowledge-files delete":  {},
-	"escape-cli users deactivate":        {},
-	"escape-cli locations tags":          {},
+	"escape-cli profiles delete":                           {},
+	"escape-cli profiles bulk-update":                      {},
+	"escape-cli assets delete":                             {},
+	"escape-cli assets bulk-delete":                        {},
+	"escape-cli assets bulk-update":                        {},
+	"escape-cli issues bulk-update":                        {},
+	"escape-cli issues bulk-workflow":                      {},
+	"escape-cli tags delete":                               {},
+	"escape-cli custom-rules delete":                       {},
+	"escape-cli locations delete":                          {},
+	"escape-cli workflows delete":                          {},
+	"escape-cli roles unbind":                              {},
+	"escape-cli integrations delete":                       {},
+	"escape-cli regression-tests delete":                   {},
+	"escape-cli views delete":                              {},
+	"escape-cli vault variables delete":                    {},
+	"escape-cli knowledge-files delete":                    {},
+	"escape-cli users deactivate":                          {},
+	"escape-cli locations tags":                            {},
+	"escape-cli security-tests update":                     {},
+	"escape-cli security-tests bulk-update":                {},
+	"escape-cli compliance enable":                         {},
+	"escape-cli org-settings scanner-configuration create": {},
 }
 
 func isDestructiveMCPCommand(path string) bool {
@@ -229,6 +241,18 @@ func buildMCPToolSpecs(
 			spec.Tool.Description = spec.Description
 		}
 
+		// scans targets pages only when --cursor is on the command line.
+		// The MCP tool always pages, so an omitted cursor is still sent empty
+		// (the first page). A non-nil default is forwarded; ForcedArgs would
+		// replace a cursor the caller did send.
+		if capability.Path == "escape-cli scans targets" {
+			for i := range spec.FlagBindings {
+				if spec.FlagBindings[i].FlagName == "cursor" {
+					spec.FlagBindings[i].Default = ""
+				}
+			}
+		}
+
 		applyBoundedMCPCommand(&spec)
 		toolSpecs = append(toolSpecs, spec)
 	}
@@ -277,10 +301,11 @@ func buildMCPTool(
 
 		schema, kind := schemaForFlag(flag)
 		binding := climcp.FlagBinding{
-			Property: property,
-			FlagName: flag.Name,
-			Kind:     kind,
-			Required: flagMarkedMCPRequired(flag),
+			Property:   property,
+			FlagName:   flag.Name,
+			Kind:       kind,
+			Required:   flagMarkedMCPRequired(flag),
+			AllowEmpty: flagMarkedMCPAllowEmpty(flag),
 		}
 		// A schema default is what hosted clients should send when they omit
 		// the property. Copy it onto the binding so the executor does not
@@ -435,7 +460,7 @@ func indexCommands(root *cobra.Command) map[string]*cobra.Command {
 
 // pagedListCommand reports whether pageFlags.bind marked the command as a
 // cursor page. Flag names are not enough: retests get has --size and --cursor
-// and is not a list. scans targets has --size as a total cap and is unmarked.
+// and is not a list.
 func pagedListCommand(command *cobra.Command) bool {
 	return command != nil && command.Annotations[pagedListAnnotation] == "true"
 }
@@ -509,8 +534,37 @@ func markMCPRequired(flags *pflag.FlagSet, name string) {
 	}
 }
 
+// markMCPAllowEmpty lets one required MCP flag be present and empty. It does
+// not by itself add the flag to the required list; pair it with markMCPRequired.
+// The flag must already be registered. A missing flag is a declaration bug, so
+// init panics.
+func markMCPAllowEmpty(flags *pflag.FlagSet, name string) {
+	if err := flags.SetAnnotation(name, mcpAllowEmptyAnnotation, []string{"true"}); err != nil {
+		panic(err)
+	}
+}
+
+// setEnumAnnotation records the allowed values of a flag for the MCP schema.
+// Generated enums are typed strings; the annotation is the plain value list
+// schemaForFlag copies onto the property. The flag must already be registered.
+// A missing flag is a declaration bug, so init panics.
+func setEnumAnnotation[T ~string](flags *pflag.FlagSet, name string, values []T) {
+	annotated := make([]string, len(values))
+	for i, value := range values {
+		annotated[i] = string(value)
+	}
+
+	if err := flags.SetAnnotation(name, flagEnumAnnotation, annotated); err != nil {
+		panic(err)
+	}
+}
+
 func flagMarkedMCPRequired(flag *pflag.Flag) bool {
 	return flag != nil && slices.Contains(flag.Annotations[mcpRequiredAnnotation], "true")
+}
+
+func flagMarkedMCPAllowEmpty(flag *pflag.Flag) bool {
+	return flag != nil && slices.Contains(flag.Annotations[mcpAllowEmptyAnnotation], "true")
 }
 
 // markMCPDefault keeps the CLI flag default and tells schemaForFlag to

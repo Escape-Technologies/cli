@@ -29,22 +29,33 @@ type ListScansFilters struct {
 	ProblemSeverities *[]string
 	NoTags            string
 	Dnf               string
+	CommitBranch      string
+	LatestBranchScans string
 	SortType          string
 	SortDirection     string
 }
 
-// ListScans lists all scans for an application
-func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v3.ScanSummarized2, *string, error) {
+// defaultScanListPageSize is the page a full listing asks for.
+// A caller that passes size > 0, one CLI or MCP page, replaces it.
+const defaultScanListPageSize = 100
+
+// ListScans lists one page of scans.
+// size 0 keeps defaultScanListPageSize. The returned total is totalCount.
+func ListScans(ctx context.Context, next string, filters *ListScansFilters, size int) ([]v3.ScanSummarized2, *string, int, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to init client: %w", err)
+		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
 	}
 
 	ctx = withArrayQuery(ctx, scansArrayQuery(filters))
 
 	req := client.ScansAPI.ListScans(ctx)
 
-	batchSize := 100
+	pageSize := size
+	if pageSize <= 0 {
+		pageSize = defaultScanListPageSize
+	}
+
 	if filters != nil && filters.SortType != "" {
 		req = req.SortType(filters.SortType)
 	} else {
@@ -57,7 +68,7 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 		req = req.SortDirection("desc")
 	}
 
-	req = req.Size(batchSize)
+	req = req.Size(pageSize)
 	if next != "" {
 		req = req.Cursor(next)
 	}
@@ -69,10 +80,10 @@ func ListScans(ctx context.Context, next string, filters *ListScansFilters) ([]v
 	data, _, err := req.Execute()
 
 	if err != nil {
-		return nil, nil, fmt.Errorf("unable to list scans: %w", humanizeAPIError(err))
+		return nil, nil, 0, fmt.Errorf("unable to list scans: %w", humanizeAPIError(err))
 	}
 
-	return data.Data, data.NextCursor, nil
+	return data.Data, data.NextCursor, data.GetTotalCount(), nil
 }
 
 // scansArrayQuery collects the scan list filters the generated client wraps in
@@ -146,6 +157,14 @@ func applyListScansFilters(req v3.ApiListScansRequest, filters *ListScansFilters
 
 	if filters.Dnf != "" {
 		req = req.Dnf(filters.Dnf)
+	}
+
+	if filters.CommitBranch != "" {
+		req = req.CommitBranch(filters.CommitBranch)
+	}
+
+	if filters.LatestBranchScans != "" {
+		req = req.LatestBranchScans(filters.LatestBranchScans)
 	}
 
 	return req
@@ -288,13 +307,29 @@ func CancelScan(ctx context.Context, scanID string) error {
 
 const scanTargetsAPIPageSize = 100
 
+// ListScanTargetsFilters are the optional filters for one page of scan targets.
+// Empty fields are omitted. Slice filters are repeated query keys: the route
+// accepts one value or repeated values and does not split commas.
+type ListScanTargetsFilters struct {
+	Types         []string
+	Sources       []string
+	Coverage      []string
+	Severities    []string
+	Issues        []string
+	Methods       []string
+	Search        string
+	SortType      string
+	SortDirection string
+}
+
 // ListScanTargets lists one page of targets discovered during a scan.
 // size is the API page size (max 100). Pass 0 to use scanTargetsAPIPageSize.
+// A nil filters lists the page unfiltered.
 func ListScanTargets(
 	ctx context.Context,
 	scanID string,
 	next string,
-	targetTypes string,
+	filters *ListScanTargetsFilters,
 	size int,
 ) ([]v3.TargetDetailed, *string, int, error) {
 	if strings.TrimSpace(scanID) == "" {
@@ -311,9 +346,7 @@ func ListScanTargets(
 		req = req.Cursor(next)
 	}
 
-	if targetTypes != "" {
-		req = req.Types(strings.Split(targetTypes, ","))
-	}
+	req = applyListScanTargetsFilters(req, filters)
 
 	pageSize := size
 	if pageSize <= 0 {
@@ -329,19 +362,103 @@ func ListScanTargets(
 	return data.Data, data.NextCursor, data.GetTotalCount(), nil
 }
 
+// applyListScanTargetsFilters adds every set filter to the request.
+func applyListScanTargetsFilters(req v3.ApiListScanTargetsRequest, filters *ListScanTargetsFilters) v3.ApiListScanTargetsRequest {
+	if filters == nil {
+		return req
+	}
+
+	if len(filters.Types) > 0 {
+		req = req.Types(filters.Types)
+	}
+
+	if len(filters.Sources) > 0 {
+		req = req.Sources(filters.Sources)
+	}
+
+	if len(filters.Coverage) > 0 {
+		req = req.Coverage(filters.Coverage)
+	}
+
+	if len(filters.Severities) > 0 {
+		req = req.Severities(filters.Severities)
+	}
+
+	if len(filters.Issues) > 0 {
+		req = req.Issues(filters.Issues)
+	}
+
+	if len(filters.Methods) > 0 {
+		req = req.Methods(filters.Methods)
+	}
+
+	if filters.Search != "" {
+		req = req.Search(filters.Search)
+	}
+
+	if filters.SortType != "" {
+		req = req.SortType(filters.SortType)
+	}
+
+	if filters.SortDirection != "" {
+		req = req.SortDirection(filters.SortDirection)
+	}
+
+	return req
+}
+
+// ListScanScenarios lists one page of the attack scenarios explored during a scan.
+// size 0 keeps the API default page size. The returned total is totalCount.
+func ListScanScenarios(ctx context.Context, scanID, next, vector, search string, size int) ([]v3.PentestScenario, *string, int, error) {
+	if strings.TrimSpace(scanID) == "" {
+		return nil, nil, 0, errors.New("scanID is required")
+	}
+
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	req := client.ScansAPI.ListScanScenarios(ctx, scanID)
+	if next != "" {
+		req = req.Cursor(next)
+	}
+
+	if size > 0 {
+		req = req.Size(size)
+	}
+
+	if vector != "" {
+		req = req.Vector(vector)
+	}
+
+	if search != "" {
+		req = req.Search(search)
+	}
+
+	data, _, err := req.Execute()
+	if err != nil {
+		return nil, nil, 0, fmt.Errorf("unable to list scan scenarios: %w", humanizeAPIError(err))
+	}
+
+	return data.GetData(), data.NextCursor, data.GetTotalCount(), nil
+}
+
 // ListScanProblemsFilters holds optional filters for listing scan problems
 type ListScanProblemsFilters struct {
-	After         string
-	Before        string
-	AssetIDs      []string
-	ProfileIDs    []string
-	ProjectIDs    []string
-	Ignored       string
-	Initiator     []string
-	Kinds         []string
-	Status        []string
-	SortType      string
-	SortDirection string
+	After             string
+	Before            string
+	AssetIDs          []string
+	ProfileIDs        []string
+	ProjectIDs        []string
+	Ignored           string
+	Initiator         []string
+	Kinds             []string
+	Status            []string
+	ProblemCodes      []string
+	ProblemSeverities []string
+	SortType          string
+	SortDirection     string
 }
 
 // scanProblemsDefaultPageSize is the page size a full listing already used.
@@ -425,6 +542,14 @@ func ListScanProblems(ctx context.Context, next string, filters *ListScanProblem
 
 		if len(filters.Status) > 0 {
 			req = req.Status(filters.Status)
+		}
+
+		if len(filters.ProblemCodes) > 0 {
+			req = req.ProblemCodes(filters.ProblemCodes)
+		}
+
+		if len(filters.ProblemSeverities) > 0 {
+			req = req.ProblemSeverities(filters.ProblemSeverities)
 		}
 	}
 

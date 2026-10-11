@@ -150,3 +150,40 @@ func TriggerExport(ctx context.Context, blocks []string, opts ExportOptions) (*v
 
 	return data, nil
 }
+
+// RenameExport renames an export job so its report is filed under another name.
+func RenameExport(ctx context.Context, jobID, name string) (*v3.RenameExport200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	body := v3.RenameExportRequest{Name: name}
+	data, _, err := client.JobsAPI.RenameExport(ctx, jobID).RenameExportRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// SendJobArtefacts emails the artefacts a finished job produced. subject is
+// optional and is left out of the request when empty.
+func SendJobArtefacts(ctx context.Context, jobID string, emails []string, subject string) (*v3.SendJobArtefacts200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	body := v3.SendJobArtefactsRequest{Emails: emails}
+	if subject != "" {
+		body.SetSubject(subject)
+	}
+
+	data, _, err := client.JobsAPI.SendJobArtefacts(ctx, jobID).SendJobArtefactsRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}

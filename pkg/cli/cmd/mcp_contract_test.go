@@ -571,6 +571,48 @@ func preserveEOF(err error) error {
 	return fmt.Errorf("read: %w", err)
 }
 
+func TestExportToolsHideOutAndDeclareFormat(t *testing.T) {
+	issues := mcpSpec(t, "issues_export")
+	assets := mcpSpec(t, "assets_export")
+	assertMCPFlagAbsent(t, issues, "out")
+	assertMCPFlagAbsent(t, assets, "out")
+
+	issuesSchema := decodeToolSchema(t, issues.Tool.RawInputSchema)
+	if !containsString(stringSlice(issuesSchema["required"]), "format") {
+		t.Fatalf("issues export required = %#v", issuesSchema["required"])
+	}
+
+	issuesFormat := schemaPropertyMap(t, issuesSchema, "format")
+	if strings.Join(stringSlice(issuesFormat["enum"]), ",") != "csv,sarif" {
+		t.Fatalf("issues format = %#v", issuesFormat["enum"])
+	}
+
+	if _, ok := schemaPropertyMap(t, issuesSchema, "where")["type"]; !ok {
+		t.Fatal("issues export is missing where")
+	}
+
+	assetsSchema := decodeToolSchema(t, assets.Tool.RawInputSchema)
+	if containsString(stringSlice(assetsSchema["required"]), "format") {
+		t.Fatalf("assets export format should stay optional, required = %#v", assetsSchema["required"])
+	}
+
+	assetsFormat := schemaPropertyMap(t, assetsSchema, "format")
+	if strings.Join(stringSlice(assetsFormat["enum"]), ",") != "csv" {
+		t.Fatalf("assets format = %#v", assetsFormat["enum"])
+	}
+}
+
+func schemaPropertyMap(t *testing.T, schema map[string]any, name string) map[string]any {
+	t.Helper()
+	properties, _ := schema["properties"].(map[string]any)
+	property, _ := properties[name].(map[string]any)
+	if property == nil {
+		t.Fatalf("missing property %s in %#v", name, schema)
+	}
+
+	return property
+}
+
 // TestAdvertisedBodiesReachTheAPI pipes a JSON body at every tool that
 // advertises one and checks the httptest server received that body. Handlers
 // read either os.Stdin or the command's InOrStdin, so both are fed.
@@ -636,6 +678,10 @@ func TestAdvertisedBodiesReachTheAPI(t *testing.T) {
 }
 
 func stdinBodyFor(path string) string {
+	if body := parityWriteStdinBody(path); body != "" {
+		return body
+	}
+
 	const id = "00000000-0000-0000-0000-000000000001"
 	switch path {
 	case "escape-cli issues comment":
@@ -698,6 +744,22 @@ func stdinBodyFor(path string) string {
 	}
 }
 
+// parityWriteStdinBody is the stdin document for commands whose generated
+// request rejects the generic probe body before the API is called.
+func parityWriteStdinBody(path string) string {
+	const id = "00000000-0000-0000-0000-000000000001"
+	switch path {
+	case "escape-cli issues bulk-workflow":
+		return `{"workflowIds":["` + id + `"],"where":{"ids":["` + id + `"]},"stdinProbe":"body"}`
+	case "escape-cli profiles bulk-update":
+		return `{"profileIds":["` + id + `"],"tagIds":["` + id + `"],"stdinProbe":"body"}`
+	case "escape-cli org-settings scanner-configuration create":
+		return `{"content":{"mode":"read_only"},"stdinProbe":"body"}`
+	default:
+		return ""
+	}
+}
+
 func bodyWasForwarded(requests []string, marker string) bool {
 	for _, request := range requests {
 		if strings.Contains(request, marker) {
@@ -706,6 +768,104 @@ func bodyWasForwarded(requests []string, marker string) bool {
 	}
 
 	return false
+}
+
+func TestIssuesBulkWorkflowMCPRequiresWorkflowAndEnums(t *testing.T) {
+	spec := mcpSpec(t, "issues_bulk_workflow")
+	schema := decodeToolSchema(t, spec.Tool.RawInputSchema)
+	if !containsString(stringSlice(schema["required"]), "workflow_id") {
+		t.Fatalf("required = %#v", schema["required"])
+	}
+
+	severityItems, _ := schemaPropertyMap(t, schema, "severity")["items"].(map[string]any)
+	if !containsString(stringSlice(severityItems["enum"]), "HIGH") {
+		t.Fatalf("severity items = %#v", severityItems)
+	}
+
+	scannerItems, _ := schemaPropertyMap(t, schema, "scanner_kind")["items"].(map[string]any)
+	if len(stringSlice(scannerItems["enum"])) == 0 {
+		t.Fatalf("scanner_kind items = %#v", scannerItems)
+	}
+}
+
+func TestComplianceEnableAllowsAnEmptyFrameworkList(t *testing.T) {
+	spec := mcpSpec(t, "compliance_enable")
+	schema := decodeToolSchema(t, spec.Tool.RawInputSchema)
+	if !containsString(stringSlice(schema["required"]), "framework") {
+		t.Fatalf("required = %#v", schema["required"])
+	}
+
+	var found bool
+	for _, binding := range spec.FlagBindings {
+		if binding.FlagName != "framework" {
+			continue
+		}
+
+		found = true
+		if !binding.Required || !binding.AllowEmpty {
+			t.Fatalf("framework binding = %#v", binding)
+		}
+	}
+
+	if !found {
+		t.Fatal("compliance enable is missing the framework binding")
+	}
+}
+
+func TestScansTargetsTypeKeepsCommaSeparatedValues(t *testing.T) {
+	spec := mcpSpec(t, "scans_targets")
+	schema := decodeToolSchema(t, spec.Tool.RawInputSchema)
+	property := schemaPropertyMap(t, schema, "type")
+	if property["type"] != "string" {
+		t.Fatalf("type schema = %#v", property)
+	}
+
+	if _, ok := property["enum"]; ok {
+		t.Fatalf("type enum = %#v, a combined kind must stay one string", property["enum"])
+	}
+
+	description, _ := property["description"].(string)
+	if !strings.Contains(description, "API_ROUTE") || !strings.Contains(description, "GRAPHQL_RESOLVER") {
+		t.Fatalf("description = %q", description)
+	}
+
+	if !mcpStringPropertyAccepts(property, "API_ROUTE,GRAPHQL_RESOLVER") {
+		t.Fatal("MCP schema rejects API_ROUTE,GRAPHQL_RESOLVER")
+	}
+}
+
+func TestScansTargetsMCPAlwaysSendsCursor(t *testing.T) {
+	spec := mcpSpec(t, "scans_targets")
+	var found bool
+	for _, binding := range spec.FlagBindings {
+		if binding.FlagName != "cursor" {
+			continue
+		}
+
+		found = true
+		if binding.Default != "" {
+			t.Fatalf("cursor default = %#v, want an empty string so the first page is requested", binding.Default)
+		}
+	}
+
+	if !found {
+		t.Fatal("scans targets is missing the cursor binding")
+	}
+}
+
+// mcpStringPropertyAccepts reports whether value satisfies a string property:
+// the type is string, and an enum, when present, lists that exact value.
+func mcpStringPropertyAccepts(property map[string]any, value string) bool {
+	if property["type"] != "string" {
+		return false
+	}
+
+	enum, ok := property["enum"]
+	if !ok {
+		return true
+	}
+
+	return containsString(stringSlice(enum), value)
 }
 
 func recordedBodies(t *testing.T, mu *sync.Mutex, got *[]string) []string {

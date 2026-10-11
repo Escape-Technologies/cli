@@ -280,7 +280,7 @@ func TestTriggerExportForwardsScopeFlags(t *testing.T) {
 	jobsExportBlocks = []string{"ISSUE_LIST"}
 	jobsExportScanID = "00000000-0000-0000-0000-000000000002"
 	jobsExportName = "Weekly digest"
-	jobsExportAssetWhere = `{"status":"MONITORED"}`
+	jobsExportAssetWhere = `{"statuses":["MONITORED"]}`
 	jobsExportProfileWhere = `{"name":"prod"}`
 	jobsExportIssueWhere = `{"severity":"HIGH"}`
 	jobsExportDryRun = true
@@ -314,7 +314,7 @@ func TestTriggerExportForwardsScopeFlags(t *testing.T) {
 		"name":         "Weekly digest",
 		"dry":          true,
 		"notify":       false,
-		"assetWhere":   map[string]any{"status": "MONITORED"},
+		"assetWhere":   map[string]any{"statuses": []any{"MONITORED"}},
 		"profileWhere": map[string]any{"name": "prod"},
 		"issueWhere":   map[string]any{"severity": "HIGH"},
 	} {
@@ -335,7 +335,7 @@ func TestParseExportWhereFlags(t *testing.T) {
 		jobsExportAssetWhere, jobsExportProfileWhere, jobsExportIssueWhere = previousAsset, previousProfile, previousIssue
 	})
 
-	jobsExportAssetWhere = `{"status":"MONITORED"}`
+	jobsExportAssetWhere = `{"statuses":["MONITORED"]}`
 	jobsExportProfileWhere = "not-json"
 	jobsExportIssueWhere = ""
 

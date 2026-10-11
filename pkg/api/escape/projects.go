@@ -5,13 +5,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
 
-// ListProjectsFilters holds optional filters for listing projects
+// ListProjectsFilters holds optional filters for listing projects.
+// IDs is comma-joined: the generated client types this filter as one string,
+// and the route splits commas. Permissions are repeated query keys.
 type ListProjectsFilters struct {
-	Search string
+	Search      string
+	IDs         []string
+	Permissions []string
 }
 
 // ListProjects lists one page of projects.
@@ -31,8 +36,18 @@ func ListProjects(ctx context.Context, next string, filters *ListProjectsFilters
 		req = req.Size(size)
 	}
 
-	if filters != nil && filters.Search != "" {
-		req = req.Search(filters.Search)
+	if filters != nil {
+		if filters.Search != "" {
+			req = req.Search(filters.Search)
+		}
+
+		if len(filters.IDs) > 0 {
+			req = req.Ids(strings.Join(filters.IDs, ","))
+		}
+
+		if len(filters.Permissions) > 0 {
+			req = req.Permissions(filters.Permissions)
+		}
 	}
 
 	data, _, err := req.Execute()

@@ -17,14 +17,23 @@ import (
 const defaultRawRequestTimeout = 60 * time.Second
 
 func rawRequest(ctx context.Context, method, path string, body []byte, out any) error {
+	_, err := rawResponse(ctx, method, path, body, out)
+
+	return err
+}
+
+// rawResponse is rawRequest that also returns the response. The body is closed
+// before return; the headers stay readable, which is how a bare-array listing
+// follows X-Next-Cursor. Callers that only need the decoded body use rawRequest.
+func rawResponse(ctx context.Context, method, path string, body []byte, out any) (*http.Response, error) {
 	baseURL, err := env.GetAPIURL()
 	if err != nil {
-		return fmt.Errorf("failed to get API URL: %w", err)
+		return nil, fmt.Errorf("failed to get API URL: %w", err)
 	}
 
 	authorization, err := env.GetAuthorizationHeader()
 	if err != nil {
-		return fmt.Errorf("failed to get authorization header: %w", err)
+		return nil, fmt.Errorf("failed to get authorization header: %w", err)
 	}
 
 	url := baseURL.String() + "/v3" + path
@@ -35,7 +44,7 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 
 	req, err := http.NewRequestWithContext(ctx, method, url, reader)
 	if err != nil {
-		return fmt.Errorf("failed to build request: %w", err)
+		return nil, fmt.Errorf("failed to build request: %w", err)
 	}
 
 	req.Header.Set("Authorization", authorization)
@@ -50,7 +59,7 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return fmt.Errorf("request failed: %w", err)
+		return nil, fmt.Errorf("request failed: %w", err)
 	}
 
 	defer func() {
@@ -64,23 +73,24 @@ func rawRequest(ctx context.Context, method, path string, body []byte, out any) 
 			msg = resp.Status
 		}
 
-		return fmt.Errorf("api error (%s): %s", resp.Status, msg)
+		return nil, fmt.Errorf("api error (%s): %s", resp.Status, msg)
 	}
 
 	if out == nil || resp.ContentLength == 0 {
 		_, _ = io.Copy(io.Discard, resp.Body)
-		return nil
+
+		return resp, nil
 	}
 
 	if err := json.NewDecoder(resp.Body).Decode(out); err != nil {
 		if err == io.EOF {
-			return nil
+			return resp, nil
 		}
 
-		return fmt.Errorf("failed to decode response: %w", err)
+		return nil, fmt.Errorf("failed to decode response: %w", err)
 	}
 
-	return nil
+	return resp, nil
 }
 
 func rawPath(segments ...string) string {

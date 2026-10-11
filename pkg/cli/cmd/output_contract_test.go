@@ -92,6 +92,7 @@ func TestArrayToolsAdvertiseWrappedItemsSchema(t *testing.T) {
 		"events_list",
 		"profiles_list",
 		"tags_list",
+		"integrations_vaults",
 	} {
 		raw, ok := rawByName[name]
 		if !ok {
@@ -132,6 +133,15 @@ func TestNamedToolsDeclareTypedOutputSchema(t *testing.T) {
 		{name: "locations_create", keys: []string{"links"}},
 		{name: "locations_update", keys: []string{"links"}},
 		{name: "issues_comment", keys: []string{"id", "createdAt", "kind"}},
+		{name: "issues_bulk_workflow", keys: []string{"ids", "count", "dryRun", "workflows"}},
+		{name: "security_tests_bulk_update", keys: []string{"ids", "count", "dryRun"}},
+		{name: "security_tests_update", keys: []string{"id", "name", "enabled"}},
+		{name: "jobs_rename", keys: []string{"id", "name"}},
+		{name: "jobs_send_artefacts", keys: []string{"sent"}},
+		{name: "compliance_enable", keys: []string{"data"}},
+		{name: "profiles_bulk_update", keys: []string{"success"}},
+		{name: "org_settings_scanner_configuration_create", keys: []string{"id", "createdAt"}},
+		{name: "assets_export", keys: []string{"contentType", "content"}},
 	}
 	for _, testCase := range cases {
 		raw, ok := rawByName[testCase.name]
@@ -156,6 +166,46 @@ func TestNamedToolsDeclareTypedOutputSchema(t *testing.T) {
 				t.Errorf("%s output schema missing %q in %s", testCase.name, key, raw)
 			}
 		}
+	}
+}
+
+func TestIssueExportAdvertisesCSVOrSARIF(t *testing.T) {
+	raw, ok := toolOutputSchemas(t)["issues_export"]
+	if !ok {
+		t.Fatal("missing MCP tool issues_export")
+	}
+
+	var doc map[string]any
+	if err := json.Unmarshal(raw, &doc); err != nil {
+		t.Fatal(err)
+	}
+
+	if doc["type"] != "object" {
+		t.Fatalf("type = %#v", doc["type"])
+	}
+
+	branches, _ := doc["oneOf"].([]any)
+	if len(branches) != 2 {
+		t.Fatalf("oneOf = %#v", doc["oneOf"])
+	}
+
+	var sawCSV, sawSARIF bool
+	for _, branch := range branches {
+		object, _ := branch.(map[string]any)
+		props, _ := object["properties"].(map[string]any)
+		if _, ok := props["contentType"]; ok {
+			sawCSV = true
+		}
+
+		if _, ok := props["version"]; ok {
+			if _, runs := props["runs"]; runs {
+				sawSARIF = true
+			}
+		}
+	}
+
+	if !sawCSV || !sawSARIF {
+		t.Fatalf("oneOf csv=%v sarif=%v in %s", sawCSV, sawSARIF, raw)
 	}
 }
 
@@ -585,6 +635,49 @@ func resetLocationUpdateFlags() {
 		flag := locationsUpdateCmd.Flags().Lookup(name)
 		_ = flag.Value.Set(flag.DefValue)
 		flag.Changed = false
+	}
+}
+
+func TestIntegrationDiscoverySchemasExposeCoordinates(t *testing.T) {
+	resetFlag(t, integrationsRepositoriesCmd, "size")
+	resetFlag(t, integrationsRepositoriesCmd, "cursor")
+
+	stdout, stderr, err := captureOutput(t, "schema", func() error {
+		return integrationsRepositoriesCmd.RunE(integrationsRepositoriesCmd, nil)
+	})
+	if err != nil {
+		t.Fatalf("repositories schema: %v\n%s", err, stderr)
+	}
+
+	for _, field := range []string{`"fullName"`, `"cloneUrl"`, `"htmlUrl"`, `"integrationIds"`, `"ownerLogin"`} {
+		if !strings.Contains(stdout, field) {
+			t.Errorf("repositories schema missing %s", field)
+		}
+	}
+
+	stdout, stderr, err = captureOutput(t, "schema", func() error {
+		return integrationsVaultsCmd.RunE(integrationsVaultsCmd, []string{"integration-id"})
+	})
+	if err != nil {
+		t.Fatalf("vaults schema: %v\n%s", err, stderr)
+	}
+
+	for _, field := range []string{`"name"`, `"externalId"`} {
+		if !strings.Contains(stdout, field) {
+			t.Errorf("vaults schema missing %s: %s", field, stdout)
+		}
+	}
+
+	repos := string(mcpSpec(t, "integrations_repositories").Tool.RawOutputSchema)
+	for _, field := range []string{`"fullName"`, `"cloneUrl"`, `"integrationIds"`} {
+		if !strings.Contains(repos, field) {
+			t.Errorf("repositories MCP schema missing %s", field)
+		}
+	}
+
+	vaults := string(mcpSpec(t, "integrations_vaults").Tool.RawOutputSchema)
+	if !strings.Contains(vaults, `"externalId"`) || !strings.Contains(vaults, `"name"`) {
+		t.Fatalf("vaults MCP schema = %s", vaults)
 	}
 }
 

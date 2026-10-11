@@ -101,7 +101,7 @@ email addresses, and role information.`,
 			return nil
 		}
 
-		users, err := escape.ListUsers(cmd.Context(), usersSearch)
+		users, err := escape.ListUsers(cmd.Context(), usersSearch, usersDeactivated)
 		if err != nil {
 			return fmt.Errorf("unable to list users: %w", err)
 		}
@@ -153,6 +153,7 @@ var (
 	usersInviteEmails []string
 	usersInviteRoleID string
 	usersSearch       string
+	usersDeactivated  string
 )
 
 func roleIDs(bindings []v3.ListProjects200ResponseDataInnerBindingsInner) []string {
@@ -269,6 +270,7 @@ func init() {
 	usersCmd.AddCommand(usersMeCmd, usersListCmd, usersGetCmd, usersInviteCmd, usersDeactivateCmd)
 	bindDestructiveGate(usersDeactivateCmd, true)
 	usersListCmd.Flags().StringVar(&usersSearch, "search", "", "search users by email (the API matches the email only)")
+	usersListCmd.Flags().StringVar(&usersDeactivated, "deactivated", "", "filter by deactivated status (true/false)")
 	usersInviteCmd.Flags().StringArrayVar(&usersInviteEmails, "email", []string{}, "email address to invite (can be specified multiple times)")
 	usersInviteCmd.Flags().StringVar(&usersInviteRoleID, "role-id", "", "role ID to bind to invited users")
 	rootCmd.AddCommand(meCmd)

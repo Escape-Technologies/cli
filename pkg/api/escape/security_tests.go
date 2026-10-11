@@ -84,3 +84,40 @@ func GetSecurityTest(ctx context.Context, securityTestUID string) (*v3.GetSecuri
 
 	return data, nil
 }
+
+// UpdateSecurityTest changes the organization configuration of one security
+// test: whether it is enabled, and the severity override its issues report.
+// Omitting customSeverity leaves the override untouched. A JSON null, carried
+// on AdditionalProperties, resets it to the scanner default. An empty string
+// is not a severity and is not sent.
+func UpdateSecurityTest(ctx context.Context, securityTestUID string, body v3.UpdateSecurityTestRequest) (*v3.GetSecurityTest200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	data, _, err := client.SecurityTestsAPI.UpdateSecurityTest(ctx, securityTestUID).UpdateSecurityTestRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
+// BulkUpdateSecurityTests changes the organization configuration of every
+// security test matching a filter, or of all of them when body.All is set.
+// A body with All set cannot carry a filter. DryRun previews the matching
+// security test IDs without changing anything.
+func BulkUpdateSecurityTests(ctx context.Context, body v3.BulkUpdateSecurityTestsRequest) (*v3.BulkUpdateSecurityTests200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	data, _, err := client.SecurityTestsAPI.BulkUpdateSecurityTests(ctx).BulkUpdateSecurityTestsRequest(body).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}

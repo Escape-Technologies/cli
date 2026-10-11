@@ -17,16 +17,18 @@ import (
 var problemsCommandOutput = providedSchema{schema: problemsOutputSchema()}
 
 var (
-	problemsDetailed   bool
-	problemsAssetIDs   []string
-	problemsDomains    []string
-	problemsIssueIDs   []string
-	problemsTagIDs     []string
-	problemsSearch     string
-	problemsInitiators []string
-	problemsKinds      []string
-	problemsRisks      []string
-	problemsPage       pageFlags
+	problemsDetailed          bool
+	problemsAssetIDs          []string
+	problemsDomains           []string
+	problemsIssueIDs          []string
+	problemsTagIDs            []string
+	problemsSearch            string
+	problemsInitiators        []string
+	problemsKinds             []string
+	problemsRisks             []string
+	problemsProblemCodes      []string
+	problemsProblemSeverities []string
+	problemsPage              pageFlags
 )
 
 var problemsCmd = &cobra.Command{
@@ -96,14 +98,16 @@ ID                                      NAME                    SCAN STATUS    P
 		}
 
 		filters := &escape.ListProblemsFilters{
-			AssetIDs:   problemsAssetIDs,
-			Domains:    problemsDomains,
-			IssueIDs:   problemsIssueIDs,
-			TagsIDs:    problemsTagIDs,
-			Search:     problemsSearch,
-			Initiators: problemsInitiators,
-			Kinds:      problemsKinds,
-			Risks:      problemsRisks,
+			AssetIDs:          problemsAssetIDs,
+			Domains:           problemsDomains,
+			IssueIDs:          problemsIssueIDs,
+			TagsIDs:           problemsTagIDs,
+			Search:            problemsSearch,
+			Initiators:        problemsInitiators,
+			Kinds:             problemsKinds,
+			Risks:             problemsRisks,
+			ProblemCodes:      problemsProblemCodes,
+			ProblemSeverities: problemsProblemSeverities,
 		}
 		fetch := func(ctx context.Context, cursor string, size int) ([]v3.ProfileScanProblemsRow, *string, int, error) {
 			rows, next, total, err := escape.ListProblems(ctx, cursor, filters, size)
@@ -267,6 +271,10 @@ func init() {
 	problemsCmd.Flags().StringSliceVarP(&problemsInitiators, "initiators", "", []string{}, "filter by scan initiators (comma-separated)")
 	problemsCmd.Flags().StringSliceVarP(&problemsKinds, "kinds", "", []string{}, "filter by scan kinds (comma-separated)")
 	problemsCmd.Flags().StringSliceVarP(&problemsRisks, "risks", "", []string{}, "filter by risk types (comma-separated)")
+	problemsCmd.Flags().StringSliceVar(&problemsProblemCodes, "problem-code", []string{}, fmt.Sprintf("filter by validation problem code(s): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues))
+	setEnumAnnotation(problemsCmd.Flags(), "problem-code", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues)
+	problemsCmd.Flags().StringSliceVar(&problemsProblemSeverities, "problem-severity", []string{}, fmt.Sprintf("filter by validation problem severity(ies): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues))
+	setEnumAnnotation(problemsCmd.Flags(), "problem-severity", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues)
 	problemsPage.bind(problemsCmd)
 	rootCmd.AddCommand(problemsCmd)
 }

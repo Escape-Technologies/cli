@@ -17,7 +17,8 @@ var orgSettingsCmd = &cobra.Command{
 	Long: `Manage Organization Settings - AI Context and Issue SLAs
 
 Read and update the organization-wide settings: the system prompt every AI
-pentest receives as context, and the SLA policy applied per issue severity.`,
+pentest receives as context, and the SLA policy applied per issue severity.
+scanner-configuration publishes the defaults a profile inherits.`,
 }
 
 var orgSettingsGetCmd = &cobra.Command{
@@ -100,7 +101,69 @@ prompt. Use --input-schema to see the expected shape.`,
 	},
 }
 
+var orgSettingsScannerConfigurationCmd = &cobra.Command{
+	Use:   "scanner-configuration",
+	Short: "Manage the organization-wide scanner configuration (Beta)",
+	Long: `Scanner Configuration - Defaults for Every Profile
+
+The organization scanner configuration holds the settings a profile inherits
+when it does not override them itself. Publishing one creates a new version;
+the previous version stays available.`,
+}
+
+var orgSettingsScannerConfigurationCreateCmd = &cobra.Command{
+	Use:   "create",
+	Short: "Publish a new organization scanner configuration (Beta)",
+	Long: `Create Scanner Configuration - Publish a New Default
+
+Publish a new organization-wide scanner configuration from a JSON body on
+stdin. The body carries the ` + "`content`" + ` object. Use --input-schema to see
+the expected shape.`,
+	Example: `  # Publish a read-only default for every profile
+  echo '{"content":{"mode":"read_only"}}' | escape-cli org-settings scanner-configuration create
+
+  # See the input schema
+  escape-cli org-settings scanner-configuration create --input-schema`,
+	Args: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.CreateOrganizationScannerConfigurationRequest{}) {
+			return nil
+		}
+
+		if out.Schema(v3.CreateOrganizationScannerConfiguration200Response{}) {
+			return nil
+		}
+
+		body, err := readRequiredBody(cmd)
+		if err != nil {
+			return err
+		}
+
+		proceed, err := confirmDestructive(cmd, "publish a new organization-wide scanner configuration", nil)
+		if err != nil || !proceed {
+			return err
+		}
+
+		created, err := escape.CreateOrganizationScannerConfiguration(cmd.Context(), body)
+		if err != nil {
+			return fmt.Errorf("failed to create the organization scanner configuration: %w", err)
+		}
+
+		out.Table(created, func() []string {
+			return []string{"ID\tCREATED AT", fmt.Sprintf("%s\t%s", created.GetId(), created.GetCreatedAt())}
+		})
+
+		return nil
+	},
+}
+
 func init() {
 	orgSettingsCmd.AddCommand(orgSettingsGetCmd, orgSettingsUpdateCmd)
+	orgSettingsScannerConfigurationCmd.AddCommand(orgSettingsScannerConfigurationCreateCmd)
+	bindDestructiveGate(orgSettingsScannerConfigurationCreateCmd, true)
+	// A dry run only logs: there is no resource to print, so the MCP result
+	// would not match the declared output schema. The CLI flag stays.
+	markMCPSkip(orgSettingsScannerConfigurationCreateCmd.Flags(), "dry-run")
+	orgSettingsCmd.AddCommand(orgSettingsScannerConfigurationCmd)
 	rootCmd.AddCommand(orgSettingsCmd)
 }

@@ -16,6 +16,8 @@ import (
 )
 
 var customRulesGetContent bool
+var customRulesListSearch string
+var customRulesListContext string
 
 var customRulesCmd = &cobra.Command{
 	Use:     "custom-rules",
@@ -55,7 +57,10 @@ ID                                      NAME                       SSH PUBLIC KE
 			return nil
 		}
 
-		customRules, err := escape.ListCustomRules(cmd.Context())
+		customRules, err := escape.ListCustomRules(cmd.Context(), &escape.ListCustomRulesFilters{
+			Search:  customRulesListSearch,
+			Context: customRulesListContext,
+		})
 		if err != nil {
 			return fmt.Errorf("failed to list custom rules: %w", err)
 		}
@@ -326,6 +331,8 @@ var customRulesUpdateCmd = &cobra.Command{
 
 func init() {
 	customRulesCmd.AddCommand(customRulesListCmd)
+	customRulesListCmd.Flags().StringVar(&customRulesListSearch, "search", "", "search custom rules by name")
+	customRulesListCmd.Flags().StringVar(&customRulesListContext, "context", "", "filter by rule context")
 	customRulesCmd.AddCommand(customRulesGetCmd)
 	customRulesGetCmd.Flags().BoolVarP(&customRulesGetContent, "content", "c", false, "print only the content JSON")
 	customRulesCmd.AddCommand(customRulesCreateCmd)

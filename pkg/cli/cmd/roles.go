@@ -28,6 +28,8 @@ COMMON WORKFLOWS:
   • Bind role to user:     escape-cli roles bind --role-id <id> --user-id <id>`,
 }
 
+var rolesSearch string
+
 var rolesListCmd = &cobra.Command{
 	Use:     "list",
 	Aliases: []string{"ls"},
@@ -38,7 +40,7 @@ var rolesListCmd = &cobra.Command{
 			return nil
 		}
 
-		roles, err := escape.ListRoles(cmd.Context())
+		roles, err := escape.ListRoles(cmd.Context(), rolesSearch)
 		if err != nil {
 			return fmt.Errorf("unable to list roles: %w", err)
 		}
@@ -282,6 +284,7 @@ var rolesDeleteCmd = &cobra.Command{
 
 func init() {
 	rolesCmd.AddCommand(rolesListCmd, rolesGetCmd, rolesCreateCmd, rolesUpdateCmd, rolesDeleteCmd, rolesBindCmd, rolesUnbindCmd)
+	rolesListCmd.Flags().StringVar(&rolesSearch, "search", "", "search roles by name")
 	bindDestructiveGate(rolesDeleteCmd, true)
 	bindDestructiveGate(rolesUnbindCmd, false)
 	rolesBindCmd.Flags().StringVar(&rolesBindRoleID, "role-id", "", "role ID to bind")

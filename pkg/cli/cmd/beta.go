@@ -23,8 +23,13 @@ var betaMCPTools = map[string]string{
 
 	// Async jobs, exports and their artefacts.
 	"escape-cli jobs trigger-export": betaMCPToolNote,
+	// Synchronous issue and asset file exports.
+	"escape-cli issues export":       betaMCPToolNote,
+	"escape-cli assets export":       betaMCPToolNote,
 	"escape-cli jobs get":            betaMCPToolNote,
 	"escape-cli jobs list":           betaMCPToolNote,
+	"escape-cli jobs rename":         betaMCPToolNote,
+	"escape-cli jobs send-artefacts": betaMCPToolNote,
 
 	// Continuous pentest, gated by CONTINUOUS_PENTEST.
 	"escape-cli profiles continuous-pentest create":  betaMCPToolNote,
@@ -55,6 +60,15 @@ var betaMCPTools = map[string]string{
 	"escape-cli emails read": betaMCPToolNote,
 	"escape-cli emails wait": betaMCPToolNote,
 
+	// Provider vault discovery is part of the variables vault surface.
+	"escape-cli integrations vaults": betaMCPToolNote,
+
+	// Ticket workflow lookups and AI pentest scenarios.
+	"escape-cli integrations jira-projects":    betaMCPToolNote,
+	"escape-cli integrations jira-issue-types": betaMCPToolNote,
+	"escape-cli integrations azure-areas":      betaMCPToolNote,
+	"escape-cli scans scenarios":               betaMCPToolNote,
+
 	// The variables vault, gated by VARIABLES_VAULT.
 	"escape-cli vault variables list":   betaMCPToolNote,
 	"escape-cli vault variables create": betaMCPToolNote,
@@ -63,6 +77,14 @@ var betaMCPTools = map[string]string{
 	"escape-cli vault list":             betaMCPToolNote,
 	"escape-cli vault link":             betaMCPToolNote,
 	"escape-cli vault entries":          betaMCPToolNote,
+
+	// Organization security-test configuration and the compliance selection.
+	"escape-cli security-tests update":      betaMCPToolNote,
+	"escape-cli security-tests bulk-update": betaMCPToolNote,
+	"escape-cli compliance enable":          betaMCPToolNote,
+
+	// Organization-wide scanner defaults.
+	"escape-cli org-settings scanner-configuration create": betaMCPToolNote,
 
 	// The knowledge file library, not GA.
 	"escape-cli knowledge-files list":   betaMCPToolNote,

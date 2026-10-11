@@ -54,8 +54,9 @@ func drainCursorPages[T any](fetch func(cursor string) ([]T, *http.Response, err
 }
 
 // ListRoles lists every role in the organization, draining every page the
-// X-Next-Cursor header announces.
-func ListRoles(ctx context.Context) ([]v3.ListRoles200ResponseInner, error) {
+// X-Next-Cursor header announces. search filters the role name and is sent
+// on every page.
+func ListRoles(ctx context.Context, search string) ([]v3.ListRoles200ResponseInner, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -65,6 +66,10 @@ func ListRoles(ctx context.Context) ([]v3.ListRoles200ResponseInner, error) {
 		req := client.RolesAPI.ListRoles(ctx).Size(maxRolePageSize)
 		if cursor != "" {
 			req = req.Cursor(cursor)
+		}
+
+		if search != "" {
+			req = req.Search(search)
 		}
 
 		data, httpRes, err := req.Execute()

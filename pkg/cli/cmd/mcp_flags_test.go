@@ -69,6 +69,8 @@ func TestMCPScansProblemsExposesFilters(t *testing.T) {
 		{property: "status", flag: "status"},
 		{property: "sort_by", flag: "sort-by"},
 		{property: "sort_direction", flag: "sort-direction"},
+		{property: "problem_code", flag: "problem-code"},
+		{property: "problem_severity", flag: "problem-severity"},
 		{property: "size", flag: "size"},
 		{property: "cursor", flag: "cursor"},
 	})
@@ -82,6 +84,7 @@ func TestScanLeafOptionsAreLocalFlags(t *testing.T) {
 	list := []string{
 		"profile-id", "status", "after", "before", "kind", "project-id",
 		"asset-id", "initiator", "ignored", "sort-by", "sort-direction",
+		"commit-branch", "latest-branch-scans", "size", "cursor",
 	}
 	assertLocalFlag(t, scansListCmd, list, map[string]string{
 		"profile-id": "p",

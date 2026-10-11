@@ -65,12 +65,17 @@ const stringSliceFlagArgsPerValue = 2
 // Required means an omitted or empty value is refused before the subprocess
 // starts. The CLI flag can stay optional. The catalog sets this when omitting
 // the flag would widen the operation to every resource.
+//
+// AllowEmpty keeps the property required (omitting it is still an error) but
+// accepts an empty value. An empty string slice is rendered as `--name=`,
+// which pflag reads as an empty list. Other required flags stay non-empty.
 type FlagBinding struct {
-	Property string
-	FlagName string
-	Kind     string
-	Default  any
-	Required bool
+	Property   string
+	FlagName   string
+	Kind       string
+	Default    any
+	Required   bool
+	AllowEmpty bool
 }
 
 // ToolSpec fully describes one CLI-backed MCP tool: its MCP-level metadata
@@ -455,7 +460,7 @@ func buildCommandArgs(spec ToolSpec, rawArgs map[string]any) ([]string, any, err
 			value = binding.Default
 		}
 
-		if binding.Required && requiredArgEmpty(value) {
+		if binding.Required && !binding.AllowEmpty && requiredArgEmpty(value) {
 			return nil, nil, fmt.Errorf("%q must not be empty", binding.Property)
 		}
 
@@ -569,7 +574,9 @@ func buildFlagArgs(binding FlagBinding, value any) ([]string, error) {
 
 		// pflag reads `--flag=` as a set stringSlice whose value is an empty
 		// list. Dropping the flag would look like "not provided", and the CLI
-		// would leave the field unchanged instead of clearing it.
+		// would leave the field unchanged instead of clearing it. AllowEmpty
+		// only decides whether a required flag may be empty; the rendering
+		// is the same.
 		if len(values) == 0 {
 			return []string{"--" + binding.FlagName + "="}, nil
 		}

@@ -152,7 +152,12 @@ func buildScanCoverage(
 		return ScanCoverage{}, fmt.Errorf("size must be <= %d (0 = all matching)", maxCoverageTargetListSize)
 	}
 
-	raw, totalCount, complete, err := listScanTargets(ctx, scanID, targetType, 0)
+	filters := &escape.ListScanTargetsFilters{}
+	if targetType != "" {
+		filters.Types = strings.Split(targetType, ",")
+	}
+
+	raw, totalCount, complete, err := listScanTargets(ctx, scanID, filters, 0)
 	if err != nil {
 		return ScanCoverage{}, err
 	}
@@ -189,7 +194,7 @@ func buildScanCoverage(
 func listScanTargets(
 	ctx context.Context,
 	scanID string,
-	targetType string,
+	filters *escape.ListScanTargetsFilters,
 	limit int,
 ) ([]v3.TargetDetailed, int, bool, error) {
 	var all []v3.TargetDetailed
@@ -212,7 +217,7 @@ func listScanTargets(
 			}
 		}
 
-		page, next, pageTotal, err := escape.ListScanTargets(ctx, scanID, cursor, targetType, pageSize)
+		page, next, pageTotal, err := escape.ListScanTargets(ctx, scanID, cursor, filters, pageSize)
 		if err != nil {
 			return nil, 0, false, fmt.Errorf("unable to list targets: %w", err)
 		}

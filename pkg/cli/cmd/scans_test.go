@@ -126,6 +126,8 @@ func TestScansListPrintsProfileAndAssetIDs(t *testing.T) {
 	scanNoTags = "true"
 	scanDnf = `{"operator":"AND"}`
 
+	resetFlag(t, scansListCmd, "size")
+	resetFlag(t, scansListCmd, "cursor")
 	scansListCmd.SetContext(context.Background())
 
 	stdout, stderr, err := captureOutput(t, "pretty", func() error {

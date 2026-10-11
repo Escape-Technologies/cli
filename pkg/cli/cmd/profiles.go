@@ -65,6 +65,8 @@ var profileProblemsSearch string
 var profileProblemsInitiators []string
 var profileProblemsKinds []string
 var profileProblemsRisks []string
+var profileProblemsProblemCodes []string
+var profileProblemsProblemSeverities []string
 var profileGetExtraAssets bool
 
 var profilesCmd = &cobra.Command{
@@ -542,14 +544,16 @@ identifying configuration issues, broken authentication, or unreachable targets.
 		}
 
 		filters := &escape.ListProblemsFilters{
-			AssetIDs:   profileProblemsAssetIDs,
-			Domains:    profileProblemsDomains,
-			IssueIDs:   profileProblemsIssueIDs,
-			TagsIDs:    profileProblemsTagsIDs,
-			Search:     profileProblemsSearch,
-			Initiators: profileProblemsInitiators,
-			Kinds:      profileProblemsKinds,
-			Risks:      profileProblemsRisks,
+			AssetIDs:          profileProblemsAssetIDs,
+			Domains:           profileProblemsDomains,
+			IssueIDs:          profileProblemsIssueIDs,
+			TagsIDs:           profileProblemsTagsIDs,
+			Search:            profileProblemsSearch,
+			Initiators:        profileProblemsInitiators,
+			Kinds:             profileProblemsKinds,
+			Risks:             profileProblemsRisks,
+			ProblemCodes:      profileProblemsProblemCodes,
+			ProblemSeverities: profileProblemsProblemSeverities,
 		}
 		if err := runPagedList(cmd, profileProblemsPage, func(ctx context.Context, cursor string, size int) ([]v3.ProfileScanProblemsRow, *string, int, error) {
 			rows, next, total, err := escape.ListProblems(ctx, cursor, filters, size)
@@ -1272,6 +1276,56 @@ and scheduled scans. The asset itself is NOT deleted.`,
 	Args: cobra.ExactArgs(1),
 }
 
+var profileBulkUpdateCmd = &cobra.Command{
+	Use:   "bulk-update",
+	Short: "Update the tags, projects or schedule of multiple profiles at once",
+	Long: `Bulk Update Profiles - Move a Set of Profiles in One Step
+
+Send a JSON body naming the profiles and the change to apply. At least one of
+tagIds, projectIds or schedule is required, and a recurring schedule is
+rejected when the batch contains an AI pentest profile. Use --input-schema to
+see the expected shape.`,
+	Example: `  # Give three profiles the same tags and project
+  echo '{"profileIds":["<profile-id>"],"tagIds":["<tag-id>"],"projectIds":["<project-id>"]}' \
+    | escape-cli profiles bulk-update
+
+  # Stop the recurring schedule of every listed profile
+  echo '{"profileIds":["<profile-id>"],"schedule":{"delete":true}}' \
+    | escape-cli profiles bulk-update`,
+	Args: cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if out.InputSchema(v3.BulkUpdateProfilesRequest{}) {
+			return nil
+		}
+
+		if out.Schema(v3.BulkUpdateProfiles200Response{}) {
+			return nil
+		}
+
+		body, err := readRequiredBody(cmd)
+		if err != nil {
+			return err
+		}
+
+		proceed, err := confirmDestructive(cmd, "update every profile named in the request", nil)
+		if err != nil || !proceed {
+			return err
+		}
+
+		result, err := escape.BulkUpdateProfiles(cmd.Context(), body)
+		if err != nil {
+			return fmt.Errorf("unable to bulk update profiles: %w", err)
+		}
+
+		out.Table(result, func() []string {
+			return []string{"SUCCESS", strconv.FormatBool(result.GetSuccess())}
+		})
+		out.Log("Bulk profile update completed")
+
+		return nil
+	},
+}
+
 func init() {
 	profilesCmd.AddCommand(
 		profilesListCmd,
@@ -1286,9 +1340,14 @@ func init() {
 		profileUpdateSchemaCmd,
 		profileGetSchemaCmd,
 		profileUploadSchemaCmd,
+		profileBulkUpdateCmd,
 		profileDeleteCmd,
 	)
 	bindDestructiveGate(profileDeleteCmd, true)
+	bindDestructiveGate(profileBulkUpdateCmd, true)
+	// A dry run only logs: there is no resource to print, so the MCP result
+	// would not match the declared output schema. The CLI flag stays.
+	markMCPSkip(profileBulkUpdateCmd.Flags(), "dry-run")
 	profileGetSchemaCmd.Flags().StringVar(&profileGetSchemaID, "schema-id", "", "specific schema asset ID to pick from extraAssets (default: active schema)")
 	profileGetSchemaCmd.Flags().StringVarP(&profileGetSchemaOutFile, "file", "f", "", "write schema bytes to file path (- for stdout); omit to print JSON metadata")
 	profileGetSchemaCmd.Flags().DurationVar(&profileGetSchemaTimeout, "timeout", profileGetSchemaDefaultTimeout, "end-to-end timeout bounding both the GetProfile API call and the signed-URL body fetch (when -f is used)")
@@ -1356,6 +1415,10 @@ func init() {
 	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsInitiators, "initiator", "n", []string{}, "initiator")
 	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsKinds, "kind", "k", []string{}, "kind")
 	profileProblemsCmd.Flags().StringSliceVarP(&profileProblemsRisks, "risk", "r", []string{}, "risk")
+	profileProblemsCmd.Flags().StringSliceVar(&profileProblemsProblemCodes, "problem-code", []string{}, fmt.Sprintf("filter by validation problem code(s): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues))
+	setEnumAnnotation(profileProblemsCmd.Flags(), "problem-code", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues)
+	profileProblemsCmd.Flags().StringSliceVar(&profileProblemsProblemSeverities, "problem-severity", []string{}, fmt.Sprintf("filter by validation problem severity(ies): %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues))
+	setEnumAnnotation(profileProblemsCmd.Flags(), "problem-severity", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITYEnumValues)
 	profileProblemsPage.bind(profileProblemsCmd)
 	rootCmd.AddCommand(profilesCmd)
 }

@@ -98,7 +98,7 @@ func ExecuteCLICommand(ctx context.Context, options ExecutionOptions) (*Executio
 		StdoutTruncated: stdout.Truncated(),
 		StderrTruncated: stderr.Truncated(),
 	}
-	finalizeCapturedOutput(result, stdout)
+	finalizeCapturedOutput(result, stdout, commandWords(options))
 
 	if runErr == nil {
 		return result, nil
@@ -261,7 +261,7 @@ func marshalBody(body any) ([]byte, error) {
 // finalizeCapturedOutput parses a complete JSON stdout into Payload.
 // When the cap was hit, the captured prefix is not JSON: it is replaced with
 // a truncation error and Payload is {"truncated": true, "error": ...}.
-func finalizeCapturedOutput(result *ExecutionResult, stdout *cappedBuffer) {
+func finalizeCapturedOutput(result *ExecutionResult, stdout *cappedBuffer, command []string) {
 	if stdout == nil || !stdout.Truncated() {
 		if result.Stdout != "" && stdout != nil {
 			var payload any
@@ -273,7 +273,7 @@ func finalizeCapturedOutput(result *ExecutionResult, stdout *cappedBuffer) {
 		return
 	}
 
-	message := truncatedStdoutMessage(stdout.limit)
+	message := truncatedStdoutMessage(stdout.limit, command)
 	result.Stdout = message
 	result.StdoutTruncated = true
 	result.Payload = map[string]any{
@@ -282,11 +282,22 @@ func finalizeCapturedOutput(result *ExecutionResult, stdout *cappedBuffer) {
 	}
 }
 
-func truncatedStdoutMessage(limit int) string {
+func truncatedStdoutMessage(limit int, command []string) string {
 	return fmt.Sprintf(
-		"output truncated at %d bytes; the payload was cut before it could be valid JSON. Retry with a smaller request or narrower filters.",
+		"output truncated at %d bytes; the payload was cut before it could be valid JSON. %s",
 		limit,
+		truncationHint(command),
 	)
+}
+
+// truncationHint tells the caller how to shrink the next request.
+// Issue and asset exports have no page size: the only narrowing knob is where.
+func truncationHint(command []string) string {
+	if len(command) >= minServerSideCommandWords && command[1] == "export" && (command[0] == "issues" || command[0] == "assets") {
+		return "Narrow where and retry."
+	}
+
+	return "Retry with a smaller request or narrower filters."
 }
 
 func describeCommand(options ExecutionOptions) string {

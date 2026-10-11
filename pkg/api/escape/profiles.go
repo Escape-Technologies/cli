@@ -475,16 +475,40 @@ func DeleteProfile(ctx context.Context, profileID string) (*v3.DeleteProfile200R
 	return data, nil
 }
 
+// BulkUpdateProfiles updates the schedule, tags and projects of many profiles
+// at once from raw JSON bytes. The body names the profiles and the change to
+// apply; the API requires at least one of tagIds, projectIds or schedule.
+func BulkUpdateProfiles(ctx context.Context, body []byte) (*v3.BulkUpdateProfiles200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var req v3.BulkUpdateProfilesRequest
+	if err := json.Unmarshal(body, &req); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	data, _, err := client.ProfilesAPI.BulkUpdateProfiles(ctx).BulkUpdateProfilesRequest(req).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
+
 // ListProblemsFilters holds optional filters for listing problems
 type ListProblemsFilters struct {
-	AssetIDs   []string
-	Domains    []string
-	IssueIDs   []string
-	TagsIDs    []string
-	Search     string
-	Initiators []string
-	Kinds      []string
-	Risks      []string
+	AssetIDs          []string
+	Domains           []string
+	IssueIDs          []string
+	TagsIDs           []string
+	Search            string
+	Initiators        []string
+	Kinds             []string
+	Risks             []string
+	ProblemCodes      []string
+	ProblemSeverities []string
 }
 
 // ListProblems lists one page of profile scan problems.
@@ -535,6 +559,14 @@ func ListProblems(ctx context.Context, next string, filters *ListProblemsFilters
 
 		if len(filters.Risks) > 0 {
 			req = req.Risks((filters.Risks))
+		}
+
+		if len(filters.ProblemCodes) > 0 {
+			req = req.ProblemCodes(filters.ProblemCodes)
+		}
+
+		if len(filters.ProblemSeverities) > 0 {
+			req = req.ProblemSeverities(filters.ProblemSeverities)
 		}
 	}
 

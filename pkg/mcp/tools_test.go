@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"reflect"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -379,7 +380,7 @@ func TestBuildCommandArgsAppliesListPageDefault(t *testing.T) {
 func TestTruncatedToolResultMarksError(t *testing.T) {
 	t.Parallel()
 
-	message := truncatedStdoutMessage(maxStdoutBytes)
+	message := truncatedStdoutMessage(maxStdoutBytes, nil)
 	result := truncatedToolResult(&ExecutionResult{
 		Stdout: message,
 		Payload: map[string]any{
@@ -414,7 +415,7 @@ func TestTruncatedToolResultMarksError(t *testing.T) {
 func TestTruncatedToolResultKeepsFailureCause(t *testing.T) {
 	t.Parallel()
 
-	message := truncatedStdoutMessage(maxStdoutBytes)
+	message := truncatedStdoutMessage(maxStdoutBytes, nil)
 	result := truncatedToolResult(&ExecutionResult{
 		Stdout:          message,
 		Stderr:          "Error:\n  Invalid API Key.",
@@ -560,5 +561,64 @@ func TestBuildCommandArgsExplicitFalseOverridesFlagDefault(t *testing.T) {
 	want := []string{"--merge=false"}
 	if !reflect.DeepEqual(args, want) {
 		t.Fatalf("args = %#v, want %#v", args, want)
+	}
+}
+
+func TestBuildCommandArgsRendersAnEmptyAllowedSlice(t *testing.T) {
+	t.Parallel()
+
+	spec := ToolSpec{
+		FlagBindings: []FlagBinding{{
+			Property:   "framework",
+			FlagName:   "framework",
+			Kind:       "stringSlice",
+			Required:   true,
+			AllowEmpty: true,
+		}},
+	}
+
+	got, _, err := buildCommandArgs(spec, map[string]any{"framework": []any{}})
+	if err != nil {
+		t.Fatalf("empty list: %v", err)
+	}
+
+	if !reflect.DeepEqual(got, []string{"--framework="}) {
+		t.Fatalf("args = %#v", got)
+	}
+
+	if _, _, err := buildCommandArgs(spec, map[string]any{}); err == nil {
+		t.Fatal("omitted framework was accepted")
+	}
+
+	required := ToolSpec{
+		FlagBindings: []FlagBinding{{
+			Property: "framework",
+			FlagName: "framework",
+			Kind:     "stringSlice",
+			Required: true,
+		}},
+	}
+	if _, _, err := buildCommandArgs(required, map[string]any{"framework": []any{}}); err == nil {
+		t.Fatal("empty required slice was accepted")
+	}
+}
+
+func TestBuildCommandArgsRendersEmptyCursorDefault(t *testing.T) {
+	t.Parallel()
+
+	got, _, err := buildCommandArgs(ToolSpec{
+		DefaultArgs: map[string]any{"size": DefaultListPageSize},
+		FlagBindings: []FlagBinding{
+			{Property: "size", FlagName: "size", Kind: "int"},
+			{Property: "cursor", FlagName: "cursor", Kind: "string", Default: ""},
+		},
+	}, map[string]any{})
+	if err != nil {
+		t.Fatalf("buildCommandArgs: %v", err)
+	}
+
+	want := []string{"--size", strconv.Itoa(DefaultListPageSize), "--cursor", ""}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("args = %#v, want %#v", got, want)
 	}
 }

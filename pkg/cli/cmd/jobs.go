@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -42,7 +43,11 @@ COMMON WORKFLOWS:
     $ escape-cli jobs trigger-export --block SCAN_SUMMARY --block ISSUE_SUMMARY
 
   • Get job status:
-    $ escape-cli jobs get <job-id> [--watch]`,
+    $ escape-cli jobs get <job-id> [--watch]
+
+  • Rename a finished report, or mail its artefacts:
+    $ escape-cli jobs rename <job-id> --name "Q3 penetration test"
+    $ escape-cli jobs send-artefacts <job-id> --email security@example.com`,
 }
 
 var (
@@ -106,7 +111,7 @@ AVAILABLE BLOCKS:
 
   # Name the report and narrow it to the open issues of one asset
   escape-cli jobs trigger-export --block ISSUE_LIST --name "Weekly digest" \
-    --issue-where '{"assetId":"<asset-id>","status":"OPEN"}'
+    --issue-where '{"assetIds":["<asset-id>"],"status":["OPEN"]}'
 
   # Validate the selection without scheduling anything
   escape-cli jobs trigger-export --block ISSUE_LIST --dry-run
@@ -277,6 +282,11 @@ var (
 	jobsListSortType      string
 	jobsListSortDirection string
 	jobsListPage          pageFlags
+
+	jobsRenameName string
+
+	jobsArtefactsEmails  []string
+	jobsArtefactsSubject string
 )
 
 var jobsListCmd = &cobra.Command{
@@ -317,6 +327,78 @@ walks every page.`,
 		}, jobsSummaryTable); err != nil {
 			return fmt.Errorf("unable to list jobs: %w", err)
 		}
+
+		return nil
+	},
+}
+
+var jobsRenameCmd = &cobra.Command{
+	Use:   "rename job-id",
+	Short: "Rename an export job (Beta)",
+	Long: `Rename an Export - File a Report Under Another Name
+
+Rename an export job. The name is the one shown on the generated report and in
+the job listing, so renaming is how a generated export is filed.`,
+	Example: `  escape-cli jobs rename <job-id> --name "Q3 penetration test"`,
+	Args:    cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.RenameExport200Response{}) {
+			return nil
+		}
+
+		if jobsRenameName == "" {
+			return errors.New("--name is required")
+		}
+
+		renamed, err := escape.RenameExport(cmd.Context(), args[0], jobsRenameName)
+		if err != nil {
+			return fmt.Errorf("unable to rename job %s: %w", args[0], err)
+		}
+
+		out.Table(renamed, func() []string {
+			return []string{"ID\tNAME", fmt.Sprintf("%s\t%s", renamed.GetId(), renamed.GetName())}
+		})
+
+		return nil
+	},
+}
+
+var jobsSendArtefactsCmd = &cobra.Command{
+	Use:     "send-artefacts job-id",
+	Aliases: []string{"send-artifacts"},
+	Short:   "Email the artefacts a job produced (Beta)",
+	Long: `Send Job Artefacts - Mail a Finished Report
+
+Email the artefacts a finished job produced (the PDF or export files) to up to
+50 recipients. --subject is optional; without it the platform's default subject
+is used. The job must already have finished, so poll 'jobs get --watch' first.`,
+	Example: `  escape-cli jobs send-artefacts <job-id> --email security@example.com
+  escape-cli jobs send-artefacts <job-id> --email a@example.com --email b@example.com --subject "Q3 report"`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if out.Schema(v3.SendJobArtefacts200Response{}) {
+			return nil
+		}
+
+		if len(jobsArtefactsEmails) == 0 {
+			return errors.New("at least one --email is required")
+		}
+
+		result, err := escape.SendJobArtefacts(cmd.Context(), args[0], jobsArtefactsEmails, jobsArtefactsSubject)
+		if err != nil {
+			return fmt.Errorf("unable to send the artefacts of job %s: %w", args[0], err)
+		}
+
+		out.Table(result, func() []string {
+			return []string{"SENT", strconv.FormatBool(result.GetSent())}
+		})
+
+		summary := fmt.Sprintf("Artefacts of job %s were not sent", args[0])
+		if result.GetSent() {
+			summary = fmt.Sprintf("Artefacts of job %s sent to %d recipient(s)", args[0], len(jobsArtefactsEmails))
+		}
+
+		out.Log(summary)
 
 		return nil
 	},
@@ -463,7 +545,12 @@ func jobWatchTimeoutError(jobID string, last *v3.GetJob200Response) error {
 }
 
 func init() {
-	jobsCmd.AddCommand(jobsTriggerExportCmd, jobsGetCmd, jobsListCmd)
+	jobsCmd.AddCommand(jobsTriggerExportCmd, jobsGetCmd, jobsListCmd, jobsRenameCmd, jobsSendArtefactsCmd)
+	jobsRenameCmd.Flags().StringVar(&jobsRenameName, "name", "", "new name of the report (required)")
+	markMCPRequired(jobsRenameCmd.Flags(), "name")
+	jobsSendArtefactsCmd.Flags().StringSliceVar(&jobsArtefactsEmails, "email", nil, "recipient email address (required; can be specified multiple times)")
+	jobsSendArtefactsCmd.Flags().StringVar(&jobsArtefactsSubject, "subject", "", "email subject line")
+	markMCPRequired(jobsSendArtefactsCmd.Flags(), "email")
 	jobsListCmd.Flags().StringVar(&jobsListSearch, "search", "", "case-insensitive substring match on the job kind (report names are not searchable)")
 	jobsListCmd.Flags().StringSliceVar(&jobsListKinds, "kind", []string{}, "filter by job kind (can be specified multiple times)")
 	jobsListCmd.Flags().StringSliceVar(&jobsListStatuses, "status", []string{}, "filter by job status: [PENDING RUNNING COMPLETED FAILED]")

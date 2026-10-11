@@ -42,3 +42,25 @@ func UpdateOrganizationSettings(ctx context.Context, body []byte) (*v3.GetOrgani
 
 	return data, nil
 }
+
+// CreateOrganizationScannerConfiguration publishes a new organization-wide
+// scanner configuration from raw JSON bytes. The body carries the `content`
+// object; profiles without their own override follow it.
+func CreateOrganizationScannerConfiguration(ctx context.Context, body []byte) (*v3.CreateOrganizationScannerConfiguration200Response, error) {
+	client, err := newAPIV3Client()
+	if err != nil {
+		return nil, fmt.Errorf("unable to init client: %w", err)
+	}
+
+	var req v3.CreateOrganizationScannerConfigurationRequest
+	if err := json.Unmarshal(body, &req); err != nil {
+		return nil, fmt.Errorf("invalid JSON: %w", err)
+	}
+
+	data, _, err := client.OrganizationSettingsAPI.CreateOrganizationScannerConfiguration(ctx).CreateOrganizationScannerConfigurationRequest(req).Execute()
+	if err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return data, nil
+}
