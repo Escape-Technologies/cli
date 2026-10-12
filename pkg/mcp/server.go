@@ -118,7 +118,10 @@ func (s *Server) Serve(ctx context.Context) error {
 	// `Access-Control-Allow-Credentials` is intentionally omitted here.
 	// CORS must wrap auth: OPTIONS preflights carry no credentials and
 	// must receive CORS headers (status 204) without triggering a 401.
-	mainMux.Handle("/mcp", wrapWithCORS(wrapWithAuthMiddleware(interceptedMCP, oauth)))
+	// PostHog wraps auth so 401s from the OAuth gate are still captured.
+	// Capture always reports. Hosted pods set ESCAPE_CLI_POSTHOG_DEPLOYMENT
+	// to staging or prod; unset maps to the local PostHog label.
+	mainMux.Handle("/mcp", wrapWithCORS(wrapWithPosthog(ctx, wrapWithAuthMiddleware(interceptedMCP, oauth), s.options.PublicAPIURL)))
 	mainMux.HandleFunc("/health", healthHandler)
 	if oauth != nil {
 		mainMux.Handle("/.well-known/oauth-protected-resource", wrapWithCORS(http.HandlerFunc(oauth.ServePRM)))
