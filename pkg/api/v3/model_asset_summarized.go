@@ -50,7 +50,7 @@ type AssetSummarized struct {
 	Host                 *AssetHostSummarized       `json:"host,omitempty"`
 	Technology           *AssetTechnologySummarized `json:"technology,omitempty"`
 	MobileApp            *AssetMobileAppSummarized  `json:"mobileApp,omitempty"`
-	Links                AssetDetailedLinks         `json:"links"`
+	Links                AssetRowLinks              `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -60,7 +60,7 @@ type _AssetSummarized AssetSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetSummarized(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, projectIds []string, links AssetDetailedLinks) *AssetSummarized {
+func NewAssetSummarized(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, projectIds []string, links AssetRowLinks) *AssetSummarized {
 	this := AssetSummarized{}
 	this.Id = id
 	this.Class = class
@@ -613,9 +613,9 @@ func (o *AssetSummarized) SetMobileApp(v AssetMobileAppSummarized) {
 }
 
 // GetLinks returns the Links field value
-func (o *AssetSummarized) GetLinks() AssetDetailedLinks {
+func (o *AssetSummarized) GetLinks() AssetRowLinks {
 	if o == nil {
-		var ret AssetDetailedLinks
+		var ret AssetRowLinks
 		return ret
 	}
 
@@ -624,7 +624,7 @@ func (o *AssetSummarized) GetLinks() AssetDetailedLinks {
 
 // GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
-func (o *AssetSummarized) GetLinksOk() (*AssetDetailedLinks, bool) {
+func (o *AssetSummarized) GetLinksOk() (*AssetRowLinks, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -632,7 +632,7 @@ func (o *AssetSummarized) GetLinksOk() (*AssetDetailedLinks, bool) {
 }
 
 // SetLinks sets field value
-func (o *AssetSummarized) SetLinks(v AssetDetailedLinks) {
+func (o *AssetSummarized) SetLinks(v AssetRowLinks) {
 	o.Links = v
 }
 

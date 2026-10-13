@@ -66,7 +66,7 @@ type UpdateAsset200Response struct {
 	RawData    interface{}      `json:"rawData,omitempty"`
 	// Metadata flags for the asset
 	Metadata             []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESMETADATAITEMS `json:"metadata,omitempty"`
-	Links                AssetDetailedLinks                                              `json:"links"`
+	Links                AssetRowLinks                                                   `json:"links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,7 +76,7 @@ type _UpdateAsset200Response UpdateAsset200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAsset200Response(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, projectIds []string, links AssetDetailedLinks) *UpdateAsset200Response {
+func NewUpdateAsset200Response(id string, class ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESCLASS, type_ ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE, name string, createdAt string, lastSeenAt string, status ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS, tags []Tag, risks []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS, projectIds []string, links AssetRowLinks) *UpdateAsset200Response {
 	this := UpdateAsset200Response{}
 	this.Id = id
 	this.Class = class
@@ -950,9 +950,9 @@ func (o *UpdateAsset200Response) SetMetadata(v []ENUMPROPERTIESDATAITEMSPROPERTI
 }
 
 // GetLinks returns the Links field value
-func (o *UpdateAsset200Response) GetLinks() AssetDetailedLinks {
+func (o *UpdateAsset200Response) GetLinks() AssetRowLinks {
 	if o == nil {
-		var ret AssetDetailedLinks
+		var ret AssetRowLinks
 		return ret
 	}
 
@@ -961,7 +961,7 @@ func (o *UpdateAsset200Response) GetLinks() AssetDetailedLinks {
 
 // GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
-func (o *UpdateAsset200Response) GetLinksOk() (*AssetDetailedLinks, bool) {
+func (o *UpdateAsset200Response) GetLinksOk() (*AssetRowLinks, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -969,7 +969,7 @@ func (o *UpdateAsset200Response) GetLinksOk() (*AssetDetailedLinks, bool) {
 }
 
 // SetLinks sets field value
-func (o *UpdateAsset200Response) SetLinks(v AssetDetailedLinks) {
+func (o *UpdateAsset200Response) SetLinks(v AssetRowLinks) {
 	o.Links = v
 }
 

@@ -15,38 +15,38 @@ import (
 	"fmt"
 )
 
-// checks if the AssetDetailedLinks type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AssetDetailedLinks{}
+// checks if the AssetRowLinks type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssetRowLinks{}
 
-// AssetDetailedLinks The links of the asset
-type AssetDetailedLinks struct {
+// AssetRowLinks The links of the asset
+type AssetRowLinks struct {
 	// The url to view the asset overview in the platform
 	AssetOverview        string `json:"assetOverview"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _AssetDetailedLinks AssetDetailedLinks
+type _AssetRowLinks AssetRowLinks
 
-// NewAssetDetailedLinks instantiates a new AssetDetailedLinks object
+// NewAssetRowLinks instantiates a new AssetRowLinks object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAssetDetailedLinks(assetOverview string) *AssetDetailedLinks {
-	this := AssetDetailedLinks{}
+func NewAssetRowLinks(assetOverview string) *AssetRowLinks {
+	this := AssetRowLinks{}
 	this.AssetOverview = assetOverview
 	return &this
 }
 
-// NewAssetDetailedLinksWithDefaults instantiates a new AssetDetailedLinks object
+// NewAssetRowLinksWithDefaults instantiates a new AssetRowLinks object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAssetDetailedLinksWithDefaults() *AssetDetailedLinks {
-	this := AssetDetailedLinks{}
+func NewAssetRowLinksWithDefaults() *AssetRowLinks {
+	this := AssetRowLinks{}
 	return &this
 }
 
 // GetAssetOverview returns the AssetOverview field value
-func (o *AssetDetailedLinks) GetAssetOverview() string {
+func (o *AssetRowLinks) GetAssetOverview() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -57,7 +57,7 @@ func (o *AssetDetailedLinks) GetAssetOverview() string {
 
 // GetAssetOverviewOk returns a tuple with the AssetOverview field value
 // and a boolean to check if the value has been set.
-func (o *AssetDetailedLinks) GetAssetOverviewOk() (*string, bool) {
+func (o *AssetRowLinks) GetAssetOverviewOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,11 +65,11 @@ func (o *AssetDetailedLinks) GetAssetOverviewOk() (*string, bool) {
 }
 
 // SetAssetOverview sets field value
-func (o *AssetDetailedLinks) SetAssetOverview(v string) {
+func (o *AssetRowLinks) SetAssetOverview(v string) {
 	o.AssetOverview = v
 }
 
-func (o AssetDetailedLinks) MarshalJSON() ([]byte, error) {
+func (o AssetRowLinks) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -77,7 +77,7 @@ func (o AssetDetailedLinks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AssetDetailedLinks) ToMap() (map[string]interface{}, error) {
+func (o AssetRowLinks) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["assetOverview"] = o.AssetOverview
 
@@ -88,7 +88,7 @@ func (o AssetDetailedLinks) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *AssetDetailedLinks) UnmarshalJSON(data []byte) (err error) {
+func (o *AssetRowLinks) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -110,15 +110,15 @@ func (o *AssetDetailedLinks) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAssetDetailedLinks := _AssetDetailedLinks{}
+	varAssetRowLinks := _AssetRowLinks{}
 
-	err = json.Unmarshal(data, &varAssetDetailedLinks)
+	err = json.Unmarshal(data, &varAssetRowLinks)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AssetDetailedLinks(varAssetDetailedLinks)
+	*o = AssetRowLinks(varAssetRowLinks)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -130,38 +130,38 @@ func (o *AssetDetailedLinks) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableAssetDetailedLinks struct {
-	value *AssetDetailedLinks
+type NullableAssetRowLinks struct {
+	value *AssetRowLinks
 	isSet bool
 }
 
-func (v NullableAssetDetailedLinks) Get() *AssetDetailedLinks {
+func (v NullableAssetRowLinks) Get() *AssetRowLinks {
 	return v.value
 }
 
-func (v *NullableAssetDetailedLinks) Set(val *AssetDetailedLinks) {
+func (v *NullableAssetRowLinks) Set(val *AssetRowLinks) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAssetDetailedLinks) IsSet() bool {
+func (v NullableAssetRowLinks) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAssetDetailedLinks) Unset() {
+func (v *NullableAssetRowLinks) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAssetDetailedLinks(val *AssetDetailedLinks) *NullableAssetDetailedLinks {
-	return &NullableAssetDetailedLinks{value: val, isSet: true}
+func NewNullableAssetRowLinks(val *AssetRowLinks) *NullableAssetRowLinks {
+	return &NullableAssetRowLinks{value: val, isSet: true}
 }
 
-func (v NullableAssetDetailedLinks) MarshalJSON() ([]byte, error) {
+func (v NullableAssetRowLinks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAssetDetailedLinks) UnmarshalJSON(src []byte) error {
+func (v *NullableAssetRowLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

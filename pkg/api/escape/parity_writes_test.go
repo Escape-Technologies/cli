@@ -108,7 +108,7 @@ func TestUpdateSecurityTestPutsEnabledAndSeverity(t *testing.T) {
 	got := captureWrite(t, securityTestWire)
 	request := v3.NewUpdateSecurityTestRequest()
 	request.SetEnabled(false)
-	request.SetCustomSeverity(v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY_HIGH)
+	request.SetCustomSeverity(v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY_HIGH)
 
 	if _, err := UpdateSecurityTest(context.Background(), parityWriteID, *request); err != nil {
 		t.Fatalf("update security test: %v", err)

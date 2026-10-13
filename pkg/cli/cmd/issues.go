@@ -665,9 +665,9 @@ func buildUpdateIssueRequest() (*v3.UpdateIssueRequest, error) {
 			body.SetSeverityNil()
 		}
 	} else if issueUpdateSeverity != "" {
-		severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(issueUpdateSeverity)
+		severity := v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(issueUpdateSeverity)
 		if !severity.IsValid() {
-			return nil, fmt.Errorf("invalid severity %q; valid values: %v", issueUpdateSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
+			return nil, fmt.Errorf("invalid severity %q; valid values: %v", issueUpdateSeverity, v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
 		}
 
 		if issueUpdateReason != "" {
@@ -677,7 +677,7 @@ func buildUpdateIssueRequest() (*v3.UpdateIssueRequest, error) {
 			body.SetSeverity(v3.UpdateIssueRequestSeverity{BulkUpdateIssuesRequestSeverityAnyOf: severityPayload})
 		} else {
 			body.SetSeverity(v3.UpdateIssueRequestSeverity{
-				ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY: &severity,
+				ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY: &severity,
 			})
 		}
 	}
@@ -1073,9 +1073,9 @@ func buildBulkUpdateIssuesRequest() (*v3.BulkUpdateIssuesRequest, error) {
 			body.SetSeverityNil()
 		}
 	} else if setSeverity != "" {
-		severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(setSeverity)
+		severity := v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(setSeverity)
 		if !severity.IsValid() {
-			return nil, fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
+			return nil, fmt.Errorf("invalid severity %q; valid values: %v", setSeverity, v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
 		}
 
 		severityPayload := v3.NewBulkUpdateIssuesRequestSeverityAnyOf()
@@ -1101,9 +1101,9 @@ func buildBulkUpdateIssuesRequest() (*v3.BulkUpdateIssuesRequest, error) {
 	}
 
 	if len(bulkIssueSeverities) > 0 {
-		severities := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, len(bulkIssueSeverities))
+		severities := make([]v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, len(bulkIssueSeverities))
 		for i, s := range bulkIssueSeverities {
-			severities[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(s)
+			severities[i] = v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(s)
 		}
 
 		where.Severities = severities
@@ -1354,9 +1354,9 @@ func buildBulkTriggerIssueWorkflowsRequest(cmd *cobra.Command) (*v3.BulkTriggerI
 		}
 
 		if len(bulkWorkflowSeverities) > 0 {
-			severities := make([]v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, len(bulkWorkflowSeverities))
+			severities := make([]v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, len(bulkWorkflowSeverities))
 			for i, s := range bulkWorkflowSeverities {
-				severities[i] = v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(s)
+				severities[i] = v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(s)
 			}
 
 			where.Severities = severities
@@ -1549,7 +1549,7 @@ func init() {
 	issueUpdateStatusCmd.Flags().StringVarP(&issueUpdateStatusStr, "status", "s", issueUpdateStatusStr, fmt.Sprintf("new status for the issue: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues))
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "reason", "", "reason for the status and/or severity change (required if your organization enforces it)")
 	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateReason, "comment", "", "deprecated: use --reason")
-	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateSeverity, "severity", "", fmt.Sprintf("new severity for the issue: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	issueUpdateStatusCmd.Flags().StringVar(&issueUpdateSeverity, "severity", "", fmt.Sprintf("new severity for the issue: %v", v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
 	issueUpdateStatusCmd.Flags().BoolVar(&issueResetSeverity, "reset-severity", false, "reset severity to the scanner value")
 	_ = issueUpdateStatusCmd.Flags().MarkDeprecated("comment", "use --reason instead")
 
@@ -1590,7 +1590,7 @@ func init() {
 	issueBulkWorkflowCmd.Flags().BoolVar(&bulkWorkflowAll, "all", false, "target every issue in the organization; cannot be combined with filter flags")
 	issueBulkWorkflowCmd.Flags().BoolVar(&bulkWorkflowDryRun, "dry-run", false, "print the matching issue IDs without triggering anything")
 	markMCPRequired(issueBulkWorkflowCmd.Flags(), "workflow-id")
-	setEnumAnnotation(issueBulkWorkflowCmd.Flags(), "severity", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
+	setEnumAnnotation(issueBulkWorkflowCmd.Flags(), "severity", v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
 	setEnumAnnotation(issueBulkWorkflowCmd.Flags(), "scanner-kind", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMSEnumValues)
 
 	issuesCmd.AddCommand(issueNotifyCmd)
@@ -1604,7 +1604,7 @@ func init() {
 
 	issueListCmd.Flags().StringVarP(&search, "search", "s", "", "free-text search across issue names and descriptions")
 	issueListCmd.Flags().StringSliceVarP(&issueStatus, "status", "", issueStatus, fmt.Sprintf("filter by status: %v", v3.AllowedENUMPROPERTIESFILTERPROPERTIESSTATUSITEMSEnumValues))
-	issueListCmd.Flags().StringSliceVarP(&issueSeverity, "severity", "l", issueSeverity, fmt.Sprintf("filter by severity level: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	issueListCmd.Flags().StringSliceVarP(&issueSeverity, "severity", "l", issueSeverity, fmt.Sprintf("filter by severity level: %v", v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
 	issueListCmd.Flags().StringSliceVarP(&profileIDs, "profile-id", "p", profileIDs, "filter by profile ID(s) - comma-separated for multiple")
 	issueListCmd.Flags().StringSliceVarP(&assetIDs, "asset-id", "a", assetIDs, "filter by asset ID(s) - comma-separated for multiple")
 	issueListCmd.Flags().StringSliceVarP(&domains, "domain", "d", domains, "filter by domain name(s)")

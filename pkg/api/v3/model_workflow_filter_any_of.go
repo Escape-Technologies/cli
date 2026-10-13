@@ -19,9 +19,9 @@ var _ MappedNullable = &WorkflowFilterAnyOf{}
 
 // WorkflowFilterAnyOf struct for WorkflowFilterAnyOf
 type WorkflowFilterAnyOf struct {
-	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
-	Risks      []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                                                            `json:"risks,omitempty"`
-	ProjectIds []string                                                                                                                `json:"projectIds,omitempty"`
+	Severities []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
+	Risks      []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMS                                         `json:"risks,omitempty"`
+	ProjectIds []string                                                                                             `json:"projectIds,omitempty"`
 	// Deprecated, use profileIds instead
 	ApplicationIds       []string                                                            `json:"applicationIds,omitempty"`
 	ProfileIds           []string                                                            `json:"profileIds,omitempty"`
@@ -73,9 +73,9 @@ func NewWorkflowFilterAnyOfWithDefaults() *WorkflowFilterAnyOf {
 }
 
 // GetSeverities returns the Severities field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.Severities) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		var ret []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 	return o.Severities
@@ -83,7 +83,7 @@ func (o *WorkflowFilterAnyOf) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIE
 
 // GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+func (o *WorkflowFilterAnyOf) GetSeveritiesOk() ([]ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.Severities) {
 		return nil, false
 	}
@@ -99,8 +99,8 @@ func (o *WorkflowFilterAnyOf) HasSeverities() bool {
 	return false
 }
 
-// SetSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
-func (o *WorkflowFilterAnyOf) SetSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+// SetSeverities gets a reference to the given []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
+func (o *WorkflowFilterAnyOf) SetSeverities(v []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severities = v
 }
 

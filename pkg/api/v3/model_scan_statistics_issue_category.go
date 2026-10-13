@@ -22,8 +22,8 @@ var _ MappedNullable = &ScanStatisticsIssueCategory{}
 type ScanStatisticsIssueCategory struct {
 	Category ENUMPROPERTIESISSUEPROPERTIESCATEGORIESITEMSPROPERTIESCATEGORY `json:"category"`
 	// The number of issues in this category, when available
-	Count                *int                                                                                                                   `json:"count,omitempty"`
-	Severity             *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity,omitempty"`
+	Count                *int                                                                                                `json:"count,omitempty"`
+	Severity             *ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -104,9 +104,9 @@ func (o *ScanStatisticsIssueCategory) SetCount(v int) {
 }
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
-func (o *ScanStatisticsIssueCategory) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+func (o *ScanStatisticsIssueCategory) GetSeverity() ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.Severity) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		var ret ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 	return *o.Severity
@@ -114,7 +114,7 @@ func (o *ScanStatisticsIssueCategory) GetSeverity() ENUMPROPERTIESDATAITEMSPROPE
 
 // GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ScanStatisticsIssueCategory) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+func (o *ScanStatisticsIssueCategory) GetSeverityOk() (*ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.Severity) {
 		return nil, false
 	}
@@ -130,8 +130,8 @@ func (o *ScanStatisticsIssueCategory) HasSeverity() bool {
 	return false
 }
 
-// SetSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severity field.
-func (o *ScanStatisticsIssueCategory) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+// SetSeverity gets a reference to the given ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severity field.
+func (o *ScanStatisticsIssueCategory) SetSeverity(v ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severity = &v
 }
 

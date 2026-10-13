@@ -1157,7 +1157,7 @@ func init() {
 	assetsListCmd.Flags().StringSliceVar(&assetListOwnerEmails, "owner-emails", nil, "filter by owner email addresses")
 	assetsListCmd.Flags().StringSliceVar(&assetListTechnologyKeys, "technology-keys", nil, "filter by technology keys")
 	assetsListCmd.Flags().StringSliceVar(&assetListPorts, "ports", nil, "filter by port numbers")
-	assetsListCmd.Flags().StringSliceVar(&assetListSeverities, "severities", nil, fmt.Sprintf("filter by issue severities: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	assetsListCmd.Flags().StringSliceVar(&assetListSeverities, "severities", nil, fmt.Sprintf("filter by issue severities: %v", v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
 	assetsListCmd.Flags().StringSliceVar(&assetListRisks, "risks", nil, fmt.Sprintf("filter by asset risks: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
 	assetsListCmd.Flags().StringSliceVar(&assetListFrameworks, "frameworks", nil, fmt.Sprintf("filter by frameworks: %v", v3.AllowedENUMPROPERTIESFRAMEWORKEnumValues))
 	assetsListCmd.Flags().StringVar(&assetListDNF, "dnf", "", "filter by a DNF expression as JSON")

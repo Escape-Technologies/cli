@@ -20,7 +20,7 @@ var _ MappedNullable = &ScanStatisticsIssueSeverity{}
 
 // ScanStatisticsIssueSeverity Issue count for one severity in a scan
 type ScanStatisticsIssueSeverity struct {
-	Severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity"`
+	Severity ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity"`
 	// The number of issues with this severity in the scan
 	Count                int `json:"count"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _ScanStatisticsIssueSeverity ScanStatisticsIssueSeverity
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScanStatisticsIssueSeverity(severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, count int) *ScanStatisticsIssueSeverity {
+func NewScanStatisticsIssueSeverity(severity ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, count int) *ScanStatisticsIssueSeverity {
 	this := ScanStatisticsIssueSeverity{}
 	this.Severity = severity
 	this.Count = count
@@ -48,9 +48,9 @@ func NewScanStatisticsIssueSeverityWithDefaults() *ScanStatisticsIssueSeverity {
 }
 
 // GetSeverity returns the Severity field value
-func (o *ScanStatisticsIssueSeverity) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+func (o *ScanStatisticsIssueSeverity) GetSeverity() ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		var ret ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *ScanStatisticsIssueSeverity) GetSeverity() ENUMPROPERTIESDATAITEMSPROPE
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *ScanStatisticsIssueSeverity) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+func (o *ScanStatisticsIssueSeverity) GetSeverityOk() (*ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *ScanStatisticsIssueSeverity) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSP
 }
 
 // SetSeverity sets field value
-func (o *ScanStatisticsIssueSeverity) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+func (o *ScanStatisticsIssueSeverity) SetSeverity(v ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severity = v
 }
 

@@ -441,7 +441,7 @@ func TestStartWatchRejectsAnUnknownSeverityBeforeStarting(t *testing.T) {
 }
 
 func TestIssueSeverityOrderCoversGeneratedEnum(t *testing.T) {
-	for _, level := range v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues {
+	for _, level := range v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues {
 		if _, ok := severityRank(level); !ok {
 			t.Errorf("severity %s is missing from issueSeverityOrder", level)
 		}

@@ -24,7 +24,7 @@ type BulkTriggerIssueWorkflowsRequestWhere struct {
 	// Filter by asset IDs
 	AssetIds []string `json:"assetIds,omitempty"`
 	// Filter by severities
-	Severities []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
+	Severities []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severities,omitempty"`
 	// Filter by profile IDs
 	ProfileIds []string `json:"profileIds,omitempty"`
 	// Filter by tag IDs
@@ -118,9 +118,9 @@ func (o *BulkTriggerIssueWorkflowsRequestWhere) SetAssetIds(v []string) {
 }
 
 // GetSeverities returns the Severities field value if set, zero value otherwise.
-func (o *BulkTriggerIssueWorkflowsRequestWhere) GetSeverities() []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+func (o *BulkTriggerIssueWorkflowsRequestWhere) GetSeverities() []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.Severities) {
-		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		var ret []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 	return o.Severities
@@ -128,7 +128,7 @@ func (o *BulkTriggerIssueWorkflowsRequestWhere) GetSeverities() []ENUMPROPERTIES
 
 // GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkTriggerIssueWorkflowsRequestWhere) GetSeveritiesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+func (o *BulkTriggerIssueWorkflowsRequestWhere) GetSeveritiesOk() ([]ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.Severities) {
 		return nil, false
 	}
@@ -144,8 +144,8 @@ func (o *BulkTriggerIssueWorkflowsRequestWhere) HasSeverities() bool {
 	return false
 }
 
-// SetSeverities gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
-func (o *BulkTriggerIssueWorkflowsRequestWhere) SetSeverities(v []ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+// SetSeverities gets a reference to the given []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Severities field.
+func (o *BulkTriggerIssueWorkflowsRequestWhere) SetSeverities(v []ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severities = v
 }
 

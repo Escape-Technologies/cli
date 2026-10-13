@@ -38,7 +38,7 @@ type ProfileSummarized struct {
 	SchemaAssetId *string `json:"schemaAssetId,omitempty"`
 	// Assets linked to the profile, including API schemas (`class === \"SCHEMA\"`). A profile can reference multiple schema assets.
 	ExtraAssets []ProfileExtraAsset `json:"extraAssets"`
-	Asset       AssetDetailed       `json:"asset"`
+	Asset       AssetRow            `json:"asset"`
 	// Security score of the last scan (0-100). Null if no scan has completed.
 	Score *float32 `json:"score,omitempty"`
 	// Coverage ratio of the last scan (0-1). Null if no scan has completed.
@@ -59,7 +59,7 @@ type _ProfileSummarized ProfileSummarized
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfileSummarized(id string, name string, description string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, extraAssets []ProfileExtraAsset, asset AssetDetailed, links ProfileSummarizedLinks) *ProfileSummarized {
+func NewProfileSummarized(id string, name string, description string, createdAt string, initiators []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS, extraAssets []ProfileExtraAsset, asset AssetRow, links ProfileSummarizedLinks) *ProfileSummarized {
 	this := ProfileSummarized{}
 	this.Id = id
 	this.Name = name
@@ -324,9 +324,9 @@ func (o *ProfileSummarized) SetExtraAssets(v []ProfileExtraAsset) {
 }
 
 // GetAsset returns the Asset field value
-func (o *ProfileSummarized) GetAsset() AssetDetailed {
+func (o *ProfileSummarized) GetAsset() AssetRow {
 	if o == nil {
-		var ret AssetDetailed
+		var ret AssetRow
 		return ret
 	}
 
@@ -335,7 +335,7 @@ func (o *ProfileSummarized) GetAsset() AssetDetailed {
 
 // GetAssetOk returns a tuple with the Asset field value
 // and a boolean to check if the value has been set.
-func (o *ProfileSummarized) GetAssetOk() (*AssetDetailed, bool) {
+func (o *ProfileSummarized) GetAssetOk() (*AssetRow, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -343,7 +343,7 @@ func (o *ProfileSummarized) GetAssetOk() (*AssetDetailed, bool) {
 }
 
 // SetAsset sets field value
-func (o *ProfileSummarized) SetAsset(v AssetDetailed) {
+func (o *ProfileSummarized) SetAsset(v AssetRow) {
 	o.Asset = v
 }
 

@@ -230,7 +230,7 @@ func init() {
 	eventsListCmd.Flags().StringVar(&eventTargetIDs, "target-id", "", "filter by target ID(s) - comma-separated for multiple")
 	eventsListCmd.Flags().StringVar(&eventWorkflowIDs, "workflow-id", "", "filter by workflow ID(s) - comma-separated for multiple")
 	eventsListCmd.Flags().StringVar(&eventGroups, "group", "", "filter by group(s) - comma-separated for multiple")
-	eventsListCmd.Flags().StringSliceVar(&eventSeverities, "severity", nil, fmt.Sprintf("filter by severity: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	eventsListCmd.Flags().StringSliceVar(&eventSeverities, "severity", nil, fmt.Sprintf("filter by severity: %v", v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
 	eventsListCmd.Flags().StringSliceVar(&eventRisks, "risk", nil, fmt.Sprintf("filter by risk: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESRISKSITEMSEnumValues))
 	eventsListCmd.Flags().StringSliceVar(&eventScanProblemCodes, "problem-code", nil, fmt.Sprintf("filter by scan problem code: %v", v3.AllowedENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODEEnumValues))
 	eventsListCmd.Flags().StringVar(&eventResponseStatusCodes, "response-status-code", "", "filter by response status code(s) - comma-separated for multiple")

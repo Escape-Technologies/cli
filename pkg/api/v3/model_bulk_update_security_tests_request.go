@@ -20,9 +20,9 @@ var _ MappedNullable = &BulkUpdateSecurityTestsRequest{}
 // BulkUpdateSecurityTestsRequest struct for BulkUpdateSecurityTestsRequest
 type BulkUpdateSecurityTestsRequest struct {
 	// The new enabled state to apply
-	Enabled        *bool                                                                                                                  `json:"enabled,omitempty"`
-	CustomSeverity *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"customSeverity,omitempty"`
-	Where          *BulkUpdateSecurityTestsRequestWhere                                                                                   `json:"where,omitempty"`
+	Enabled        *bool                                                                                               `json:"enabled,omitempty"`
+	CustomSeverity *ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"customSeverity,omitempty"`
+	Where          *BulkUpdateSecurityTestsRequestWhere                                                                `json:"where,omitempty"`
 	// Set to true to target every security test. Mutually exclusive with a non-empty `where`.
 	All *bool `json:"all,omitempty"`
 	// Return the matching security test IDs and count without updating anything
@@ -82,9 +82,9 @@ func (o *BulkUpdateSecurityTestsRequest) SetEnabled(v bool) {
 }
 
 // GetCustomSeverity returns the CustomSeverity field value if set, zero value otherwise.
-func (o *BulkUpdateSecurityTestsRequest) GetCustomSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+func (o *BulkUpdateSecurityTestsRequest) GetCustomSeverity() ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.CustomSeverity) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		var ret ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 	return *o.CustomSeverity
@@ -92,7 +92,7 @@ func (o *BulkUpdateSecurityTestsRequest) GetCustomSeverity() ENUMPROPERTIESDATAI
 
 // GetCustomSeverityOk returns a tuple with the CustomSeverity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateSecurityTestsRequest) GetCustomSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+func (o *BulkUpdateSecurityTestsRequest) GetCustomSeverityOk() (*ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.CustomSeverity) {
 		return nil, false
 	}
@@ -108,8 +108,8 @@ func (o *BulkUpdateSecurityTestsRequest) HasCustomSeverity() bool {
 	return false
 }
 
-// SetCustomSeverity gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the CustomSeverity field.
-func (o *BulkUpdateSecurityTestsRequest) SetCustomSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+// SetCustomSeverity gets a reference to the given ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the CustomSeverity field.
+func (o *BulkUpdateSecurityTestsRequest) SetCustomSeverity(v ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.CustomSeverity = &v
 }
 

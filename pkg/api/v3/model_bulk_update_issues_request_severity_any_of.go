@@ -19,7 +19,7 @@ var _ MappedNullable = &BulkUpdateIssuesRequestSeverityAnyOf{}
 
 // BulkUpdateIssuesRequestSeverityAnyOf struct for BulkUpdateIssuesRequestSeverityAnyOf
 type BulkUpdateIssuesRequestSeverityAnyOf struct {
-	Value *ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"value,omitempty"`
+	Value *ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"value,omitempty"`
 	// Reason for the change (required if your organization enforces it)
 	Reason               *string `json:"reason,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -45,9 +45,9 @@ func NewBulkUpdateIssuesRequestSeverityAnyOfWithDefaults() *BulkUpdateIssuesRequ
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValue() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValue() ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil || IsNil(o.Value) {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		var ret ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 	return *o.Value
@@ -55,7 +55,7 @@ func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValue() ENUMPROPERTIESDATAITEM
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValueOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+func (o *BulkUpdateIssuesRequestSeverityAnyOf) GetValueOk() (*ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
@@ -71,8 +71,8 @@ func (o *BulkUpdateIssuesRequestSeverityAnyOf) HasValue() bool {
 	return false
 }
 
-// SetValue gets a reference to the given ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Value field.
-func (o *BulkUpdateIssuesRequestSeverityAnyOf) SetValue(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+// SetValue gets a reference to the given ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY and assigns it to the Value field.
+func (o *BulkUpdateIssuesRequestSeverityAnyOf) SetValue(v ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Value = &v
 }
 

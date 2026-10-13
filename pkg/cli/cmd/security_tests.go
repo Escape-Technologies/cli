@@ -505,10 +505,10 @@ func parseSecurityTestEnabled(value string) (bool, error) {
 	}
 }
 
-func parseSecurityTestSeverity(value string) (v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, error) {
-	severity := v3.ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(value)
+func parseSecurityTestSeverity(value string) (v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, error) {
+	severity := v3.ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY(value)
 	if !severity.IsValid() {
-		return "", fmt.Errorf("invalid severity %q; valid values: %v", value, v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
+		return "", fmt.Errorf("invalid severity %q; valid values: %v", value, v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues)
 	}
 
 	return severity, nil
@@ -603,11 +603,11 @@ func init() {
 	securityTestsListPage.bind(securityTestsListCmd)
 
 	securityTestsUpdateCmd.Flags().StringVar(&securityTestsUpdateEnabled, "enabled", "", "switch the test on or off for the organization (true or false)")
-	securityTestsUpdateCmd.Flags().StringVar(&securityTestsUpdateSeverity, "set-severity", "", fmt.Sprintf("severity its issues report: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	securityTestsUpdateCmd.Flags().StringVar(&securityTestsUpdateSeverity, "set-severity", "", fmt.Sprintf("severity its issues report: %v", v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
 	securityTestsUpdateCmd.Flags().BoolVar(&securityTestsUpdateResetSeverity, "reset-severity", false, "drop the severity override and use the scanner default")
 
 	securityTestsBulkUpdateCmd.Flags().StringVar(&securityTestsBulkEnabled, "enabled", "", "switch the matched tests on or off (true or false)")
-	securityTestsBulkUpdateCmd.Flags().StringVar(&securityTestsBulkSeverity, "set-severity", "", fmt.Sprintf("severity the matched tests report: %v", v3.AllowedENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
+	securityTestsBulkUpdateCmd.Flags().StringVar(&securityTestsBulkSeverity, "set-severity", "", fmt.Sprintf("severity the matched tests report: %v", v3.AllowedENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITYEnumValues))
 	securityTestsBulkUpdateCmd.Flags().BoolVar(&securityTestsBulkResetSeverity, "reset-severity", false, "drop the severity overrides and use the scanner defaults")
 	securityTestsBulkUpdateCmd.Flags().StringSliceVar(&securityTestsBulkIDs, "security-test-id", nil, "filter by security test ID(s)")
 	securityTestsBulkUpdateCmd.Flags().StringVar(&securityTestsBulkSearch, "search", "", "filter by name substring")

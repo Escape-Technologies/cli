@@ -20,7 +20,7 @@ var _ MappedNullable = &UpdateOrganizationSettingsRequestSlasInner{}
 
 // UpdateOrganizationSettingsRequestSlasInner struct for UpdateOrganizationSettingsRequestSlasInner
 type UpdateOrganizationSettingsRequestSlasInner struct {
-	Severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity"`
+	Severity ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity"`
 	// The SLA deadline for this severity, in milliseconds
 	TimeMs int `json:"timeMs"`
 	// Whether the SLA is enforced for this severity
@@ -34,7 +34,7 @@ type _UpdateOrganizationSettingsRequestSlasInner UpdateOrganizationSettingsReque
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateOrganizationSettingsRequestSlasInner(severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, timeMs int, enabled bool) *UpdateOrganizationSettingsRequestSlasInner {
+func NewUpdateOrganizationSettingsRequestSlasInner(severity ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, timeMs int, enabled bool) *UpdateOrganizationSettingsRequestSlasInner {
 	this := UpdateOrganizationSettingsRequestSlasInner{}
 	this.Severity = severity
 	this.TimeMs = timeMs
@@ -51,9 +51,9 @@ func NewUpdateOrganizationSettingsRequestSlasInnerWithDefaults() *UpdateOrganiza
 }
 
 // GetSeverity returns the Severity field value
-func (o *UpdateOrganizationSettingsRequestSlasInner) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+func (o *UpdateOrganizationSettingsRequestSlasInner) GetSeverity() ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		var ret ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *UpdateOrganizationSettingsRequestSlasInner) GetSeverity() ENUMPROPERTIE
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *UpdateOrganizationSettingsRequestSlasInner) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+func (o *UpdateOrganizationSettingsRequestSlasInner) GetSeverityOk() (*ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *UpdateOrganizationSettingsRequestSlasInner) GetSeverityOk() (*ENUMPROPE
 }
 
 // SetSeverity sets field value
-func (o *UpdateOrganizationSettingsRequestSlasInner) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+func (o *UpdateOrganizationSettingsRequestSlasInner) SetSeverity(v ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severity = v
 }
 

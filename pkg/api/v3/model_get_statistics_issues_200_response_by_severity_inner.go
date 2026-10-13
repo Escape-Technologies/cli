@@ -20,7 +20,7 @@ var _ MappedNullable = &GetStatisticsIssues200ResponseBySeverityInner{}
 
 // GetStatisticsIssues200ResponseBySeverityInner struct for GetStatisticsIssues200ResponseBySeverityInner
 type GetStatisticsIssues200ResponseBySeverityInner struct {
-	Severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity"`
+	Severity ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY `json:"severity"`
 	// Number of issues with this severity
 	Count                int `json:"count"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _GetStatisticsIssues200ResponseBySeverityInner GetStatisticsIssues200Respon
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetStatisticsIssues200ResponseBySeverityInner(severity ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, count int) *GetStatisticsIssues200ResponseBySeverityInner {
+func NewGetStatisticsIssues200ResponseBySeverityInner(severity ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, count int) *GetStatisticsIssues200ResponseBySeverityInner {
 	this := GetStatisticsIssues200ResponseBySeverityInner{}
 	this.Severity = severity
 	this.Count = count
@@ -48,9 +48,9 @@ func NewGetStatisticsIssues200ResponseBySeverityInnerWithDefaults() *GetStatisti
 }
 
 // GetSeverity returns the Severity field value
-func (o *GetStatisticsIssues200ResponseBySeverityInner) GetSeverity() ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
+func (o *GetStatisticsIssues200ResponseBySeverityInner) GetSeverity() ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY {
 	if o == nil {
-		var ret ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
+		var ret ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *GetStatisticsIssues200ResponseBySeverityInner) GetSeverity() ENUMPROPER
 
 // GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
-func (o *GetStatisticsIssues200ResponseBySeverityInner) GetSeverityOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
+func (o *GetStatisticsIssues200ResponseBySeverityInner) GetSeverityOk() (*ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *GetStatisticsIssues200ResponseBySeverityInner) GetSeverityOk() (*ENUMPR
 }
 
 // SetSeverity sets field value
-func (o *GetStatisticsIssues200ResponseBySeverityInner) SetSeverity(v ENUMPROPERTIESDATAITEMSPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
+func (o *GetStatisticsIssues200ResponseBySeverityInner) SetSeverity(v ENUMPROPERTIESASSETPROPERTIESSTATISTICSPROPERTIESISSUESPROPERTIESSEVERITIESITEMSPROPERTIESSEVERITY) {
 	o.Severity = v
 }
 
