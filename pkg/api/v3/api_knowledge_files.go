@@ -364,7 +364,7 @@ This is a two-step flow:
 
 The file is processed asynchronously: poll the list endpoint until the status is `COMPLETED` or `FAILED`.
 
-File names must be unique within the organization: names that sanitize to the same storage key (for example `report v1.md` and `report-v1.md`) share a single object, and uploading a new file overwrites the previous one.
+Each upload is stored under its own object, so uploading a file with an already used name adds a new file instead of overwriting the previous one. Uploads are limited to 35MB.
 
 Beta: subject to change.
 
