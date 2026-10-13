@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateSecretVaultVariableRequest{}
 // CreateSecretVaultVariableRequest struct for CreateSecretVaultVariableRequest
 type CreateSecretVaultVariableRequest struct {
 	Type ENUMSECRET `json:"type"`
-	// The name of the variable, referenced from scan configs as {{NAME}}
+	// The name of the variable, referenced from scan configs as ${NAME}
 	Name string `json:"name"`
 	// The secret value. Write-only: never returned by the API.
 	Value                string `json:"value"`

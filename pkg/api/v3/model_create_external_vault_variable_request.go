@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateExternalVaultVariableRequest{}
 // CreateExternalVaultVariableRequest struct for CreateExternalVaultVariableRequest
 type CreateExternalVaultVariableRequest struct {
 	Type ENUMEXTERNAL `json:"type"`
-	// The name of the variable, referenced from scan configs as {{NAME}}
+	// The name of the variable, referenced from scan configs as ${NAME}
 	Name string `json:"name"`
 	// The vault's own coordinate at the provider
 	ExternalId string `json:"externalId"`

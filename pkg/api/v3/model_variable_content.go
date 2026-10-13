@@ -23,7 +23,7 @@ type VariableContent struct {
 	// The id of the vault variable
 	Id   string                                `json:"id"`
 	Type ENUMPROPERTIESDATAITEMSPROPERTIESTYPE `json:"type"`
-	// The name of the vault variable, referenced from scan configs as {{NAME}}
+	// The name of the vault variable, referenced from scan configs as ${NAME}
 	Name                 string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }

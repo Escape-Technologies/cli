@@ -19,7 +19,7 @@ var vaultCmd = &cobra.Command{
 	Short:   "Manage the variables vault",
 	Long: `Manage the Variables Vault - Secret References for Scan Configurations
 
-The vault stores the secret values scan configurations reference as {{NAME}}.
+The vault stores the secret values scan configurations reference as ${NAME}.
 A variable is either a plaintext value, a masked secret, or a pointer to an
 entry of a provider vault.
 
@@ -245,7 +245,7 @@ func init() {
 	vaultVariablesListPage.bind(vaultVariablesListCmd)
 	vaultVariablesListCmd.Flags().StringVar(&vaultVariablesSearch, "search", "", "search vault variables by name")
 
-	vaultVariablesCreateCmd.Flags().StringVar(&vaultVariablesCreateName, "name", "", "variable name, referenced from scan configs as {{NAME}}")
+	vaultVariablesCreateCmd.Flags().StringVar(&vaultVariablesCreateName, "name", "", "variable name, referenced from scan configs as ${NAME}")
 	vaultVariablesCreateCmd.Flags().StringVar(&vaultVariableType, "type", "", "variable kind: "+strings.Join(vaultVariableTypes, ", "))
 	if err := vaultVariablesCreateCmd.Flags().SetAnnotation("type", flagEnumAnnotation, vaultVariableTypes); err != nil {
 		panic(err)

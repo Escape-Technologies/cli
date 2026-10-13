@@ -455,7 +455,7 @@ func (r ApiGetScanConfigurationRequest) Execute() (*GetScanConfiguration200Respo
 /*
 GetScanConfiguration Get a scan effective configuration
 
-Returns the configuration a scan actually ran with, as stored on the scan. Credentials, tokens, cookies, passwords and other secret values are redacted with "[REDACTED]". Vault variable references (e.g. "{{API_KEY}}") are never resolved to their secret value.
+Returns the configuration a scan actually ran with, as stored on the scan. Credentials, tokens, cookies, passwords and other secret values are redacted with "[REDACTED]". Vault variable references (e.g. "${API_KEY}") are never resolved to their secret value.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param scanId The scan ID

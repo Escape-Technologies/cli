@@ -22,7 +22,7 @@ var _ MappedNullable = &GetScanConfiguration200Response{}
 type GetScanConfiguration200Response struct {
 	// The id of the scan
 	ScanId string `json:"scanId"`
-	// The effective scanner configuration the scan actually ran with. Credentials, tokens, cookies, passwords and other secret values are replaced with \"[REDACTED]\"; vault variable references (e.g. \"{{API_KEY}}\") are never resolved to their secret value.
+	// The effective scanner configuration the scan actually ran with. Credentials, tokens, cookies, passwords and other secret values are replaced with \"[REDACTED]\"; vault variable references (e.g. \"${API_KEY}\") are never resolved to their secret value.
 	Configuration        map[string]interface{} `json:"configuration"`
 	AdditionalProperties map[string]interface{}
 }

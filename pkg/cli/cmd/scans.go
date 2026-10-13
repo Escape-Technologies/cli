@@ -308,7 +308,7 @@ var scanConfigurationCmd = &cobra.Command{
 
 Returns the configuration a scan actually ran with, as stored on the scan.
 Credentials, tokens, cookies, passwords and other secret values are redacted
-with "[REDACTED]". Vault variable references (e.g. "{{API_KEY}}") are never
+with "[REDACTED]". Vault variable references (e.g. "${API_KEY}") are never
 resolved to their secret value.
 
 USE CASES:

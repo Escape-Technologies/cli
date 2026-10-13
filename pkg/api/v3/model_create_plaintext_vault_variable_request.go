@@ -21,7 +21,7 @@ var _ MappedNullable = &CreatePlaintextVaultVariableRequest{}
 // CreatePlaintextVaultVariableRequest struct for CreatePlaintextVaultVariableRequest
 type CreatePlaintextVaultVariableRequest struct {
 	Type ENUMPLAINTEXT `json:"type"`
-	// The name of the variable, referenced from scan configs as {{NAME}}
+	// The name of the variable, referenced from scan configs as ${NAME}
 	Name string `json:"name"`
 	// The plaintext value. Write-only: never returned by the API.
 	Value                string `json:"value"`
