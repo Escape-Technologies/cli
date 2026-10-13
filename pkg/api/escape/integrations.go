@@ -287,13 +287,6 @@ type GithubRepository struct {
 	IntegrationIDs []string `json:"integrationIds"`
 }
 
-// RemoteVault is a vault an integration can see at its provider, before it
-// is linked. ExternalID is the coordinate `vault link` sends.
-type RemoteVault struct {
-	Name       string `json:"name"`
-	ExternalID string `json:"externalId"`
-}
-
 // repositoryResponse is the GitHub repository listing envelope. The route
 // pages like the integration listings do.
 type repositoryResponse struct {
@@ -344,32 +337,6 @@ func ListGithubRepositories(ctx context.Context, integrationID, next string, siz
 	}
 
 	return resp.Data, resp.NextCursor, resp.TotalCount, nil
-}
-
-// ListIntegrationVaults lists the vaults the integration can see at its
-// provider, before any of them is linked to the organization. Only names and
-// provider coordinates are returned; values never leave the provider.
-// search narrows the listing by vault name.
-func ListIntegrationVaults(ctx context.Context, kind, integrationID, search string) ([]RemoteVault, error) {
-	if strings.TrimSpace(kind) == "" {
-		return nil, errors.New("kind is required")
-	}
-
-	if strings.TrimSpace(integrationID) == "" {
-		return nil, errors.New("integrationID is required")
-	}
-
-	path := rawPath("integrations", kind, integrationID, "vaults")
-	if search != "" {
-		path += "?search=" + url.QueryEscape(search)
-	}
-
-	var vaults []RemoteVault
-	if err := rawRequest(ctx, http.MethodGet, path, nil, &vaults); err != nil {
-		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
-	}
-
-	return vaults, nil
 }
 
 // JiraProject is one Jira project the integration can file tickets against.

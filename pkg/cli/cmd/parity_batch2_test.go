@@ -110,62 +110,101 @@ func TestViewsDeleteIsMCPDestructive(t *testing.T) {
 }
 
 func TestVaultVariablesCommands(t *testing.T) {
-	previousKey, previousType, previousContent, previousVault := vaultVariablesCreateKey, vaultVariableType, vaultVariableContent, vaultVariableVaultID
+	previousName, previousType, previousValue := vaultVariablesCreateName, vaultVariableType, vaultVariableValue
+	previousExternalID, previousExternalEntry := vaultVariableExternalID, vaultVariableExternalEntry
 	t.Cleanup(func() {
-		vaultVariablesCreateKey, vaultVariableType, vaultVariableContent, vaultVariableVaultID = previousKey, previousType, previousContent, previousVault
+		vaultVariablesCreateName, vaultVariableType, vaultVariableValue = previousName, previousType, previousValue
+		vaultVariableExternalID, vaultVariableExternalEntry = previousExternalID, previousExternalEntry
 	})
 
 	t.Run("create sends the write-only value once", func(t *testing.T) {
-		vaultVariablesCreateKey = "API_TOKEN"
+		vaultVariablesCreateName = "API_TOKEN"
 		vaultVariableType = "SECRET"
-		vaultVariableContent = "tok_123"
-		vaultVariableVaultID = ""
+		vaultVariableValue = "tok_123"
+		vaultVariableExternalID = ""
+		vaultVariableExternalEntry = ""
 
 		runParityBatch2Case(t, parityBatch2Case{
 			name:    "vault variables create",
 			command: vaultVariablesCreateCmd,
 			args:    func() []string { return nil },
 			method:  http.MethodPost,
-			path:    "/v3/vault-variables",
+			path:    "/v3/vault-variables/secret",
 			body: func(t *testing.T, got map[string]any) {
 				t.Helper()
 				for key, want := range map[string]any{
-					"key":     "API_TOKEN",
-					"type":    "SECRET",
-					"content": "tok_123",
+					"name":  "API_TOKEN",
+					"type":  "SECRET",
+					"value": "tok_123",
 				} {
 					if got[key] != want {
 						t.Fatalf("%s = %#v, want %#v", key, got[key], want)
 					}
 				}
-
-				if _, set := got["vaultId"]; set {
-					t.Fatalf("vaultId must stay unset for a SECRET variable: %#v", got)
-				}
 			},
 			respond: func(w http.ResponseWriter) {
-				writeParityJSON(w, `{"id":"`+parityID+`","key":"API_TOKEN","type":"SECRET","createdAt":"2026-01-01T00:00:00Z","updatedAt":"2026-01-01T00:00:00Z"}`)
+				writeParityJSON(w, `{"id":"`+parityID+`","name":"API_TOKEN","type":"SECRET"}`)
 			},
 		})
 	})
 
-	t.Run("rotate sends the new value", func(t *testing.T) {
-		vaultVariableContent = "tok_456"
+	t.Run("external create sends the provider coordinates", func(t *testing.T) {
+		vaultVariablesCreateName = "DB_PASSWORD"
+		vaultVariableType = "EXTERNAL"
+		vaultVariableValue = ""
+		vaultVariableExternalID = "https://my-vault.vault.azure.net/"
+		vaultVariableExternalEntry = "production-db"
 
 		runParityBatch2Case(t, parityBatch2Case{
-			name:    "vault variables rotate",
-			command: vaultVariablesRotateCmd,
-			args:    func() []string { return []string{parityID} },
+			name:    "vault variables create external",
+			command: vaultVariablesCreateCmd,
+			args:    func() []string { return nil },
 			method:  http.MethodPost,
-			path:    "/v3/vault-variables/" + parityID + "/rotate",
+			path:    "/v3/vault-variables/external",
 			body: func(t *testing.T, got map[string]any) {
 				t.Helper()
-				if got["content"] != "tok_456" {
-					t.Fatalf("content = %#v", got["content"])
+				for key, want := range map[string]any{
+					"name":          "DB_PASSWORD",
+					"type":          "EXTERNAL",
+					"externalId":    "https://my-vault.vault.azure.net/",
+					"externalEntry": "production-db",
+				} {
+					if got[key] != want {
+						t.Fatalf("%s = %#v, want %#v", key, got[key], want)
+					}
 				}
 			},
 			respond: func(w http.ResponseWriter) {
-				writeParityJSON(w, `{"id":"`+parityID+`","key":"API_TOKEN","type":"SECRET","createdAt":"2026-01-01T00:00:00Z","updatedAt":"2026-01-01T00:00:00Z"}`)
+				writeParityJSON(w, `{"id":"`+parityID+`","name":"DB_PASSWORD","type":"EXTERNAL"}`)
+			},
+		})
+	})
+
+	t.Run("update sends the new value", func(t *testing.T) {
+		resetFlag(t, vaultVariablesUpdateCmd, "value")
+		resetFlag(t, vaultVariablesUpdateCmd, "external-entry")
+		if err := vaultVariablesUpdateCmd.Flags().Set("value", "tok_456"); err != nil {
+			t.Fatal(err)
+		}
+
+		runParityBatch2Case(t, parityBatch2Case{
+			name:    "vault variables update",
+			command: vaultVariablesUpdateCmd,
+			args:    func() []string { return []string{parityID} },
+			method:  http.MethodPut,
+			path:    "/v3/vault-variables/" + parityID,
+			body: func(t *testing.T, got map[string]any) {
+				t.Helper()
+				if got["value"] != "tok_456" {
+					t.Fatalf("value = %#v", got["value"])
+				}
+
+				if _, set := got["externalEntry"]; set {
+					t.Fatalf("externalEntry must stay unset: %#v", got)
+				}
+			},
+			respond: func(w http.ResponseWriter) {
+				writeParityJSON(w, `{"id":"`+parityID+`","name":"API_TOKEN","type":"SECRET"}`)
 			},
 		})
 	})
@@ -183,30 +222,6 @@ func TestVaultVariablesCommands(t *testing.T) {
 			path:    "/v3/vault-variables/" + parityID,
 			respond: func(w http.ResponseWriter) { writeParityJSON(w, `{"message":"deleted"}`) },
 		})
-	})
-}
-
-func TestVaultLinkSendsTheProviderCoordinates(t *testing.T) {
-	previousIntegration, previousExternal := vaultLinkIntegrationID, vaultLinkExternalID
-	t.Cleanup(func() { vaultLinkIntegrationID, vaultLinkExternalID = previousIntegration, previousExternal })
-	vaultLinkIntegrationID = parityID
-	vaultLinkExternalID = "prod/keyvault"
-
-	runParityBatch2Case(t, parityBatch2Case{
-		name:    "vault link",
-		command: vaultLinkCmd,
-		args:    func() []string { return nil },
-		method:  http.MethodPost,
-		path:    "/v3/vaults",
-		body: func(t *testing.T, got map[string]any) {
-			t.Helper()
-			if got["integrationId"] != parityID || got["externalId"] != "prod/keyvault" {
-				t.Fatalf("link body = %#v", got)
-			}
-		},
-		respond: func(w http.ResponseWriter) {
-			writeParityJSON(w, `{"id":"`+parityID+`","name":"prod","type":"AZURE","externalId":"prod/keyvault","integrationId":"`+parityID+`","createdAt":"2026-01-01T00:00:00Z","updatedAt":"2026-01-01T00:00:00Z"}`)
-		},
 	})
 }
 
@@ -389,23 +404,15 @@ func TestIntegrationsRunsListsOnePage(t *testing.T) {
 }
 
 // TestBetaMarkersCoverTheFlaggedGroups keeps the Beta badge aligned with the
-// server-side beta policy: the vault and the knowledge library are the two
-// flagged surfaces this batch exposes.
+// server-side beta policy. The variables vault graduated; the knowledge
+// library is still flagged.
 func TestBetaMarkersCoverTheFlaggedGroups(t *testing.T) {
 	for _, path := range []string{
-		"escape-cli vault variables list",
-		"escape-cli vault variables create",
-		"escape-cli vault variables delete",
-		"escape-cli vault variables rotate",
-		"escape-cli vault list",
-		"escape-cli vault link",
-		"escape-cli vault entries",
 		"escape-cli knowledge-files list",
 		"escape-cli knowledge-files upload",
 		"escape-cli knowledge-files delete",
 		"escape-cli jobs rename",
 		"escape-cli jobs send-artefacts",
-		"escape-cli integrations vaults",
 		"escape-cli integrations jira-projects",
 		"escape-cli integrations jira-issue-types",
 		"escape-cli integrations azure-areas",
@@ -424,6 +431,10 @@ func TestBetaMarkersCoverTheFlaggedGroups(t *testing.T) {
 
 	for _, path := range []string{
 		"escape-cli views list",
+		"escape-cli vault variables list",
+		"escape-cli vault variables create",
+		"escape-cli vault variables update",
+		"escape-cli vault variables delete",
 		"escape-cli org-settings get",
 		"escape-cli users deactivate",
 		"escape-cli workflows pause",
@@ -451,11 +462,8 @@ func TestNewWriteCommandsAreRegistered(t *testing.T) {
 		"escape-cli views delete",
 		"escape-cli vault variables list",
 		"escape-cli vault variables create",
+		"escape-cli vault variables update",
 		"escape-cli vault variables delete",
-		"escape-cli vault variables rotate",
-		"escape-cli vault list",
-		"escape-cli vault link",
-		"escape-cli vault entries",
 		"escape-cli knowledge-files list",
 		"escape-cli knowledge-files delete",
 		"escape-cli knowledge-files upload",
@@ -470,7 +478,6 @@ func TestNewWriteCommandsAreRegistered(t *testing.T) {
 		"escape-cli integrations sync",
 		"escape-cli integrations runs",
 		"escape-cli integrations repositories",
-		"escape-cli integrations vaults",
 		"escape-cli integrations jira-projects",
 		"escape-cli integrations jira-issue-types",
 		"escape-cli integrations azure-areas",
@@ -492,18 +499,16 @@ func TestNewWriteCommandsAreRegistered(t *testing.T) {
 	}
 }
 
-// TestVaultVariablesCreateRejectsAnExternalWithoutAVault keeps the flag
-// contract the API documents: vaultId is required for EXTERNAL and forbidden
-// otherwise.
-func TestVaultVariablesCreateRejectsAnExternalWithoutAVault(t *testing.T) {
-	previousKey, previousType, previousContent, previousVault := vaultVariablesCreateKey, vaultVariableType, vaultVariableContent, vaultVariableVaultID
+// TestVaultVariablesCreateRejectsAMismatchedBody keeps the three create
+// shapes apart: EXTERNAL needs the provider coordinates, a stored type needs
+// a value.
+func TestVaultVariablesCreateRejectsAMismatchedBody(t *testing.T) {
+	previousName, previousType, previousValue := vaultVariablesCreateName, vaultVariableType, vaultVariableValue
+	previousExternalID, previousExternalEntry := vaultVariableExternalID, vaultVariableExternalEntry
 	t.Cleanup(func() {
-		vaultVariablesCreateKey, vaultVariableType, vaultVariableContent, vaultVariableVaultID = previousKey, previousType, previousContent, previousVault
+		vaultVariablesCreateName, vaultVariableType, vaultVariableValue = previousName, previousType, previousValue
+		vaultVariableExternalID, vaultVariableExternalEntry = previousExternalID, previousExternalEntry
 	})
-	vaultVariablesCreateKey = "DB_PASSWORD"
-	vaultVariableType = "EXTERNAL"
-	vaultVariableContent = "production/db"
-	vaultVariableVaultID = ""
 
 	command := vaultVariablesCreateCmd
 	command.SetIn(strings.NewReader(""))
@@ -511,7 +516,20 @@ func TestVaultVariablesCreateRejectsAnExternalWithoutAVault(t *testing.T) {
 	command.SetErr(io.Discard)
 	command.SetContext(context.Background())
 
-	if err := command.RunE(command, nil); err == nil || !strings.Contains(err.Error(), "--vault-id is required") {
-		t.Fatalf("err = %v, want the vault-id requirement", err)
+	vaultVariablesCreateName = "DB_PASSWORD"
+	vaultVariableType = "EXTERNAL"
+	vaultVariableValue = ""
+	vaultVariableExternalID = ""
+	vaultVariableExternalEntry = ""
+	if err := command.RunE(command, nil); err == nil || !strings.Contains(err.Error(), "--external-id and --external-entry are required") {
+		t.Fatalf("err = %v, want the external coordinate requirement", err)
+	}
+
+	vaultVariableType = "SECRET"
+	vaultVariableValue = ""
+	vaultVariableExternalID = "https://my-vault.vault.azure.net/"
+	vaultVariableExternalEntry = "production-db"
+	if err := command.RunE(command, nil); err == nil || !strings.Contains(err.Error(), "only used for an EXTERNAL variable") {
+		t.Fatalf("err = %v, want the stored-type rejection", err)
 	}
 }

@@ -28,9 +28,6 @@ var (
 	integrationsReposFullNames     []string
 	integrationReposPage           pageFlags
 
-	integrationsVaultsKind   string
-	integrationsVaultsSearch string
-
 	integrationsJiraProjectsSearch      string
 	integrationsJiraIssueTypesProjectID string
 	integrationsAzureAreasProject       string
@@ -356,48 +353,6 @@ with it, only that integration's repositories.`,
 	},
 }
 
-var integrationsVaultsCmd = &cobra.Command{
-	Use:   "vaults integration-id",
-	Short: "List the vaults an integration sees at its provider (Beta)",
-	Long: `List Provider Vaults - Discover What Can Be Linked
-
-List the vaults an integration can see at its provider, before any of them is
-linked to the organization. Each row carries the externalId
-'escape-cli vault link' needs. Only names are returned: the values never leave
-the provider.`,
-	Example: `  # What the Azure integration can see
-  escape-cli integrations vaults <integration-id> --kind azure-key-vault
-
-  # Narrow the discovery by name
-  escape-cli integrations vaults <integration-id> --kind aws --search prod`,
-	Args: cobra.ExactArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		if out.Schema([]escape.RemoteVault{}) {
-			return nil
-		}
-
-		if integrationsVaultsKind == "" {
-			return errors.New("--kind is required")
-		}
-
-		vaults, err := escape.ListIntegrationVaults(cmd.Context(), integrationsVaultsKind, args[0], integrationsVaultsSearch)
-		if err != nil {
-			return fmt.Errorf("failed to list provider vaults: %w", err)
-		}
-
-		out.Table(vaults, func() []string {
-			rows := []string{"NAME\tEXTERNAL ID"}
-			for _, vault := range vaults {
-				rows = append(rows, fmt.Sprintf("%s\t%s", vault.Name, vault.ExternalID))
-			}
-
-			return rows
-		})
-
-		return nil
-	},
-}
-
 var integrationsJiraProjectsCmd = &cobra.Command{
 	Use:   "jira-projects integration-id",
 	Short: "List Jira projects an integration can file tickets against (Beta)",
@@ -626,7 +581,7 @@ func integrationInputSchema(build func() (*clischema.JSONSchema, error)) (bool, 
 }
 
 func init() {
-	integrationsCmd.AddCommand(integrationsListCmd, integrationsGetCmd, integrationsCreateCmd, integrationsUpdateCmd, integrationsDeleteCmd, integrationsTestCmd, integrationsSyncCmd, integrationsRunsCmd, integrationsRepositoriesCmd, integrationsVaultsCmd, integrationsJiraProjectsCmd, integrationsJiraIssueTypesCmd, integrationsAzureAreasCmd)
+	integrationsCmd.AddCommand(integrationsListCmd, integrationsGetCmd, integrationsCreateCmd, integrationsUpdateCmd, integrationsDeleteCmd, integrationsTestCmd, integrationsSyncCmd, integrationsRunsCmd, integrationsRepositoriesCmd, integrationsJiraProjectsCmd, integrationsJiraIssueTypesCmd, integrationsAzureAreasCmd)
 	kinds := integrationKinds()
 	kindUsage := "integration kind: " + strings.Join(kinds, ", ")
 	for _, subcommand := range []*cobra.Command{
@@ -644,16 +599,6 @@ func init() {
 			panic(err)
 		}
 	}
-
-	// Provider vault discovery is GitHub-independent but still kind-addressed:
-	// the --kind value is the URL slug the vaults route uses.
-	integrationsVaultsCmd.Flags().StringVar(&integrationsVaultsKind, "kind", "", kindUsage)
-	if err := integrationsVaultsCmd.Flags().SetAnnotation("kind", flagEnumAnnotation, kinds); err != nil {
-		panic(err)
-	}
-
-	markMCPRequired(integrationsVaultsCmd.Flags(), "kind")
-	integrationsVaultsCmd.Flags().StringVar(&integrationsVaultsSearch, "search", "", "search term to filter vaults by name")
 
 	integrationsJiraProjectsCmd.Flags().StringVar(&integrationsJiraProjectsSearch, "search", "", "search term to filter Jira projects by name")
 	integrationsJiraIssueTypesCmd.Flags().StringVar(&integrationsJiraIssueTypesProjectID, "project-id", "", "Jira project id")

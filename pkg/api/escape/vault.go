@@ -2,10 +2,27 @@ package escape
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
-
-	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
+	"net/http"
+	"net/url"
+	"strconv"
 )
+
+// VariableContent is a vault variable as the public API returns it.
+// The value is write-only and is never part of this struct.
+type VariableContent struct {
+	ID   string `json:"id"`
+	Type string `json:"type"`
+	Name string `json:"name"`
+}
+
+// variablePage is one page of GET /vault-variables.
+type variablePage struct {
+	Data       []VariableContent `json:"data"`
+	NextCursor *string           `json:"nextCursor"`
+	TotalCount int               `json:"totalCount"`
+}
 
 // ListVaultVariablesFilters holds the optional filters of the variable listing.
 type ListVaultVariablesFilters struct {
@@ -14,145 +31,111 @@ type ListVaultVariablesFilters struct {
 
 // ListVaultVariables lists one page of the organization's vault variables.
 // size 0 keeps the API default page size. The returned total is totalCount.
-func ListVaultVariables(ctx context.Context, next string, size int, filters *ListVaultVariablesFilters) ([]v3.VaultVariableSummary, *string, int, error) {
-	client, err := newAPIV3Client()
-	if err != nil {
-		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
-	}
-
-	req := client.VaultVariablesAPI.ListVaultVariables(ctx)
+func ListVaultVariables(ctx context.Context, next string, size int, filters *ListVaultVariablesFilters) ([]VariableContent, *string, int, error) {
+	query := url.Values{}
 	if next != "" {
-		req = req.Cursor(next)
+		query.Set("cursor", next)
 	}
 
 	if size > 0 {
-		req = req.Size(size)
+		query.Set("size", strconv.Itoa(size))
 	}
 
 	if filters != nil && filters.Search != "" {
-		req = req.Search(filters.Search)
+		query.Set("search", filters.Search)
 	}
 
-	data, _, listErr := req.Execute()
-	if listErr != nil {
-		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(listErr))
+	path := rawPath("vault-variables")
+	if encoded := query.Encode(); encoded != "" {
+		path += "?" + encoded
 	}
 
-	nextCursor := data.GetNextCursor()
+	var page variablePage
+	if err := rawRequest(ctx, http.MethodGet, path, nil, &page); err != nil {
+		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
 
-	return data.GetData(), &nextCursor, data.GetTotalCount(), nil
+	return page.Data, page.NextCursor, page.TotalCount, nil
 }
 
-// CreateVaultVariable stores a secret reference. vaultID is required for an
-// EXTERNAL variable and empty otherwise.
-func CreateVaultVariable(ctx context.Context, key, variableType, content, vaultID string) (*v3.CreateVaultVariable200Response, error) {
-	client, err := newAPIV3Client()
+// CreatePlaintextVaultVariable stores a plaintext value under name.
+func CreatePlaintextVaultVariable(ctx context.Context, name, value string) (*VariableContent, error) {
+	return createStoredVariable(ctx, "plaintext", "PLAINTEXT", name, value)
+}
+
+// CreateSecretVaultVariable stores a masked secret under name.
+func CreateSecretVaultVariable(ctx context.Context, name, value string) (*VariableContent, error) {
+	return createStoredVariable(ctx, "secret", "SECRET", name, value)
+}
+
+func createStoredVariable(ctx context.Context, segment, variableType, name, value string) (*VariableContent, error) {
+	body, err := json.Marshal(map[string]string{
+		"type":  variableType,
+		"name":  name,
+		"value": value,
+	})
 	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
+		return nil, fmt.Errorf("failed to encode request: %w", err)
 	}
 
-	req := v3.NewCreateVaultVariableRequest(
-		key,
-		v3.ENUMPROPERTIESDATAITEMSPROPERTIESTYPE(variableType),
-		content,
-	)
-	if vaultID != "" {
-		req.SetVaultId(vaultID)
-	}
-
-	data, _, err := client.VaultVariablesAPI.CreateVaultVariable(ctx).CreateVaultVariableRequest(*req).Execute()
-	if err != nil {
+	var variable VariableContent
+	if err := rawRequest(ctx, http.MethodPost, rawPath("vault-variables", segment), body, &variable); err != nil {
 		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
-	return data, nil
+	return &variable, nil
+}
+
+// CreateExternalVaultVariable stores a pointer at a provider entry.
+// The API confirms the vault and the entry exist before it stores the variable.
+func CreateExternalVaultVariable(ctx context.Context, name, externalID, externalEntry string) (*VariableContent, error) {
+	body, err := json.Marshal(map[string]string{
+		"type":          "EXTERNAL",
+		"name":          name,
+		"externalId":    externalID,
+		"externalEntry": externalEntry,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("failed to encode request: %w", err)
+	}
+
+	var variable VariableContent
+	if err := rawRequest(ctx, http.MethodPost, rawPath("vault-variables", "external"), body, &variable); err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return &variable, nil
+}
+
+// UpdateVaultVariable replaces the value of a plaintext or secret variable,
+// or the entry name of an external one. Exactly one of value and externalEntry
+// is sent.
+func UpdateVaultVariable(ctx context.Context, variableID, value, externalEntry string, external bool) (*VariableContent, error) {
+	payload := map[string]string{}
+	if external {
+		payload["externalEntry"] = externalEntry
+	} else {
+		payload["value"] = value
+	}
+
+	body, err := json.Marshal(payload)
+	if err != nil {
+		return nil, fmt.Errorf("failed to encode request: %w", err)
+	}
+
+	var variable VariableContent
+	if err := rawRequest(ctx, http.MethodPut, rawPath("vault-variables", variableID), body, &variable); err != nil {
+		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
+	}
+
+	return &variable, nil
 }
 
 // DeleteVaultVariable deletes a vault variable by ID.
-func DeleteVaultVariable(ctx context.Context, variableID string) (*v3.DeleteProfile200Response, error) {
-	client, err := newAPIV3Client()
-	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
+func DeleteVaultVariable(ctx context.Context, variableID string) error {
+	if err := rawRequest(ctx, http.MethodDelete, rawPath("vault-variables", variableID), nil, &struct{}{}); err != nil {
+		return fmt.Errorf("api error: %w", humanizeAPIError(err))
 	}
 
-	data, _, err := client.VaultVariablesAPI.DeleteVaultVariable(ctx, variableID).Execute()
-	if err != nil {
-		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
-	}
-
-	return data, nil
-}
-
-// RotateVaultVariable replaces the value of a vault variable.
-func RotateVaultVariable(ctx context.Context, variableID, content string) (*v3.CreateVaultVariable200Response, error) {
-	client, err := newAPIV3Client()
-	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
-	}
-
-	req := v3.NewRotateVaultVariableRequest(content)
-	data, _, err := client.VaultVariablesAPI.RotateVaultVariable(ctx, variableID).RotateVaultVariableRequest(*req).Execute()
-	if err != nil {
-		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
-	}
-
-	return data, nil
-}
-
-// ListVaults lists one page of the vaults reachable by the organization.
-// size 0 keeps the API default page size. The returned total is totalCount.
-func ListVaults(ctx context.Context, next string, size int) ([]v3.VaultSummary1, *string, int, error) {
-	client, err := newAPIV3Client()
-	if err != nil {
-		return nil, nil, 0, fmt.Errorf("unable to init client: %w", err)
-	}
-
-	req := client.VaultVariablesAPI.ListVaults(ctx)
-	if next != "" {
-		req = req.Cursor(next)
-	}
-
-	if size > 0 {
-		req = req.Size(size)
-	}
-
-	data, _, listErr := req.Execute()
-	if listErr != nil {
-		return nil, nil, 0, fmt.Errorf("api error: %w", humanizeAPIError(listErr))
-	}
-
-	nextCursor := data.GetNextCursor()
-
-	return data.GetData(), &nextCursor, data.GetTotalCount(), nil
-}
-
-// LinkVault links a provider vault to the organization.
-func LinkVault(ctx context.Context, integrationID, externalID string) (*v3.LinkVault200Response, error) {
-	client, err := newAPIV3Client()
-	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
-	}
-
-	req := v3.NewLinkVaultRequest(integrationID, externalID)
-	data, _, err := client.VaultVariablesAPI.LinkVault(ctx).LinkVaultRequest(*req).Execute()
-	if err != nil {
-		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
-	}
-
-	return data, nil
-}
-
-// ListVaultEntries lists the entries of a vault, as the provider names them.
-func ListVaultEntries(ctx context.Context, vaultID string) ([]v3.VaultEntry, error) {
-	client, err := newAPIV3Client()
-	if err != nil {
-		return nil, fmt.Errorf("unable to init client: %w", err)
-	}
-
-	data, _, err := client.VaultVariablesAPI.ListVaultEntries(ctx, vaultID).Execute()
-	if err != nil {
-		return nil, fmt.Errorf("api error: %w", humanizeAPIError(err))
-	}
-
-	return data, nil
+	return nil
 }

@@ -20,9 +20,9 @@ var _ MappedNullable = &ListVaultVariables200Response{}
 
 // ListVaultVariables200Response struct for ListVaultVariables200Response
 type ListVaultVariables200Response struct {
-	NextCursor           *string                `json:"nextCursor,omitempty"`
-	TotalCount           *int                   `json:"totalCount,omitempty"`
-	Data                 []VaultVariableSummary `json:"data"`
+	NextCursor           *string           `json:"nextCursor,omitempty"`
+	TotalCount           *int              `json:"totalCount,omitempty"`
+	Data                 []VariableContent `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _ListVaultVariables200Response ListVaultVariables200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListVaultVariables200Response(data []VaultVariableSummary) *ListVaultVariables200Response {
+func NewListVaultVariables200Response(data []VariableContent) *ListVaultVariables200Response {
 	this := ListVaultVariables200Response{}
 	var totalCount int = 100
 	this.TotalCount = &totalCount
@@ -115,9 +115,9 @@ func (o *ListVaultVariables200Response) SetTotalCount(v int) {
 }
 
 // GetData returns the Data field value
-func (o *ListVaultVariables200Response) GetData() []VaultVariableSummary {
+func (o *ListVaultVariables200Response) GetData() []VariableContent {
 	if o == nil {
-		var ret []VaultVariableSummary
+		var ret []VariableContent
 		return ret
 	}
 
@@ -126,7 +126,7 @@ func (o *ListVaultVariables200Response) GetData() []VaultVariableSummary {
 
 // GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
-func (o *ListVaultVariables200Response) GetDataOk() ([]VaultVariableSummary, bool) {
+func (o *ListVaultVariables200Response) GetDataOk() ([]VariableContent, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,7 +134,7 @@ func (o *ListVaultVariables200Response) GetDataOk() ([]VaultVariableSummary, boo
 }
 
 // SetData sets field value
-func (o *ListVaultVariables200Response) SetData(v []VaultVariableSummary) {
+func (o *ListVaultVariables200Response) SetData(v []VariableContent) {
 	o.Data = v
 }
 

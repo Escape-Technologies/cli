@@ -50,19 +50,16 @@ func humanizeAPIError(err error) error {
 		return nil
 	}
 
-	// The generated v3 client returns *v3.GenericOpenAPIError, so target the
-	// pointer type — targeting the value type silently fails to match and
-	// drops all humanization (see TestHumanizeAPIErrorHumanizesGeneratedAPIError).
-	var apiErr *v3.GenericOpenAPIError
-	if !errors.As(err, &apiErr) || apiErr == nil {
+	status, body, ok := apiErrorParts(err)
+	if !ok {
 		return err
 	}
 
-	if isUnauthorizedAPIError(apiErr) {
+	if isUnauthorized(status, body) {
 		return &humanizedAPIError{msg: InvalidAPIKeyMessage, err: err}
 	}
 
-	msg := humanizeAPIErrorBody(apiErr.Body())
+	msg := humanizeAPIErrorBody(body)
 	if msg == "" {
 		return err
 	}
@@ -70,22 +67,38 @@ func humanizeAPIError(err error) error {
 	return &humanizedAPIError{msg: msg, err: err}
 }
 
-// IsInvalidAPIKey reports whether err was produced by an unauthorized API response.
-func IsInvalidAPIKey(err error) bool {
+// apiErrorParts reads the status text and body from either the generated
+// client error or a rawRequest failure. Callers wrap both the same way.
+func apiErrorParts(err error) (string, []byte, bool) {
+	// The generated v3 client returns *v3.GenericOpenAPIError, so target the
+	// pointer type — targeting the value type silently fails to match and
+	// drops all humanization (see TestHumanizeAPIErrorHumanizesGeneratedAPIError).
 	var apiErr *v3.GenericOpenAPIError
-	return errors.As(err, &apiErr) && isUnauthorizedAPIError(apiErr)
-}
-
-func isUnauthorizedAPIError(apiErr *v3.GenericOpenAPIError) bool {
-	if apiErr == nil {
-		return false
+	if errors.As(err, &apiErr) && apiErr != nil {
+		return apiErr.Error(), apiErr.Body(), true
 	}
 
-	if strings.Contains(apiErr.Error(), "401") {
+	var rawErr *rawAPIError
+	if errors.As(err, &rawErr) && rawErr != nil {
+		return rawErr.status, rawErr.body, true
+	}
+
+	return "", nil, false
+}
+
+// IsInvalidAPIKey reports whether err was produced by an unauthorized API response.
+func IsInvalidAPIKey(err error) bool {
+	status, body, ok := apiErrorParts(err)
+
+	return ok && isUnauthorized(status, body)
+}
+
+func isUnauthorized(status string, body []byte) bool {
+	if strings.Contains(status, "401") {
 		return true
 	}
 
-	normalized := strings.ToLower(humanizeAPIErrorBody(apiErr.Body()))
+	normalized := strings.ToLower(humanizeAPIErrorBody(body))
 
 	return strings.Contains(normalized, "not authorized") ||
 		strings.Contains(normalized, "no valid access token") ||

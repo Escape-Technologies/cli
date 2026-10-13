@@ -68,12 +68,8 @@ func rawResponse(ctx context.Context, method, path string, body []byte, out any)
 
 	if resp.StatusCode >= http.StatusBadRequest {
 		data, _ := io.ReadAll(resp.Body)
-		msg := strings.TrimSpace(string(data))
-		if msg == "" {
-			msg = resp.Status
-		}
 
-		return nil, fmt.Errorf("api error (%s): %s", resp.Status, msg)
+		return nil, &rawAPIError{status: resp.Status, body: data}
 	}
 
 	if out == nil || resp.ContentLength == 0 {
@@ -91,6 +87,24 @@ func rawResponse(ctx context.Context, method, path string, body []byte, out any)
 	}
 
 	return resp, nil
+}
+
+// rawAPIError is an HTTP failure from rawRequest. The status and body stay
+// available so humanizeAPIError can turn a 401 into InvalidAPIKeyMessage and
+// a {message, details} body into the same text the generated client produces.
+// Error() keeps the previous "api error (status): body" string.
+type rawAPIError struct {
+	status string
+	body   []byte
+}
+
+func (e *rawAPIError) Error() string {
+	msg := strings.TrimSpace(string(e.body))
+	if msg == "" {
+		msg = e.status
+	}
+
+	return fmt.Sprintf("api error (%s): %s", e.status, msg)
 }
 
 func rawPath(segments ...string) string {

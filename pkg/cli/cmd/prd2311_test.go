@@ -307,28 +307,6 @@ func TestPRD2311CommandsSendTheDocumentedRequest(t *testing.T) {
 			},
 		})
 	})
-
-	t.Run("integrations vaults", func(t *testing.T) {
-		previousKind, previousSearch := integrationsVaultsKind, integrationsVaultsSearch
-		t.Cleanup(func() {
-			integrationsVaultsKind = previousKind
-			integrationsVaultsSearch = previousSearch
-		})
-		integrationsVaultsKind = "azure-key-vault"
-		integrationsVaultsSearch = "prod"
-
-		runParityBatch2Case(t, parityBatch2Case{
-			name:    "integrations vaults",
-			command: integrationsVaultsCmd,
-			args:    func() []string { return []string{parityID} },
-			method:  http.MethodGet,
-			path:    "/v3/integrations/azure-key-vault/" + parityID + "/vaults",
-			query:   map[string]string{"search": "prod"},
-			respond: func(w http.ResponseWriter) {
-				writeParityJSON(w, `[{"name":"prod","externalId":"vault-1"}]`)
-			},
-		})
-	})
 }
 
 // TestPRD2311CommandsRejectIncompleteInput keeps a write from reaching the API
@@ -483,16 +461,6 @@ func TestPRD2311CommandsRejectIncompleteInput(t *testing.T) {
 		jobsArtefactsSubject = ""
 		err := runCommandExpectingFailure(t, jobsSendArtefactsCmd, []string{parityID})
 		if err == nil || !strings.Contains(err.Error(), "--email") {
-			t.Fatalf("error = %v", err)
-		}
-	})
-
-	t.Run("integrations vaults needs a kind", func(t *testing.T) {
-		previousKind := integrationsVaultsKind
-		t.Cleanup(func() { integrationsVaultsKind = previousKind })
-		integrationsVaultsKind = ""
-		err := runCommandExpectingFailure(t, integrationsVaultsCmd, []string{parityID})
-		if err == nil || !strings.Contains(err.Error(), "--kind") {
 			t.Fatalf("error = %v", err)
 		}
 	})

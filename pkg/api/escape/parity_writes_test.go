@@ -293,23 +293,51 @@ func TestListGithubRepositoriesScopesOneIntegration(t *testing.T) {
 	}
 }
 
-func TestListIntegrationVaultsSendsKindAndSearch(t *testing.T) {
-	got := captureWrite(t, `[{"name":"prod","externalId":"vault-1"}]`)
+func TestVaultVariableWritesUseTheSplitEndpoints(t *testing.T) {
+	got := captureWrite(t, `{"id":"`+parityWriteID+`","type":"SECRET","name":"API_TOKEN"}`)
 
-	vaults, err := ListIntegrationVaults(context.Background(), "azure-key-vault", parityWriteID, "prod")
+	variable, err := CreateSecretVaultVariable(context.Background(), "API_TOKEN", "tok_123")
 	if err != nil {
-		t.Fatalf("list vaults: %v", err)
+		t.Fatalf("create secret: %v", err)
 	}
 
-	if got.method != http.MethodGet || got.path != "/v3/integrations/azure-key-vault/"+parityWriteID+"/vaults" {
+	if got.method != http.MethodPost || got.path != "/v3/vault-variables/secret" {
 		t.Fatalf("request = %s %s", got.method, got.path)
 	}
 
-	if got.query.Get("search") != "prod" {
-		t.Fatalf("search = %q", got.query.Get("search"))
+	body := decodeWriteBody(t, got.body)
+	if body["type"] != "SECRET" || body["name"] != "API_TOKEN" || body["value"] != "tok_123" {
+		t.Fatalf("body = %#v", body)
 	}
 
-	if len(vaults) != 1 || vaults[0].ExternalID != "vault-1" || vaults[0].Name != "prod" {
-		t.Fatalf("vaults = %#v", vaults)
+	if variable.ID != parityWriteID || variable.Name != "API_TOKEN" || variable.Type != "SECRET" {
+		t.Fatalf("variable = %#v", variable)
+	}
+
+	got = captureWrite(t, `{"id":"`+parityWriteID+`","type":"EXTERNAL","name":"DB_PASSWORD"}`)
+	if _, err := CreateExternalVaultVariable(context.Background(), "DB_PASSWORD", "https://my-vault.vault.azure.net/", "production-db"); err != nil {
+		t.Fatalf("create external: %v", err)
+	}
+
+	if got.method != http.MethodPost || got.path != "/v3/vault-variables/external" {
+		t.Fatalf("request = %s %s", got.method, got.path)
+	}
+
+	got = captureWrite(t, `{"id":"`+parityWriteID+`","type":"SECRET","name":"API_TOKEN"}`)
+	if _, err := UpdateVaultVariable(context.Background(), parityWriteID, "tok_456", "", false); err != nil {
+		t.Fatalf("update: %v", err)
+	}
+
+	if got.method != http.MethodPut || got.path != "/v3/vault-variables/"+parityWriteID {
+		t.Fatalf("request = %s %s", got.method, got.path)
+	}
+
+	body = decodeWriteBody(t, got.body)
+	if body["value"] != "tok_456" {
+		t.Fatalf("body = %#v", body)
+	}
+
+	if _, set := body["externalEntry"]; set {
+		t.Fatalf("externalEntry must stay unset: %#v", body)
 	}
 }

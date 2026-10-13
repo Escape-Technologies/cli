@@ -60,23 +60,11 @@ var betaMCPTools = map[string]string{
 	"escape-cli emails read": betaMCPToolNote,
 	"escape-cli emails wait": betaMCPToolNote,
 
-	// Provider vault discovery is part of the variables vault surface.
-	"escape-cli integrations vaults": betaMCPToolNote,
-
 	// Ticket workflow lookups and AI pentest scenarios.
 	"escape-cli integrations jira-projects":    betaMCPToolNote,
 	"escape-cli integrations jira-issue-types": betaMCPToolNote,
 	"escape-cli integrations azure-areas":      betaMCPToolNote,
 	"escape-cli scans scenarios":               betaMCPToolNote,
-
-	// The variables vault, gated by VARIABLES_VAULT.
-	"escape-cli vault variables list":   betaMCPToolNote,
-	"escape-cli vault variables create": betaMCPToolNote,
-	"escape-cli vault variables delete": betaMCPToolNote,
-	"escape-cli vault variables rotate": betaMCPToolNote,
-	"escape-cli vault list":             betaMCPToolNote,
-	"escape-cli vault link":             betaMCPToolNote,
-	"escape-cli vault entries":          betaMCPToolNote,
 
 	// Organization security-test configuration and the compliance selection.
 	"escape-cli security-tests update":      betaMCPToolNote,

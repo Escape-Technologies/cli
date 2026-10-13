@@ -66,6 +66,40 @@ func TestHumanizeAPIErrorBodyReturnsEmptyOnUnknownShape(t *testing.T) {
 	}
 }
 
+func TestHumanizeAPIErrorMapsRawUnauthorized(t *testing.T) {
+	t.Parallel()
+	rawErr := &rawAPIError{
+		status: "401 Unauthorized",
+		body:   []byte(`{"message":"Unauthorized"}`),
+	}
+	got := humanizeAPIError(rawErr)
+	if got.Error() != InvalidAPIKeyMessage {
+		t.Fatalf("expected %q, got %q", InvalidAPIKeyMessage, got.Error())
+	}
+
+	if !IsInvalidAPIKey(fmt.Errorf("api error: %w", got)) {
+		t.Fatal("expected invalid API key detection through the raw error")
+	}
+}
+
+func TestHumanizeAPIErrorHumanizesRawBody(t *testing.T) {
+	t.Parallel()
+	rawErr := &rawAPIError{
+		status: "400 Bad Request",
+		body:   []byte(`{"message":"Bad Request","details":"name: Name must be SCREAMING_SNAKE_CASE"}`),
+	}
+	got := humanizeAPIError(rawErr)
+	const want = "Bad Request: name: Name must be SCREAMING_SNAKE_CASE"
+	if got.Error() != want {
+		t.Fatalf("expected %q, got %q", want, got.Error())
+	}
+
+	var unwrapped *rawAPIError
+	if !errors.As(got, &unwrapped) || unwrapped != rawErr {
+		t.Fatalf("expected errors.As to reach the original raw API error")
+	}
+}
+
 func TestHumanizeAPIErrorPassesThroughNonAPIError(t *testing.T) {
 	t.Parallel()
 	original := &stubError{msg: "boom"}

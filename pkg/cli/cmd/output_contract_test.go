@@ -92,7 +92,6 @@ func TestArrayToolsAdvertiseWrappedItemsSchema(t *testing.T) {
 		"events_list",
 		"profiles_list",
 		"tags_list",
-		"integrations_vaults",
 	} {
 		raw, ok := rawByName[name]
 		if !ok {
@@ -655,29 +654,11 @@ func TestIntegrationDiscoverySchemasExposeCoordinates(t *testing.T) {
 		}
 	}
 
-	stdout, stderr, err = captureOutput(t, "schema", func() error {
-		return integrationsVaultsCmd.RunE(integrationsVaultsCmd, []string{"integration-id"})
-	})
-	if err != nil {
-		t.Fatalf("vaults schema: %v\n%s", err, stderr)
-	}
-
-	for _, field := range []string{`"name"`, `"externalId"`} {
-		if !strings.Contains(stdout, field) {
-			t.Errorf("vaults schema missing %s: %s", field, stdout)
-		}
-	}
-
 	repos := string(mcpSpec(t, "integrations_repositories").Tool.RawOutputSchema)
 	for _, field := range []string{`"fullName"`, `"cloneUrl"`, `"integrationIds"`} {
 		if !strings.Contains(repos, field) {
 			t.Errorf("repositories MCP schema missing %s", field)
 		}
-	}
-
-	vaults := string(mcpSpec(t, "integrations_vaults").Tool.RawOutputSchema)
-	if !strings.Contains(vaults, `"externalId"`) || !strings.Contains(vaults, `"name"`) {
-		t.Fatalf("vaults MCP schema = %s", vaults)
 	}
 }
 
