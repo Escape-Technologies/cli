@@ -29,7 +29,7 @@ type GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInn
 	Basic                *string                                                                                              `json:"basic,omitempty"`
 	Digest               *string                                                                                              `json:"digest,omitempty"`
 	Role                 *string                                                                                              `json:"role,omitempty"`
-	Password             string                                                                                               `json:"password"`
+	Password             *string                                                                                              `json:"password,omitempty"`
 	AdditionalFields     []GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInnerAdditionalFieldsInner `json:"additional_fields,omitempty"`
 	PreLoginActions      []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                  `json:"pre_login_actions,omitempty"`
 	PostLoginActions     []GetProfile200ResponseConfigurationAuthenticationUsersInnerCredentialsActionsInner                  `json:"post_login_actions,omitempty"`
@@ -44,10 +44,9 @@ type _GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner(username string, password string) *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner {
+func NewGetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner(username string) *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner {
 	this := GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner{}
 	this.Username = username
-	this.Password = password
 	return &this
 }
 
@@ -339,28 +338,36 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 	o.Role = &v
 }
 
-// GetPassword returns the Password field value
+// GetPassword returns the Password field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetPassword() string {
-	if o == nil {
+	if o == nil || IsNil(o.Password) {
 		var ret string
 		return ret
 	}
-
-	return o.Password
+	return *o.Password
 }
 
-// GetPasswordOk returns a tuple with the Password field value
+// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) GetPasswordOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
-	return &o.Password, true
+	return o.Password, true
 }
 
-// SetPassword sets field value
+// HasPassword returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) HasPassword() bool {
+	if o != nil && !IsNil(o.Password) {
+		return true
+	}
+
+	return false
+}
+
+// SetPassword gets a reference to the given string and assigns it to the Password field.
 func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11UsersInner) SetPassword(v string) {
-	o.Password = v
+	o.Password = &v
 }
 
 // GetAdditionalFields returns the AdditionalFields field value if set, zero value otherwise.
@@ -558,7 +565,9 @@ func (o GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11Users
 	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
-	toSerialize["password"] = o.Password
+	if !IsNil(o.Password) {
+		toSerialize["password"] = o.Password
+	}
 	if !IsNil(o.AdditionalFields) {
 		toSerialize["additional_fields"] = o.AdditionalFields
 	}
@@ -588,7 +597,6 @@ func (o *GetProfile200ResponseConfigurationAuthenticationPresetsInnerOneOf11User
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"username",
-		"password",
 	}
 
 	allProperties := make(map[string]interface{})
