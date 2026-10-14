@@ -45,6 +45,7 @@ type WorkflowFilterAnyOf struct {
 	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
 	AiFalsePositive      *bool                                                               `json:"aiFalsePositive,omitempty"`
 	Agentic              *bool                                                               `json:"agentic,omitempty"`
+	Exploitable          *bool                                                               `json:"exploitable,omitempty"`
 	TargetIds            []string                                                            `json:"targetIds,omitempty"`
 	Domains              []string                                                            `json:"domains,omitempty"`
 	IgnoreInventory      *bool                                                               `json:"ignoreInventory,omitempty"`
@@ -872,6 +873,38 @@ func (o *WorkflowFilterAnyOf) SetAgentic(v bool) {
 	o.Agentic = &v
 }
 
+// GetExploitable returns the Exploitable field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf) GetExploitable() bool {
+	if o == nil || IsNil(o.Exploitable) {
+		var ret bool
+		return ret
+	}
+	return *o.Exploitable
+}
+
+// GetExploitableOk returns a tuple with the Exploitable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf) GetExploitableOk() (*bool, bool) {
+	if o == nil || IsNil(o.Exploitable) {
+		return nil, false
+	}
+	return o.Exploitable, true
+}
+
+// HasExploitable returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf) HasExploitable() bool {
+	if o != nil && !IsNil(o.Exploitable) {
+		return true
+	}
+
+	return false
+}
+
+// SetExploitable gets a reference to the given bool and assigns it to the Exploitable field.
+func (o *WorkflowFilterAnyOf) SetExploitable(v bool) {
+	o.Exploitable = &v
+}
+
 // GetTargetIds returns the TargetIds field value if set, zero value otherwise.
 func (o *WorkflowFilterAnyOf) GetTargetIds() []string {
 	if o == nil || IsNil(o.TargetIds) {
@@ -1118,6 +1151,9 @@ func (o WorkflowFilterAnyOf) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Agentic) {
 		toSerialize["agentic"] = o.Agentic
 	}
+	if !IsNil(o.Exploitable) {
+		toSerialize["exploitable"] = o.Exploitable
+	}
 	if !IsNil(o.TargetIds) {
 		toSerialize["targetIds"] = o.TargetIds
 	}
@@ -1180,6 +1216,7 @@ func (o *WorkflowFilterAnyOf) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "assetStatuses")
 		delete(additionalProperties, "aiFalsePositive")
 		delete(additionalProperties, "agentic")
+		delete(additionalProperties, "exploitable")
 		delete(additionalProperties, "targetIds")
 		delete(additionalProperties, "domains")
 		delete(additionalProperties, "ignoreInventory")
