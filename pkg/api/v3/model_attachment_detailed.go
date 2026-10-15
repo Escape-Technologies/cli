@@ -24,6 +24,7 @@ type AttachmentDetailed struct {
 	Id string `json:"id"`
 	// The date and time the attachment was created
 	CreatedAt            string                        `json:"createdAt"`
+	AgentToolCall        *AgentToolCallDetailed        `json:"agentToolCall,omitempty"`
 	Exchange             *ExchangeDetailed             `json:"exchange,omitempty"`
 	GeneratedOpenapiSpec *GeneratedOpenapiSpecDetailed `json:"generatedOpenapiSpec,omitempty"`
 	Graph                *GraphDetailed                `json:"graph,omitempty"`
@@ -100,6 +101,38 @@ func (o *AttachmentDetailed) GetCreatedAtOk() (*string, bool) {
 // SetCreatedAt sets field value
 func (o *AttachmentDetailed) SetCreatedAt(v string) {
 	o.CreatedAt = v
+}
+
+// GetAgentToolCall returns the AgentToolCall field value if set, zero value otherwise.
+func (o *AttachmentDetailed) GetAgentToolCall() AgentToolCallDetailed {
+	if o == nil || IsNil(o.AgentToolCall) {
+		var ret AgentToolCallDetailed
+		return ret
+	}
+	return *o.AgentToolCall
+}
+
+// GetAgentToolCallOk returns a tuple with the AgentToolCall field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AttachmentDetailed) GetAgentToolCallOk() (*AgentToolCallDetailed, bool) {
+	if o == nil || IsNil(o.AgentToolCall) {
+		return nil, false
+	}
+	return o.AgentToolCall, true
+}
+
+// HasAgentToolCall returns a boolean if a field has been set.
+func (o *AttachmentDetailed) HasAgentToolCall() bool {
+	if o != nil && !IsNil(o.AgentToolCall) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentToolCall gets a reference to the given AgentToolCallDetailed and assigns it to the AgentToolCall field.
+func (o *AttachmentDetailed) SetAgentToolCall(v AgentToolCallDetailed) {
+	o.AgentToolCall = &v
 }
 
 // GetExchange returns the Exchange field value if set, zero value otherwise.
@@ -306,6 +339,9 @@ func (o AttachmentDetailed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["createdAt"] = o.CreatedAt
+	if !IsNil(o.AgentToolCall) {
+		toSerialize["agentToolCall"] = o.AgentToolCall
+	}
 	if !IsNil(o.Exchange) {
 		toSerialize["exchange"] = o.Exchange
 	}
@@ -370,6 +406,7 @@ func (o *AttachmentDetailed) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "agentToolCall")
 		delete(additionalProperties, "exchange")
 		delete(additionalProperties, "generatedOpenapiSpec")
 		delete(additionalProperties, "graph")
