@@ -32,6 +32,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	CommandInjectionAgent                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"command_injection_agent,omitempty"`
 	AccessControlAgent                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"access_control_agent,omitempty"`
 	BusinessLogicAgent                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"business_logic_agent,omitempty"`
+	CassandraAllowAllAuthenticator            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cassandra_allow_all_authenticator,omitempty"`
 	AirflowConfigExposure                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_config_exposure,omitempty"`
 	AirflowDefaultLogin                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_default_login,omitempty"`
 	AirflowV3DefaultLogin                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"airflow_v3_default_login,omitempty"`
@@ -67,6 +68,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	BrokenFunctionLevelAuthorization          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"broken_function_level_authorization,omitempty"`
 	CharacterLimit                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"character_limit,omitempty"`
 	ClientSideStateTampering                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"client_side_state_tampering,omitempty"`
+	ClickhouseNoAuth                          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"clickhouse_no_auth,omitempty"`
 	CgiBinRce                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cgi_bin_rce,omitempty"`
 	FrontendBola                              *GetProfile200ResponseConfigurationSecurityTestsBola                      `json:"frontend_bola,omitempty"`
 	CloudstackDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"cloudstack_default_login,omitempty"`
@@ -98,6 +100,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	FrontendCsrfPostBased                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_csrf_post_based,omitempty"`
 	DebugMode                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"debug_mode,omitempty"`
 	DjangoSecretKey                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"django_secret_key,omitempty"`
+	DnsOpenRecursiveResolver                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dns_open_recursive_resolver,omitempty"`
 	DolphinschedulerDefaultLogin              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dolphinscheduler_default_login,omitempty"`
 	DorisDefaultLogin                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"doris_default_login,omitempty"`
 	DirectoryTraversal                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"directory_traversal,omitempty"`
@@ -195,7 +198,10 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	MissingAuthentication                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_authentication,omitempty"`
 	MissingPkce                               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_pkce,omitempty"`
 	MissingRateLimiting                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"missing_rate_limiting,omitempty"`
+	ModbusUnauthenticatedWrite                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"modbus_unauthenticated_write,omitempty"`
+	MongoNoAuth                               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mongo_no_auth,omitempty"`
 	NegativeValue                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"negative_value,omitempty"`
+	Neo4jAuthDisabled                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"neo4j_auth_disabled,omitempty"`
 	Nosql                                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nosql,omitempty"`
 	FrontendNosqlInjection                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_nosql_injection,omitempty"`
 	OauthGrantMisconfiguration                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"oauth_grant_misconfiguration,omitempty"`
@@ -215,6 +221,8 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	ServerError                               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"server_error,omitempty"`
 	SessionFixation                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"session_fixation,omitempty"`
 	SoftwareComponentLeak                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"software_component_leak,omitempty"`
+	SnmpDefaultReadCommunity                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"snmp_default_read_community,omitempty"`
+	SnmpDefaultWriteCommunity                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"snmp_default_write_community,omitempty"`
 	SpringbootActuatorDump                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"springboot_actuator_dump,omitempty"`
 	SpringbootActuatorEnv                     *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"springboot_actuator_env,omitempty"`
 	SpringbootActuatorHeapdump                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"springboot_actuator_heapdump,omitempty"`
@@ -290,6 +298,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	IssueSslWeakCipherNegotiation             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_weak_cipher_negotiation,omitempty"`
 	IssueSslWeakLowSecurityCiphers            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_weak_low_security_ciphers,omitempty"`
 	IssueSslWeakPreRfc128bitCiphers           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_weak_pre_rfc_128bit_ciphers,omitempty"`
+	JdwpDebugPortExposed                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jdwp_debug_port_exposed,omitempty"`
 	Ssrf                                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssrf,omitempty"`
 	Ssti                                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssti,omitempty"`
 	FrontendSsrfHeader                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"frontend_ssrf_header,omitempty"`
@@ -331,6 +340,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	GlpiDefaultLogin                          *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"glpi_default_login,omitempty"`
 	GrafanaDefaultLogin                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"grafana_default_login,omitempty"`
 	InfobloxNetmriRailsCookieRce              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"infoblox_netmri_rails_cookie_rce,omitempty"`
+	InfluxdbNoAuth                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"influxdb_no_auth,omitempty"`
 	IotawattAppExposure                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"iotawatt_app_exposure,omitempty"`
 	JenkinsWeakPassword                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jenkins_weak_password,omitempty"`
 	JolokiaTomcatCredsLeak                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"jolokia_tomcat_creds_leak,omitempty"`
@@ -359,6 +369,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	LuceeRce                                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"lucee_rce,omitempty"`
 	MalwaredByobRce                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"malwared_byob_rce,omitempty"`
 	MdbDatabaseFile                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mdb_database_file,omitempty"`
+	MemcachedNoAuth                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"memcached_no_auth,omitempty"`
 	MinioDefaultLogin                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"minio_default_login,omitempty"`
 	MssqlDefaultCredentials                   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mssql_default_credentials,omitempty"`
 	MssqlExposed                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"mssql_exposed,omitempty"`
@@ -370,11 +381,13 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	NginxWebuiRce                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nginx_webui_rce,omitempty"`
 	NginxwebuiRuncmdRce                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nginxwebui_runcmd_rce,omitempty"`
 	NodeEcstaticInternalPath                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"node_ecstatic_internal_path,omitempty"`
+	NodeInspectorExposed                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"node_inspector_exposed,omitempty"`
 	NoderedDefaultLogin                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"nodered_default_login,omitempty"`
 	OpenmediavaultDefaultLogin                *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"openmediavault_default_login,omitempty"`
 	OpensearchDashboardDefaultLogin           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"opensearch_dashboard_default_login,omitempty"`
 	PhpTimeclockXss                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"php_timeclock_xss,omitempty"`
 	PhpXdebugRce                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"php_xdebug_rce,omitempty"`
+	PhpfpmPortExposed                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"phpfpm_port_exposed,omitempty"`
 	PhpZerodiumBackdoorRce                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"php_zerodium_backdoor_rce,omitempty"`
 	PhpldapadminXss                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"phpldapadmin_xss,omitempty"`
 	PhpmyadminDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"phpmyadmin_default_login,omitempty"`
@@ -422,6 +435,8 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	CompromisedSupplyChain                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"compromised_supply_chain,omitempty"`
 	ZabbixDefaultLogin                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"zabbix_default_login,omitempty"`
 	DnsRebindingAttack                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dns_rebinding_attack,omitempty"`
+	DnsUnauthenticatedDynamicUpdate           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dns_unauthenticated_dynamic_update,omitempty"`
+	DnsZoneTransferAny                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dns_zone_transfer_any,omitempty"`
 	SpoofableSpfRecordsPtrMechanism           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"spoofable_spf_records_ptr_mechanism,omitempty"`
 	Xxe                                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"xxe,omitempty"`
 	AdditionalProperties                      map[string]interface{}
@@ -860,6 +875,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasBusinessLogicAgent(
 // SetBusinessLogicAgent gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the BusinessLogicAgent field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetBusinessLogicAgent(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.BusinessLogicAgent = &v
+}
+
+// GetCassandraAllowAllAuthenticator returns the CassandraAllowAllAuthenticator field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCassandraAllowAllAuthenticator() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.CassandraAllowAllAuthenticator) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.CassandraAllowAllAuthenticator
+}
+
+// GetCassandraAllowAllAuthenticatorOk returns a tuple with the CassandraAllowAllAuthenticator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetCassandraAllowAllAuthenticatorOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.CassandraAllowAllAuthenticator) {
+		return nil, false
+	}
+	return o.CassandraAllowAllAuthenticator, true
+}
+
+// HasCassandraAllowAllAuthenticator returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasCassandraAllowAllAuthenticator() bool {
+	if o != nil && !IsNil(o.CassandraAllowAllAuthenticator) {
+		return true
+	}
+
+	return false
+}
+
+// SetCassandraAllowAllAuthenticator gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the CassandraAllowAllAuthenticator field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetCassandraAllowAllAuthenticator(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.CassandraAllowAllAuthenticator = &v
 }
 
 // GetAirflowConfigExposure returns the AirflowConfigExposure field value if set, zero value otherwise.
@@ -1982,6 +2029,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetClientSideStateTamp
 	o.ClientSideStateTampering = &v
 }
 
+// GetClickhouseNoAuth returns the ClickhouseNoAuth field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetClickhouseNoAuth() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.ClickhouseNoAuth) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.ClickhouseNoAuth
+}
+
+// GetClickhouseNoAuthOk returns a tuple with the ClickhouseNoAuth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetClickhouseNoAuthOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.ClickhouseNoAuth) {
+		return nil, false
+	}
+	return o.ClickhouseNoAuth, true
+}
+
+// HasClickhouseNoAuth returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasClickhouseNoAuth() bool {
+	if o != nil && !IsNil(o.ClickhouseNoAuth) {
+		return true
+	}
+
+	return false
+}
+
+// SetClickhouseNoAuth gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ClickhouseNoAuth field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetClickhouseNoAuth(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.ClickhouseNoAuth = &v
+}
+
 // GetCgiBinRce returns the CgiBinRce field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetCgiBinRce() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.CgiBinRce) {
@@ -2972,6 +3051,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasDjangoSecretKey() b
 // SetDjangoSecretKey gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the DjangoSecretKey field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetDjangoSecretKey(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.DjangoSecretKey = &v
+}
+
+// GetDnsOpenRecursiveResolver returns the DnsOpenRecursiveResolver field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDnsOpenRecursiveResolver() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.DnsOpenRecursiveResolver) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.DnsOpenRecursiveResolver
+}
+
+// GetDnsOpenRecursiveResolverOk returns a tuple with the DnsOpenRecursiveResolver field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDnsOpenRecursiveResolverOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.DnsOpenRecursiveResolver) {
+		return nil, false
+	}
+	return o.DnsOpenRecursiveResolver, true
+}
+
+// HasDnsOpenRecursiveResolver returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasDnsOpenRecursiveResolver() bool {
+	if o != nil && !IsNil(o.DnsOpenRecursiveResolver) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnsOpenRecursiveResolver gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the DnsOpenRecursiveResolver field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetDnsOpenRecursiveResolver(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.DnsOpenRecursiveResolver = &v
 }
 
 // GetDolphinschedulerDefaultLogin returns the DolphinschedulerDefaultLogin field value if set, zero value otherwise.
@@ -6078,6 +6189,70 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetMissingRateLimiting
 	o.MissingRateLimiting = &v
 }
 
+// GetModbusUnauthenticatedWrite returns the ModbusUnauthenticatedWrite field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetModbusUnauthenticatedWrite() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.ModbusUnauthenticatedWrite) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.ModbusUnauthenticatedWrite
+}
+
+// GetModbusUnauthenticatedWriteOk returns a tuple with the ModbusUnauthenticatedWrite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetModbusUnauthenticatedWriteOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.ModbusUnauthenticatedWrite) {
+		return nil, false
+	}
+	return o.ModbusUnauthenticatedWrite, true
+}
+
+// HasModbusUnauthenticatedWrite returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasModbusUnauthenticatedWrite() bool {
+	if o != nil && !IsNil(o.ModbusUnauthenticatedWrite) {
+		return true
+	}
+
+	return false
+}
+
+// SetModbusUnauthenticatedWrite gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the ModbusUnauthenticatedWrite field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetModbusUnauthenticatedWrite(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.ModbusUnauthenticatedWrite = &v
+}
+
+// GetMongoNoAuth returns the MongoNoAuth field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMongoNoAuth() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.MongoNoAuth) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.MongoNoAuth
+}
+
+// GetMongoNoAuthOk returns a tuple with the MongoNoAuth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMongoNoAuthOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.MongoNoAuth) {
+		return nil, false
+	}
+	return o.MongoNoAuth, true
+}
+
+// HasMongoNoAuth returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasMongoNoAuth() bool {
+	if o != nil && !IsNil(o.MongoNoAuth) {
+		return true
+	}
+
+	return false
+}
+
+// SetMongoNoAuth gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MongoNoAuth field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetMongoNoAuth(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.MongoNoAuth = &v
+}
+
 // GetNegativeValue returns the NegativeValue field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetNegativeValue() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.NegativeValue) {
@@ -6108,6 +6283,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasNegativeValue() boo
 // SetNegativeValue gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the NegativeValue field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetNegativeValue(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.NegativeValue = &v
+}
+
+// GetNeo4jAuthDisabled returns the Neo4jAuthDisabled field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetNeo4jAuthDisabled() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.Neo4jAuthDisabled) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.Neo4jAuthDisabled
+}
+
+// GetNeo4jAuthDisabledOk returns a tuple with the Neo4jAuthDisabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetNeo4jAuthDisabledOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.Neo4jAuthDisabled) {
+		return nil, false
+	}
+	return o.Neo4jAuthDisabled, true
+}
+
+// HasNeo4jAuthDisabled returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasNeo4jAuthDisabled() bool {
+	if o != nil && !IsNil(o.Neo4jAuthDisabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetNeo4jAuthDisabled gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the Neo4jAuthDisabled field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetNeo4jAuthDisabled(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.Neo4jAuthDisabled = &v
 }
 
 // GetNosql returns the Nosql field value if set, zero value otherwise.
@@ -6716,6 +6923,70 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasSoftwareComponentLe
 // SetSoftwareComponentLeak gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the SoftwareComponentLeak field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetSoftwareComponentLeak(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.SoftwareComponentLeak = &v
+}
+
+// GetSnmpDefaultReadCommunity returns the SnmpDefaultReadCommunity field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSnmpDefaultReadCommunity() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.SnmpDefaultReadCommunity) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.SnmpDefaultReadCommunity
+}
+
+// GetSnmpDefaultReadCommunityOk returns a tuple with the SnmpDefaultReadCommunity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSnmpDefaultReadCommunityOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.SnmpDefaultReadCommunity) {
+		return nil, false
+	}
+	return o.SnmpDefaultReadCommunity, true
+}
+
+// HasSnmpDefaultReadCommunity returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasSnmpDefaultReadCommunity() bool {
+	if o != nil && !IsNil(o.SnmpDefaultReadCommunity) {
+		return true
+	}
+
+	return false
+}
+
+// SetSnmpDefaultReadCommunity gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the SnmpDefaultReadCommunity field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetSnmpDefaultReadCommunity(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.SnmpDefaultReadCommunity = &v
+}
+
+// GetSnmpDefaultWriteCommunity returns the SnmpDefaultWriteCommunity field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSnmpDefaultWriteCommunity() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.SnmpDefaultWriteCommunity) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.SnmpDefaultWriteCommunity
+}
+
+// GetSnmpDefaultWriteCommunityOk returns a tuple with the SnmpDefaultWriteCommunity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSnmpDefaultWriteCommunityOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.SnmpDefaultWriteCommunity) {
+		return nil, false
+	}
+	return o.SnmpDefaultWriteCommunity, true
+}
+
+// HasSnmpDefaultWriteCommunity returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasSnmpDefaultWriteCommunity() bool {
+	if o != nil && !IsNil(o.SnmpDefaultWriteCommunity) {
+		return true
+	}
+
+	return false
+}
+
+// SetSnmpDefaultWriteCommunity gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the SnmpDefaultWriteCommunity field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetSnmpDefaultWriteCommunity(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.SnmpDefaultWriteCommunity = &v
 }
 
 // GetSpringbootActuatorDump returns the SpringbootActuatorDump field value if set, zero value otherwise.
@@ -9118,6 +9389,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetIssueSslWeakPreRfc1
 	o.IssueSslWeakPreRfc128bitCiphers = &v
 }
 
+// GetJdwpDebugPortExposed returns the JdwpDebugPortExposed field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJdwpDebugPortExposed() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.JdwpDebugPortExposed) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.JdwpDebugPortExposed
+}
+
+// GetJdwpDebugPortExposedOk returns a tuple with the JdwpDebugPortExposed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetJdwpDebugPortExposedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.JdwpDebugPortExposed) {
+		return nil, false
+	}
+	return o.JdwpDebugPortExposed, true
+}
+
+// HasJdwpDebugPortExposed returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasJdwpDebugPortExposed() bool {
+	if o != nil && !IsNil(o.JdwpDebugPortExposed) {
+		return true
+	}
+
+	return false
+}
+
+// SetJdwpDebugPortExposed gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the JdwpDebugPortExposed field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetJdwpDebugPortExposed(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.JdwpDebugPortExposed = &v
+}
+
 // GetSsrf returns the Ssrf field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetSsrf() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.Ssrf) {
@@ -10430,6 +10733,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetInfobloxNetmriRails
 	o.InfobloxNetmriRailsCookieRce = &v
 }
 
+// GetInfluxdbNoAuth returns the InfluxdbNoAuth field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetInfluxdbNoAuth() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.InfluxdbNoAuth) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.InfluxdbNoAuth
+}
+
+// GetInfluxdbNoAuthOk returns a tuple with the InfluxdbNoAuth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetInfluxdbNoAuthOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.InfluxdbNoAuth) {
+		return nil, false
+	}
+	return o.InfluxdbNoAuth, true
+}
+
+// HasInfluxdbNoAuth returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasInfluxdbNoAuth() bool {
+	if o != nil && !IsNil(o.InfluxdbNoAuth) {
+		return true
+	}
+
+	return false
+}
+
+// SetInfluxdbNoAuth gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the InfluxdbNoAuth field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetInfluxdbNoAuth(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.InfluxdbNoAuth = &v
+}
+
 // GetIotawattAppExposure returns the IotawattAppExposure field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetIotawattAppExposure() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.IotawattAppExposure) {
@@ -11326,6 +11661,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetMdbDatabaseFile(v G
 	o.MdbDatabaseFile = &v
 }
 
+// GetMemcachedNoAuth returns the MemcachedNoAuth field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMemcachedNoAuth() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.MemcachedNoAuth) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.MemcachedNoAuth
+}
+
+// GetMemcachedNoAuthOk returns a tuple with the MemcachedNoAuth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetMemcachedNoAuthOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.MemcachedNoAuth) {
+		return nil, false
+	}
+	return o.MemcachedNoAuth, true
+}
+
+// HasMemcachedNoAuth returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasMemcachedNoAuth() bool {
+	if o != nil && !IsNil(o.MemcachedNoAuth) {
+		return true
+	}
+
+	return false
+}
+
+// SetMemcachedNoAuth gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the MemcachedNoAuth field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetMemcachedNoAuth(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.MemcachedNoAuth = &v
+}
+
 // GetMinioDefaultLogin returns the MinioDefaultLogin field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetMinioDefaultLogin() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.MinioDefaultLogin) {
@@ -11678,6 +12045,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetNodeEcstaticInterna
 	o.NodeEcstaticInternalPath = &v
 }
 
+// GetNodeInspectorExposed returns the NodeInspectorExposed field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetNodeInspectorExposed() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.NodeInspectorExposed) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.NodeInspectorExposed
+}
+
+// GetNodeInspectorExposedOk returns a tuple with the NodeInspectorExposed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetNodeInspectorExposedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.NodeInspectorExposed) {
+		return nil, false
+	}
+	return o.NodeInspectorExposed, true
+}
+
+// HasNodeInspectorExposed returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasNodeInspectorExposed() bool {
+	if o != nil && !IsNil(o.NodeInspectorExposed) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeInspectorExposed gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the NodeInspectorExposed field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetNodeInspectorExposed(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.NodeInspectorExposed = &v
+}
+
 // GetNoderedDefaultLogin returns the NoderedDefaultLogin field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetNoderedDefaultLogin() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.NoderedDefaultLogin) {
@@ -11836,6 +12235,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasPhpXdebugRce() bool
 // SetPhpXdebugRce gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the PhpXdebugRce field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetPhpXdebugRce(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.PhpXdebugRce = &v
+}
+
+// GetPhpfpmPortExposed returns the PhpfpmPortExposed field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetPhpfpmPortExposed() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.PhpfpmPortExposed) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.PhpfpmPortExposed
+}
+
+// GetPhpfpmPortExposedOk returns a tuple with the PhpfpmPortExposed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetPhpfpmPortExposedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.PhpfpmPortExposed) {
+		return nil, false
+	}
+	return o.PhpfpmPortExposed, true
+}
+
+// HasPhpfpmPortExposed returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasPhpfpmPortExposed() bool {
+	if o != nil && !IsNil(o.PhpfpmPortExposed) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhpfpmPortExposed gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the PhpfpmPortExposed field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetPhpfpmPortExposed(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.PhpfpmPortExposed = &v
 }
 
 // GetPhpZerodiumBackdoorRce returns the PhpZerodiumBackdoorRce field value if set, zero value otherwise.
@@ -13342,6 +13773,70 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetDnsRebindingAttack(
 	o.DnsRebindingAttack = &v
 }
 
+// GetDnsUnauthenticatedDynamicUpdate returns the DnsUnauthenticatedDynamicUpdate field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDnsUnauthenticatedDynamicUpdate() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.DnsUnauthenticatedDynamicUpdate) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.DnsUnauthenticatedDynamicUpdate
+}
+
+// GetDnsUnauthenticatedDynamicUpdateOk returns a tuple with the DnsUnauthenticatedDynamicUpdate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDnsUnauthenticatedDynamicUpdateOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.DnsUnauthenticatedDynamicUpdate) {
+		return nil, false
+	}
+	return o.DnsUnauthenticatedDynamicUpdate, true
+}
+
+// HasDnsUnauthenticatedDynamicUpdate returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasDnsUnauthenticatedDynamicUpdate() bool {
+	if o != nil && !IsNil(o.DnsUnauthenticatedDynamicUpdate) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnsUnauthenticatedDynamicUpdate gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the DnsUnauthenticatedDynamicUpdate field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetDnsUnauthenticatedDynamicUpdate(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.DnsUnauthenticatedDynamicUpdate = &v
+}
+
+// GetDnsZoneTransferAny returns the DnsZoneTransferAny field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDnsZoneTransferAny() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.DnsZoneTransferAny) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.DnsZoneTransferAny
+}
+
+// GetDnsZoneTransferAnyOk returns a tuple with the DnsZoneTransferAny field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDnsZoneTransferAnyOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.DnsZoneTransferAny) {
+		return nil, false
+	}
+	return o.DnsZoneTransferAny, true
+}
+
+// HasDnsZoneTransferAny returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasDnsZoneTransferAny() bool {
+	if o != nil && !IsNil(o.DnsZoneTransferAny) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnsZoneTransferAny gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the DnsZoneTransferAny field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetDnsZoneTransferAny(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.DnsZoneTransferAny = &v
+}
+
 // GetSpoofableSpfRecordsPtrMechanism returns the SpoofableSpfRecordsPtrMechanism field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetSpoofableSpfRecordsPtrMechanism() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.SpoofableSpfRecordsPtrMechanism) {
@@ -13455,6 +13950,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.BusinessLogicAgent) {
 		toSerialize["business_logic_agent"] = o.BusinessLogicAgent
 	}
+	if !IsNil(o.CassandraAllowAllAuthenticator) {
+		toSerialize["cassandra_allow_all_authenticator"] = o.CassandraAllowAllAuthenticator
+	}
 	if !IsNil(o.AirflowConfigExposure) {
 		toSerialize["airflow_config_exposure"] = o.AirflowConfigExposure
 	}
@@ -13560,6 +14058,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.ClientSideStateTampering) {
 		toSerialize["client_side_state_tampering"] = o.ClientSideStateTampering
 	}
+	if !IsNil(o.ClickhouseNoAuth) {
+		toSerialize["clickhouse_no_auth"] = o.ClickhouseNoAuth
+	}
 	if !IsNil(o.CgiBinRce) {
 		toSerialize["cgi_bin_rce"] = o.CgiBinRce
 	}
@@ -13652,6 +14153,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	}
 	if !IsNil(o.DjangoSecretKey) {
 		toSerialize["django_secret_key"] = o.DjangoSecretKey
+	}
+	if !IsNil(o.DnsOpenRecursiveResolver) {
+		toSerialize["dns_open_recursive_resolver"] = o.DnsOpenRecursiveResolver
 	}
 	if !IsNil(o.DolphinschedulerDefaultLogin) {
 		toSerialize["dolphinscheduler_default_login"] = o.DolphinschedulerDefaultLogin
@@ -13944,8 +14448,17 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.MissingRateLimiting) {
 		toSerialize["missing_rate_limiting"] = o.MissingRateLimiting
 	}
+	if !IsNil(o.ModbusUnauthenticatedWrite) {
+		toSerialize["modbus_unauthenticated_write"] = o.ModbusUnauthenticatedWrite
+	}
+	if !IsNil(o.MongoNoAuth) {
+		toSerialize["mongo_no_auth"] = o.MongoNoAuth
+	}
 	if !IsNil(o.NegativeValue) {
 		toSerialize["negative_value"] = o.NegativeValue
+	}
+	if !IsNil(o.Neo4jAuthDisabled) {
+		toSerialize["neo4j_auth_disabled"] = o.Neo4jAuthDisabled
 	}
 	if !IsNil(o.Nosql) {
 		toSerialize["nosql"] = o.Nosql
@@ -14003,6 +14516,12 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	}
 	if !IsNil(o.SoftwareComponentLeak) {
 		toSerialize["software_component_leak"] = o.SoftwareComponentLeak
+	}
+	if !IsNil(o.SnmpDefaultReadCommunity) {
+		toSerialize["snmp_default_read_community"] = o.SnmpDefaultReadCommunity
+	}
+	if !IsNil(o.SnmpDefaultWriteCommunity) {
+		toSerialize["snmp_default_write_community"] = o.SnmpDefaultWriteCommunity
 	}
 	if !IsNil(o.SpringbootActuatorDump) {
 		toSerialize["springboot_actuator_dump"] = o.SpringbootActuatorDump
@@ -14229,6 +14748,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.IssueSslWeakPreRfc128bitCiphers) {
 		toSerialize["issue_ssl_weak_pre_rfc_128bit_ciphers"] = o.IssueSslWeakPreRfc128bitCiphers
 	}
+	if !IsNil(o.JdwpDebugPortExposed) {
+		toSerialize["jdwp_debug_port_exposed"] = o.JdwpDebugPortExposed
+	}
 	if !IsNil(o.Ssrf) {
 		toSerialize["ssrf"] = o.Ssrf
 	}
@@ -14352,6 +14874,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.InfobloxNetmriRailsCookieRce) {
 		toSerialize["infoblox_netmri_rails_cookie_rce"] = o.InfobloxNetmriRailsCookieRce
 	}
+	if !IsNil(o.InfluxdbNoAuth) {
+		toSerialize["influxdb_no_auth"] = o.InfluxdbNoAuth
+	}
 	if !IsNil(o.IotawattAppExposure) {
 		toSerialize["iotawatt_app_exposure"] = o.IotawattAppExposure
 	}
@@ -14436,6 +14961,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.MdbDatabaseFile) {
 		toSerialize["mdb_database_file"] = o.MdbDatabaseFile
 	}
+	if !IsNil(o.MemcachedNoAuth) {
+		toSerialize["memcached_no_auth"] = o.MemcachedNoAuth
+	}
 	if !IsNil(o.MinioDefaultLogin) {
 		toSerialize["minio_default_login"] = o.MinioDefaultLogin
 	}
@@ -14469,6 +14997,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.NodeEcstaticInternalPath) {
 		toSerialize["node_ecstatic_internal_path"] = o.NodeEcstaticInternalPath
 	}
+	if !IsNil(o.NodeInspectorExposed) {
+		toSerialize["node_inspector_exposed"] = o.NodeInspectorExposed
+	}
 	if !IsNil(o.NoderedDefaultLogin) {
 		toSerialize["nodered_default_login"] = o.NoderedDefaultLogin
 	}
@@ -14483,6 +15014,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	}
 	if !IsNil(o.PhpXdebugRce) {
 		toSerialize["php_xdebug_rce"] = o.PhpXdebugRce
+	}
+	if !IsNil(o.PhpfpmPortExposed) {
+		toSerialize["phpfpm_port_exposed"] = o.PhpfpmPortExposed
 	}
 	if !IsNil(o.PhpZerodiumBackdoorRce) {
 		toSerialize["php_zerodium_backdoor_rce"] = o.PhpZerodiumBackdoorRce
@@ -14625,6 +15159,12 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.DnsRebindingAttack) {
 		toSerialize["dns_rebinding_attack"] = o.DnsRebindingAttack
 	}
+	if !IsNil(o.DnsUnauthenticatedDynamicUpdate) {
+		toSerialize["dns_unauthenticated_dynamic_update"] = o.DnsUnauthenticatedDynamicUpdate
+	}
+	if !IsNil(o.DnsZoneTransferAny) {
+		toSerialize["dns_zone_transfer_any"] = o.DnsZoneTransferAny
+	}
 	if !IsNil(o.SpoofableSpfRecordsPtrMechanism) {
 		toSerialize["spoofable_spf_records_ptr_mechanism"] = o.SpoofableSpfRecordsPtrMechanism
 	}
@@ -14666,6 +15206,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "command_injection_agent")
 		delete(additionalProperties, "access_control_agent")
 		delete(additionalProperties, "business_logic_agent")
+		delete(additionalProperties, "cassandra_allow_all_authenticator")
 		delete(additionalProperties, "airflow_config_exposure")
 		delete(additionalProperties, "airflow_default_login")
 		delete(additionalProperties, "airflow_v3_default_login")
@@ -14701,6 +15242,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "broken_function_level_authorization")
 		delete(additionalProperties, "character_limit")
 		delete(additionalProperties, "client_side_state_tampering")
+		delete(additionalProperties, "clickhouse_no_auth")
 		delete(additionalProperties, "cgi_bin_rce")
 		delete(additionalProperties, "frontend_bola")
 		delete(additionalProperties, "cloudstack_default_login")
@@ -14732,6 +15274,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "frontend_csrf_post_based")
 		delete(additionalProperties, "debug_mode")
 		delete(additionalProperties, "django_secret_key")
+		delete(additionalProperties, "dns_open_recursive_resolver")
 		delete(additionalProperties, "dolphinscheduler_default_login")
 		delete(additionalProperties, "doris_default_login")
 		delete(additionalProperties, "directory_traversal")
@@ -14829,7 +15372,10 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "missing_authentication")
 		delete(additionalProperties, "missing_pkce")
 		delete(additionalProperties, "missing_rate_limiting")
+		delete(additionalProperties, "modbus_unauthenticated_write")
+		delete(additionalProperties, "mongo_no_auth")
 		delete(additionalProperties, "negative_value")
+		delete(additionalProperties, "neo4j_auth_disabled")
 		delete(additionalProperties, "nosql")
 		delete(additionalProperties, "frontend_nosql_injection")
 		delete(additionalProperties, "oauth_grant_misconfiguration")
@@ -14849,6 +15395,8 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "server_error")
 		delete(additionalProperties, "session_fixation")
 		delete(additionalProperties, "software_component_leak")
+		delete(additionalProperties, "snmp_default_read_community")
+		delete(additionalProperties, "snmp_default_write_community")
 		delete(additionalProperties, "springboot_actuator_dump")
 		delete(additionalProperties, "springboot_actuator_env")
 		delete(additionalProperties, "springboot_actuator_heapdump")
@@ -14924,6 +15472,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "issue_ssl_weak_cipher_negotiation")
 		delete(additionalProperties, "issue_ssl_weak_low_security_ciphers")
 		delete(additionalProperties, "issue_ssl_weak_pre_rfc_128bit_ciphers")
+		delete(additionalProperties, "jdwp_debug_port_exposed")
 		delete(additionalProperties, "ssrf")
 		delete(additionalProperties, "ssti")
 		delete(additionalProperties, "frontend_ssrf_header")
@@ -14965,6 +15514,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "glpi_default_login")
 		delete(additionalProperties, "grafana_default_login")
 		delete(additionalProperties, "infoblox_netmri_rails_cookie_rce")
+		delete(additionalProperties, "influxdb_no_auth")
 		delete(additionalProperties, "iotawatt_app_exposure")
 		delete(additionalProperties, "jenkins_weak_password")
 		delete(additionalProperties, "jolokia_tomcat_creds_leak")
@@ -14993,6 +15543,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "lucee_rce")
 		delete(additionalProperties, "malwared_byob_rce")
 		delete(additionalProperties, "mdb_database_file")
+		delete(additionalProperties, "memcached_no_auth")
 		delete(additionalProperties, "minio_default_login")
 		delete(additionalProperties, "mssql_default_credentials")
 		delete(additionalProperties, "mssql_exposed")
@@ -15004,11 +15555,13 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "nginx_webui_rce")
 		delete(additionalProperties, "nginxwebui_runcmd_rce")
 		delete(additionalProperties, "node_ecstatic_internal_path")
+		delete(additionalProperties, "node_inspector_exposed")
 		delete(additionalProperties, "nodered_default_login")
 		delete(additionalProperties, "openmediavault_default_login")
 		delete(additionalProperties, "opensearch_dashboard_default_login")
 		delete(additionalProperties, "php_timeclock_xss")
 		delete(additionalProperties, "php_xdebug_rce")
+		delete(additionalProperties, "phpfpm_port_exposed")
 		delete(additionalProperties, "php_zerodium_backdoor_rce")
 		delete(additionalProperties, "phpldapadmin_xss")
 		delete(additionalProperties, "phpmyadmin_default_login")
@@ -15056,6 +15609,8 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "compromised_supply_chain")
 		delete(additionalProperties, "zabbix_default_login")
 		delete(additionalProperties, "dns_rebinding_attack")
+		delete(additionalProperties, "dns_unauthenticated_dynamic_update")
+		delete(additionalProperties, "dns_zone_transfer_any")
 		delete(additionalProperties, "spoofable_spf_records_ptr_mechanism")
 		delete(additionalProperties, "xxe")
 		o.AdditionalProperties = additionalProperties
