@@ -309,7 +309,7 @@ func (r ApiCreateContinuousPentestRequest) Execute() (*UpdateContinuousPentest20
 /*
 CreateContinuousPentest Create a continuous pentest
 
-Set up continuous pentesting on an AI Pentest profile: watch repositories on branches and review diffs on a cron. Each repository must be visible to a GitHub App installation.
+Set up continuous pentesting on an AI Pentest profile: watch repositories on branches and review diffs on a cron, or from CI. Each repository must be visible to a GitHub App installation.
 
 Beta: subject to change.
 
@@ -1137,7 +1137,7 @@ func (r ApiEnableContinuousPentestRequest) Execute() (*UpdateContinuousPentest20
 /*
 EnableContinuousPentest Enable a continuous pentest
 
-Turn the timer back on, optionally replacing the watched repositories. Each repository restarts at its current head. The cron is required, since disabling clears it.
+Turn a continuous pentest back on, optionally replacing the watched repositories. Each repository restarts at its current head. A schedule requires a cron. CI does not.
 
 Beta: subject to change.
 

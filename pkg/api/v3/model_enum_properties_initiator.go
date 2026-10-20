@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ENUMPROPERTIESINITIATOR The initiator of the scan
+// ENUMPROPERTIESINITIATOR SCHEDULED plans a cron. CI does not.
 type ENUMPROPERTIESINITIATOR string
 
 // List of ENUM_PROPERTIES_INITIATOR

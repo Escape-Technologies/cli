@@ -40,8 +40,6 @@ type _StartRetestRequest StartRetestRequest
 func NewStartRetestRequest(profileId string) *StartRetestRequest {
 	this := StartRetestRequest{}
 	this.ProfileId = profileId
-	var initiator ENUMPROPERTIESINITIATOR = ENUMPROPERTIESINITIATOR_CI
-	this.Initiator = &initiator
 	return &this
 }
 
@@ -50,8 +48,6 @@ func NewStartRetestRequest(profileId string) *StartRetestRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewStartRetestRequestWithDefaults() *StartRetestRequest {
 	this := StartRetestRequest{}
-	var initiator ENUMPROPERTIESINITIATOR = ENUMPROPERTIESINITIATOR_CI
-	this.Initiator = &initiator
 	return &this
 }
 
