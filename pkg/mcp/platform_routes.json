@@ -31,6 +31,8 @@
     "path": "/integrations-next/azure-boards/oauth/callback/",
     "tokens": ["integrations", "next", "azure", "boards", "oauth", "callback"]
   },
+  { "path": "/learning/", "tokens": ["learning"] },
+  { "path": "/learning/candidates/", "tokens": ["learning", "candidates"] },
   { "path": "/learning/scenarios/", "tokens": ["learning", "scenarios"] },
   { "path": "/learning/studio/", "tokens": ["learning", "studio"] },
   { "path": "/network/", "tokens": ["network"] },
