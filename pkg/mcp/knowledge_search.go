@@ -6,16 +6,20 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
 	"sync"
 	"time"
+	"unicode/utf8"
+
+	"golang.org/x/net/html"
 )
 
 const (
 	defaultDocsSiteURL        = "https://docs.escape.tech/"
-	defaultDocsSearchIndexURL = "https://docs.escape.tech/search/search_index.json"
+	defaultDocsSearchIndexURL = "https://docs.escape.tech/search.json"
 	defaultDocsIndexTTL       = 5 * time.Minute
 	maxDocsSnippetChars       = 220
 	maxDocsResultsPerQuery    = 8
@@ -43,7 +47,7 @@ const (
 )
 
 // DocsSearchIndex caches and queries the docs.escape.tech search index built
-// by Docusaurus.
+// by Zensical, and reads full pages from their Markdown exports.
 type DocsSearchIndex struct {
 	docsSiteURL    string
 	searchIndexURL string
@@ -65,9 +69,10 @@ type KnowledgeSearchResult struct {
 	Snippet string `json:"snippet"`
 }
 
-// KnowledgeDocPage is the full page text returned by GetPage. Text is plain
-// (the Docusaurus search index strips markdown) and capped at
-// maxDocsPageChars; Truncated reports whether the cap was applied.
+// KnowledgeDocPage is the full page text returned by GetPage. Text is the
+// page's Markdown export when the docs build publishes one, plain text rebuilt
+// from the search index otherwise. It is capped at maxDocsPageChars;
+// Truncated reports whether the cap was applied.
 type KnowledgeDocPage struct {
 	Title     string `json:"title"`
 	URL       string `json:"url"`
@@ -167,11 +172,12 @@ func (d *DocsSearchIndex) Search(ctx context.Context, queryInput string, limit i
 }
 
 // GetPage returns the full text of a documentation page identified by the URL
-// or path surfaced in a Search result. Docusaurus indexes each section as its
-// own location (page/#anchor), so the page body is rebuilt by concatenating
-// every section whose location shares the target path, in index order. The
-// text is plain (the search index strips markdown) and capped at
-// maxDocsPageChars.
+// or path surfaced in a Search result. The page must exist in the search index,
+// so arbitrary paths are never fetched. Its Markdown export (<page>/index.md)
+// is preferred because it keeps code blocks, tables, and links. Pages the docs
+// build does not export (vulnerability details, release notes) are rebuilt by
+// concatenating every indexed section (page/#anchor) of the page, in index
+// order. The text is capped at maxDocsPageChars.
 func (d *DocsSearchIndex) GetPage(ctx context.Context, urlOrPath string) (*KnowledgeDocPage, error) {
 	key := docsPageKey(urlOrPath)
 	if key == "" {
@@ -204,7 +210,13 @@ func (d *DocsSearchIndex) GetPage(ctx context.Context, urlOrPath string) (*Knowl
 		return nil, ErrDocsPageNotFound
 	}
 
-	text := strings.Join(sections, "\n\n")
+	text, err := d.fetchMarkdown(ctx, page.URL)
+	if err != nil {
+		log.Printf("WARN knowledge_get_page: markdown export unavailable for %s: %v", page.URL, err)
+
+		text = strings.Join(sections, "\n\n")
+	}
+
 	if text == "" {
 		text = page.Title
 	}
@@ -217,6 +229,51 @@ func (d *DocsSearchIndex) GetPage(ctx context.Context, urlOrPath string) (*Knowl
 	page.Text = text
 
 	return page, nil
+}
+
+// fetchMarkdown downloads the Markdown export Zensical publishes next to each
+// selected HTML page. Any non-2xx answer (unexported page) is an error so the
+// caller falls back to the search index text.
+func (d *DocsSearchIndex) fetchMarkdown(ctx context.Context, pageURL string) (string, error) {
+	parsed, err := url.Parse(pageURL)
+	if err != nil {
+		return "", fmt.Errorf("parse docs page url: %w", err)
+	}
+
+	parsed.Fragment = ""
+	parsed.Path = strings.TrimSuffix(parsed.Path, "/") + "/index.md"
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, parsed.String(), nil)
+	if err != nil {
+		return "", fmt.Errorf("new docs markdown request: %w", err)
+	}
+
+	req.Header.Set("Accept", "text/markdown")
+
+	resp, err := d.httpClient.Do(req)
+	if err != nil {
+		return "", fmt.Errorf("docs markdown fetch: %w", err)
+	}
+
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
+		return "", fmt.Errorf("docs markdown http %d", resp.StatusCode)
+	}
+
+	// The site answers unknown paths with its HTML 404 page; only trust a
+	// Markdown body.
+	if !strings.HasPrefix(resp.Header.Get("Content-Type"), "text/markdown") {
+		return "", fmt.Errorf("docs markdown content type %q", resp.Header.Get("Content-Type"))
+	}
+
+	// Read one byte past the cap's worst case so truncation is still detected.
+	body, err := io.ReadAll(io.LimitReader(resp.Body, int64(maxDocsPageChars*utf8.UTFMax+1)))
+	if err != nil {
+		return "", fmt.Errorf("read docs markdown: %w", err)
+	}
+
+	return strings.TrimSpace(string(body)), nil
 }
 
 // docsPageKey normalises a docs location, path, or absolute URL to the
@@ -425,14 +482,14 @@ func (d *DocsSearchIndex) fetchDocs(ctx context.Context) ([]indexedDoc, error) {
 	}
 
 	var payload struct {
-		Docs []rawSearchIndexDoc `json:"docs"`
+		Items []rawSearchIndexDoc `json:"items"`
 	}
 	if err := json.NewDecoder(resp.Body).Decode(&payload); err != nil {
 		return nil, fmt.Errorf("decode docs index: %w", err)
 	}
 
-	docs := make([]indexedDoc, 0, len(payload.Docs))
-	for _, raw := range payload.Docs {
+	docs := make([]indexedDoc, 0, len(payload.Items))
+	for _, raw := range payload.Items {
 		if strings.TrimSpace(raw.Location) == "" {
 			continue
 		}
@@ -444,7 +501,7 @@ func (d *DocsSearchIndex) fetchDocs(ctx context.Context) ([]indexedDoc, error) {
 }
 
 func toIndexedDoc(raw rawSearchIndexDoc, docsSiteURL string) indexedDoc {
-	cleanText := collapseWhitespace(raw.Text)
+	cleanText := collapseWhitespace(htmlToText(raw.Text))
 	cleanTitle := collapseWhitespace(raw.Title)
 	if cleanTitle == "" {
 		cleanTitle = raw.Location
@@ -465,6 +522,27 @@ func toIndexedDoc(raw rawSearchIndexDoc, docsSiteURL string) indexedDoc {
 		normalizedTitle:    normalizeForSearch(cleanTitle),
 		normalizedText:     normalizeForSearch(cleanText),
 		normalizedLocation: normalizeForSearch(raw.Location),
+	}
+}
+
+// htmlToText flattens the HTML fragments Zensical stores as index text. Only
+// text nodes are kept (entities decoded), so attribute values never leak in.
+// Tags become spaces so adjacent list items or cells do not merge into one
+// word.
+func htmlToText(value string) string {
+	tokens := html.NewTokenizer(strings.NewReader(value))
+
+	var text strings.Builder
+	for {
+		switch tokens.Next() {
+		case html.ErrorToken:
+			return text.String()
+		case html.TextToken:
+			text.Write(tokens.Text())
+		case html.StartTagToken, html.EndTagToken, html.SelfClosingTagToken:
+			text.WriteByte(' ')
+		case html.CommentToken, html.DoctypeToken:
+		}
 	}
 }
 

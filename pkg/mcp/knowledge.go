@@ -101,7 +101,7 @@ func buildKnowledgeGetPageTool() mcpgo.Tool {
 	return mcpgo.NewTool(
 		knowledgeGetPageToolName,
 		mcpgo.WithDescription(
-			"Fetch the full text of an Escape documentation page. "+
+			"Fetch the full Markdown of an Escape documentation page, including code blocks and configuration examples. "+
 				"Use after knowledge_answer_question when the short snippets are not enough: "+
 				"pass the page URL (or path) from one of its results.",
 		),
@@ -110,7 +110,7 @@ func buildKnowledgeGetPageTool() mcpgo.Tool {
 			mcpgo.Required(),
 			mcpgo.Description(
 				"Docs page URL or path returned by knowledge_answer_question, e.g. "+
-					"https://docs.escape.tech/documentation/private-location/ or /documentation/private-location/. "+
+					"https://docs.escape.tech/documentation/platform/private-location/ or /documentation/platform/private-location/. "+
 					"Anchors (#section) are ignored; the whole page is returned.",
 			),
 		),

@@ -110,30 +110,10 @@ func TestPlatformLinkSelector_MatchesRelevantRoutes(t *testing.T) {
 func TestDocsSearchIndex_SearchScoresMatches(t *testing.T) {
 	t.Parallel()
 
-	mockIndex := struct {
-		Docs []rawSearchIndexDoc `json:"docs"`
-	}{
-		Docs: []rawSearchIndexDoc{
-			{Location: "documentation/private-location/", Title: "Private Location", Text: "A private location is a self-hosted scanner tunnel."},
-			{Location: "documentation/api-reference/", Title: "API reference", Text: "Endpoints and payloads."},
-		},
-	}
-	body, err := json.Marshal(mockIndex)
-	if err != nil {
-		t.Fatalf("marshal mock index: %v", err)
-	}
-
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write(body)
-	}))
-	t.Cleanup(srv.Close)
-
-	index := NewDocsSearchIndex(DocsSearchIndexOptions{
-		DocsSiteURL:    "https://docs.escape.tech/",
-		SearchIndexURL: srv.URL,
-		TTL:            time.Minute,
-	})
+	index := newDocsIndexFixture(t, []rawSearchIndexDoc{
+		{Location: "documentation/platform/private-location/", Title: "Private Locations", Text: "<p>A private location is a <code>self-hosted</code> scanner&#39;s tunnel.</p>"},
+		{Location: "documentation/api-reference/", Title: "API reference", Text: "<p>Endpoints and payloads.</p>"},
+	}, nil)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -154,45 +134,104 @@ func TestDocsSearchIndex_SearchScoresMatches(t *testing.T) {
 	if !strings.HasPrefix(results[0].URL, "https://docs.escape.tech/") {
 		t.Errorf("expected absolute URL, got %q", results[0].URL)
 	}
+
+	if want := "A private location is a self-hosted scanner's tunnel."; results[0].Snippet != want {
+		t.Errorf("snippet = %q, want HTML stripped to %q", results[0].Snippet, want)
+	}
 }
 
-// newDocsIndexFixture serves the given docs entries from an httptest server
-// and returns a search index pointed at it.
-func newDocsIndexFixture(t *testing.T, docs []rawSearchIndexDoc) *DocsSearchIndex {
+// newDocsIndexFixture serves the given docs entries in the Zensical
+// search.json shape, plus Markdown exports keyed by URL path, through a fake
+// transport so production URLs stay intact. Other paths answer with an HTML
+// 404 like the real site.
+func newDocsIndexFixture(t *testing.T, docs []rawSearchIndexDoc, markdown map[string]string) *DocsSearchIndex {
 	t.Helper()
 
-	body, err := json.Marshal(struct {
-		Docs []rawSearchIndexDoc `json:"docs"`
-	}{Docs: docs})
+	body, err := json.Marshal(map[string]any{"config": map[string]any{}, "items": docs})
 	if err != nil {
 		t.Fatalf("marshal docs index: %v", err)
 	}
 
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/search.json", func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_, _ = w.Write(body)
-	}))
-	t.Cleanup(srv.Close)
+	})
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		content, ok := markdown[r.URL.Path]
+		if !ok {
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			w.WriteHeader(http.StatusNotFound)
+			_, _ = w.Write([]byte("<html>Not found</html>"))
+
+			return
+		}
+
+		w.Header().Set("Content-Type", "text/markdown; charset=utf-8")
+		_, _ = w.Write([]byte(content))
+	})
 
 	return NewDocsSearchIndex(DocsSearchIndexOptions{
 		DocsSiteURL:    "https://docs.escape.tech/",
-		SearchIndexURL: srv.URL,
+		SearchIndexURL: "https://docs.escape.tech/search.json",
 		TTL:            time.Minute,
+		HTTPClient:     &http.Client{Transport: handlerTransport{mux}},
 	})
+}
+
+// handlerTransport answers every request with an in-process handler.
+type handlerTransport struct{ handler http.Handler }
+
+func (h handlerTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+	rec := httptest.NewRecorder()
+	h.handler.ServeHTTP(rec, r)
+
+	return rec.Result(), nil
 }
 
 func privateLocationDocs() []rawSearchIndexDoc {
 	return []rawSearchIndexDoc{
-		{Location: "documentation/private-location/", Title: "Private Location", Text: "Intro about private locations."},
-		{Location: "documentation/private-location/#setup", Title: "Setup", Text: "Setup steps for a private location."},
-		{Location: "documentation/other/", Title: "Other", Text: "Unrelated page."},
+		{Location: "documentation/private-location/", Title: "Private Location", Text: "<p>Intro about private locations.</p>"},
+		{Location: "documentation/private-location/#setup", Title: "Setup", Text: "<p>Setup steps for a private location.</p>"},
+		{Location: "documentation/other/", Title: "Other", Text: "<p>Unrelated page.</p>"},
+	}
+}
+
+func TestHTMLToText_IgnoresAttributes(t *testing.T) {
+	t.Parallel()
+
+	got := collapseWhitespace(htmlToText(`<ul><li><code title="a > b">hello</code></li><li>x &amp; y</li></ul>`))
+	if got != "hello x & y" {
+		t.Errorf("htmlToText = %q, want %q", got, "hello x & y")
+	}
+}
+
+func TestDocsSearchIndex_GetPagePrefersMarkdown(t *testing.T) {
+	t.Parallel()
+
+	markdown := "# Private Location\n\n```yaml\nlocation: private\n```"
+	index := newDocsIndexFixture(t, privateLocationDocs(), map[string]string{
+		"/documentation/private-location/index.md": markdown,
+	})
+
+	page, err := index.GetPage(context.Background(), "/documentation/private-location/#setup")
+	if err != nil {
+		t.Fatalf("GetPage: %v", err)
+	}
+
+	if page.Text != markdown {
+		t.Errorf("text = %q, want the Markdown export %q", page.Text, markdown)
+	}
+
+	if page.URL != "https://docs.escape.tech/documentation/private-location/" {
+		t.Errorf("url = %q", page.URL)
 	}
 }
 
 func TestDocsSearchIndex_GetPageAggregatesSections(t *testing.T) {
 	t.Parallel()
 
-	index := newDocsIndexFixture(t, privateLocationDocs())
+	index := newDocsIndexFixture(t, privateLocationDocs(), nil)
 	ctx := context.Background()
 
 	page, err := index.GetPage(ctx, "https://docs.escape.tech/documentation/private-location/")
@@ -234,7 +273,7 @@ func TestDocsSearchIndex_GetPageAggregatesSections(t *testing.T) {
 func TestDocsSearchIndex_GetPageUnknownURL(t *testing.T) {
 	t.Parallel()
 
-	index := newDocsIndexFixture(t, privateLocationDocs())
+	index := newDocsIndexFixture(t, privateLocationDocs(), nil)
 
 	for _, input := range []string{"documentation/does-not-exist/", "https://docs.escape.tech/nope/", "   "} {
 		if _, err := index.GetPage(context.Background(), input); !errors.Is(err, ErrDocsPageNotFound) {
@@ -249,7 +288,7 @@ func TestDocsSearchIndex_GetPageTruncates(t *testing.T) {
 	long := strings.Repeat("x", maxDocsPageChars+100)
 	index := newDocsIndexFixture(t, []rawSearchIndexDoc{
 		{Location: "documentation/long-page/", Title: "Long Page", Text: long},
-	})
+	}, nil)
 
 	page, err := index.GetPage(context.Background(), "documentation/long-page/")
 	if err != nil {
@@ -268,7 +307,7 @@ func TestDocsSearchIndex_GetPageTruncates(t *testing.T) {
 func TestBuildKnowledgeGetPageHandler(t *testing.T) {
 	t.Parallel()
 
-	handler := buildKnowledgeGetPageHandler(newDocsIndexFixture(t, privateLocationDocs()))
+	handler := buildKnowledgeGetPageHandler(newDocsIndexFixture(t, privateLocationDocs(), nil))
 
 	// Auth gate.
 	res, err := handler(context.Background(), newCallToolRequest(map[string]any{"url": "documentation/private-location/"}))
