@@ -31,7 +31,7 @@ var betaMCPTools = map[string]string{
 	"escape-cli jobs rename":         betaMCPToolNote,
 	"escape-cli jobs send-artefacts": betaMCPToolNote,
 
-	// Continuous pentest, gated by CONTINUOUS_PENTEST.
+	// Continuous Pentesting, gated by ENABLE_CONTINUOUS_PENTESTING.
 	"escape-cli profiles continuous-pentest create":  betaMCPToolNote,
 	"escape-cli profiles continuous-pentest update":  betaMCPToolNote,
 	"escape-cli profiles continuous-pentest enable":  betaMCPToolNote,

@@ -115,6 +115,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	StoredXss                                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"stored_xss,omitempty"`
 	ReflectedXss                              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"reflected_xss,omitempty"`
 	DomainTakeover                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"domain_takeover,omitempty"`
+	DanglingCname                             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dangling_cname,omitempty"`
 	Drupal7ElfinderRce                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"drupal7_elfinder_rce,omitempty"`
 	DrupalAvatarXss                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"drupal_avatar_xss,omitempty"`
 	DubboAdminDefaultLogin                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dubbo_admin_default_login,omitempty"`
@@ -3531,6 +3532,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasDomainTakeover() bo
 // SetDomainTakeover gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the DomainTakeover field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetDomainTakeover(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.DomainTakeover = &v
+}
+
+// GetDanglingCname returns the DanglingCname field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDanglingCname() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.DanglingCname) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.DanglingCname
+}
+
+// GetDanglingCnameOk returns a tuple with the DanglingCname field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetDanglingCnameOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.DanglingCname) {
+		return nil, false
+	}
+	return o.DanglingCname, true
+}
+
+// HasDanglingCname returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasDanglingCname() bool {
+	if o != nil && !IsNil(o.DanglingCname) {
+		return true
+	}
+
+	return false
+}
+
+// SetDanglingCname gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the DanglingCname field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetDanglingCname(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.DanglingCname = &v
 }
 
 // GetDrupal7ElfinderRce returns the Drupal7ElfinderRce field value if set, zero value otherwise.
@@ -14199,6 +14232,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.DomainTakeover) {
 		toSerialize["domain_takeover"] = o.DomainTakeover
 	}
+	if !IsNil(o.DanglingCname) {
+		toSerialize["dangling_cname"] = o.DanglingCname
+	}
 	if !IsNil(o.Drupal7ElfinderRce) {
 		toSerialize["drupal7_elfinder_rce"] = o.Drupal7ElfinderRce
 	}
@@ -15289,6 +15325,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "stored_xss")
 		delete(additionalProperties, "reflected_xss")
 		delete(additionalProperties, "domain_takeover")
+		delete(additionalProperties, "dangling_cname")
 		delete(additionalProperties, "drupal7_elfinder_rce")
 		delete(additionalProperties, "drupal_avatar_xss")
 		delete(additionalProperties, "dubbo_admin_default_login")
