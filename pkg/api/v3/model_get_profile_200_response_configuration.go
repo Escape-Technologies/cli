@@ -28,15 +28,14 @@ type GetProfile200ResponseConfiguration struct {
 	Network        *GetProfile200ResponseConfigurationNetwork        `json:"network,omitempty"`
 	// Deprecated: use `maxDurationMinutes` on the profile instead.
 	// Deprecated
-	MaxDuration          *float32                                                `json:"max_duration,omitempty"`
-	SubdomainEnumeration *GetProfile200ResponseConfigurationSubdomainEnumeration `json:"subdomain_enumeration,omitempty"`
-	PortScanning         *GetProfile200ResponseConfigurationPortScanning         `json:"port_scanning,omitempty"`
-	ServiceDiscovery     *GetProfile200ResponseConfigurationServiceDiscovery     `json:"service_discovery,omitempty"`
-	FrontendDast         *GetProfile200ResponseConfigurationFrontendDast         `json:"frontend_dast,omitempty"`
-	GraphqlApiDast       *GetProfile200ResponseConfigurationGraphqlApiDast       `json:"graphql_api_dast,omitempty"`
-	RestApiDast          *GetProfile200ResponseConfigurationRestApiDast          `json:"rest_api_dast,omitempty"`
-	AutomatedPentesting  *GetProfile200ResponseConfigurationAutomatedPentesting  `json:"automated_pentesting,omitempty"`
-	Experimental         *GetProfile200ResponseConfigurationExperimental         `json:"experimental,omitempty"`
+	MaxDuration          *float32                                               `json:"max_duration,omitempty"`
+	PortScanning         *GetProfile200ResponseConfigurationPortScanning        `json:"port_scanning,omitempty"`
+	ServiceDiscovery     *GetProfile200ResponseConfigurationServiceDiscovery    `json:"service_discovery,omitempty"`
+	FrontendDast         *GetProfile200ResponseConfigurationFrontendDast        `json:"frontend_dast,omitempty"`
+	GraphqlApiDast       *GetProfile200ResponseConfigurationGraphqlApiDast      `json:"graphql_api_dast,omitempty"`
+	RestApiDast          *GetProfile200ResponseConfigurationRestApiDast         `json:"rest_api_dast,omitempty"`
+	AutomatedPentesting  *GetProfile200ResponseConfigurationAutomatedPentesting `json:"automated_pentesting,omitempty"`
+	Experimental         *GetProfile200ResponseConfigurationExperimental        `json:"experimental,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -318,38 +317,6 @@ func (o *GetProfile200ResponseConfiguration) SetMaxDuration(v float32) {
 	o.MaxDuration = &v
 }
 
-// GetSubdomainEnumeration returns the SubdomainEnumeration field value if set, zero value otherwise.
-func (o *GetProfile200ResponseConfiguration) GetSubdomainEnumeration() GetProfile200ResponseConfigurationSubdomainEnumeration {
-	if o == nil || IsNil(o.SubdomainEnumeration) {
-		var ret GetProfile200ResponseConfigurationSubdomainEnumeration
-		return ret
-	}
-	return *o.SubdomainEnumeration
-}
-
-// GetSubdomainEnumerationOk returns a tuple with the SubdomainEnumeration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetProfile200ResponseConfiguration) GetSubdomainEnumerationOk() (*GetProfile200ResponseConfigurationSubdomainEnumeration, bool) {
-	if o == nil || IsNil(o.SubdomainEnumeration) {
-		return nil, false
-	}
-	return o.SubdomainEnumeration, true
-}
-
-// HasSubdomainEnumeration returns a boolean if a field has been set.
-func (o *GetProfile200ResponseConfiguration) HasSubdomainEnumeration() bool {
-	if o != nil && !IsNil(o.SubdomainEnumeration) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubdomainEnumeration gets a reference to the given GetProfile200ResponseConfigurationSubdomainEnumeration and assigns it to the SubdomainEnumeration field.
-func (o *GetProfile200ResponseConfiguration) SetSubdomainEnumeration(v GetProfile200ResponseConfigurationSubdomainEnumeration) {
-	o.SubdomainEnumeration = &v
-}
-
 // GetPortScanning returns the PortScanning field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfiguration) GetPortScanning() GetProfile200ResponseConfigurationPortScanning {
 	if o == nil || IsNil(o.PortScanning) {
@@ -608,9 +575,6 @@ func (o GetProfile200ResponseConfiguration) ToMap() (map[string]interface{}, err
 	if !IsNil(o.MaxDuration) {
 		toSerialize["max_duration"] = o.MaxDuration
 	}
-	if !IsNil(o.SubdomainEnumeration) {
-		toSerialize["subdomain_enumeration"] = o.SubdomainEnumeration
-	}
 	if !IsNil(o.PortScanning) {
 		toSerialize["port_scanning"] = o.PortScanning
 	}
@@ -662,7 +626,6 @@ func (o *GetProfile200ResponseConfiguration) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "inference")
 		delete(additionalProperties, "network")
 		delete(additionalProperties, "max_duration")
-		delete(additionalProperties, "subdomain_enumeration")
 		delete(additionalProperties, "port_scanning")
 		delete(additionalProperties, "service_discovery")
 		delete(additionalProperties, "frontend_dast")
