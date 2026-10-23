@@ -69,6 +69,8 @@ homebrew_casks:
 
 kos:
   - repositories: [escapetech/cli]
+    # Pinned for its ca-certificates-bundle 20260909-r3, without the compromised eMudhra roots (PLA-1584).
+    base_image: cgr.dev/chainguard/static@sha256:17367e4d3ae2b46c3290858e483fac09be085c92b372360fe3bf6a6150848fde
     tags:
       - '{{.Version}}'
       - latest
