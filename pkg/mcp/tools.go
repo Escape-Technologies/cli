@@ -136,7 +136,7 @@ func RegisterCommandTools(
 	options CommandExecutionOptions,
 ) {
 	for _, spec := range specs {
-		server.AddTool(spec.Tool, buildToolHandler(spec, options))
+		registerTool(server, spec.Tool, buildToolHandler(spec, options))
 	}
 }
 
@@ -152,6 +152,8 @@ func buildToolHandler(
 
 		auth, err := AuthFromContext(ctx)
 		if err != nil {
+			recordAuthFailure("missing_credentials")
+
 			return mcpgo.NewToolResultError(err.Error()), nil
 		}
 

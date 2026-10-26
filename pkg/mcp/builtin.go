@@ -45,7 +45,7 @@ func RegisterBuiltinTools(server *mcpserver.MCPServer, specs []ToolSpec) {
 		mcpgo.WithOpenWorldHintAnnotation(false),
 	)
 
-	server.AddTool(tool, buildListCapabilitiesHandler(specs))
+	registerTool(server, tool, buildListCapabilitiesHandler(specs))
 }
 
 func buildListCapabilitiesHandler(specs []ToolSpec) mcpserver.ToolHandlerFunc {
@@ -113,7 +113,7 @@ func registerGetToolSpec(server *mcpserver.MCPServer, specs []ToolSpec) {
 		byName[spec.Name] = spec
 	}
 
-	server.AddTool(tool, func(ctx context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
+	registerTool(server, tool, func(ctx context.Context, request mcpgo.CallToolRequest) (*mcpgo.CallToolResult, error) {
 		if _, err := AuthFromContext(ctx); err != nil {
 			return mcpgo.NewToolResultError(err.Error()), nil
 		}

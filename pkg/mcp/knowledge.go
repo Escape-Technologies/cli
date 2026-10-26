@@ -91,8 +91,8 @@ func RegisterKnowledgeTools(server *mcpserver.MCPServer, opts KnowledgeOptions) 
 		mcpgo.WithOpenWorldHintAnnotation(false),
 	)
 
-	server.AddTool(tool, buildKnowledgeHandler(index, selector, docsSite, platformBase))
-	server.AddTool(buildKnowledgeGetPageTool(), buildKnowledgeGetPageHandler(index))
+	registerTool(server, tool, buildKnowledgeHandler(index, selector, docsSite, platformBase))
+	registerTool(server, buildKnowledgeGetPageTool(), buildKnowledgeGetPageHandler(index))
 
 	return nil
 }

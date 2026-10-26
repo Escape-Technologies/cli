@@ -18,7 +18,6 @@ var viewTargets = []string{"ASSETS", "EVENTS", "INTEGRATIONS", "ISSUES", "LOCATI
 var (
 	viewsTarget    string
 	viewsProjectID string
-	viewsLegacy    bool
 	viewsListPage  pageFlags
 
 	viewsSortType      string
@@ -61,7 +60,7 @@ through the API is rejected: the platform owns them.`,
 			return errors.New("--target is required")
 		}
 
-		views, err := escape.ListViews(cmd.Context(), viewsTarget, viewsProjectID, !viewsLegacy)
+		views, err := escape.ListViews(cmd.Context(), viewsTarget, viewsProjectID)
 		if err != nil {
 			return fmt.Errorf("unable to list views: %w", err)
 		}
@@ -273,7 +272,6 @@ func init() {
 
 	_ = viewsListCmd.MarkFlagRequired("target")
 	viewsListCmd.Flags().StringVar(&viewsProjectID, "project-id", "", "only return views scoped to this project ID")
-	viewsListCmd.Flags().BoolVar(&viewsLegacy, "legacy", false, "list legacy table views instead of the next-generation views (default)")
 	viewsListPage.bind(viewsIssuesCmd)
 	bindDestructiveGate(viewsDeleteCmd, true)
 

@@ -12,6 +12,11 @@ ANON_MESSAGE='feat: sync code from internal repository'
 ANON_NAME='Escape Technologies'
 ANON_EMAIL='bot@escape.tech'
 
+# MONITORING.md is the internal on-call contract (Grafana dashboards, infra
+# names, alert thresholds). It must never reach the public GitHub mirror,
+# wherever it sits in the tree.
+excluded_file_pattern='(^|/)MONITORING\.md$'
+
 log() {
   printf '[cli-mirror %s] %s\n' "$(date -u +%H:%M:%S)" "$*" >&2
 }
@@ -31,6 +36,40 @@ commit_tree() {
     git commit-tree "$tree" "$@" -m "$ANON_MESSAGE"
 }
 
+# strip_excluded_files rebuilds the tree without the excluded file names,
+# using a scratch index so the caller's worktree and index are untouched.
+strip_excluded_files() {
+  local tree="$1"
+  local scratch previous
+  scratch=$(mktemp)
+  previous="${GIT_INDEX_FILE:-}"
+  export GIT_INDEX_FILE="$scratch"
+  git read-tree "$tree"
+
+  local path removed=0
+  # -z keeps raw pathnames: git quotes paths with non-ASCII or control
+  # characters, and a quoted path would dodge the `$`-anchored pattern.
+  while IFS= read -r -d '' path; do
+    [[ "$path" =~ $excluded_file_pattern ]] || continue
+    git update-index --force-remove -- "$path"
+    removed=1
+  done < <(git ls-files -z)
+
+  local result="$tree"
+  if [[ "$removed" == 1 ]]; then
+    result=$(git write-tree)
+  fi
+
+  if [[ -n "$previous" ]]; then
+    export GIT_INDEX_FILE="$previous"
+  else
+    unset GIT_INDEX_FILE
+  fi
+  rm -f "$scratch"
+
+  printf '%s\n' "$result"
+}
+
 # Print the anonymized commit SHA for tree_ish, parented on onto_ref when given.
 anonymize() {
   local tree_ish="$1"
@@ -41,6 +80,7 @@ anonymize() {
   # Peel after resolving. `HEAD:path^{tree}` is parsed as a path, not a peel.
   object=$(git rev-parse --verify "${tree_ish}") || die "cannot resolve ${tree_ish}"
   tree=$(git rev-parse "${object}^{tree}") || die "cannot peel tree from ${object}"
+  tree=$(strip_excluded_files "$tree")
   log "object=${object} tree=${tree}"
 
   if [[ -n "$onto_ref" ]]; then
@@ -129,6 +169,28 @@ Co-authored-by: internal <internal@escape.tech>'
   second_anon=$(cd "$root" && "$script" HEAD "$first_anon")
   assert_anon_commit "$root" "$second_anon" "$second_tree" "$first_anon"
   [[ "$second_anon" != "$first_anon" ]] || die "changed tree should create a new commit"
+
+  # MONITORING.md is the internal on-call contract: stripped wherever it
+  # appears in the tree, at any depth. Removing only those files must not
+  # even create a new mirror commit — the tree matches the previous one.
+  echo 'on-call: internal grafana' >"$root/MONITORING.md"
+  echo nested >"$root/packages/cli/MONITORING.md"
+  git -C "$root" add MONITORING.md packages/cli/MONITORING.md
+  git -C "$root" commit -q -m 'feat: monitoring docs'
+
+  git -C "$root" ls-tree -r --name-only 'HEAD' | grep -q 'MONITORING\.md' \
+    || die 'self-check setup failed: MONITORING.md not committed'
+  local monitored_anon
+  monitored_anon=$(cd "$root" && "$script" HEAD "$second_anon")
+  [[ "$monitored_anon" == "$second_anon" ]] \
+    || die "tree that only added MONITORING.md should reuse ${second_anon}, got ${monitored_anon}"
+  if git -C "$root" ls-tree -r --name-only "$monitored_anon" | grep -q 'MONITORING\.md'; then
+    die "MONITORING.md survived the mirror tree"
+  fi
+  git -C "$root" ls-tree --name-only "$monitored_anon" | grep -qx 'file' \
+    || die "exclusion removed unrelated files"
+  git -C "$root" ls-tree -r --name-only "$monitored_anon" | grep -qx 'packages/cli/file' \
+    || die "exclusion removed unrelated nested files"
 
   echo 'anonymize-mirror-history self-check ok'
 }

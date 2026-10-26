@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Escape-Technologies/cli/pkg/metrics"
 	mcpserver "github.com/mark3labs/mcp-go/server"
 )
 
@@ -57,6 +58,10 @@ func NewServer(options ServerOptions) *Server {
 // is cancelled. The shutdown path uses a detached context to give in-flight
 // handlers a bounded drain window.
 func (s *Server) Serve(ctx context.Context) error {
+	// Pushes to VictoriaMetrics only when VICTORIA_METRICS_PUSH_URL is set;
+	// otherwise the exporter stays pull-only on the health port.
+	metrics.Start(ctx)
+
 	rootServer, err := s.protocolServer()
 	if err != nil {
 		return err
@@ -118,10 +123,12 @@ func (s *Server) Serve(ctx context.Context) error {
 	// `Access-Control-Allow-Credentials` is intentionally omitted here.
 	// CORS must wrap auth: OPTIONS preflights carry no credentials and
 	// must receive CORS headers (status 204) without triggering a 401.
-	// PostHog wraps auth so 401s from the OAuth gate are still captured.
+	// Metrics wrap auth so 401s rejected at the gate are counted as auth
+	// failures; PostHog also wraps auth so those 401s stay captured. Metrics
+	// sit outside PostHog so the push loop never waits on telemetry.
 	// Capture always reports. Hosted pods set ESCAPE_CLI_POSTHOG_DEPLOYMENT
 	// to staging or prod; unset maps to the local PostHog label.
-	mainMux.Handle("/mcp", wrapWithCORS(wrapWithPosthog(ctx, wrapWithAuthMiddleware(interceptedMCP, oauth), s.options.PublicAPIURL)))
+	mainMux.Handle("/mcp", wrapWithCORS(wrapWithPosthog(ctx, wrapWithMetrics(wrapWithAuthMiddleware(interceptedMCP, oauth)), s.options.PublicAPIURL)))
 	mainMux.HandleFunc("/health", healthHandler)
 	if oauth != nil {
 		mainMux.Handle("/.well-known/oauth-protected-resource", wrapWithCORS(http.HandlerFunc(oauth.ServePRM)))
@@ -140,6 +147,9 @@ func (s *Server) Serve(ctx context.Context) error {
 	if healthPort != 0 {
 		healthMux := http.NewServeMux()
 		healthMux.HandleFunc("/health", healthHandler)
+		// /metrics lives on the health port, which is cluster-internal only:
+		// the main port is publicly exposed and must not leak metric labels.
+		healthMux.Handle("/metrics", metrics.Handler())
 		healthServer = &http.Server{
 			Addr:              fmt.Sprintf(":%d", healthPort),
 			Handler:           healthMux,
@@ -237,12 +247,18 @@ func wrapWithAuthMiddleware(next http.Handler, oauth *oauthHandlers) http.Handle
 		if oauth != nil {
 			apiKey := apiKeyFromRequest(req)
 			if apiKey == "" {
+				recordAuthFailure("missing_credentials")
+
 				oauth.WriteUnauthorized(w, "invalid_token", "missing credentials")
+
 				return
 			}
 
 			if !oauth.ValidateAPIKey(ctx, apiKey) {
+				recordAuthFailure("invalid_api_key")
+
 				oauth.WriteUnauthorized(w, "invalid_token", "revoked or invalid api key")
+
 				return
 			}
 		}

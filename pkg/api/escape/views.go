@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"strconv"
 
 	v3 "github.com/Escape-Technologies/cli/pkg/api/v3"
 )
@@ -15,9 +14,8 @@ type ListViewIssuesFilters struct {
 	SortDirection string
 }
 
-// ListViews lists the saved views of one target. next selects the
-// next-generation views (the API default) or the legacy table views.
-func ListViews(ctx context.Context, target, projectID string, next bool) ([]v3.ViewDetail, error) {
+// ListViews lists the saved views of one target.
+func ListViews(ctx context.Context, target, projectID string) ([]v3.ViewDetail, error) {
 	client, err := newAPIV3Client()
 	if err != nil {
 		return nil, fmt.Errorf("unable to init client: %w", err)
@@ -27,8 +25,6 @@ func ListViews(ctx context.Context, target, projectID string, next bool) ([]v3.V
 	if projectID != "" {
 		req = req.ProjectId(projectID)
 	}
-
-	req = req.Next(strconv.FormatBool(next))
 
 	data, _, err := req.Execute()
 	if err != nil {

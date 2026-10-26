@@ -27,8 +27,6 @@ type ViewDetail struct {
 	// The managed view key, or null for user-created views.
 	Key    *string                                               `json:"key,omitempty"`
 	Target ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET `json:"target"`
-	// Whether this is a next-generation view.
-	Next bool `json:"next"`
 	// The position of the view in the list.
 	Order   int                `json:"order"`
 	Project *ViewDetailProject `json:"project,omitempty"`
@@ -51,12 +49,11 @@ type _ViewDetail ViewDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewViewDetail(id string, name string, target ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET, next bool, order int, widgets []string, columns []string, groupBy []string) *ViewDetail {
+func NewViewDetail(id string, name string, target ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET, order int, widgets []string, columns []string, groupBy []string) *ViewDetail {
 	this := ViewDetail{}
 	this.Id = id
 	this.Name = name
 	this.Target = target
-	this.Next = next
 	this.Order = order
 	this.Widgets = widgets
 	this.Columns = columns
@@ -174,30 +171,6 @@ func (o *ViewDetail) GetTargetOk() (*ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPER
 // SetTarget sets field value
 func (o *ViewDetail) SetTarget(v ENUMPROPERTIESDATAITEMSPROPERTIESVIEWPROPERTIESTARGET) {
 	o.Target = v
-}
-
-// GetNext returns the Next field value
-func (o *ViewDetail) GetNext() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Next
-}
-
-// GetNextOk returns a tuple with the Next field value
-// and a boolean to check if the value has been set.
-func (o *ViewDetail) GetNextOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Next, true
-}
-
-// SetNext sets field value
-func (o *ViewDetail) SetNext(v bool) {
-	o.Next = v
 }
 
 // GetOrder returns the Order field value
@@ -440,7 +413,6 @@ func (o ViewDetail) ToMap() (map[string]interface{}, error) {
 		toSerialize["key"] = o.Key
 	}
 	toSerialize["target"] = o.Target
-	toSerialize["next"] = o.Next
 	toSerialize["order"] = o.Order
 	if !IsNil(o.Project) {
 		toSerialize["project"] = o.Project
@@ -473,7 +445,6 @@ func (o *ViewDetail) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"name",
 		"target",
-		"next",
 		"order",
 		"widgets",
 		"columns",
@@ -511,7 +482,6 @@ func (o *ViewDetail) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "key")
 		delete(additionalProperties, "target")
-		delete(additionalProperties, "next")
 		delete(additionalProperties, "order")
 		delete(additionalProperties, "project")
 		delete(additionalProperties, "filters")

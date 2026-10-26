@@ -335,7 +335,7 @@ func (r ApiListViewIssuesRequest) Execute() (*ListIssues200Response, *http.Respo
 /*
 ListViewIssues List issues of a view
 
-List the issues matching a saved issue view. The view filters are applied as the issue predicate. Only next-generation views with the `ISSUES` target are supported.
+List the issues matching a saved issue view. The view filters are applied as the issue predicate. The view must have the `ISSUES` target.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param viewId The view ID
@@ -486,7 +486,6 @@ type ApiListViewsRequest struct {
 	cursor     *string
 	size       *int
 	projectId  *string
-	next       *string
 }
 
 // The resource the views apply to
@@ -513,12 +512,6 @@ func (r ApiListViewsRequest) ProjectId(projectId string) ApiListViewsRequest {
 	return r
 }
 
-// Whether to list next-generation views (true, default) or legacy table views (false)
-func (r ApiListViewsRequest) Next(next string) ApiListViewsRequest {
-	r.next = &next
-	return r
-}
-
 func (r ApiListViewsRequest) Execute() (*ListViews200Response, *http.Response, error) {
 	return r.ApiService.ListViewsExecute(r)
 }
@@ -526,7 +519,7 @@ func (r ApiListViewsRequest) Execute() (*ListViews200Response, *http.Response, e
 /*
 ListViews List views
 
-List the saved views of the organization for a given target. By default this returns the next-generation views; set `next` to false to list legacy table views instead. Legacy table views only expose their identity and ordering: their stored configuration is kept in an internal format that the internal API does not expose. Pass `cursor` and `size` to page through the views: without them every view is returned, as before.
+List the saved views of the organization for a given target. Optionally filter by project. Pass `cursor` and `size` to page through the views; without them every matching view is returned.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListViewsRequest
@@ -575,9 +568,6 @@ func (a *ViewsAPIService) ListViewsExecute(r ApiListViewsRequest) (*ListViews200
 	parameterAddToHeaderOrQuery(localVarQueryParams, "target", r.target, "form", "")
 	if r.projectId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "projectId", r.projectId, "form", "")
-	}
-	if r.next != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next", r.next, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

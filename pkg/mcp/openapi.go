@@ -60,7 +60,7 @@ func RegisterPublicAPITools(server *mcpserver.MCPServer, opts PublicAPIOptions) 
 		mcpgo.WithOpenWorldHintAnnotation(true),
 	)
 
-	server.AddTool(tool, buildPublicAPIHandler(index, opts.PublicAPIURL))
+	registerTool(server, tool, buildPublicAPIHandler(index, opts.PublicAPIURL))
 
 	return nil
 }
