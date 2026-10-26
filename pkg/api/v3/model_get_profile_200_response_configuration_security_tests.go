@@ -235,6 +235,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	SpringbootActuatorTrace                   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"springboot_actuator_trace,omitempty"`
 	Sql                                       *GetProfile200ResponseConfigurationSecurityTestsFrontendSqlInjection      `json:"sql,omitempty"`
 	SqlInjectionOracleBased                   *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"sql_injection_oracle_based,omitempty"`
+	SqlInjectionBooleanBased                  *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"sql_injection_boolean_based,omitempty"`
 	SslCertificate                            *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssl_certificate,omitempty"`
 	Ssl                                       *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"ssl,omitempty"`
 	IssueSslAnonymousNullCiphers              *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"issue_ssl_anonymous_null_ciphers,omitempty"`
@@ -7373,6 +7374,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasSqlInjectionOracleB
 // SetSqlInjectionOracleBased gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the SqlInjectionOracleBased field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetSqlInjectionOracleBased(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.SqlInjectionOracleBased = &v
+}
+
+// GetSqlInjectionBooleanBased returns the SqlInjectionBooleanBased field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSqlInjectionBooleanBased() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.SqlInjectionBooleanBased) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.SqlInjectionBooleanBased
+}
+
+// GetSqlInjectionBooleanBasedOk returns a tuple with the SqlInjectionBooleanBased field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetSqlInjectionBooleanBasedOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.SqlInjectionBooleanBased) {
+		return nil, false
+	}
+	return o.SqlInjectionBooleanBased, true
+}
+
+// HasSqlInjectionBooleanBased returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasSqlInjectionBooleanBased() bool {
+	if o != nil && !IsNil(o.SqlInjectionBooleanBased) {
+		return true
+	}
+
+	return false
+}
+
+// SetSqlInjectionBooleanBased gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the SqlInjectionBooleanBased field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetSqlInjectionBooleanBased(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.SqlInjectionBooleanBased = &v
 }
 
 // GetSslCertificate returns the SslCertificate field value if set, zero value otherwise.
@@ -14625,6 +14658,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.SqlInjectionOracleBased) {
 		toSerialize["sql_injection_oracle_based"] = o.SqlInjectionOracleBased
 	}
+	if !IsNil(o.SqlInjectionBooleanBased) {
+		toSerialize["sql_injection_boolean_based"] = o.SqlInjectionBooleanBased
+	}
 	if !IsNil(o.SslCertificate) {
 		toSerialize["ssl_certificate"] = o.SslCertificate
 	}
@@ -15481,6 +15517,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "springboot_actuator_trace")
 		delete(additionalProperties, "sql")
 		delete(additionalProperties, "sql_injection_oracle_based")
+		delete(additionalProperties, "sql_injection_boolean_based")
 		delete(additionalProperties, "ssl_certificate")
 		delete(additionalProperties, "ssl")
 		delete(additionalProperties, "issue_ssl_anonymous_null_ciphers")
