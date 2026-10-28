@@ -1137,7 +1137,7 @@ func (r ApiEnableContinuousPentestRequest) Execute() (*UpdateContinuousPentest20
 /*
 EnableContinuousPentest Enable a continuous pentest
 
-Turn a continuous pentest back on, optionally replacing the watched repositories. Each repository restarts at its current head. A schedule requires a cron. CI does not.
+Turn a continuous pentest back on, optionally replacing the watched repositories. Each repository restarts at its current head. A schedule requires a cron. CI and MERGE do not.
 
 Beta: subject to change.
 
