@@ -26,6 +26,7 @@ type CreateExportWorkflowActionUsingJiraParameters struct {
 	StaticPropertiesMapping []CreateExportWorkflowActionUsingJiraParametersStaticPropertiesMappingInner `json:"staticPropertiesMapping,omitempty"`
 	ParentKey               *string                                                                     `json:"parentKey,omitempty"`
 	DisableDefaultMappings  *bool                                                                       `json:"disableDefaultMappings,omitempty"`
+	StatusMapping           *CreateExportWorkflowActionUsingJiraParametersStatusMapping                 `json:"statusMapping,omitempty"`
 	AdditionalProperties    map[string]interface{}
 }
 
@@ -223,6 +224,38 @@ func (o *CreateExportWorkflowActionUsingJiraParameters) SetDisableDefaultMapping
 	o.DisableDefaultMappings = &v
 }
 
+// GetStatusMapping returns the StatusMapping field value if set, zero value otherwise.
+func (o *CreateExportWorkflowActionUsingJiraParameters) GetStatusMapping() CreateExportWorkflowActionUsingJiraParametersStatusMapping {
+	if o == nil || IsNil(o.StatusMapping) {
+		var ret CreateExportWorkflowActionUsingJiraParametersStatusMapping
+		return ret
+	}
+	return *o.StatusMapping
+}
+
+// GetStatusMappingOk returns a tuple with the StatusMapping field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateExportWorkflowActionUsingJiraParameters) GetStatusMappingOk() (*CreateExportWorkflowActionUsingJiraParametersStatusMapping, bool) {
+	if o == nil || IsNil(o.StatusMapping) {
+		return nil, false
+	}
+	return o.StatusMapping, true
+}
+
+// HasStatusMapping returns a boolean if a field has been set.
+func (o *CreateExportWorkflowActionUsingJiraParameters) HasStatusMapping() bool {
+	if o != nil && !IsNil(o.StatusMapping) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusMapping gets a reference to the given CreateExportWorkflowActionUsingJiraParametersStatusMapping and assigns it to the StatusMapping field.
+func (o *CreateExportWorkflowActionUsingJiraParameters) SetStatusMapping(v CreateExportWorkflowActionUsingJiraParametersStatusMapping) {
+	o.StatusMapping = &v
+}
+
 func (o CreateExportWorkflowActionUsingJiraParameters) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -244,6 +277,9 @@ func (o CreateExportWorkflowActionUsingJiraParameters) ToMap() (map[string]inter
 	}
 	if !IsNil(o.DisableDefaultMappings) {
 		toSerialize["disableDefaultMappings"] = o.DisableDefaultMappings
+	}
+	if !IsNil(o.StatusMapping) {
+		toSerialize["statusMapping"] = o.StatusMapping
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -296,6 +332,7 @@ func (o *CreateExportWorkflowActionUsingJiraParameters) UnmarshalJSON(data []byt
 		delete(additionalProperties, "staticPropertiesMapping")
 		delete(additionalProperties, "parentKey")
 		delete(additionalProperties, "disableDefaultMappings")
+		delete(additionalProperties, "statusMapping")
 		o.AdditionalProperties = additionalProperties
 	}
 
