@@ -36,6 +36,7 @@ var betaMCPTools = map[string]string{
 	"escape-cli profiles continuous-pentest update":  betaMCPToolNote,
 	"escape-cli profiles continuous-pentest enable":  betaMCPToolNote,
 	"escape-cli profiles continuous-pentest disable": betaMCPToolNote,
+	"escape-cli continuous-scans start":              betaMCPToolNote,
 
 	// Target reachability validation: the release notes list it as coming
 	// next, not as shipped.

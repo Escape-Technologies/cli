@@ -212,6 +212,7 @@ func CommandSchemaRegistry() map[string]CommandSchemas {
 			Output: v3.UpdateContinuousPentest200Response{},
 		},
 		"escape-cli profiles continuous-pentest disable": {Output: v3.UpdateContinuousPentest200Response{}},
+		"escape-cli continuous-scans start":              {Output: v3.ScanDetailed1{}},
 		"escape-cli profiles problems":                   {Output: Page[v3.ProfileScanProblemsRow]{}},
 		"escape-cli profiles delete":                     {Output: profileDeleteOutput},
 		"escape-cli profiles bulk-update":                {Input: v3.BulkUpdateProfilesRequest{}, Output: v3.BulkUpdateProfiles200Response{}},

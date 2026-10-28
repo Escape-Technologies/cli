@@ -20,6 +20,10 @@ inputs:
     description: 'Wait until the scan ends and print the results'
     required: false
     default: 'false'
+  continuous:
+    description: 'Start a continuous pentest run (POST /continuous-scans) instead of a full scan'
+    required: false
+    default: 'false'
   cli_image:
     description: 'Override the CLI Docker image. Defaults to the released version.'
     required: false
@@ -55,6 +59,7 @@ runs:
         ESCAPE_API_KEY: ${{ inputs.api_key }}
         INPUT_PROFILE_ID: ${{ inputs.profile_id }}
         ESCAPE_WATCH: ${{ inputs.watch }}
+        ESCAPE_CONTINUOUS: ${{ inputs.continuous }}
         ESCAPE_CONFIGURATION_OVERRIDE: ${{ inputs.configuration_override }}
         ESCAPE_SCHEMA: ${{ inputs.schema }}
         ESCAPE_CLI_IMAGE_OVERRIDE: ${{ inputs.cli_image }}
@@ -80,14 +85,22 @@ runs:
           echo "Updating schema"
           run_cli profiles update-schema "${PROFILE_ID}" "${ESCAPE_SCHEMA}"
         fi
-        args=(scans start "${PROFILE_ID}")
+        if [ "${ESCAPE_CONTINUOUS}" = "true" ]; then
+          args=(continuous-scans start "${PROFILE_ID}")
+          # docker run only forwards ESCAPE_API_KEY, so the CLI cannot see GITHUB_SHA.
+          if [ -n "${GITHUB_SHA:-}" ]; then
+            args+=(--commit-hash "${GITHUB_SHA}")
+          fi
+        else
+          args=(scans start "${PROFILE_ID}")
+        fi
         if [ "${ESCAPE_WATCH}" = "true" ]; then
           args+=(--watch)
         fi
         # fail_on_severities is deprecated but still honored. --fail-on-severity
         # takes one floor severity, so a list maps to its least severe entry:
         # an issue at or above that level fails the run. Only meaningful with
-        # watch=true, which the flag requires on scans start.
+        # watch=true, which the flag requires on start.
         if [ "${ESCAPE_WATCH}" = "true" ] && [ -n "${INPUT_FAIL_ON_SEVERITIES}" ]; then
           floor=""
           floor_rank=5
@@ -115,6 +128,10 @@ runs:
           fi
         fi
         if [ -n "${ESCAPE_CONFIGURATION_OVERRIDE}" ]; then
+          if [ "${ESCAPE_CONTINUOUS}" = "true" ]; then
+            echo "::error::configuration_override is not supported for continuous scans"
+            exit 1
+          fi
           args+=(--override "${ESCAPE_CONFIGURATION_OVERRIDE}")
         fi
         echo "Running scan:"

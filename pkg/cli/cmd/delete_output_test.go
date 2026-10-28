@@ -1007,6 +1007,7 @@ func TestEveryOutputSchemaToolIsExercisedOrExplained(t *testing.T) {
 		"escape-cli profiles continuous-pentest update":  {},
 		"escape-cli profiles continuous-pentest enable":  {},
 		"escape-cli profiles continuous-pentest disable": {},
+		"escape-cli continuous-scans start":              {},
 		"escape-cli views delete":                        {},
 		"escape-cli views reorder":                       {},
 		"escape-cli vault variables create":              {},
