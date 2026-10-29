@@ -25,6 +25,8 @@ type WorkflowFilterAnyOf2 struct {
 	Status               []ENUMPROPERTIESSTATUS                                            `json:"status,omitempty"`
 	Initiator            []ENUMPROPERTIESDATAITEMSPROPERTIESINITIATORSITEMS                `json:"initiator,omitempty"`
 	Kinds                []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS                 `json:"kinds,omitempty"`
+	Modes                []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS    `json:"modes,omitempty"`
+	WithoutModes         []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS    `json:"withoutModes,omitempty"`
 	ProjectIds           []string                                                          `json:"projectIds,omitempty"`
 	ProblemSeverities    []ENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESSEVERITY `json:"problemSeverities,omitempty"`
 	ProblemCodes         []ENUMPROPERTIESLASTSCANPROPERTIESPROBLEMSITEMSPROPERTIESCODE     `json:"problemCodes,omitempty"`
@@ -216,6 +218,70 @@ func (o *WorkflowFilterAnyOf2) HasKinds() bool {
 // SetKinds gets a reference to the given []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS and assigns it to the Kinds field.
 func (o *WorkflowFilterAnyOf2) SetKinds(v []ENUMPROPERTIESFILTERPROPERTIESSCANNERKINDSITEMS) {
 	o.Kinds = v
+}
+
+// GetModes returns the Modes field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf2) GetModes() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS {
+	if o == nil || IsNil(o.Modes) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS
+		return ret
+	}
+	return o.Modes
+}
+
+// GetModesOk returns a tuple with the Modes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf2) GetModesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS, bool) {
+	if o == nil || IsNil(o.Modes) {
+		return nil, false
+	}
+	return o.Modes, true
+}
+
+// HasModes returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf2) HasModes() bool {
+	if o != nil && !IsNil(o.Modes) {
+		return true
+	}
+
+	return false
+}
+
+// SetModes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS and assigns it to the Modes field.
+func (o *WorkflowFilterAnyOf2) SetModes(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS) {
+	o.Modes = v
+}
+
+// GetWithoutModes returns the WithoutModes field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf2) GetWithoutModes() []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS {
+	if o == nil || IsNil(o.WithoutModes) {
+		var ret []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS
+		return ret
+	}
+	return o.WithoutModes
+}
+
+// GetWithoutModesOk returns a tuple with the WithoutModes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf2) GetWithoutModesOk() ([]ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS, bool) {
+	if o == nil || IsNil(o.WithoutModes) {
+		return nil, false
+	}
+	return o.WithoutModes, true
+}
+
+// HasWithoutModes returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf2) HasWithoutModes() bool {
+	if o != nil && !IsNil(o.WithoutModes) {
+		return true
+	}
+
+	return false
+}
+
+// SetWithoutModes gets a reference to the given []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS and assigns it to the WithoutModes field.
+func (o *WorkflowFilterAnyOf2) SetWithoutModes(v []ENUMPROPERTIESDATAITEMSPROPERTIESFILTER2PROPERTIESMODESITEMS) {
+	o.WithoutModes = v
 }
 
 // GetProjectIds returns the ProjectIds field value if set, zero value otherwise.
@@ -596,6 +662,12 @@ func (o WorkflowFilterAnyOf2) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Kinds) {
 		toSerialize["kinds"] = o.Kinds
 	}
+	if !IsNil(o.Modes) {
+		toSerialize["modes"] = o.Modes
+	}
+	if !IsNil(o.WithoutModes) {
+		toSerialize["withoutModes"] = o.WithoutModes
+	}
 	if !IsNil(o.ProjectIds) {
 		toSerialize["projectIds"] = o.ProjectIds
 	}
@@ -656,6 +728,8 @@ func (o *WorkflowFilterAnyOf2) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "initiator")
 		delete(additionalProperties, "kinds")
+		delete(additionalProperties, "modes")
+		delete(additionalProperties, "withoutModes")
 		delete(additionalProperties, "projectIds")
 		delete(additionalProperties, "problemSeverities")
 		delete(additionalProperties, "problemCodes")
