@@ -13,6 +13,8 @@ on:
 
 jobs:
   binary:
+    permissions:
+      contents: write
     name: Release Binary
     runs-on: ubuntu-latest
     steps:
@@ -40,6 +42,8 @@ jobs:
           GORELEASER_CURRENT_TAG: ${{ github.event.inputs.tag }}
 
   action:
+    permissions:
+      contents: write
     name: Release Action
     runs-on: ubuntu-latest
     needs: binary
@@ -56,6 +60,8 @@ jobs:
             version.txt
 
   helm:
+    permissions:
+      contents: write
     name: Deploy Helm Charts to GitHub Pages
     runs-on: ubuntu-latest
     needs: binary
