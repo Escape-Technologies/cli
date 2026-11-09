@@ -17,14 +17,15 @@ import (
 
 // CreateWorkflowRequestActionsInner struct for CreateWorkflowRequestActionsInner
 type CreateWorkflowRequestActionsInner struct {
-	CreateActWorkflowActionUsingUpdateAsset *CreateActWorkflowActionUsingUpdateAsset
-	CreateExportWorkflowActionUsingJira     *CreateExportWorkflowActionUsingJira
-	CreateExportWorkflowActionUsingWebhook  *CreateExportWorkflowActionUsingWebhook
-	CreateExportWorkflowActionUsingWiz      *CreateExportWorkflowActionUsingWiz
-	CreateNotifyWorkflowActionUsingDiscord  *CreateNotifyWorkflowActionUsingDiscord
-	CreateNotifyWorkflowActionUsingEmail    *CreateNotifyWorkflowActionUsingEmail
-	CreateNotifyWorkflowActionUsingSlack    *CreateNotifyWorkflowActionUsingSlack
-	CreateNotifyWorkflowActionUsingTeams    *CreateNotifyWorkflowActionUsingTeams
+	CreateActWorkflowActionUsingUpdateAsset   *CreateActWorkflowActionUsingUpdateAsset
+	CreateExportWorkflowActionUsingJira       *CreateExportWorkflowActionUsingJira
+	CreateExportWorkflowActionUsingServiceNow *CreateExportWorkflowActionUsingServiceNow
+	CreateExportWorkflowActionUsingWebhook    *CreateExportWorkflowActionUsingWebhook
+	CreateExportWorkflowActionUsingWiz        *CreateExportWorkflowActionUsingWiz
+	CreateNotifyWorkflowActionUsingDiscord    *CreateNotifyWorkflowActionUsingDiscord
+	CreateNotifyWorkflowActionUsingEmail      *CreateNotifyWorkflowActionUsingEmail
+	CreateNotifyWorkflowActionUsingSlack      *CreateNotifyWorkflowActionUsingSlack
+	CreateNotifyWorkflowActionUsingTeams      *CreateNotifyWorkflowActionUsingTeams
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -54,6 +55,19 @@ func (dst *CreateWorkflowRequestActionsInner) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.CreateExportWorkflowActionUsingJira = nil
+	}
+
+	// try to unmarshal JSON data into CreateExportWorkflowActionUsingServiceNow
+	err = json.Unmarshal(data, &dst.CreateExportWorkflowActionUsingServiceNow)
+	if err == nil {
+		jsonCreateExportWorkflowActionUsingServiceNow, _ := json.Marshal(dst.CreateExportWorkflowActionUsingServiceNow)
+		if string(jsonCreateExportWorkflowActionUsingServiceNow) == "{}" { // empty struct
+			dst.CreateExportWorkflowActionUsingServiceNow = nil
+		} else {
+			return nil // data stored in dst.CreateExportWorkflowActionUsingServiceNow, return on the first match
+		}
+	} else {
+		dst.CreateExportWorkflowActionUsingServiceNow = nil
 	}
 
 	// try to unmarshal JSON data into CreateExportWorkflowActionUsingWebhook
@@ -145,6 +159,10 @@ func (src CreateWorkflowRequestActionsInner) MarshalJSON() ([]byte, error) {
 
 	if src.CreateExportWorkflowActionUsingJira != nil {
 		return json.Marshal(&src.CreateExportWorkflowActionUsingJira)
+	}
+
+	if src.CreateExportWorkflowActionUsingServiceNow != nil {
+		return json.Marshal(&src.CreateExportWorkflowActionUsingServiceNow)
 	}
 
 	if src.CreateExportWorkflowActionUsingWebhook != nil {

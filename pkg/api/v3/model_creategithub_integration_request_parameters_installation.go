@@ -20,11 +20,12 @@ var _ MappedNullable = &CreategithubIntegrationRequestParametersInstallation{}
 
 // CreategithubIntegrationRequestParametersInstallation struct for CreategithubIntegrationRequestParametersInstallation
 type CreategithubIntegrationRequestParametersInstallation struct {
-	InstallationId       string            `json:"installation_id"`
-	AccountLogin         string            `json:"account_login"`
-	Permissions          map[string]string `json:"permissions"`
-	SuspendedAt          *string           `json:"suspended_at,omitempty"`
-	LastSyncedAt         string            `json:"last_synced_at"`
+	InstallationId       string                                                   `json:"installation_id"`
+	AccountLogin         string                                                   `json:"account_login"`
+	Permissions          map[string]string                                        `json:"permissions"`
+	SuspendedAt          *string                                                  `json:"suspended_at,omitempty"`
+	LastSyncedAt         string                                                   `json:"last_synced_at"`
+	App                  *CreategithubIntegrationRequestParametersInstallationApp `json:"app,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -179,6 +180,38 @@ func (o *CreategithubIntegrationRequestParametersInstallation) SetLastSyncedAt(v
 	o.LastSyncedAt = v
 }
 
+// GetApp returns the App field value if set, zero value otherwise.
+func (o *CreategithubIntegrationRequestParametersInstallation) GetApp() CreategithubIntegrationRequestParametersInstallationApp {
+	if o == nil || IsNil(o.App) {
+		var ret CreategithubIntegrationRequestParametersInstallationApp
+		return ret
+	}
+	return *o.App
+}
+
+// GetAppOk returns a tuple with the App field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreategithubIntegrationRequestParametersInstallation) GetAppOk() (*CreategithubIntegrationRequestParametersInstallationApp, bool) {
+	if o == nil || IsNil(o.App) {
+		return nil, false
+	}
+	return o.App, true
+}
+
+// HasApp returns a boolean if a field has been set.
+func (o *CreategithubIntegrationRequestParametersInstallation) HasApp() bool {
+	if o != nil && !IsNil(o.App) {
+		return true
+	}
+
+	return false
+}
+
+// SetApp gets a reference to the given CreategithubIntegrationRequestParametersInstallationApp and assigns it to the App field.
+func (o *CreategithubIntegrationRequestParametersInstallation) SetApp(v CreategithubIntegrationRequestParametersInstallationApp) {
+	o.App = &v
+}
+
 func (o CreategithubIntegrationRequestParametersInstallation) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -196,6 +229,9 @@ func (o CreategithubIntegrationRequestParametersInstallation) ToMap() (map[strin
 		toSerialize["suspended_at"] = o.SuspendedAt
 	}
 	toSerialize["last_synced_at"] = o.LastSyncedAt
+	if !IsNil(o.App) {
+		toSerialize["app"] = o.App
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -247,6 +283,7 @@ func (o *CreategithubIntegrationRequestParametersInstallation) UnmarshalJSON(dat
 		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "suspended_at")
 		delete(additionalProperties, "last_synced_at")
+		delete(additionalProperties, "app")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -31,6 +31,10 @@
     "path": "/integrations-next/azure-boards/oauth/callback/",
     "tokens": ["integrations", "next", "azure", "boards", "oauth", "callback"]
   },
+  {
+    "path": "/integrations-next/servicenow/oauth/callback/",
+    "tokens": ["integrations", "next", "servicenow", "oauth", "callback"]
+  },
   { "path": "/learning/", "tokens": ["learning"] },
   { "path": "/learning/candidates/", "tokens": ["learning", "candidates"] },
   { "path": "/learning/processing/", "tokens": ["learning", "processing"] },
@@ -78,6 +82,7 @@
   { "path": "/pentest/network/profiles/", "tokens": ["pentest", "network", "profiles"] },
   { "path": "/pentest/profiles/", "tokens": ["pentest", "profiles"] },
   { "path": "/pentest/scans/", "tokens": ["pentest", "scans"] },
+  { "path": "/pentest/validation/", "tokens": ["pentest", "validation"] },
   { "path": "/profiles/", "tokens": ["profiles"] },
   { "path": "/profiles/custom-rules/", "tokens": ["profiles", "custom", "rules"] },
   { "path": "/profiles/scans/", "tokens": ["profiles", "scans"] },

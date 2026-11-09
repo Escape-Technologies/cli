@@ -80,7 +80,7 @@ var betaMCPTools = map[string]string{
 	"escape-cli knowledge-files upload": betaMCPToolNote,
 	"escape-cli knowledge-files delete": betaMCPToolNote,
 
-	// Issue retests, gated by ISSUE_RETEST.
+	// Issue retests, not graduated from Beta on the public API yet.
 	"escape-cli retests list":  betaMCPToolNote,
 	"escape-cli retests get":   betaMCPToolNote,
 	"escape-cli retests start": betaMCPToolNote,
