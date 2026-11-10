@@ -35,6 +35,7 @@ type WorkflowFilterAnyOf struct {
 	TagIds               []string                                                            `json:"tagIds,omitempty"`
 	NoTags               *bool                                                               `json:"noTags,omitempty"`
 	ScanIds              []string                                                            `json:"scanIds,omitempty"`
+	ScenarioTemplateIds  []string                                                            `json:"scenarioTemplateIds,omitempty"`
 	FirstSeenScanIds     []string                                                            `json:"firstSeenScanIds,omitempty"`
 	SecurityTestUids     []string                                                            `json:"securityTestUids,omitempty"`
 	Status               []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS                         `json:"status,omitempty"`
@@ -551,6 +552,38 @@ func (o *WorkflowFilterAnyOf) HasScanIds() bool {
 // SetScanIds gets a reference to the given []string and assigns it to the ScanIds field.
 func (o *WorkflowFilterAnyOf) SetScanIds(v []string) {
 	o.ScanIds = v
+}
+
+// GetScenarioTemplateIds returns the ScenarioTemplateIds field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf) GetScenarioTemplateIds() []string {
+	if o == nil || IsNil(o.ScenarioTemplateIds) {
+		var ret []string
+		return ret
+	}
+	return o.ScenarioTemplateIds
+}
+
+// GetScenarioTemplateIdsOk returns a tuple with the ScenarioTemplateIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf) GetScenarioTemplateIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ScenarioTemplateIds) {
+		return nil, false
+	}
+	return o.ScenarioTemplateIds, true
+}
+
+// HasScenarioTemplateIds returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf) HasScenarioTemplateIds() bool {
+	if o != nil && !IsNil(o.ScenarioTemplateIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetScenarioTemplateIds gets a reference to the given []string and assigns it to the ScenarioTemplateIds field.
+func (o *WorkflowFilterAnyOf) SetScenarioTemplateIds(v []string) {
+	o.ScenarioTemplateIds = v
 }
 
 // GetFirstSeenScanIds returns the FirstSeenScanIds field value if set, zero value otherwise.
@@ -1121,6 +1154,9 @@ func (o WorkflowFilterAnyOf) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScanIds) {
 		toSerialize["scanIds"] = o.ScanIds
 	}
+	if !IsNil(o.ScenarioTemplateIds) {
+		toSerialize["scenarioTemplateIds"] = o.ScenarioTemplateIds
+	}
 	if !IsNil(o.FirstSeenScanIds) {
 		toSerialize["firstSeenScanIds"] = o.FirstSeenScanIds
 	}
@@ -1206,6 +1242,7 @@ func (o *WorkflowFilterAnyOf) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "tagIds")
 		delete(additionalProperties, "noTags")
 		delete(additionalProperties, "scanIds")
+		delete(additionalProperties, "scenarioTemplateIds")
 		delete(additionalProperties, "firstSeenScanIds")
 		delete(additionalProperties, "securityTestUids")
 		delete(additionalProperties, "status")
