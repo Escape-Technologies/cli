@@ -64,10 +64,8 @@
   { "path": "/organization/projects/", "tokens": ["organization", "projects"] },
   { "path": "/organization/projects/create/", "tokens": ["organization", "projects", "create"] },
   { "path": "/organization/roles-next/", "tokens": ["organization", "roles", "next"] },
-  {
-    "path": "/organization/roles-next/create/",
-    "tokens": ["organization", "roles", "next", "create"]
-  },
+  { "path": "/organization/roles/", "tokens": ["organization", "roles"] },
+  { "path": "/organization/roles/create/", "tokens": ["organization", "roles", "create"] },
   { "path": "/organization/tags/", "tokens": ["organization", "tags"] },
   { "path": "/organization/vault-variables/", "tokens": ["organization", "vault", "variables"] },
   {
