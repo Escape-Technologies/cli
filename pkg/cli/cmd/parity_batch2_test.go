@@ -248,7 +248,7 @@ func TestOrgSettingsGetReadsTheSettings(t *testing.T) {
 		method:  http.MethodGet,
 		path:    "/v3/organization-settings",
 		respond: func(w http.ResponseWriter) {
-			writeParityJSON(w, `{"slas":[{"severity":"HIGH","timeMs":86400000,"enabled":true}],"settings":[],"killSwitches":{"dast":true,"aiPentesting":false,"asm":true}}`)
+			writeParityJSON(w, `{"slas":[{"severity":"HIGH","timeMs":86400000,"enabled":true}],"settings":[],"killSwitches":{"dast":true,"aiPentesting":false,"networkPentest":false,"asm":true}}`)
 		},
 	})
 }

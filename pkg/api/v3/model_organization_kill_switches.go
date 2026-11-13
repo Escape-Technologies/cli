@@ -24,6 +24,8 @@ type OrganizationKillSwitches struct {
 	Dast bool `json:"dast"`
 	// Read-only: whether AI pentesting scans are disabled for the organization
 	AiPentesting bool `json:"aiPentesting"`
+	// Read-only: whether Network Pentesting scans are disabled for the organization
+	NetworkPentest bool `json:"networkPentest"`
 	// Read-only: whether ASM scans are disabled for the organization
 	Asm                  bool `json:"asm"`
 	AdditionalProperties map[string]interface{}
@@ -35,10 +37,11 @@ type _OrganizationKillSwitches OrganizationKillSwitches
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationKillSwitches(dast bool, aiPentesting bool, asm bool) *OrganizationKillSwitches {
+func NewOrganizationKillSwitches(dast bool, aiPentesting bool, networkPentest bool, asm bool) *OrganizationKillSwitches {
 	this := OrganizationKillSwitches{}
 	this.Dast = dast
 	this.AiPentesting = aiPentesting
+	this.NetworkPentest = networkPentest
 	this.Asm = asm
 	return &this
 }
@@ -99,6 +102,30 @@ func (o *OrganizationKillSwitches) SetAiPentesting(v bool) {
 	o.AiPentesting = v
 }
 
+// GetNetworkPentest returns the NetworkPentest field value
+func (o *OrganizationKillSwitches) GetNetworkPentest() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.NetworkPentest
+}
+
+// GetNetworkPentestOk returns a tuple with the NetworkPentest field value
+// and a boolean to check if the value has been set.
+func (o *OrganizationKillSwitches) GetNetworkPentestOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NetworkPentest, true
+}
+
+// SetNetworkPentest sets field value
+func (o *OrganizationKillSwitches) SetNetworkPentest(v bool) {
+	o.NetworkPentest = v
+}
+
 // GetAsm returns the Asm field value
 func (o *OrganizationKillSwitches) GetAsm() bool {
 	if o == nil {
@@ -135,6 +162,7 @@ func (o OrganizationKillSwitches) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["dast"] = o.Dast
 	toSerialize["aiPentesting"] = o.AiPentesting
+	toSerialize["networkPentest"] = o.NetworkPentest
 	toSerialize["asm"] = o.Asm
 
 	for key, value := range o.AdditionalProperties {
@@ -151,6 +179,7 @@ func (o *OrganizationKillSwitches) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"dast",
 		"aiPentesting",
+		"networkPentest",
 		"asm",
 	}
 
@@ -183,6 +212,7 @@ func (o *OrganizationKillSwitches) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "dast")
 		delete(additionalProperties, "aiPentesting")
+		delete(additionalProperties, "networkPentest")
 		delete(additionalProperties, "asm")
 		o.AdditionalProperties = additionalProperties
 	}
