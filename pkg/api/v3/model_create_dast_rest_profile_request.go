@@ -48,7 +48,7 @@ type CreateDastRestProfileRequest struct {
 	Mode                       *ENUMPROPERTIESCONFIGURATIONPROPERTIESMODE `json:"mode,omitempty"`
 	// Maximum scan duration in minutes.
 	MaxDurationMinutes *int `json:"maxDurationMinutes,omitempty"`
-	// Whether to start the scan immediately
+	// Whether to start the scan immediately. Omitted, it starts when the caller can run scans.
 	Start                *bool `json:"start,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -63,8 +63,6 @@ func NewCreateDastRestProfileRequest(assetId string, name string) *CreateDastRes
 	this := CreateDastRestProfileRequest{}
 	this.AssetId = assetId
 	this.Name = name
-	var start bool = true
-	this.Start = &start
 	return &this
 }
 
@@ -73,8 +71,6 @@ func NewCreateDastRestProfileRequest(assetId string, name string) *CreateDastRes
 // but it doesn't guarantee that properties required by API are set
 func NewCreateDastRestProfileRequestWithDefaults() *CreateDastRestProfileRequest {
 	this := CreateDastRestProfileRequest{}
-	var start bool = true
-	this.Start = &start
 	return &this
 }
 
