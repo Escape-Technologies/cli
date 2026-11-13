@@ -630,8 +630,8 @@ func renderIssueWithEvents(result IssueWithEvents) error {
 // buildUpdateIssueRequest assembles the PUT payload for `issues update` from the command flags.
 // A --reason is forwarded with the status change, the severity change, or a severity reset.
 // Severity changes use the { value, reason } object form only when a reason is given.
-// A reset with a reason uses the same object with value null, so organizations enforcing
-// REQUIRE_CHANGE_REASON can clear a manual severity. A reset without a reason stays a bare null.
+// A reset with a reason uses the same object with value null.
+// A reset without a reason stays a bare null.
 func buildUpdateIssueRequest() (*v3.UpdateIssueRequest, error) {
 	if issueResetSeverity && issueUpdateSeverity != "" {
 		return nil, errors.New("--reset-severity and --severity are mutually exclusive")
@@ -1038,8 +1038,7 @@ var issueTrendsCmd = &cobra.Command{
 }
 
 // buildBulkUpdateIssuesRequest assembles the bulk update payload from the bulk-update command flags.
-// --reason is forwarded with the status change, the severity change, or a severity reset so
-// organizations enforcing REQUIRE_CHANGE_REASON can change or clear severities in bulk.
+// --reason is an optional comment forwarded with the status change, the severity change, or a severity reset.
 func buildBulkUpdateIssuesRequest() (*v3.BulkUpdateIssuesRequest, error) {
 	if resetSeverity && setSeverity != "" {
 		return nil, errors.New("--reset-severity and --set-severity are mutually exclusive")
