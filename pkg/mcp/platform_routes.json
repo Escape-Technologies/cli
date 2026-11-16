@@ -33,6 +33,10 @@
     "tokens": ["integrations", "azure", "boards", "oauth", "callback"]
   },
   {
+    "path": "/integrations/linear/oauth/callback/",
+    "tokens": ["integrations", "linear", "oauth", "callback"]
+  },
+  {
     "path": "/integrations/servicenow/oauth/callback/",
     "tokens": ["integrations", "servicenow", "oauth", "callback"]
   },
