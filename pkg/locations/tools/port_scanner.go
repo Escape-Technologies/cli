@@ -20,12 +20,14 @@ const (
 	defaultPortScanTimeout = 60 * time.Second
 	defaultScanRetries     = 3
 	portScanTool           = "port-scanner"
+	portListShodan         = "shodan"
 )
 
 type portScanRequest struct {
 	Timeout   int    `json:"timeout"` // in seconds
 	Rate      int    `json:"rate"`
-	Ports     string `json:"ports"`
+	Ports     string `json:"ports,omitempty"`
+	PortList  string `json:"port_list,omitempty"`
 	Mode      string `json:"mode"`
 	Target    string `json:"target"`
 	MaxThread int    `json:"max_thread,omitempty"`
@@ -133,7 +135,29 @@ func parsePortScanRequest(payload map[string]any) (portScanRequest, error) {
 		return portScanRequest{}, errors.New("max_thread must be non-negative")
 	}
 
+	if req.Ports != "" && req.PortList != "" {
+		return portScanRequest{}, errors.New("ports and port_list are mutually exclusive")
+	}
+
+	if req.PortList != "" {
+		ports, err := portsForList(req.PortList)
+		if err != nil {
+			return portScanRequest{}, err
+		}
+
+		req.Ports = ports
+	}
+
 	return req, nil
+}
+
+func portsForList(portList string) (string, error) {
+	switch portList {
+	case portListShodan:
+		return shodanPorts, nil
+	default:
+		return "", fmt.Errorf("unsupported port_list %q", portList)
+	}
 }
 
 func addPorts(hosts map[string][]int, hr *result.HostResult) {

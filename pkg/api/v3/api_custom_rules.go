@@ -387,7 +387,7 @@ func (a *CustomRulesAPIService) GetCustomRuleExecute(r ApiGetCustomRuleRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v PaginationError
+			var v BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
