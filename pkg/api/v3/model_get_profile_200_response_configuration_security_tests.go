@@ -436,6 +436,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	WebminDefaultLogin                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"webmin_default_login,omitempty"`
 	WordpressAccessibleWpconfig               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"wordpress_accessible_wpconfig,omitempty"`
 	CompromisedSupplyChain                    *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"compromised_supply_chain,omitempty"`
+	OptimizelySnippetCompromise               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"optimizely_snippet_compromise,omitempty"`
 	ZabbixDefaultLogin                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"zabbix_default_login,omitempty"`
 	DnsRebindingAttack                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dns_rebinding_attack,omitempty"`
 	DnsUnauthenticatedDynamicUpdate           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"dns_unauthenticated_dynamic_update,omitempty"`
@@ -13808,6 +13809,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) SetCompromisedSupplyCh
 	o.CompromisedSupplyChain = &v
 }
 
+// GetOptimizelySnippetCompromise returns the OptimizelySnippetCompromise field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetOptimizelySnippetCompromise() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.OptimizelySnippetCompromise) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.OptimizelySnippetCompromise
+}
+
+// GetOptimizelySnippetCompromiseOk returns a tuple with the OptimizelySnippetCompromise field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetOptimizelySnippetCompromiseOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.OptimizelySnippetCompromise) {
+		return nil, false
+	}
+	return o.OptimizelySnippetCompromise, true
+}
+
+// HasOptimizelySnippetCompromise returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasOptimizelySnippetCompromise() bool {
+	if o != nil && !IsNil(o.OptimizelySnippetCompromise) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptimizelySnippetCompromise gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the OptimizelySnippetCompromise field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetOptimizelySnippetCompromise(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.OptimizelySnippetCompromise = &v
+}
+
 // GetZabbixDefaultLogin returns the ZabbixDefaultLogin field value if set, zero value otherwise.
 func (o *GetProfile200ResponseConfigurationSecurityTests) GetZabbixDefaultLogin() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
 	if o == nil || IsNil(o.ZabbixDefaultLogin) {
@@ -15261,6 +15294,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.CompromisedSupplyChain) {
 		toSerialize["compromised_supply_chain"] = o.CompromisedSupplyChain
 	}
+	if !IsNil(o.OptimizelySnippetCompromise) {
+		toSerialize["optimizely_snippet_compromise"] = o.OptimizelySnippetCompromise
+	}
 	if !IsNil(o.ZabbixDefaultLogin) {
 		toSerialize["zabbix_default_login"] = o.ZabbixDefaultLogin
 	}
@@ -15718,6 +15754,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "webmin_default_login")
 		delete(additionalProperties, "wordpress_accessible_wpconfig")
 		delete(additionalProperties, "compromised_supply_chain")
+		delete(additionalProperties, "optimizely_snippet_compromise")
 		delete(additionalProperties, "zabbix_default_login")
 		delete(additionalProperties, "dns_rebinding_attack")
 		delete(additionalProperties, "dns_unauthenticated_dynamic_update")
