@@ -24,6 +24,7 @@ type GetProfile200ResponseConfigurationServiceDiscovery struct {
 	BaseUrlsWordlist         []string                                                     `json:"base_urls_wordlist,omitempty"`
 	EndpointsWordlist        []string                                                     `json:"endpoints_wordlist,omitempty"`
 	GraphqlEndpointsWordlist []string                                                     `json:"graphql_endpoints_wordlist,omitempty"`
+	ApiDomainsWordlist       []string                                                     `json:"api_domains_wordlist,omitempty"`
 	AdditionalProperties     map[string]interface{}
 }
 
@@ -206,6 +207,38 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) SetGraphqlEndpoints
 	o.GraphqlEndpointsWordlist = v
 }
 
+// GetApiDomainsWordlist returns the ApiDomainsWordlist field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetApiDomainsWordlist() []string {
+	if o == nil || IsNil(o.ApiDomainsWordlist) {
+		var ret []string
+		return ret
+	}
+	return o.ApiDomainsWordlist
+}
+
+// GetApiDomainsWordlistOk returns a tuple with the ApiDomainsWordlist field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationServiceDiscovery) GetApiDomainsWordlistOk() ([]string, bool) {
+	if o == nil || IsNil(o.ApiDomainsWordlist) {
+		return nil, false
+	}
+	return o.ApiDomainsWordlist, true
+}
+
+// HasApiDomainsWordlist returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationServiceDiscovery) HasApiDomainsWordlist() bool {
+	if o != nil && !IsNil(o.ApiDomainsWordlist) {
+		return true
+	}
+
+	return false
+}
+
+// SetApiDomainsWordlist gets a reference to the given []string and assigns it to the ApiDomainsWordlist field.
+func (o *GetProfile200ResponseConfigurationServiceDiscovery) SetApiDomainsWordlist(v []string) {
+	o.ApiDomainsWordlist = v
+}
+
 func (o GetProfile200ResponseConfigurationServiceDiscovery) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -230,6 +263,9 @@ func (o GetProfile200ResponseConfigurationServiceDiscovery) ToMap() (map[string]
 	}
 	if !IsNil(o.GraphqlEndpointsWordlist) {
 		toSerialize["graphql_endpoints_wordlist"] = o.GraphqlEndpointsWordlist
+	}
+	if !IsNil(o.ApiDomainsWordlist) {
+		toSerialize["api_domains_wordlist"] = o.ApiDomainsWordlist
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -258,6 +294,7 @@ func (o *GetProfile200ResponseConfigurationServiceDiscovery) UnmarshalJSON(data 
 		delete(additionalProperties, "base_urls_wordlist")
 		delete(additionalProperties, "endpoints_wordlist")
 		delete(additionalProperties, "graphql_endpoints_wordlist")
+		delete(additionalProperties, "api_domains_wordlist")
 		o.AdditionalProperties = additionalProperties
 	}
 
