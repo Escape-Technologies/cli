@@ -2,6 +2,7 @@ package mcp
 
 import (
 	"context"
+	"log/slog"
 	"net/http"
 	"strconv"
 	"sync"
@@ -165,6 +166,33 @@ func (t *sessionTracker) Count() float64 {
 	return float64(len(t.last))
 }
 
+// maxLoggedToolError caps the error text a failed call logs: handler error
+// messages can quote response bodies, and a log line does not need the whole
+// payload (request payloads and credentials are never logged here).
+const maxLoggedToolError = 512
+
+// toolErrorText picks the error string a failed call exposes: the returned
+// error, else the first text content the handler built.
+func toolErrorText(err error, result *mcpgo.CallToolResult) string {
+	text := ""
+	if err != nil {
+		text = err.Error()
+	} else if result != nil {
+		for _, content := range result.Content {
+			if item, ok := content.(mcpgo.TextContent); ok {
+				text = item.Text
+				break
+			}
+		}
+	}
+
+	if len(text) > maxLoggedToolError {
+		text = text[:maxLoggedToolError]
+	}
+
+	return text
+}
+
 // registerTool adds one tool to the server with call count and latency
 // attached. Every tool registration goes through here — built-in, knowledge,
 // public-API, and CLI-backed — so one definition covers the whole catalog.
@@ -178,6 +206,13 @@ func registerTool(server *mcpserver.MCPServer, tool mcpgo.Tool, handler mcpserve
 		outcome := "ok"
 		if err != nil || (result != nil && result.IsError) {
 			outcome = "error"
+		}
+
+		if outcome == "error" {
+			// The container never logs tool errors elsewhere, so this
+			// warn is the only trace a failing tool call leaves.
+			slog.WarnContext(ctx, "mcp: tool call failed",
+				"tool", toolName, "error", toolErrorText(err, result))
 		}
 
 		toolCallsTotal.Inc(toolName, outcome)
