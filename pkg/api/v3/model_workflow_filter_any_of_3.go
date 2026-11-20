@@ -39,6 +39,7 @@ type WorkflowFilterAnyOf3 struct {
 	AssetStatuses        []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESSTATUS `json:"assetStatuses,omitempty"`
 	AssetTypes           []ENUMPROPERTIESDATAITEMSPROPERTIESEXTRAASSETSITEMSPROPERTIESTYPE   `json:"assetTypes,omitempty"`
 	ScanIds              []string                                                            `json:"scanIds,omitempty"`
+	Scheduled            *bool                                                               `json:"scheduled,omitempty"`
 	Dnf                  interface{}                                                         `json:"dnf,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -702,6 +703,38 @@ func (o *WorkflowFilterAnyOf3) SetScanIds(v []string) {
 	o.ScanIds = v
 }
 
+// GetScheduled returns the Scheduled field value if set, zero value otherwise.
+func (o *WorkflowFilterAnyOf3) GetScheduled() bool {
+	if o == nil || IsNil(o.Scheduled) {
+		var ret bool
+		return ret
+	}
+	return *o.Scheduled
+}
+
+// GetScheduledOk returns a tuple with the Scheduled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowFilterAnyOf3) GetScheduledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Scheduled) {
+		return nil, false
+	}
+	return o.Scheduled, true
+}
+
+// HasScheduled returns a boolean if a field has been set.
+func (o *WorkflowFilterAnyOf3) HasScheduled() bool {
+	if o != nil && !IsNil(o.Scheduled) {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduled gets a reference to the given bool and assigns it to the Scheduled field.
+func (o *WorkflowFilterAnyOf3) SetScheduled(v bool) {
+	o.Scheduled = &v
+}
+
 // GetDnf returns the Dnf field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowFilterAnyOf3) GetDnf() interface{} {
 	if o == nil {
@@ -805,6 +838,9 @@ func (o WorkflowFilterAnyOf3) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScanIds) {
 		toSerialize["scanIds"] = o.ScanIds
 	}
+	if !IsNil(o.Scheduled) {
+		toSerialize["scheduled"] = o.Scheduled
+	}
 	if o.Dnf != nil {
 		toSerialize["dnf"] = o.Dnf
 	}
@@ -850,6 +886,7 @@ func (o *WorkflowFilterAnyOf3) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "assetStatuses")
 		delete(additionalProperties, "assetTypes")
 		delete(additionalProperties, "scanIds")
+		delete(additionalProperties, "scheduled")
 		delete(additionalProperties, "dnf")
 		o.AdditionalProperties = additionalProperties
 	}
