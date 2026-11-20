@@ -52,7 +52,6 @@
   { "path": "/organization/", "tokens": ["organization"] },
   { "path": "/organization/audit-logs/", "tokens": ["organization", "audit", "logs"] },
   { "path": "/organization/billing/", "tokens": ["organization", "billing"] },
-  { "path": "/organization/billing/contact/", "tokens": ["organization", "billing", "contact"] },
   { "path": "/organization/general/", "tokens": ["organization", "general"] },
   {
     "path": "/organization/global-configuration/",
