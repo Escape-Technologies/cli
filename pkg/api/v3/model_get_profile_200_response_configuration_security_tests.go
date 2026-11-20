@@ -165,6 +165,7 @@ type GetProfile200ResponseConfigurationSecurityTests struct {
 	HeaderCacheControl                        *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_cache_control,omitempty"`
 	HeaderContentSecurityPolicy               *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_content_security_policy,omitempty"`
 	HeaderContentType                         *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_content_type,omitempty"`
+	HeaderReferrerPolicy                      *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_referrer_policy,omitempty"`
 	HeaderSetCookie                           *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_set_cookie,omitempty"`
 	HeaderStrictTransportSecurity             *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_strict_transport_security,omitempty"`
 	HeaderXContentTypeOptions                 *GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin       `json:"header_x_content_type_options,omitempty"`
@@ -5138,6 +5139,38 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) HasHeaderContentType()
 // SetHeaderContentType gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the HeaderContentType field.
 func (o *GetProfile200ResponseConfigurationSecurityTests) SetHeaderContentType(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
 	o.HeaderContentType = &v
+}
+
+// GetHeaderReferrerPolicy returns the HeaderReferrerPolicy field value if set, zero value otherwise.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetHeaderReferrerPolicy() GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin {
+	if o == nil || IsNil(o.HeaderReferrerPolicy) {
+		var ret GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin
+		return ret
+	}
+	return *o.HeaderReferrerPolicy
+}
+
+// GetHeaderReferrerPolicyOk returns a tuple with the HeaderReferrerPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) GetHeaderReferrerPolicyOk() (*GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin, bool) {
+	if o == nil || IsNil(o.HeaderReferrerPolicy) {
+		return nil, false
+	}
+	return o.HeaderReferrerPolicy, true
+}
+
+// HasHeaderReferrerPolicy returns a boolean if a field has been set.
+func (o *GetProfile200ResponseConfigurationSecurityTests) HasHeaderReferrerPolicy() bool {
+	if o != nil && !IsNil(o.HeaderReferrerPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetHeaderReferrerPolicy gets a reference to the given GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin and assigns it to the HeaderReferrerPolicy field.
+func (o *GetProfile200ResponseConfigurationSecurityTests) SetHeaderReferrerPolicy(v GetProfile200ResponseConfigurationSecurityTestsAdminerDefaultLogin) {
+	o.HeaderReferrerPolicy = &v
 }
 
 // GetHeaderSetCookie returns the HeaderSetCookie field value if set, zero value otherwise.
@@ -14580,6 +14613,9 @@ func (o GetProfile200ResponseConfigurationSecurityTests) ToMap() (map[string]int
 	if !IsNil(o.HeaderContentType) {
 		toSerialize["header_content_type"] = o.HeaderContentType
 	}
+	if !IsNil(o.HeaderReferrerPolicy) {
+		toSerialize["header_referrer_policy"] = o.HeaderReferrerPolicy
+	}
 	if !IsNil(o.HeaderSetCookie) {
 		toSerialize["header_set_cookie"] = o.HeaderSetCookie
 	}
@@ -15591,6 +15627,7 @@ func (o *GetProfile200ResponseConfigurationSecurityTests) UnmarshalJSON(data []b
 		delete(additionalProperties, "header_cache_control")
 		delete(additionalProperties, "header_content_security_policy")
 		delete(additionalProperties, "header_content_type")
+		delete(additionalProperties, "header_referrer_policy")
 		delete(additionalProperties, "header_set_cookie")
 		delete(additionalProperties, "header_strict_transport_security")
 		delete(additionalProperties, "header_x_content_type_options")
