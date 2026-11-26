@@ -20,8 +20,12 @@ var _ MappedNullable = &CreateservicenowIntegrationRequestParametersCredentialsO
 
 // CreateservicenowIntegrationRequestParametersCredentialsOneOf1 struct for CreateservicenowIntegrationRequestParametersCredentialsOneOf1
 type CreateservicenowIntegrationRequestParametersCredentialsOneOf1 struct {
-	AuthMethod           ENUMAPIKEY `json:"auth_method"`
-	ApiKey               string     `json:"api_key"`
+	AuthMethod           ENUMOAUTH `json:"auth_method"`
+	ClientId             string    `json:"client_id"`
+	ClientSecret         string    `json:"client_secret"`
+	AccessToken          *string   `json:"access_token,omitempty"`
+	RefreshToken         *string   `json:"refresh_token,omitempty"`
+	TokenExpiresAt       *string   `json:"token_expires_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,10 +35,11 @@ type _CreateservicenowIntegrationRequestParametersCredentialsOneOf1 Createservic
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateservicenowIntegrationRequestParametersCredentialsOneOf1(authMethod ENUMAPIKEY, apiKey string) *CreateservicenowIntegrationRequestParametersCredentialsOneOf1 {
+func NewCreateservicenowIntegrationRequestParametersCredentialsOneOf1(authMethod ENUMOAUTH, clientId string, clientSecret string) *CreateservicenowIntegrationRequestParametersCredentialsOneOf1 {
 	this := CreateservicenowIntegrationRequestParametersCredentialsOneOf1{}
 	this.AuthMethod = authMethod
-	this.ApiKey = apiKey
+	this.ClientId = clientId
+	this.ClientSecret = clientSecret
 	return &this
 }
 
@@ -47,9 +52,9 @@ func NewCreateservicenowIntegrationRequestParametersCredentialsOneOf1WithDefault
 }
 
 // GetAuthMethod returns the AuthMethod field value
-func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetAuthMethod() ENUMAPIKEY {
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetAuthMethod() ENUMOAUTH {
 	if o == nil {
-		var ret ENUMAPIKEY
+		var ret ENUMOAUTH
 		return ret
 	}
 
@@ -58,7 +63,7 @@ func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetAuthM
 
 // GetAuthMethodOk returns a tuple with the AuthMethod field value
 // and a boolean to check if the value has been set.
-func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetAuthMethodOk() (*ENUMAPIKEY, bool) {
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetAuthMethodOk() (*ENUMOAUTH, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,32 +71,152 @@ func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetAuthM
 }
 
 // SetAuthMethod sets field value
-func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) SetAuthMethod(v ENUMAPIKEY) {
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) SetAuthMethod(v ENUMOAUTH) {
 	o.AuthMethod = v
 }
 
-// GetApiKey returns the ApiKey field value
-func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetApiKey() string {
+// GetClientId returns the ClientId field value
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetClientId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ApiKey
+	return o.ClientId
 }
 
-// GetApiKeyOk returns a tuple with the ApiKey field value
+// GetClientIdOk returns a tuple with the ClientId field value
 // and a boolean to check if the value has been set.
-func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetApiKeyOk() (*string, bool) {
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetClientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ApiKey, true
+	return &o.ClientId, true
 }
 
-// SetApiKey sets field value
-func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) SetApiKey(v string) {
-	o.ApiKey = v
+// SetClientId sets field value
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) SetClientId(v string) {
+	o.ClientId = v
+}
+
+// GetClientSecret returns the ClientSecret field value
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetClientSecret() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ClientSecret
+}
+
+// GetClientSecretOk returns a tuple with the ClientSecret field value
+// and a boolean to check if the value has been set.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetClientSecretOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ClientSecret, true
+}
+
+// SetClientSecret sets field value
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) SetClientSecret(v string) {
+	o.ClientSecret = v
+}
+
+// GetAccessToken returns the AccessToken field value if set, zero value otherwise.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetAccessToken() string {
+	if o == nil || IsNil(o.AccessToken) {
+		var ret string
+		return ret
+	}
+	return *o.AccessToken
+}
+
+// GetAccessTokenOk returns a tuple with the AccessToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetAccessTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessToken) {
+		return nil, false
+	}
+	return o.AccessToken, true
+}
+
+// HasAccessToken returns a boolean if a field has been set.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) HasAccessToken() bool {
+	if o != nil && !IsNil(o.AccessToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessToken gets a reference to the given string and assigns it to the AccessToken field.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) SetAccessToken(v string) {
+	o.AccessToken = &v
+}
+
+// GetRefreshToken returns the RefreshToken field value if set, zero value otherwise.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetRefreshToken() string {
+	if o == nil || IsNil(o.RefreshToken) {
+		var ret string
+		return ret
+	}
+	return *o.RefreshToken
+}
+
+// GetRefreshTokenOk returns a tuple with the RefreshToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetRefreshTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.RefreshToken) {
+		return nil, false
+	}
+	return o.RefreshToken, true
+}
+
+// HasRefreshToken returns a boolean if a field has been set.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) HasRefreshToken() bool {
+	if o != nil && !IsNil(o.RefreshToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetRefreshToken gets a reference to the given string and assigns it to the RefreshToken field.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) SetRefreshToken(v string) {
+	o.RefreshToken = &v
+}
+
+// GetTokenExpiresAt returns the TokenExpiresAt field value if set, zero value otherwise.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetTokenExpiresAt() string {
+	if o == nil || IsNil(o.TokenExpiresAt) {
+		var ret string
+		return ret
+	}
+	return *o.TokenExpiresAt
+}
+
+// GetTokenExpiresAtOk returns a tuple with the TokenExpiresAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) GetTokenExpiresAtOk() (*string, bool) {
+	if o == nil || IsNil(o.TokenExpiresAt) {
+		return nil, false
+	}
+	return o.TokenExpiresAt, true
+}
+
+// HasTokenExpiresAt returns a boolean if a field has been set.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) HasTokenExpiresAt() bool {
+	if o != nil && !IsNil(o.TokenExpiresAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenExpiresAt gets a reference to the given string and assigns it to the TokenExpiresAt field.
+func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) SetTokenExpiresAt(v string) {
+	o.TokenExpiresAt = &v
 }
 
 func (o CreateservicenowIntegrationRequestParametersCredentialsOneOf1) MarshalJSON() ([]byte, error) {
@@ -105,7 +230,17 @@ func (o CreateservicenowIntegrationRequestParametersCredentialsOneOf1) MarshalJS
 func (o CreateservicenowIntegrationRequestParametersCredentialsOneOf1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["auth_method"] = o.AuthMethod
-	toSerialize["api_key"] = o.ApiKey
+	toSerialize["client_id"] = o.ClientId
+	toSerialize["client_secret"] = o.ClientSecret
+	if !IsNil(o.AccessToken) {
+		toSerialize["access_token"] = o.AccessToken
+	}
+	if !IsNil(o.RefreshToken) {
+		toSerialize["refresh_token"] = o.RefreshToken
+	}
+	if !IsNil(o.TokenExpiresAt) {
+		toSerialize["token_expires_at"] = o.TokenExpiresAt
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -120,7 +255,8 @@ func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) Unmarsha
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"auth_method",
-		"api_key",
+		"client_id",
+		"client_secret",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -151,7 +287,11 @@ func (o *CreateservicenowIntegrationRequestParametersCredentialsOneOf1) Unmarsha
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "auth_method")
-		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "access_token")
+		delete(additionalProperties, "refresh_token")
+		delete(additionalProperties, "token_expires_at")
 		o.AdditionalProperties = additionalProperties
 	}
 

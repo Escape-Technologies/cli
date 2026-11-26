@@ -18,9 +18,16 @@ import (
 
 // CreateservicenowIntegrationRequestParametersCredentials - struct for CreateservicenowIntegrationRequestParametersCredentials
 type CreateservicenowIntegrationRequestParametersCredentials struct {
+	CreatelinearIntegrationRequestParametersCredentialsOneOf      *CreatelinearIntegrationRequestParametersCredentialsOneOf
 	CreateservicenowIntegrationRequestParametersCredentialsOneOf  *CreateservicenowIntegrationRequestParametersCredentialsOneOf
 	CreateservicenowIntegrationRequestParametersCredentialsOneOf1 *CreateservicenowIntegrationRequestParametersCredentialsOneOf1
-	CreateservicenowIntegrationRequestParametersCredentialsOneOf2 *CreateservicenowIntegrationRequestParametersCredentialsOneOf2
+}
+
+// CreatelinearIntegrationRequestParametersCredentialsOneOfAsCreateservicenowIntegrationRequestParametersCredentials is a convenience function that returns CreatelinearIntegrationRequestParametersCredentialsOneOf wrapped in CreateservicenowIntegrationRequestParametersCredentials
+func CreatelinearIntegrationRequestParametersCredentialsOneOfAsCreateservicenowIntegrationRequestParametersCredentials(v *CreatelinearIntegrationRequestParametersCredentialsOneOf) CreateservicenowIntegrationRequestParametersCredentials {
+	return CreateservicenowIntegrationRequestParametersCredentials{
+		CreatelinearIntegrationRequestParametersCredentialsOneOf: v,
+	}
 }
 
 // CreateservicenowIntegrationRequestParametersCredentialsOneOfAsCreateservicenowIntegrationRequestParametersCredentials is a convenience function that returns CreateservicenowIntegrationRequestParametersCredentialsOneOf wrapped in CreateservicenowIntegrationRequestParametersCredentials
@@ -37,17 +44,27 @@ func CreateservicenowIntegrationRequestParametersCredentialsOneOf1AsCreateservic
 	}
 }
 
-// CreateservicenowIntegrationRequestParametersCredentialsOneOf2AsCreateservicenowIntegrationRequestParametersCredentials is a convenience function that returns CreateservicenowIntegrationRequestParametersCredentialsOneOf2 wrapped in CreateservicenowIntegrationRequestParametersCredentials
-func CreateservicenowIntegrationRequestParametersCredentialsOneOf2AsCreateservicenowIntegrationRequestParametersCredentials(v *CreateservicenowIntegrationRequestParametersCredentialsOneOf2) CreateservicenowIntegrationRequestParametersCredentials {
-	return CreateservicenowIntegrationRequestParametersCredentials{
-		CreateservicenowIntegrationRequestParametersCredentialsOneOf2: v,
-	}
-}
-
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateservicenowIntegrationRequestParametersCredentials) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into CreatelinearIntegrationRequestParametersCredentialsOneOf
+	err = newStrictDecoder(data).Decode(&dst.CreatelinearIntegrationRequestParametersCredentialsOneOf)
+	if err == nil {
+		jsonCreatelinearIntegrationRequestParametersCredentialsOneOf, _ := json.Marshal(dst.CreatelinearIntegrationRequestParametersCredentialsOneOf)
+		if string(jsonCreatelinearIntegrationRequestParametersCredentialsOneOf) == "{}" { // empty struct
+			dst.CreatelinearIntegrationRequestParametersCredentialsOneOf = nil
+		} else {
+			if err = validator.Validate(dst.CreatelinearIntegrationRequestParametersCredentialsOneOf); err != nil {
+				dst.CreatelinearIntegrationRequestParametersCredentialsOneOf = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CreatelinearIntegrationRequestParametersCredentialsOneOf = nil
+	}
+
 	// try to unmarshal data into CreateservicenowIntegrationRequestParametersCredentialsOneOf
 	err = newStrictDecoder(data).Decode(&dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf)
 	if err == nil {
@@ -82,28 +99,11 @@ func (dst *CreateservicenowIntegrationRequestParametersCredentials) UnmarshalJSO
 		dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf1 = nil
 	}
 
-	// try to unmarshal data into CreateservicenowIntegrationRequestParametersCredentialsOneOf2
-	err = newStrictDecoder(data).Decode(&dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf2)
-	if err == nil {
-		jsonCreateservicenowIntegrationRequestParametersCredentialsOneOf2, _ := json.Marshal(dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf2)
-		if string(jsonCreateservicenowIntegrationRequestParametersCredentialsOneOf2) == "{}" { // empty struct
-			dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf2 = nil
-		} else {
-			if err = validator.Validate(dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf2); err != nil {
-				dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf2 = nil
-			} else {
-				match++
-			}
-		}
-	} else {
-		dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf2 = nil
-	}
-
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.CreatelinearIntegrationRequestParametersCredentialsOneOf = nil
 		dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf = nil
 		dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf1 = nil
-		dst.CreateservicenowIntegrationRequestParametersCredentialsOneOf2 = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CreateservicenowIntegrationRequestParametersCredentials)")
 	} else if match == 1 {
@@ -115,16 +115,16 @@ func (dst *CreateservicenowIntegrationRequestParametersCredentials) UnmarshalJSO
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CreateservicenowIntegrationRequestParametersCredentials) MarshalJSON() ([]byte, error) {
+	if src.CreatelinearIntegrationRequestParametersCredentialsOneOf != nil {
+		return json.Marshal(&src.CreatelinearIntegrationRequestParametersCredentialsOneOf)
+	}
+
 	if src.CreateservicenowIntegrationRequestParametersCredentialsOneOf != nil {
 		return json.Marshal(&src.CreateservicenowIntegrationRequestParametersCredentialsOneOf)
 	}
 
 	if src.CreateservicenowIntegrationRequestParametersCredentialsOneOf1 != nil {
 		return json.Marshal(&src.CreateservicenowIntegrationRequestParametersCredentialsOneOf1)
-	}
-
-	if src.CreateservicenowIntegrationRequestParametersCredentialsOneOf2 != nil {
-		return json.Marshal(&src.CreateservicenowIntegrationRequestParametersCredentialsOneOf2)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -135,6 +135,10 @@ func (obj *CreateservicenowIntegrationRequestParametersCredentials) GetActualIns
 	if obj == nil {
 		return nil
 	}
+	if obj.CreatelinearIntegrationRequestParametersCredentialsOneOf != nil {
+		return obj.CreatelinearIntegrationRequestParametersCredentialsOneOf
+	}
+
 	if obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf != nil {
 		return obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf
 	}
@@ -143,26 +147,22 @@ func (obj *CreateservicenowIntegrationRequestParametersCredentials) GetActualIns
 		return obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf1
 	}
 
-	if obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf2 != nil {
-		return obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf2
-	}
-
 	// all schemas are nil
 	return nil
 }
 
 // Get the actual instance value
 func (obj CreateservicenowIntegrationRequestParametersCredentials) GetActualInstanceValue() interface{} {
+	if obj.CreatelinearIntegrationRequestParametersCredentialsOneOf != nil {
+		return *obj.CreatelinearIntegrationRequestParametersCredentialsOneOf
+	}
+
 	if obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf != nil {
 		return *obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf
 	}
 
 	if obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf1 != nil {
 		return *obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf1
-	}
-
-	if obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf2 != nil {
-		return *obj.CreateservicenowIntegrationRequestParametersCredentialsOneOf2
 	}
 
 	// all schemas are nil
