@@ -41,7 +41,6 @@ type WorkflowFilterAnyOf struct {
 	SecurityTestUids     []string                                                            `json:"securityTestUids,omitempty"`
 	Status               []ENUMPROPERTIESFILTERPROPERTIESSTATUSITEMS                         `json:"status,omitempty"`
 	CreatedAfter         *time.Time                                                          `json:"createdAfter,omitempty"`
-	VisibleProfilesOnly  *bool                                                               `json:"visibleProfilesOnly,omitempty"`
 	Ids                  []string                                                            `json:"ids,omitempty"`
 	BlacklistedIds       []string                                                            `json:"blacklistedIds,omitempty"`
 	FullNames            []string                                                            `json:"fullNames,omitempty"`
@@ -717,38 +716,6 @@ func (o *WorkflowFilterAnyOf) SetCreatedAfter(v time.Time) {
 	o.CreatedAfter = &v
 }
 
-// GetVisibleProfilesOnly returns the VisibleProfilesOnly field value if set, zero value otherwise.
-func (o *WorkflowFilterAnyOf) GetVisibleProfilesOnly() bool {
-	if o == nil || IsNil(o.VisibleProfilesOnly) {
-		var ret bool
-		return ret
-	}
-	return *o.VisibleProfilesOnly
-}
-
-// GetVisibleProfilesOnlyOk returns a tuple with the VisibleProfilesOnly field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowFilterAnyOf) GetVisibleProfilesOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.VisibleProfilesOnly) {
-		return nil, false
-	}
-	return o.VisibleProfilesOnly, true
-}
-
-// HasVisibleProfilesOnly returns a boolean if a field has been set.
-func (o *WorkflowFilterAnyOf) HasVisibleProfilesOnly() bool {
-	if o != nil && !IsNil(o.VisibleProfilesOnly) {
-		return true
-	}
-
-	return false
-}
-
-// SetVisibleProfilesOnly gets a reference to the given bool and assigns it to the VisibleProfilesOnly field.
-func (o *WorkflowFilterAnyOf) SetVisibleProfilesOnly(v bool) {
-	o.VisibleProfilesOnly = &v
-}
-
 // GetIds returns the Ids field value if set, zero value otherwise.
 func (o *WorkflowFilterAnyOf) GetIds() []string {
 	if o == nil || IsNil(o.Ids) {
@@ -1236,9 +1203,6 @@ func (o WorkflowFilterAnyOf) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAfter) {
 		toSerialize["createdAfter"] = o.CreatedAfter
 	}
-	if !IsNil(o.VisibleProfilesOnly) {
-		toSerialize["visibleProfilesOnly"] = o.VisibleProfilesOnly
-	}
 	if !IsNil(o.Ids) {
 		toSerialize["ids"] = o.Ids
 	}
@@ -1320,7 +1284,6 @@ func (o *WorkflowFilterAnyOf) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "securityTestUids")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "createdAfter")
-		delete(additionalProperties, "visibleProfilesOnly")
 		delete(additionalProperties, "ids")
 		delete(additionalProperties, "blacklistedIds")
 		delete(additionalProperties, "fullNames")
